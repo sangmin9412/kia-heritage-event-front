@@ -1,0 +1,92 @@
+/* KIA Signature 폰트 패밀리 */
+@font-face {
+  font-family: "KIA Signature";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_LIGHT.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATURELIGHT.TTF") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Signature";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_REGULAR.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREREGULAR.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Signature";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_BOLD.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREBOLD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Signature";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_BOLD.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREBOLD.TTF") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* KIA Signature Fix 폰트 패밀리 */
+@font-face {
+  font-family: "KIA Signature Fix";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_FIXLIGHT.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREFIXLIGHT.TTF") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Signature Fix";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_FIXREGULAR.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREFIXREGULAR.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Signature Fix";
+  src: url("/fonts/kia/kia_signature/woff/KIASIGNATURE_FIXBOLD.woff") format("woff"),
+    url("/fonts/kia/kia_signature/ttf/KIASIGNATUREFIXBOLD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* KIA Origin 폰트 패밀리 */
+@font-face {
+  font-family: "KIA Origin";
+  src: url("/fonts/kia/kia_origin/woff/KiaL.woff") format("woff"),
+    url("/fonts/kia/kia_origin/ttf/KiaL.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Origin";
+  src: url("/fonts/kia/kia_origin/woff/KiaM.woff") format("woff"),
+    url("/fonts/kia/kia_origin/ttf/KiaM.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KIA Origin";
+  src: url("/fonts/kia/kia_origin/woff/KiaB.woff") format("woff"),
+    url("/fonts/kia/kia_origin/ttf/KiaB.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
