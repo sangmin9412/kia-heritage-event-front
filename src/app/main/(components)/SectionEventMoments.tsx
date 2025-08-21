@@ -55,7 +55,7 @@ export const SectionEventMoments = () => {
           }
         }
         timeoutRef.current = null;
-      }, 300);
+      }, 600);
     };
 
     // Embla carousel의 이벤트 리스너 추가
@@ -78,7 +78,7 @@ export const SectionEventMoments = () => {
     playOnInit: true, // 초기 재생 여부
     stopOnInteraction: false, // 상호작용 시 정지 여부
     speed: 1, // 스크롤 속도
-    startDelay: 100, // 시작 지연 시간
+    startDelay: 300, // 시작 지연 시간
     direction: scrollDirection // 스크롤 방향
   });
 
