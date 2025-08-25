@@ -1,10 +1,10 @@
-import ScrollReveal from "@/blocks/TextAnimations/ScrollReveal/ScrollReveal";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { getImagePath } from "@/lib/utils";
-import AutoScroll from "embla-carousel-auto-scroll";
-import Image from "next/image";
 import { useCallback, useState, useRef, useMemo } from "react";
+import Image from "next/image";
+import AutoScroll from "embla-carousel-auto-scroll";
 import useEmblaCarousel from "embla-carousel-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import ScrollReveal from "@/blocks/TextAnimations/ScrollReveal/ScrollReveal";
+import { getImagePath } from "@/lib/utils";
 
 export const SectionEventMoments = () => {
   const [scrollDirection, setScrollDirection] = useState<"forward" | "backward">("forward");
@@ -95,8 +95,9 @@ export const SectionEventMoments = () => {
 
   return (
     <section className='py-[8rem] bg-[#f8f8f8] overflow-hidden'>
+      <h2 className='blind'>My Moments with Kia</h2>
       <div className='mb-[4rem]'>
-        <h2
+        <div
           className='text-center text-[2.4rem] font-bold text-primary'
           aria-label='수많은 도전과 기회로 달려온 Kia의 80년. Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동, 그리고 나만의 My moments with Kia를 들려주세요.'
         >
@@ -114,7 +115,7 @@ export const SectionEventMoments = () => {
             <br />
             그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
           </ScrollReveal>
-        </h2>
+        </div>
       </div>
       <div className='container'>
         <div className='flex items-center justify-center overflow-hidden'>
@@ -144,8 +145,8 @@ export const SectionEventMoments = () => {
               ))}
             </CarouselContent>
           </Carousel>
-          <div className='absolute top-0 right-[2rem] w-[10rem] h-full bg-gradient-to-r from-transparent to-[#f8f8f8]'></div>
-          <div className='absolute top-0 left-[2rem] w-[10rem] h-full bg-gradient-to-l from-transparent to-[#f8f8f8]'></div>
+          <div className='absolute top-0 right-0 w-[10rem] h-full bg-gradient-to-r from-transparent to-[#f8f8f8]'></div>
+          <div className='absolute top-0 left-0 w-[10rem] h-full bg-gradient-to-l from-transparent to-[#f8f8f8]'></div>
         </div>
       </div>
     </section>
