@@ -97,10 +97,10 @@ export const SectionEventPrize = () => {
           </SectionTitle>
           <div className='flex flex-col gap-[4rem]'>
             <h4 className='blind'>경품 안내</h4>
-            <div className='flex gap-[3.2rem]'>
+            <div className='flex gap-[3.2rem] overflow-hidden'>
               {PRIZE_LIST.map(prize => (
-                <div className='flex flex-1 flex-col' key={prize.title}>
-                  <div className='flex justify-center items-center overflow-hidden'>
+                <div className='flex flex-1 flex-col items-center overflow-hidden' key={prize.title}>
+                  <div className='flex justify-center items-center'>
                     <div className='flex w-[40.5rem] h-[30.7rem]'>
                       <Image
                         src={getImagePath(prize.prizeImage)}

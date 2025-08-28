@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import AutoScroll from "embla-carousel-auto-scroll";

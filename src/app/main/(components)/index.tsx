@@ -7,3 +7,4 @@ export * from "./sections/section-instagram-event";
 export * from "./sections/section-event-share";
 export * from "./sections/section-buttons";
 export * from "./sections/section-event-notice";
+export * from "./container";
