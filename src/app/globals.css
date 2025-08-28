@@ -70,7 +70,7 @@
   --secondary: oklch(54.6% 0.014377 236.8);
   --secondary-foreground: oklch(98.5% 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(18.4% 0.031295 241.3 / 0.2);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -133,6 +133,26 @@
     @apply absolute top-0 left-0 right-0 z-50;
     a {
       @apply absolute top-0 left-0 right-0 z-50 text-white bg-black text-center text-sm font-bold leading-[4rem] focus:outline-none h-0 overflow-hidden transition-all duration-300 focus:h-[4rem];
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 20px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(102, 102, 102, 0.3);
+      border-radius: 20px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-button {
+      display: none;
     }
   }
 }
