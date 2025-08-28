@@ -16,6 +16,7 @@ export const SectionInstagramEvent = () => {
                 height={478}
                 unoptimized
                 className='w-full h-full object-contain'
+                priority
               />
             </div>
           </div>

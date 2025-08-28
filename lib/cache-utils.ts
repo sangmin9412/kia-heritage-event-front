@@ -17,7 +17,7 @@ export const FILE_PATTERNS = {
   font: /\.(woff|woff2|ttf|otf|eot)$/i,
   svg: /\.svg$/i,
   css: /\.css$/i,
-  js: /\.(js|mjs)$/i,
+  js: /\.(js|mjs)$/i
 } as const;
 
 /**

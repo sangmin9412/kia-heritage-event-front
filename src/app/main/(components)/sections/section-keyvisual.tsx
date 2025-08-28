@@ -14,6 +14,7 @@ export const SectionKeyVisual = () => {
             height={860}
             className='w-full h-full object-cover'
             unoptimized
+            priority
           />
         </div>
       </div>

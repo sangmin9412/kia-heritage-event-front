@@ -1,19 +1,24 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter
-} from "@/components/ui/dialog";
-import { EventEnterForm } from "@/components/features/form/event-enter-form";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+
 import { DialogLenisWrapper } from "@/components/features/modal/dialog-lenis-wrapper";
+import { EventEnterForm } from "@/features/poster/components/event-enter-form";
 
 export function EventEnterFormModal() {
+  const pathname = usePathname();
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(pathname === "/form");
+  }, [pathname]);
 
   const handleClose = () => {
     router.back();
@@ -21,7 +26,7 @@ export function EventEnterFormModal() {
 
   return (
     <DialogLenisWrapper>
-      <Dialog open={true} onOpenChange={handleClose}>
+      <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className='max-w-[76rem]'>
           <DialogHeader>
             <DialogTitle>이벤트 참여하기</DialogTitle>

@@ -1,10 +1,14 @@
-import { useEventEnterForm } from "@/components/features/form/event-enter-form/schema";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Form, FormFieldInput, FormFieldRadioGroup, FormRow } from "@/components/ui/form";
-import { BirthDateField, TermsAgreementField } from "@/components/features/form/event-enter-form/fields";
+import { BirthDateField, TermsAgreementField, useEventEnterForm } from "@/features/poster/components/event-enter-form";
 import { hnadleErrorFocus } from "@/utils/form-error";
+import { useRouter } from "next/navigation";
 
 export const EventEnterForm = () => {
+  const router = useRouter();
+
   const {
     form,
     isValid,
@@ -19,6 +23,7 @@ export const EventEnterForm = () => {
   const handleSubmit = form.handleSubmit(
     data => {
       onSubmit(data);
+      router.push("/create");
     },
     error => {
       console.log("handleSubmit error", error);
@@ -33,6 +38,7 @@ export const EventEnterForm = () => {
           className='max-h-[60dvh] overflow-y-auto custom-scrollbar desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[3.6rem]'
           data-lenis-prevent
         >
+          <h3 className='sr-only'>이벤트 참여 양식</h3>
           <div className='flex flex-col gap-[3.2rem]'>
             <FormRow label='이름' required names={["name"]}>
               <FormFieldInput form={form} name='name' placeholder='김기아' type='text' required />
@@ -66,7 +72,8 @@ export const EventEnterForm = () => {
               <FormFieldRadioGroup form={form} name='hasDriverLicense' options={hasDriverLicenseOptions} />
             </FormRow>
           </div>
-          <div>
+          <div className='mt-[7rem]'>
+            <h3 className='mb-[2.4rem] text-[1.8rem] leading-[3rem] font-bold'>약관 동의</h3>
             <TermsAgreementField form={form} />
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { eventEnterFormSchemaType, Option } from "@/components/features/form/event-enter-form/schema";
+import { eventEnterFormSchemaType, Option } from "@/features/poster/components/event-enter-form";
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { FormFieldSelect, FormRow } from "@/components/ui/form";
 

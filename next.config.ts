@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_BUILD_TIME: new Date().getTime().toString()
+  },
   async headers() {
     return [
       {
@@ -9,13 +12,13 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // 1년 캐시
+            value: "public, max-age=31536000, immutable" // 1년 캐시
           },
           {
             key: "Expires",
-            value: new Date(Date.now() + 31536000 * 1000).toUTCString(),
-          },
-        ],
+            value: new Date(Date.now() + 31536000 * 1000).toUTCString()
+          }
+        ]
       },
       {
         // 폰트 파일에 대한 캐시 헤더 설정
@@ -23,13 +26,13 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // 1년 캐시
+            value: "public, max-age=31536000, immutable" // 1년 캐시
           },
           {
             key: "Expires",
-            value: new Date(Date.now() + 31536000 * 1000).toUTCString(),
-          },
-        ],
+            value: new Date(Date.now() + 31536000 * 1000).toUTCString()
+          }
+        ]
       },
       {
         // 일반적인 정적 파일들 (jpg, jpeg, png, gif, webp, avif, ico, svg, woff, woff2, ttf, otf)
@@ -37,16 +40,16 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // 1년 캐시
+            value: "public, max-age=31536000, immutable" // 1년 캐시
           },
           {
             key: "Expires",
-            value: new Date(Date.now() + 31536000 * 1000).toUTCString(),
-          },
-        ],
-      },
+            value: new Date(Date.now() + 31536000 * 1000).toUTCString()
+          }
+        ]
+      }
     ];
-  },
+  }
 };
 
 export default nextConfig;

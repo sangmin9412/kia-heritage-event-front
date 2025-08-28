@@ -164,6 +164,7 @@ const InnerDialogContent = React.forwardRef<
 >(({ className, children, position = "default", draggable = false, ...props }, ref) => {
   const context = React.useContext(DialogContext);
   if (!context) throw new Error("InnerDialogContent must be used within a Dialog");
+
   const [isDragging, setIsDragging] = React.useState(false);
   const [startY, setStartY] = React.useState(0);
   const [currentY, setCurrentY] = React.useState(0);
