@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // const { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl;
   const response = NextResponse.next();
+
+  if (pathname.includes("/create")) {
+    const userForm = request.cookies.get("event-enter-form");
+    if (userForm === undefined) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
 
   return response;
 }

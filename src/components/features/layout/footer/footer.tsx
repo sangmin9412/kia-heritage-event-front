@@ -1,9 +1,19 @@
+"use client";
+
 import { getImagePath } from "@/lib/utils";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 
-const MainFooter = () => {
+const Footer = () => {
+  const pathname = usePathname();
+  const isMain = useMemo(() => ["/", "/form"].includes(pathname), [pathname]);
+
   return (
-    <footer className='bg-primary mt-auto'>
+    <footer
+      data-layout={isMain ? "main" : "sub"}
+      className='relative bg-primary mt-auto [&[data-layout="sub"]]:bg-[#f8f8f8]'
+    >
       <div className='container'>
         <div className='flex items-center justify-between h-[12rem]'>
           <div className='flex'>
@@ -48,4 +58,4 @@ const MainFooter = () => {
   );
 };
 
-export default MainFooter;
+export default Footer;

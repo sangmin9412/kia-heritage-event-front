@@ -89,14 +89,14 @@ const JUDGE_CRITERIA = [
 export const SectionEventPrize = () => {
   return (
     <section className='py-[8rem] bg-white'>
-      <h2 className='blind'>경품 및 시상 안내 섹션</h2>
+      <h3 className='blind'>경품 및 시상 안내 섹션</h3>
       <div className='container'>
         <div className='flex flex-col gap-[4rem]'>
           <SectionTitle asChild>
-            <h3>경품 및 시상 안내</h3>
+            <h4>경품 및 시상 안내</h4>
           </SectionTitle>
           <div className='flex flex-col gap-[4rem]'>
-            <h4 className='blind'>경품 안내</h4>
+            <h5 className='blind'>경품 안내</h5>
             <div className='flex gap-[3.2rem] overflow-hidden'>
               {PRIZE_LIST.map(prize => (
                 <div className='flex flex-1 flex-col items-center overflow-hidden' key={prize.title}>
@@ -121,7 +121,7 @@ export const SectionEventPrize = () => {
             </div>
 
             <div>
-              <h4 className='text-[1.8rem] leading-[6.2rem] font-bold text-center text-white bg-black'>심사 기준</h4>
+              <h5 className='text-[1.8rem] leading-[6.2rem] font-bold text-center text-white bg-black'>심사 기준</h5>
               <div>
                 {JUDGE_CRITERIA.map(criteria => (
                   <div key={criteria.title} className='flex'>

@@ -97,7 +97,7 @@ export const SectionEventMoments = () => {
 
   return (
     <section className='py-[8rem] bg-[#f8f8f8] overflow-hidden'>
-      <h2 className='blind'>My Moments with Kia</h2>
+      <h3 className='blind'>My Moments with Kia</h3>
       <div className='mb-[4rem]'>
         <div
           className='text-center text-[2.4rem] font-bold text-primary'

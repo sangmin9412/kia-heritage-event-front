@@ -29,7 +29,7 @@ export const MainContainer = () => {
       }}
     >
       <main className='main-content'>
-        <h1 className='blind'>기아 헤리티지 이벤트 안내</h1>
+        <h2 className='blind'>이벤트 안내</h2>
         <SectionKeyVisual />
         <SectionEventMoments />
         <SectionEventInfo />

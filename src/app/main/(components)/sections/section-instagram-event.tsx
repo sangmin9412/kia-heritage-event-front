@@ -4,7 +4,7 @@ import Image from "next/image";
 export const SectionInstagramEvent = () => {
   return (
     <section className='py-[8rem] bg-[#f8f8f8]'>
-      <h2 className='blind'>인스타그램 스토리 공유 이벤트 섹션</h2>
+      <h3 className='blind'>인스타그램 스토리 공유 이벤트 섹션</h3>
       <div className='container'>
         <div className='flex'>
           <div className='flex-[0_0_68rem]'>
@@ -22,7 +22,7 @@ export const SectionInstagramEvent = () => {
           </div>
           <div className='flex-1 px-[2.4rem] bg-white'>
             <div className='p-[4.8rem_2.4rem_4rem] border-b border-border'>
-              <h3 className='mb-[1.6rem] text-[2rem] leading-[3.2rem] font-bold'>인스타그램 스토리 공유 이벤트</h3>
+              <h4 className='mb-[1.6rem] text-[2rem] leading-[3.2rem] font-bold'>인스타그램 스토리 공유 이벤트</h4>
               <p className='text-sub-text'>
                 완성된 포스터를 저장한 뒤,
                 <br />

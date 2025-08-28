@@ -33,7 +33,7 @@ export const SectionEventShare = () => {
       <div className='container'>
         <div className='flex justify-between items-center'>
           <div>
-            <h2 className='text-[2rem] leading-[3.2rem] font-bold text-sub-text'>이벤트 공유하기</h2>
+            <h3 className='text-[2rem] leading-[3.2rem] font-bold text-sub-text'>이벤트 공유하기</h3>
           </div>
           <div>
             <ul className='flex gap-[1.6rem]'>

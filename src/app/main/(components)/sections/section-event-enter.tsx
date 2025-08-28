@@ -6,7 +6,7 @@ import Image from "next/image";
 export const SectionEventEnter = () => {
   return (
     <section className='relative py-[8rem]'>
-      <h2 className='blind'>응모 방법 섹션</h2>
+      <h3 className='blind'>응모 방법 섹션</h3>
       <div aria-hidden='true' className='absolute inset-0 bg-black'>
         <Image
           src={getImagePath("/images/main/enter_section_bg_01.webp")}
@@ -19,7 +19,7 @@ export const SectionEventEnter = () => {
       <div className='container'>
         <div className='flex flex-col gap-[4rem]'>
           <SectionTitle asChild>
-            <h3>응모 방법</h3>
+            <h4>응모 방법</h4>
           </SectionTitle>
           <div>
             <div className='flex gap-[4rem]'>
@@ -39,7 +39,7 @@ export const SectionEventEnter = () => {
 
                 <div className='p-[3.2rem]'>
                   <p className='mb-[.8rem] text-[1.8rem] leading-[3rem] text-sub-text'>Step 01</p>
-                  <h4 className='text-[2.4rem] leading-[3.8rem] font-bold'>나만의 포스터 만들기</h4>
+                  <h5 className='text-[2.4rem] leading-[3.8rem] font-bold'>나만의 포스터 만들기</h5>
                 </div>
 
                 <div className='p-[3.2rem_3.2rem_4rem] border-t border-border'>
@@ -68,7 +68,7 @@ export const SectionEventEnter = () => {
 
                 <div className='p-[3.2rem]'>
                   <p className='mb-[.8rem] text-[1.8rem] leading-[3rem] text-sub-text'>Step 02</p>
-                  <h4 className='text-[2.4rem] leading-[3.8rem] font-bold'>인스타그램 피드 인증하기</h4>
+                  <h5 className='text-[2.4rem] leading-[3.8rem] font-bold'>인스타그램 피드 인증하기</h5>
                 </div>
 
                 <div className='p-[3.2rem_3.2rem_4rem] border-t border-border'>

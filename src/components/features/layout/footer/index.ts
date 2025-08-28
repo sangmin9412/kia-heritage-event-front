@@ -1,2 +1,2 @@
 // Footer Components
-export { default as Footer } from "./MainFooter";
+export { default as Footer } from "./footer";

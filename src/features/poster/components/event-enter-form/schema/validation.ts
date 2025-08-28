@@ -1,7 +1,18 @@
+import { Option } from "@/features/poster/types";
 import { z } from "zod";
 
 export const GenderTypes = ["male", "female"] as const;
 export const DriverLicenseTypes = ["Y", "N"] as const;
+
+export const GenderOptions: Option<(typeof GenderTypes)[number]>[] = [
+  { label: "남자", value: "male" },
+  { label: "여자", value: "female" }
+];
+
+export const hasDriverLicenseOptions: Option<(typeof DriverLicenseTypes)[number]>[] = [
+  { label: "예", value: "Y" },
+  { label: "아니오", value: "N" }
+];
 
 const baseSchema = {
   name: z.string().min(1, { message: "이름을 입력해주세요." }),
@@ -18,12 +29,5 @@ const baseSchema = {
 };
 
 export const eventEnterFormSchema = z.object(baseSchema);
-
-export type Option = {
-  label: string;
-  value: string;
-};
-
-export type GenderOption = Option[];
 
 export type eventEnterFormSchemaType = z.infer<typeof eventEnterFormSchema>;

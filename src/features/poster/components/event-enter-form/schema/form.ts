@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { eventEnterFormSchema, eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
+import {
+  eventEnterFormSchema,
+  eventEnterFormSchemaType,
+  GenderOptions,
+  hasDriverLicenseOptions
+} from "@/features/poster/components/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
 
 interface FormState {
@@ -12,11 +17,6 @@ interface FormState {
   error: string | null;
   couponCode?: string;
 }
-
-const GenderOptions = [
-  { label: "남자", value: "male" },
-  { label: "여자", value: "female" }
-];
 
 const birthYearOptions = Array.from({ length: 2007 - 1920 + 1 }, (_, i) => {
   const year = 2007 - i;
@@ -38,11 +38,6 @@ const birthDayOptions = Array.from({ length: 31 }, (_, i) => {
     label: `${day}일`
   };
 });
-
-const hasDriverLicenseOptions = [
-  { label: "예", value: "Y" },
-  { label: "아니오", value: "N" }
-];
 
 const useEventEnterForm = () => {
   const [formState, setFormState] = useState<FormState>({
