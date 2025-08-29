@@ -9,10 +9,12 @@ interface AlertProps {
   description?: ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
+  onClose?: () => void;
 }
 
 interface AlertContextType {
   open: (props: AlertProps) => void;
+  onCloseComplete: () => void;
 }
 
 const AlertContext = createContext<AlertContextType | undefined>(undefined);
@@ -21,7 +23,7 @@ export function AlertProvider({ children }: { children: ReactNode }) {
   const { isOpen, alertProps, open, close, onCloseComplete } = useAlert();
 
   return (
-    <AlertContext.Provider value={{ open }}>
+    <AlertContext.Provider value={{ open, onCloseComplete }}>
       {children}
       <Alert isOpen={isOpen} onOpenChange={close} onCloseComplete={onCloseComplete} {...alertProps} />
     </AlertContext.Provider>

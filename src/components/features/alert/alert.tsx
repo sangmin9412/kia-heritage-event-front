@@ -18,10 +18,20 @@ interface AlertProps {
   onConfirm?: () => void;
   onCancel?: () => void;
   onOpenChange: (open: boolean) => void;
+  onClose?: () => void;
   onCloseComplete?: () => void;
 }
 
-export function Alert({ isOpen, title, description, onConfirm, onCancel, onOpenChange, onCloseComplete }: AlertProps) {
+export function Alert({
+  isOpen,
+  title,
+  description,
+  onConfirm,
+  onCancel,
+  onOpenChange,
+  onClose,
+  onCloseComplete
+}: AlertProps) {
   const handleConfirm = () => {
     onConfirm?.();
     onOpenChange(false);
@@ -35,18 +45,19 @@ export function Alert({ isOpen, title, description, onConfirm, onCancel, onOpenC
   const handleAnimationEnd = useCallback(
     (e: React.AnimationEvent) => {
       // AlertDialog가 닫힐 때의 애니메이션이 끝나면 호출
-      if (!isOpen && e.animationName.includes("hide")) {
+      if (!isOpen && e.animationName.includes("exit")) {
         onCloseComplete?.();
+        onClose?.();
       }
     },
-    [isOpen, onCloseComplete]
+    [isOpen, onCloseComplete, onClose]
   );
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent
         onAnimationEnd={handleAnimationEnd}
-        className='max-w-[32rem] lg:max-w-[46.4rem] w-full p-[2rem] pt-[4.8rem] lg:p-[4.8rem] gap-0 rounded-[.8rem]'
+        className='max-w-[32rem] lg:max-w-[46.4rem] w-full p-[2rem] pt-[4.8rem] lg:p-[4.8rem] gap-0'
       >
         <AlertDialogHeader className='mb-[3.2rem] space-y-0'>
           <AlertDialogTitle>{title || ""}</AlertDialogTitle>
@@ -59,12 +70,18 @@ export function Alert({ isOpen, title, description, onConfirm, onCancel, onOpenC
         </AlertDialogHeader>
         <AlertDialogFooter>
           {onCancel && (
-            <AlertDialogCancel onClick={handleCancel} className='flex-1 lg:max-w-[24rem]'>
+            <AlertDialogCancel
+              onClick={handleCancel}
+              className='flex-1 lg:max-w-[24rem] p-[1.2rem] text-[1.4rem] lg:text-[1.6rem] h-[4.8rem]'
+            >
               취소
             </AlertDialogCancel>
           )}
           {onConfirm && (
-            <AlertDialogAction onClick={handleConfirm} className='flex-1 lg:max-w-[24rem]'>
+            <AlertDialogAction
+              onClick={handleConfirm}
+              className='flex-1 lg:max-w-[24rem] p-[1.2rem] text-[1.4rem] lg:text-[1.6rem] h-[4.8rem]'
+            >
               확인
             </AlertDialogAction>
           )}

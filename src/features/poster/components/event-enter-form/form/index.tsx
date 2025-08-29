@@ -78,7 +78,7 @@ export const EventEnterForm = () => {
           </div>
         </div>
         <div className='pt-[2.4rem]'>
-          <Button className='w-full' disabled={!isValid} onClick={handleSubmit}>
+          <Button className='w-full' disabled={!isValid} type='submit'>
             이벤트 참여하기
           </Button>
         </div>

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { setCookieData } from "@/lib/cookie-utils";
 import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form/schema/validation";
 
 type EventEnterFormState = {
@@ -9,6 +8,8 @@ type EventEnterFormState = {
   setUserForm: (form: Partial<eventEnterFormSchemaType>) => void;
   posterForm: Partial<createPosterFormSchemaType>;
   setPosterForm: (form: Partial<createPosterFormSchemaType>) => void;
+  userStory: string;
+  setUserStory: (story: string) => void;
 };
 
 export const useEventEnterFormStore = create<EventEnterFormState>()(
@@ -18,8 +19,8 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
       setUserForm: form => {
         set({ userForm: form });
         // 쿠키에도 동일한 데이터 저장
-        const currentState = get();
-        setCookieData("event-enter-form", { ...currentState, userForm: form });
+        // const currentState = get();
+        // setCookieData("event-enter-form", { ...currentState, userForm: form });
       },
       posterForm: {
         frameType: "horizontal",
@@ -32,8 +33,15 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
       setPosterForm: form => {
         set({ posterForm: form });
         // 쿠키에도 동일한 데이터 저장
-        const currentState = get();
-        setCookieData("create-poster-form", { ...currentState, posterForm: form });
+        // const currentState = get();
+        // setCookieData("create-poster-form", { ...currentState, posterForm: form });
+      },
+      userStory: "",
+      setUserStory: story => {
+        set({ userStory: story });
+        // 쿠키에도 동일한 데이터 저장
+        // const currentState = get();
+        // setCookieData("user-story", { ...currentState, userStory: story });
       }
     }),
     {

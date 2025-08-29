@@ -21,7 +21,7 @@ export default function ErrorPage({
   showRetry = true,
   showHome = true,
   showBack = false,
-  onRetry,
+  onRetry
 }: ErrorPageProps) {
   const router = useRouter();
 
@@ -42,32 +42,32 @@ export default function ErrorPage({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-lg w-full text-center">
-        <div className="mb-8">
-          {statusCode && <h1 className="text-6xl font-bold text-gray-300 mb-4">{statusCode}</h1>}
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4" dangerouslySetInnerHTML={{ __html: title }} />
-          <p className="text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: message }} />
+    <div className='min-h-screen flex items-center justify-center bg-gray-50 px-4'>
+      <div className='max-w-lg w-full text-center'>
+        <div className='mb-8'>
+          {statusCode && <h1 className='text-6xl font-bold text-gray-300 mb-4'>{statusCode}</h1>}
+          <h2 className='text-2xl font-semibold text-gray-900 mb-4' dangerouslySetInnerHTML={{ __html: title }} />
+          <p className='text-gray-600 leading-relaxed' dangerouslySetInnerHTML={{ __html: message }} />
         </div>
 
-        <div className="space-y-3">
+        <div className='space-y-3'>
           {showRetry && (
-            <Button onClick={handleRetry} className="w-full" variant="default">
-              <RefreshCw className="w-8 h-8 mr-2" />
+            <Button onClick={handleRetry} className='w-full' variant='default'>
+              <RefreshCw className='w-[2.4rem] h-[2.4rem] mr-[.8rem]' />
               다시 시도
             </Button>
           )}
 
           {showHome && (
-            <Button onClick={handleGoHome} className="w-full" variant="secondary">
-              <Home className="w-8 h-8 mr-2" />
+            <Button onClick={handleGoHome} className='w-full' variant='secondary'>
+              <Home className='w-[2.4rem] h-[2.4rem] mr-[.8rem]' />
               홈으로 이동
             </Button>
           )}
 
           {showBack && (
-            <Button onClick={handleGoBack} className="w-full" variant="outline">
-              <ArrowLeft className="w-8 h-8 mr-2" />
+            <Button onClick={handleGoBack} className='w-full' variant='outline'>
+              <ArrowLeft className='w-[2.4rem] h-[2.4rem] mr-[.8rem]' />
               이전 페이지
             </Button>
           )}

@@ -15,6 +15,7 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
         className
       )}
       {...props}
+      value={props.value || ""}
     >
       <CheckboxPrimitive.Indicator
         data-slot='checkbox-indicator'

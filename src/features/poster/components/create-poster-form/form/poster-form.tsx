@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { IconInfo, IconPlus } from "@/assets/icons";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form";
 import { Option } from "@/features/poster/types";
 
-import { cn, getImagePath } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
@@ -147,50 +147,62 @@ const PhotoFrame = ({
 };
 
 const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
-  const imageFile = form.watch("imageFile");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const imageBase64 = form.watch("imageBase64");
   const imageScale = form.watch("imageScale");
   const imageVertical = form.watch("imageVertical");
   const imageHorizontal = form.watch("imageHorizontal");
 
+  const isImageFile = useMemo(() => imageFile && imageFile instanceof File, [imageFile]);
+
   useEffect(() => {
-    if (imageFile) {
+    if (isImageFile && imageFile) {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(imageFile);
       fileReader.onload = () => {
         form.setValue("imageBase64", fileReader.result as string);
       };
     }
-  }, [imageFile, form]);
+  }, [imageFile, form, isImageFile]);
 
   const handleDeleteImage = useCallback(() => {
-    form.resetField("imageFile");
+    setImageFile(null);
     form.setValue("imageBase64", "");
+  }, [form]);
+
+  const minmaxValue = useCallback((value: number, min: number, max: number) => {
+    return Math.min(Math.max(value, min), max);
   }, []);
 
   const handleScaleUp = useCallback(() => {
-    form.setValue("imageScale", imageScale + 0.1);
-  }, [imageScale, form]);
+    const value = Number((imageScale + 0.1).toFixed(1));
+    form.setValue("imageScale", minmaxValue(value, 0, 2));
+  }, [imageScale, form, minmaxValue]);
 
   const handleScaleDown = useCallback(() => {
-    form.setValue("imageScale", imageScale - 0.1);
-  }, [imageScale, form]);
+    const value = Number((imageScale - 0.1).toFixed(1));
+    form.setValue("imageScale", minmaxValue(value, 0, 2));
+  }, [imageScale, form, minmaxValue]);
 
   const handlePositionTop = useCallback(() => {
-    form.setValue("imageVertical", imageVertical + 1);
-  }, [imageVertical, form]);
+    const value = imageVertical - 1;
+    form.setValue("imageVertical", minmaxValue(value, -100, 100));
+  }, [imageVertical, form, minmaxValue]);
 
   const handlePositionBottom = useCallback(() => {
-    form.setValue("imageVertical", imageVertical - 1);
-  }, [imageVertical, form]);
+    const value = imageVertical + 1;
+    form.setValue("imageVertical", minmaxValue(value, -100, 100));
+  }, [imageVertical, form, minmaxValue]);
 
   const handlePositionLeft = useCallback(() => {
-    form.setValue("imageHorizontal", imageHorizontal + 1);
-  }, [imageHorizontal, form]);
+    const value = imageHorizontal - 1;
+    form.setValue("imageHorizontal", minmaxValue(value, -100, 100));
+  }, [imageHorizontal, form, minmaxValue]);
 
   const handlePositionRight = useCallback(() => {
-    form.setValue("imageHorizontal", imageHorizontal - 1);
-  }, [imageHorizontal, form]);
+    const value = imageHorizontal + 1;
+    form.setValue("imageHorizontal", minmaxValue(value, -100, 100));
+  }, [imageHorizontal, form, minmaxValue]);
 
   return (
     <>
@@ -209,31 +221,25 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
                 </span>
               </div>
             )}
-            <FormField
-              control={form.control}
-              name='imageFile'
-              render={({ field }) => (
-                <FormItem>
-                  <label
-                    htmlFor='image-file'
-                    className='relative flex items-center justify-center w-[16.5rem] h-[20.6rem] bg-white border border-border cursor-pointer'
-                  >
-                    <Input
-                      type='file'
-                      accept='image/jpeg, image/jpg, image/png'
-                      onChange={e => {
-                        field.onChange(e.target.files?.[0]);
-                      }}
-                      id='image-file'
-                      className='hidden'
-                    />
-                    <span>
-                      <IconPlus />
-                    </span>
-                  </label>
-                </FormItem>
-              )}
-            />
+            <div className='w-[16.5rem] h-[20.6rem]'>
+              <label
+                htmlFor='image-file'
+                className='relative flex items-center justify-center w-full h-full bg-white border border-border cursor-pointer'
+              >
+                <Input
+                  type='file'
+                  accept='image/jpeg, image/jpg, image/png'
+                  onChange={e => {
+                    setImageFile(e.target.files?.[0] || null);
+                  }}
+                  id='image-file'
+                  className='hidden'
+                />
+                <span>
+                  <IconPlus />
+                </span>
+              </label>
+            </div>
           </div>
         </ItemContent>
 
@@ -265,7 +271,7 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
               <h4 className='text-[1.6rem] font-bold leading-[2.6rem]'>크기 조정</h4>
               <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
                 <div className='relative flex-[0_0_4rem] items-center'>
-                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleDown}>
+                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleDown} type='button'>
                     <IcSliderScaleDown />
                     <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
                       축소
@@ -283,7 +289,7 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
                   }}
                 />
                 <div className='relative flex-[0_0_4rem] items-center'>
-                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp}>
+                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp} type='button'>
                     <IcSliderScaleUp />
                     <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
                       확대
@@ -298,10 +304,14 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
               <div className='flex flex-col gap-[4rem]'>
                 <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
                   <div className='relative flex-[0_0_4rem] items-center'>
-                    <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionBottom}>
-                      <IcSliderPositionBottom />
+                    <button
+                      className='relative w-[4rem] h-[4rem] cursor-pointer'
+                      onClick={handlePositionTop}
+                      type='button'
+                    >
+                      <IcSliderPositionTop />
                       <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        하
+                        상
                       </span>
                     </button>
                   </div>
@@ -315,10 +325,14 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
                     }}
                   />
                   <div className='relative flex-[0_0_4rem] items-center'>
-                    <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionTop}>
-                      <IcSliderPositionTop />
+                    <button
+                      className='relative w-[4rem] h-[4rem] cursor-pointer'
+                      onClick={handlePositionBottom}
+                      type='button'
+                    >
+                      <IcSliderPositionBottom />
                       <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        상
+                        하
                       </span>
                     </button>
                   </div>
@@ -326,7 +340,11 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
 
                 <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
                   <div className='relative flex-[0_0_4rem] items-center'>
-                    <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionLeft}>
+                    <button
+                      className='relative w-[4rem] h-[4rem] cursor-pointer'
+                      onClick={handlePositionLeft}
+                      type='button'
+                    >
                       <IcSliderPositionLeft />
                       <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
                         좌
@@ -343,7 +361,11 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
                     }}
                   />
                   <div className='relative flex-[0_0_4rem] items-center'>
-                    <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionRight}>
+                    <button
+                      className='relative w-[4rem] h-[4rem] cursor-pointer'
+                      onClick={handlePositionRight}
+                      type='button'
+                    >
                       <IcSliderPositionRight />
                       <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
                         우
@@ -412,13 +434,17 @@ const SelectCar = ({
 
 const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
   const posterTitle = form.watch("posterTitle");
-  const posterTitleLength = posterTitle.length;
+  const posterTitleLength = posterTitle?.length || 0;
+  const limitLength = 20;
+  const limitLengthString = limitLength.toString().padStart(2, "0");
 
   return (
     <>
       <div>
         <ItemTitle>‘My Moments With Kia’ 포스터에 어울리는 타이틀을 입력해주세요.</ItemTitle>
-        <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>최대 글자수 00자 이내로 작성해주세요.</p>
+        <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+          최대 글자수 {limitLengthString}자 이내로 작성해주세요.
+        </p>
         <ItemContent>
           <div className='relative'>
             <FormFieldInput
@@ -427,9 +453,10 @@ const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
               placeholder='예) 나 어릴적'
               type='text'
               className='pr-[12rem] w-full text-[1.6rem]'
+              maxLength={limitLength}
             />
             <span className='absolute inset-y-0 right-[2.4rem] flex items-center text-[1.4rem] pointer-events-none'>
-              {posterTitleLength.toString().padStart(2, "0")}/00 byte
+              {posterTitleLength.toString().padStart(2, "0")}/{limitLengthString} byte
             </span>
           </div>
         </ItemContent>

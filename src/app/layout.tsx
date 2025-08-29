@@ -30,7 +30,7 @@ export default function RootLayout({
           <a href='#content'>본문 바로가기</a>
         </div>
         <AppProvider>
-          <div className='wrapper'>
+          <div className='wrapper contain-paint'>
             <div id='content'>{children}</div>
             <Footer />
           </div>

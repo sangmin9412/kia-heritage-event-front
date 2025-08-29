@@ -47,7 +47,11 @@ function Slider({
           data-slot='slider-thumb'
           key={index}
           className='border-[4px] border-border bg-background ring-ring/50 block size-[3.2rem] shrink-0 rounded-full shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
-        />
+        >
+          <em className='absolute top-full left-0 right-0 translate-y-[.4rem] [font-style:normal] text-[1.4rem] leading-[2.2rem] text-center'>
+            {_values}
+          </em>
+        </SliderPrimitive.Thumb>
       ))}
     </SliderPrimitive.Root>
   );
