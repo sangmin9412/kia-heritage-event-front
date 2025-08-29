@@ -25,7 +25,7 @@ export function EventEnterFormModal() {
   };
 
   return (
-    <DialogLenisWrapper>
+    <DialogLenisWrapper open={isOpen}>
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className='max-w-[76rem]'>
           <DialogHeader>

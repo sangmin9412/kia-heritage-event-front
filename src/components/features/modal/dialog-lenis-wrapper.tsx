@@ -3,15 +3,26 @@
 import { useEffect } from "react";
 import { useLenis } from "lenis/react";
 
-export const DialogLenisWrapper = ({ children }: { children: React.ReactNode }) => {
+interface DialogLenisWrapperProps {
+  children: React.ReactNode;
+  open: boolean;
+}
+
+export const DialogLenisWrapper = ({ children, open }: DialogLenisWrapperProps) => {
   const lenis = useLenis();
 
   useEffect(() => {
-    lenis?.stop();
+    console.log("open", open);
+    if (open) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+
     return () => {
       lenis?.start();
     };
-  }, [lenis]);
+  }, [lenis, open]);
 
   return children;
 };
