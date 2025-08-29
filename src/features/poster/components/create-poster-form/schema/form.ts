@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEventEnterFormStore } from "@/features/poster/store";
@@ -36,11 +36,20 @@ const useCreatePosterForm = () => {
 
   const { isValid } = form.formState;
 
+  // 폼 데이터가 변경될 때마다 스토어에 자동 업데이트
+  useEffect(() => {
+    const subscription = form.watch(value => {
+      setPosterForm(value as createPosterFormSchemaType);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [form, setPosterForm]);
+
   const onSubmit = async (data: createPosterFormSchemaType) => {
     try {
       setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
       console.log("submit data", data);
-      // 스토어에 유저 데이터 저장
+      // 스토어에 유저 데이터 저장 (이미 watch에서 자동으로 저장되고 있음)
       setPosterForm(data);
     } catch (error) {
       setFormState(prev => ({

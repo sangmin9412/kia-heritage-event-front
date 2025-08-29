@@ -1,15 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import { useCreatePosterForm } from "@/features/poster/components/create-poster-form";
 import { PosterForm } from "@/features/poster/components/create-poster-form/form/poster-form";
 import { PosterPreview } from "@/features/poster/components/create-poster-form/form/poster-preview";
 import { hnadleErrorFocus } from "@/utils/form-error";
-import { useRouter } from "next/navigation";
 
 export const CreatePosterForm = () => {
   const router = useRouter();
-  const { form, isValid, onSubmit, formState, frameOptions, carOptions } = useCreatePosterForm();
+  const { form, isValid, onSubmit, frameOptions, carOptions } = useCreatePosterForm();
 
   const handleSubmit = form.handleSubmit(
     data => {
@@ -27,7 +27,7 @@ export const CreatePosterForm = () => {
       <form onSubmit={handleSubmit}>
         <div className='container'>
           <div className='flex gap-[3rem]'>
-            <div className='flex-[0_0_43rem]'>
+            <div className='flex-[0_0_43rem] max-w-[43rem]'>
               <div className='sticky top-[2rem]'>
                 <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
                   <PosterPreview form={form} onSubmit={onSubmit} isValid={isValid} />

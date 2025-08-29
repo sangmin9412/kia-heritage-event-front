@@ -14,7 +14,7 @@ type EventEnterFormState = {
 
 export const useEventEnterFormStore = create<EventEnterFormState>()(
   persist(
-    (set, get) => ({
+    set => ({
       userForm: {},
       setUserForm: form => {
         set({ userForm: form });
