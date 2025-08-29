@@ -31,6 +31,7 @@ const useCreatePosterForm = () => {
   const form = useForm<createPosterFormSchemaType>({
     resolver: zodResolver(createPosterFormSchema),
     defaultValues: posterForm, // 스토어에 저장된 데이터 사용
+    values: posterForm as createPosterFormSchemaType,
     mode: "onChange"
   });
 

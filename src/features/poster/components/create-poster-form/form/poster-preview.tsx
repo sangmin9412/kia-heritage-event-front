@@ -33,8 +33,7 @@ export const PosterPreview = ({ form, isValid, onSubmit }: PosterPreviewProps) =
 export const PosterPreviewer = ({ className }: { className?: string }) => {
   const { posterForm } = useEventEnterFormStore(state => state);
 
-  const { frameType, imageBase64, imageScale, imageVertical, imageHorizontal, carType, posterTitle, instagramName } =
-    posterForm;
+  const { frameType, imageBase64, imageScale, imageVertical, imageHorizontal, carType, posterTitle } = posterForm;
 
   const imageStyle = {
     "--image-horizontal": `${imageHorizontal}%`,
@@ -42,8 +41,6 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
     "--image-scale": `${imageScale}`,
     transform: `translateX(var(--image-horizontal)) translateY(var(--image-vertical)) scale(var(--image-scale))`
   } as React.CSSProperties;
-
-  console.log("imageBase64", imageBase64);
 
   if (!posterForm) return null;
 
