@@ -89,38 +89,37 @@ export const SectionEventMoments = () => {
       getImagePath("/images/main/moments_img_01.webp"),
       getImagePath("/images/main/moments_img_02.webp"),
       getImagePath("/images/main/moments_img_03.webp"),
-      getImagePath("/images/main/moments_img_04.webp"),
-      getImagePath("/images/main/moments_img_05.webp"),
-      getImagePath("/images/main/moments_img_06.webp")
+      getImagePath("/images/main/moments_img_04.webp")
     ];
   }, []);
 
   return (
-    <section className='py-[8rem] bg-[#f8f8f8] overflow-hidden'>
+    <section className='py-[12rem] bg-primary overflow-hidden'>
       <h3 className='blind'>My Moments with Kia</h3>
-      <div className='mb-[4rem]'>
-        <div
-          className='text-center text-[2.4rem] font-bold text-primary'
-          aria-label='수많은 도전과 기회로 달려온 Kia의 80년. Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동, 그리고 나만의 My moments with Kia를 들려주세요.'
-        >
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={5}
-            blurStrength={10}
-            rotationEnd='center center'
-            wordAnimationEnd='center center'
-          >
-            수많은 도전과 기회로 달려온 Kia의 80년.
-            <br />
-            Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
-            <br />
-            그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
-          </ScrollReveal>
-        </div>
-      </div>
       <div className='container'>
-        <div className='flex items-center justify-center overflow-hidden'>
+        <div className='mb-[8rem]'>
+          <div
+            className='text-[3rem] text-white [&_br:first-of-type+span]:mt-[2rem]'
+            aria-label='수많은 도전과 기회로 달려온 Kia의 80년. Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동, 그리고 나만의 My moments with Kia를 들려주세요.'
+          >
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={5}
+              blurStrength={10}
+              rotationEnd='center center'
+              wordAnimationEnd='center center'
+            >
+              수많은 도전과 기회로 달려온 Kia의 80년.
+              <br />
+              Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
+              <br />
+              그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
+            </ScrollReveal>
+          </div>
+        </div>
+
+        <div className='relative flex items-center justify-center overflow-hidden'>
           <Carousel
             opts={{
               loop: true,
@@ -132,13 +131,13 @@ export const SectionEventMoments = () => {
           >
             <CarouselContent>
               {[...carouselItems, ...carouselItems].map((img, index) => (
-                <CarouselItem key={index + index} className='pl-[2rem] basis-[33.5rem]'>
-                  <div className='w-[31.5rem] h-[42rem]'>
+                <CarouselItem key={index + index} className='pl-[1rem] basis-[29rem]'>
+                  <div className='w-[28rem] h-[35rem]'>
                     <Image
                       src={img}
                       alt={`moments-img-${index + 1}`}
-                      width={315}
-                      height={420}
+                      width={280}
+                      height={350}
                       className='w-full h-full object-cover'
                       unoptimized
                     />
@@ -147,8 +146,8 @@ export const SectionEventMoments = () => {
               ))}
             </CarouselContent>
           </Carousel>
-          <div className='absolute top-0 right-0 w-[10rem] h-full bg-gradient-to-r from-transparent to-[#f8f8f8]'></div>
-          <div className='absolute top-0 left-0 w-[10rem] h-full bg-gradient-to-l from-transparent to-[#f8f8f8]'></div>
+          <div className='absolute top-0 right-0 w-[10rem] h-full bg-gradient-to-r from-transparent to-primary'></div>
+          <div className='absolute top-0 left-0 w-[10rem] h-full bg-gradient-to-l from-transparent to-primary'></div>
         </div>
       </div>
     </section>

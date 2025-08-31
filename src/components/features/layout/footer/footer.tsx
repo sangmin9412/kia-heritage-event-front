@@ -25,12 +25,12 @@ const Footer = () => {
                 {
                   name: "instagram",
                   path: "/images/common/icons/ic_footer_instagram.svg",
-                  link: "#"
+                  link: "https://www.instagram.com/kia.kor/"
                 },
                 {
                   name: "youtube",
                   path: "/images/common/icons/ic_footer_youtube.svg",
-                  link: "#"
+                  link: "https://www.youtube.com/@KiaKorea"
                 },
                 {
                   name: "twitter",
