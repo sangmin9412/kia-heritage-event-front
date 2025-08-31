@@ -8,12 +8,15 @@ import { DialogLenisWrapper } from "@/components/features/modal/dialog-lenis-wra
 import { EventEnterForm } from "@/features/poster/components/event-enter-form";
 
 export function EventEnterFormModal() {
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setIsOpen(true);
+    return () => {
+      setIsOpen(false);
+    };
   }, []);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ export function EventEnterFormModal() {
   }, [pathname]);
 
   const handleClose = () => {
-    router.back();
+    router.push("/", { scroll: false });
   };
 
   return (
