@@ -32,38 +32,30 @@ export default function CreateLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <CreateTopBanner />
-      <div className='pt-[8rem]'>{children}</div>
+      <div>{children}</div>
     </>
   );
 }
 
 const CreateTopBanner = () => {
   return (
-    <div className='relative h-[30rem]'>
-      <Image
-        src={getImagePath("/images/create/top_banner_img_01_pc.webp")}
-        alt='top-banner'
-        fill
-        className='object-cover pointer-events-none'
-        unoptimized
-        priority
-      />
-      <div className='container flex flex-col h-full'>
-        <div className='flex items-center h-[8rem]'>
+    <div className='relative h-[21.4rem] bg-primary'>
+      <div className='container flex flex-col justify-center gap-[4.8rem] h-full'>
+        <div className='flex items-center'>
           <Link href='/'>
             <Image
               src={getImagePath("/images/common/logo.svg")}
               alt='top-banner'
-              width={105}
-              height={40}
-              className='w-[105px] h-[40px] object-cover'
+              width={84}
+              height={32}
+              className='w-[84px] h-[32px] object-cover'
               unoptimized
               priority
             />
           </Link>
         </div>
-        <div className='my-auto'>
-          <h2 className='text-[4.2rem] leading-[6rem] font-bold text-white animate-in fade-in slide-in-from-bottom-50 ease-in-out duration-1000'>
+        <div>
+          <h2 className='text-[3.2rem] leading-[3.8rem] font-bold text-white animate-in fade-in slide-in-from-bottom-50 ease-in-out duration-1000'>
             포스터 제작하기
           </h2>
         </div>

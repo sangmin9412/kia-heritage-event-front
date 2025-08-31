@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { IconInfo, IconPlus } from "@/assets/icons";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -22,6 +22,7 @@ import {
   IcSliderScaleDown,
   IcSliderScaleUp
 } from "@/assets/icons/ic-slider";
+import { useEventEnterFormStore } from "@/features/poster/store";
 
 interface PosterFormProps {
   form: UseFormReturn<createPosterFormSchemaType>;
@@ -34,7 +35,7 @@ export const PosterForm = ({ form, frameOptions, carOptions }: PosterFormProps) 
     <div>
       <Accordion type='multiple' className='w-full' defaultValue={["item-1", "item-2", "item-3", "item-4"]}>
         <AccordionItem value='item-1' className='border-0'>
-          <AccordionTrigger>포토 프레임</AccordionTrigger>
+          <AccordionTrigger>포토 프레임 선택</AccordionTrigger>
           <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <PhotoFrame form={form} frameOptions={frameOptions} />
           </AccordionContent>
@@ -52,7 +53,7 @@ export const PosterForm = ({ form, frameOptions, carOptions }: PosterFormProps) 
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-4' className='border-0'>
-          <AccordionTrigger>포스터 타이틀 및 인스타그램 계정명 입력</AccordionTrigger>
+          <AccordionTrigger>타이틀 및 인스타그램 계정명 입력</AccordionTrigger>
           <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <InputInstagramName form={form} />
           </AccordionContent>
@@ -70,88 +71,85 @@ const ItemContent = ({ children, className }: { children: React.ReactNode; class
   return <div className={cn("pt-[2.4rem]", className)}>{children}</div>;
 };
 
-const PhotoFrame = ({
-  form,
-  frameOptions
-}: {
-  form: PosterFormProps["form"];
-  frameOptions: PosterFormProps["frameOptions"];
-}) => {
-  return (
-    <>
-      <div>
-        <ItemTitle>포토 프레임을 선택해주세요.</ItemTitle>
-        <ItemContent>
-          <FormField
-            control={form.control}
-            name='frameType'
-            render={({ field }) => (
-              <FormItem>
-                <RadioGroup onValueChange={field.onChange} value={field.value}>
-                  <div className='flex gap-[1.6rem]'>
-                    {frameOptions.map(option => (
-                      <div key={option.value}>
-                        <label
-                          htmlFor={option.value}
-                          className='block relative w-[16.5rem] h-[20.6rem] p-[2.4rem] bg-white border border-border data-[checked=true]:border-primary cursor-pointer z-0'
-                          data-checked={field.value === option.value}
-                        >
-                          {option.value === "horizontal" && (
-                            <div className='absolute inset-[4rem_0] bg-[#f8f8f8] z-[-1]'>
-                              {/** 가로형 프레임 이미지 */}
-                            </div>
-                          )}
-                          {option.value === "vertical" && (
-                            <div className='absolute inset-0 bg-[#f8f8f8] z-[-1]'>{/** 세로형 프레임 이미지 */}</div>
-                          )}
-                          <p className='text-[1.6rem] font-bold leading-[2.6rem]'>{option.label}</p>
-                          <span className='flex absolute right-[2.4rem] bottom-[2.4rem] pointer-events-none'>
-                            <RadioGroupItem
-                              value={option.value}
-                              id={`${option.value}`}
-                              mode='checkbox'
-                              className='w-[3.2rem] h-[3.2rem] [&_svg]:size-[1.8rem]'
-                            />
-                          </span>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </FormItem>
-            )}
-          />
-        </ItemContent>
-      </div>
-
-      <div className='mt-[2.4rem] p-[2.4rem_3.2rem] bg-[#f8f8f8]'>
-        <div className='mb-[1.2rem] flex items-center gap-[1.2rem]'>
-          <span>
-            <IconInfo />
-          </span>
-          <h4 className='text-[1.6rem] font-bold leading-[2.6rem] text-sub-text'>프레임 선택 Tip</h4>
-        </div>
+const PhotoFrame = memo(
+  ({ form, frameOptions }: { form: PosterFormProps["form"]; frameOptions: PosterFormProps["frameOptions"] }) => {
+    return (
+      <>
         <div>
-          <DotList className='gap-[.4rem]'>
-            <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem]'>
-              선택하신 이미지와 프레임이 다를 경우, 이미지 일부가 잘릴 수 있어요.
-            </DotItem>
-            <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem]'>
-              이미지 구도를 확인하고 어울리는 프레임을 선택해 주세요.
-            </DotItem>
-          </DotList>
+          <ItemTitle>포토 프레임을 선택해주세요.</ItemTitle>
+          <ItemContent>
+            <FormField
+              control={form.control}
+              name='frameType'
+              render={({ field }) => (
+                <FormItem>
+                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                    <div className='flex gap-[1.6rem]'>
+                      {frameOptions.map(option => (
+                        <div key={option.value}>
+                          <label
+                            htmlFor={option.value}
+                            className='block relative w-[16.5rem] h-[20.6rem] p-[2.4rem] bg-white border border-border data-[checked=true]:border-primary cursor-pointer z-0'
+                            data-checked={field.value === option.value}
+                          >
+                            {option.value === "horizontal" && (
+                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 가로형 프레임 이미지 */}</div>
+                            )}
+                            {option.value === "vertical" && (
+                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 세로형 프레임 이미지 */}</div>
+                            )}
+                            <p className='text-[1.6rem] font-bold leading-[2.6rem]'>{option.label}</p>
+                            <span className='flex absolute right-[2.4rem] bottom-[2.4rem] pointer-events-none'>
+                              <RadioGroupItem
+                                value={option.value}
+                                id={`${option.value}`}
+                                mode='checkbox'
+                                className='w-[3.2rem] h-[3.2rem] [&_svg]:size-[1.8rem]'
+                              />
+                            </span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </RadioGroup>
+                </FormItem>
+              )}
+            />
+          </ItemContent>
         </div>
-      </div>
-    </>
-  );
-};
 
-const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
+        <div className='mt-[2.4rem] p-[2.4rem_3.2rem] bg-[#f8f8f8]'>
+          <div className='mb-[1.2rem] flex items-center gap-[1.2rem]'>
+            <span>
+              <IconInfo />
+            </span>
+            <h4 className='text-[1.6rem] font-bold leading-[2.6rem] text-sub-text'>프레임 선택 Tip</h4>
+          </div>
+          <div>
+            <DotList className='gap-[.4rem]'>
+              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+                선택하신 이미지와 프레임이 다를 경우, 이미지 일부가 잘릴 수 있어요.
+              </DotItem>
+              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+                이미지 구도를 확인하고 어울리는 프레임을 선택해 주세요.
+              </DotItem>
+            </DotList>
+          </div>
+        </div>
+      </>
+    );
+  }
+);
+PhotoFrame.displayName = "PhotoFrame";
+
+const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const imageBase64 = form.watch("imageBase64");
-  const imageScale = form.watch("imageScale");
-  const imageVertical = form.watch("imageVertical");
-  const imageHorizontal = form.watch("imageHorizontal");
+  const {
+    imageScale = 0,
+    imageVertical = 0,
+    imageHorizontal = 0,
+    imageBase64 = ""
+  } = useEventEnterFormStore(state => state.posterForm);
 
   const isImageFile = useMemo(() => imageFile && imageFile instanceof File, [imageFile]);
 
@@ -252,10 +250,10 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
           </div>
           <div>
             <DotList className='gap-[.4rem]'>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem]'>
+              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
                 가로형 비율 4:3 (권장 해상도 1350*1080)
               </DotItem>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem]'>
+              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
                 세로형 비율 3:4 (권장 해상도 1080*1350)
               </DotItem>
             </DotList>
@@ -270,32 +268,12 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
             <div className='flex flex-col gap-[2.4rem]'>
               <h4 className='text-[1.6rem] font-bold leading-[2.6rem]'>크기 조정</h4>
               <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
-                <div className='relative flex-[0_0_4rem] items-center'>
-                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleDown} type='button'>
-                    <IcSliderScaleDown />
-                    <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                      축소
-                    </span>
-                  </button>
-                </div>
-                <Slider
-                  className='flex-1'
-                  min={0}
-                  max={2}
-                  step={0.1}
-                  value={[form.watch("imageScale")]}
-                  onValueChange={value => {
-                    form.setValue("imageScale", value[0]);
-                  }}
+                <ImageScaleSlider
+                  form={form}
+                  imageScale={imageScale}
+                  handleScaleDown={handleScaleDown}
+                  handleScaleUp={handleScaleUp}
                 />
-                <div className='relative flex-[0_0_4rem] items-center'>
-                  <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp} type='button'>
-                    <IcSliderScaleUp />
-                    <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                      확대
-                    </span>
-                  </button>
-                </div>
               </div>
             </div>
 
@@ -303,75 +281,18 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
               <h4 className='text-[1.6rem] font-bold leading-[2.6rem]'>위치 조정</h4>
               <div className='flex flex-col gap-[4rem]'>
                 <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
-                  <div className='relative flex-[0_0_4rem] items-center'>
-                    <button
-                      className='relative w-[4rem] h-[4rem] cursor-pointer'
-                      onClick={handlePositionTop}
-                      type='button'
-                    >
-                      <IcSliderPositionTop />
-                      <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        상
-                      </span>
-                    </button>
-                  </div>
-                  <Slider
-                    min={-100}
-                    max={100}
-                    step={1}
-                    value={[form.watch("imageVertical")]}
-                    onValueChange={value => {
-                      form.setValue("imageVertical", value[0]);
-                    }}
+                  <ImagePositionHorizontalSlider
+                    form={form}
+                    handlePositionLeft={handlePositionLeft}
+                    handlePositionRight={handlePositionRight}
                   />
-                  <div className='relative flex-[0_0_4rem] items-center'>
-                    <button
-                      className='relative w-[4rem] h-[4rem] cursor-pointer'
-                      onClick={handlePositionBottom}
-                      type='button'
-                    >
-                      <IcSliderPositionBottom />
-                      <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        하
-                      </span>
-                    </button>
-                  </div>
                 </div>
-
                 <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
-                  <div className='relative flex-[0_0_4rem] items-center'>
-                    <button
-                      className='relative w-[4rem] h-[4rem] cursor-pointer'
-                      onClick={handlePositionLeft}
-                      type='button'
-                    >
-                      <IcSliderPositionLeft />
-                      <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        좌
-                      </span>
-                    </button>
-                  </div>
-                  <Slider
-                    min={-100}
-                    max={100}
-                    step={1}
-                    value={[form.watch("imageHorizontal")]}
-                    onValueChange={value => {
-                      form.setValue("imageHorizontal", value[0]);
-                    }}
+                  <ImagePositionVerticalSlider
+                    form={form}
+                    handlePositionTop={handlePositionTop}
+                    handlePositionBottom={handlePositionBottom}
                   />
-                  <div className='relative flex-[0_0_4rem] items-center'>
-                    <button
-                      className='relative w-[4rem] h-[4rem] cursor-pointer'
-                      onClick={handlePositionRight}
-                      type='button'
-                    >
-                      <IcSliderPositionRight />
-                      <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
-                        우
-                      </span>
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -380,59 +301,190 @@ const UploadImage = ({ form }: { form: PosterFormProps["form"] }) => {
       </div>
     </>
   );
-};
+});
 
-const SelectCar = ({
-  form,
-  carOptions
-}: {
-  form: PosterFormProps["form"];
-  carOptions: PosterFormProps["carOptions"];
-}) => {
-  return (
-    <div>
-      <ItemTitle>Kia 80주년 기념 대표 헤리티지 차량을 선택해주세요.</ItemTitle>
-      <ItemContent>
-        <FormField
-          control={form.control}
-          name='carType'
-          render={({ field }) => (
-            <FormItem>
-              <RadioGroup onValueChange={field.onChange} value={field.value}>
-                <div className='grid grid-cols-4 gap-[1.6rem]'>
-                  {carOptions.map((option, index) => (
-                    <div key={option.value + index}>
-                      <div className='relative w-full h-0 pb-[100%]'>
-                        <label
-                          htmlFor={option.value}
-                          className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary cursor-pointer z-0'
-                          data-checked={field.value === option.value}
-                        >
-                          <div className='absolute inset-[2rem]'>
-                            <Image
-                              src={option.image as string}
-                              alt='car-image'
-                              className='inset-[2.4rem] object-cover'
-                              unoptimized
-                              fill
-                            />
-                          </div>
-                          <RadioGroupItem value={option.value} id={option.value} hidden />
-                        </label>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </RadioGroup>
-            </FormItem>
-          )}
+const ImageScaleSlider = memo(
+  ({
+    form,
+    imageScale,
+    handleScaleDown,
+    handleScaleUp
+  }: {
+    form: PosterFormProps["form"];
+    imageScale: number;
+    handleScaleDown: () => void;
+    handleScaleUp: () => void;
+  }) => {
+    return (
+      <>
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleDown} type='button'>
+            <IcSliderScaleDown />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              축소
+            </span>
+          </button>
+        </div>
+        <Slider
+          className='flex-1'
+          min={0}
+          max={2}
+          step={0.1}
+          value={[imageScale]}
+          onValueChange={value => {
+            form.setValue("imageScale", value[0]);
+          }}
         />
-      </ItemContent>
-    </div>
-  );
-};
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp} type='button'>
+            <IcSliderScaleUp />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              확대
+            </span>
+          </button>
+        </div>
+      </>
+    );
+  }
+);
 
-const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
+const ImagePositionVerticalSlider = memo(
+  ({
+    form,
+    handlePositionTop,
+    handlePositionBottom
+  }: {
+    form: PosterFormProps["form"];
+    handlePositionTop: () => void;
+    handlePositionBottom: () => void;
+  }) => {
+    return (
+      <>
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionTop} type='button'>
+            <IcSliderPositionTop />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              상
+            </span>
+          </button>
+        </div>
+        <Slider
+          min={-100}
+          max={100}
+          step={1}
+          value={[form.watch("imageVertical")]}
+          onValueChange={value => {
+            form.setValue("imageVertical", value[0]);
+          }}
+        />
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionBottom} type='button'>
+            <IcSliderPositionBottom />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              하
+            </span>
+          </button>
+        </div>
+      </>
+    );
+  }
+);
+
+const ImagePositionHorizontalSlider = memo(
+  ({
+    form,
+    handlePositionLeft,
+    handlePositionRight
+  }: {
+    form: PosterFormProps["form"];
+    handlePositionLeft: () => void;
+    handlePositionRight: () => void;
+  }) => {
+    return (
+      <>
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionLeft} type='button'>
+            <IcSliderPositionLeft />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              좌
+            </span>
+          </button>
+        </div>
+        <Slider
+          min={-100}
+          max={100}
+          step={1}
+          value={[form.watch("imageHorizontal")]}
+          onValueChange={value => {
+            form.setValue("imageHorizontal", value[0]);
+          }}
+        />
+        <div className='relative flex-[0_0_4rem] items-center'>
+          <button className='relative w-[4rem] h-[4rem] cursor-pointer' onClick={handlePositionRight} type='button'>
+            <IcSliderPositionRight />
+            <span className='absolute top-full left-0 right-0 translate-y-[.4rem] text-[1.4rem] leading-[2.2rem] text-center'>
+              우
+            </span>
+          </button>
+        </div>
+      </>
+    );
+  }
+);
+
+ImageScaleSlider.displayName = "ImageScaleSlider";
+ImagePositionVerticalSlider.displayName = "ImagePositionVerticalSlider";
+ImagePositionHorizontalSlider.displayName = "ImagePositionHorizontalSlider";
+UploadImage.displayName = "UploadImage";
+
+const SelectCar = memo(
+  ({ form, carOptions }: { form: PosterFormProps["form"]; carOptions: PosterFormProps["carOptions"] }) => {
+    return (
+      <div>
+        <ItemTitle>Kia 80주년 기념 대표 헤리티지 차량을 선택해주세요.</ItemTitle>
+        <ItemContent>
+          <FormField
+            control={form.control}
+            name='carType'
+            render={({ field }) => (
+              <FormItem>
+                <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <div className='grid grid-cols-4 gap-[1.6rem]'>
+                    {carOptions.map((option, index) => (
+                      <div key={option.value + index}>
+                        <div className='relative w-full h-0 pb-[100%]'>
+                          <label
+                            htmlFor={option.value}
+                            className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-500 cursor-pointer z-0'
+                            data-checked={field.value === option.value}
+                          >
+                            <div className='absolute inset-[2rem]'>
+                              <Image
+                                src={option.image as string}
+                                alt='car-image'
+                                className='inset-[.8rem] object-cover'
+                                unoptimized
+                                fill
+                              />
+                            </div>
+                            <RadioGroupItem value={option.value} id={option.value} hidden />
+                          </label>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </FormItem>
+            )}
+          />
+        </ItemContent>
+      </div>
+    );
+  }
+);
+SelectCar.displayName = "SelectCar";
+
+const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"] }) => {
   const posterTitle = form.watch("posterTitle");
   const posterTitleLength = posterTitle?.length || 0;
   const limitLength = 20;
@@ -441,7 +493,7 @@ const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
   return (
     <>
       <div>
-        <ItemTitle>‘My Moments With Kia’ 포스터에 어울리는 타이틀을 입력해주세요.</ItemTitle>
+        <ItemTitle>포스터에 어울리는 타이틀을 입력해주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
           최대 글자수 {limitLengthString}자 이내로 작성해주세요.
         </p>
@@ -479,7 +531,7 @@ const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
               <FormFieldInput
                 form={form}
                 name='instagramName'
-                placeholder='인스타그램 아이디 입력'
+                placeholder='인스타그램 계정명 입력'
                 type='text'
                 className='pr-[12rem] w-full text-[1.6rem]'
                 id='instagram-name'
@@ -490,4 +542,5 @@ const InputInstagramName = ({ form }: { form: PosterFormProps["form"] }) => {
       </div>
     </>
   );
-};
+});
+InputInstagramName.displayName = "InputInstagramName";

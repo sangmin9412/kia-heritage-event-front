@@ -6,8 +6,30 @@ import { useCreatePosterForm } from "@/features/poster/components/create-poster-
 import { PosterForm } from "@/features/poster/components/create-poster-form/form/poster-form";
 import { PosterPreview } from "@/features/poster/components/create-poster-form/form/poster-preview";
 import { hnadleErrorFocus } from "@/utils/form-error";
+import { Button } from "@/components/ui/button";
 
 export const CreatePosterForm = () => {
+  return (
+    <div className='container'>
+      <div className='flex'>
+        <div className='p-[4.8rem_4rem_0] flex-[0_0_64rem] max-w-[64rem]'>
+          <div className='sticky top-[2rem]'>
+            <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
+              <PosterPreview />
+            </div>
+          </div>
+        </div>
+        <div className='flex-1'>
+          <div className='p-[2.4rem_4.8rem_4.8rem] bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-right-10 ease-in-out duration-1000'>
+            <PosterFormContainer />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PosterFormContainer = () => {
   const router = useRouter();
   const { form, isValid, onSubmit, frameOptions, carOptions } = useCreatePosterForm();
 
@@ -25,21 +47,11 @@ export const CreatePosterForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit}>
-        <div className='container'>
-          <div className='flex gap-[3rem]'>
-            <div className='flex-[0_0_43rem] max-w-[43rem]'>
-              <div className='sticky top-[2rem]'>
-                <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
-                  <PosterPreview form={form} onSubmit={onSubmit} isValid={isValid} />
-                </div>
-              </div>
-            </div>
-            <div className='flex-1'>
-              <div className='p-[2.4rem_4.8rem_8rem] bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-right-10 ease-in-out duration-1000'>
-                <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
-              </div>
-            </div>
-          </div>
+        <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
+        <div className='sticky bottom-0 py-[2.4rem] bg-white'>
+          <Button size='lg' disabled={!isValid} type='submit' className='w-full'>
+            사연 작성하기
+          </Button>
         </div>
       </form>
     </Form>
