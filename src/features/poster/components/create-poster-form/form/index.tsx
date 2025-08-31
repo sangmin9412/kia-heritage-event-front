@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import { useCreatePosterForm } from "@/features/poster/components/create-poster-form";
@@ -49,11 +50,18 @@ const PosterFormContainer = () => {
       <form onSubmit={handleSubmit}>
         <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
         <div className='sticky bottom-0 py-[2.4rem] bg-white'>
-          <Button size='lg' disabled={!isValid} type='submit' className='w-full'>
-            사연 작성하기
-          </Button>
+          <PosterSubmit isValid={isValid} />
         </div>
       </form>
     </Form>
   );
 };
+
+const PosterSubmit = memo(({ isValid }: { isValid: boolean }) => {
+  return (
+    <Button size='lg' disabled={!isValid} type='submit' className='w-full'>
+      사연 작성하기
+    </Button>
+  );
+});
+PosterSubmit.displayName = "PosterSubmit";

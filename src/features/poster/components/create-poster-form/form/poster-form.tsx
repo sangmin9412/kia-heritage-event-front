@@ -144,12 +144,10 @@ PhotoFrame.displayName = "PhotoFrame";
 
 const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const {
-    imageScale = 0,
-    imageVertical = 0,
-    imageHorizontal = 0,
-    imageBase64 = ""
-  } = useEventEnterFormStore(state => state.posterForm);
+  const imageBase64 = useEventEnterFormStore(state => state.posterForm.imageBase64);
+  const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale) || 0;
+  const imageVertical = useEventEnterFormStore(state => state.posterForm.imageVertical) || 0;
+  const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal) || 0;
 
   const isImageFile = useMemo(() => imageFile && imageFile instanceof File, [imageFile]);
 
@@ -485,7 +483,7 @@ const SelectCar = memo(
 SelectCar.displayName = "SelectCar";
 
 const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"] }) => {
-  const posterTitle = form.watch("posterTitle");
+  const posterTitle = useEventEnterFormStore(state => state.posterForm.posterTitle);
   const posterTitleLength = posterTitle?.length || 0;
   const limitLength = 20;
   const limitLengthString = limitLength.toString().padStart(2, "0");
