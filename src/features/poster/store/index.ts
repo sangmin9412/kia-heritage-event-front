@@ -3,11 +3,14 @@ import { eventEnterFormSchemaType } from "@/features/poster/components/event-ent
 import { persist, createJSONStorage } from "zustand/middleware";
 import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form/schema/validation";
 
+type UserForm = Partial<eventEnterFormSchemaType>;
+type PosterForm = Partial<createPosterFormSchemaType>;
+
 type EventEnterFormState = {
-  userForm: Partial<eventEnterFormSchemaType>;
-  setUserForm: (form: Partial<eventEnterFormSchemaType>) => void;
-  posterForm: Partial<createPosterFormSchemaType>;
-  setPosterForm: (form: Partial<createPosterFormSchemaType>) => void;
+  userForm: UserForm;
+  setUserForm: (form: UserForm) => void;
+  posterForm: PosterForm;
+  setPosterForm: (form: PosterForm) => void;
   userStory: string;
   setUserStory: (story: string) => void;
 };

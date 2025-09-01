@@ -1,38 +1,14 @@
-"use client";
-
-import { useAlertDialog } from "@/components/contexts";
+import { CreateAlert } from "@/app/create/(components)/alert";
 import { getImagePath } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function CreateLayout({ children }: { children: React.ReactNode }) {
-  const { open } = useAlertDialog();
-  const router = useRouter();
-  useEffect(() => {
-    // 이벤트 참여 정보가 없으면 알림 띄우기
-    const localStorageEventEnterForm = localStorage.getItem("event-enter-form");
-
-    const isEventEnterForm = !!localStorageEventEnterForm;
-    if (!isEventEnterForm) {
-      open({
-        title: "이벤트 참여 정보가 없습니다.",
-        description: "메인 페이지로 이동하여<br /> 이벤트 참여 정보를 입력해주세요.",
-        onConfirm() {
-          router.push("/");
-        },
-        onClose() {
-          router.push("/");
-        }
-      });
-    }
-  }, [router, open]);
-
   return (
     <>
       <CreateTopBanner />
       <div>{children}</div>
+      <CreateAlert />
     </>
   );
 }
