@@ -11,8 +11,11 @@ export const CreateAlert = () => {
   const router = useRouter();
   const userForm = useEventEnterFormStore(state => state.userForm);
   const posterForm = useEventEnterFormStore(state => state.posterForm);
+  const hasHydrated = useEventEnterFormStore(state => state._hasHydrated);
 
   useEffect(() => {
+    if (!hasHydrated) return;
+
     // 이벤트 참여 정보가 없으면 알림 띄우기
     const isEventEnterForm = Object.keys(userForm).length > 0;
     if (!isEventEnterForm && pathname === "/create") {
@@ -53,7 +56,7 @@ export const CreateAlert = () => {
       });
       return;
     }
-  }, [router, open, userForm, pathname, posterForm]);
+  }, [router, open, userForm, pathname, posterForm, hasHydrated]);
 
   return <></>;
 };

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export const CreatePosterForm = () => {
   return (
     <div className='container'>
-      <div className='flex'>
+      <div className='flex pb-[8rem]'>
         <div className='p-[4.8rem_4rem_0] flex-[0_0_64rem] max-w-[64rem]'>
           <div className='sticky top-[2rem]'>
             <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
@@ -20,8 +20,8 @@ export const CreatePosterForm = () => {
             </div>
           </div>
         </div>
-        <div className='flex-1'>
-          <div className='p-[2.4rem_4.8rem_4.8rem] bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-right-10 ease-in-out duration-1000'>
+        <div className='flex-1 min-w-0 w-full'>
+          <div className='min-h-screen flex flex-col bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-right-10 ease-in-out duration-1000'>
             <PosterFormContainer />
           </div>
         </div>
@@ -48,8 +48,10 @@ const PosterFormContainer = () => {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit}>
-        <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
-        <div className='sticky bottom-0 py-[2.4rem] bg-white'>
+        <div className='p-[2.4rem_4.8rem]'>
+          <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
+        </div>
+        <div className='mt-auto sticky bottom-0 p-[2.4rem_4.8rem] bg-white border-t border-border'>
           <PosterSubmit isValid={isValid} />
         </div>
       </form>

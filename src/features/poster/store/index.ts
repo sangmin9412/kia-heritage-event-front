@@ -13,11 +13,18 @@ type EventEnterFormState = {
   setPosterForm: (form: PosterForm) => void;
   userStory: string;
   setUserStory: (story: string) => void;
+  // 초기 데이터 로드 여부
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 };
 
 export const useEventEnterFormStore = create<EventEnterFormState>()(
   persist(
     set => ({
+      _hasHydrated: false,
+      setHasHydrated: (state: boolean) => {
+        set({ _hasHydrated: state });
+      },
       userForm: {},
       setUserForm: form => {
         set({ userForm: form });
@@ -49,7 +56,13 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
     }),
     {
       name: "event-enter-form",
-      storage: createJSONStorage(() => localStorage)
+      storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state, error) => {
+        if (error) {
+          console.error("Error rehydrating storage:", error);
+        }
+        state?.setHasHydrated(true);
+      }
     }
   )
 );
