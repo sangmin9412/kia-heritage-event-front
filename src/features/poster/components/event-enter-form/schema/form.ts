@@ -10,10 +10,12 @@ import {
   hasDriverLicenseOptions
 } from "@/features/poster/components/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
+import { getParticipationStatus } from "@/features/poster/api";
 
 interface FormState {
   isSubmitting: boolean;
   isSuccess: boolean;
+  isParticipated?: boolean;
   error: string | null;
   couponCode?: string;
 }
@@ -61,6 +63,19 @@ const useEventEnterForm = () => {
     try {
       setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
       console.log("submit data", data);
+
+      // 참여 여부 조회
+      const response = await getParticipationStatus(data);
+
+      setFormState(prev => ({ ...prev, isParticipated: response.isParticipated }));
+
+      // 이미 참여가 완료되었습니다.
+      if (response.isParticipated) {
+        // 스토어에 유저 데이터 초기화
+        setUserForm({});
+        return;
+      }
+
       // 스토어에 유저 데이터 저장
       setUserForm(data);
     } catch (error) {
@@ -69,6 +84,8 @@ const useEventEnterForm = () => {
         isSubmitting: false,
         error: error instanceof Error ? error.message : "An error occurred"
       }));
+    } finally {
+      setFormState(prev => ({ ...prev, isSubmitting: false }));
     }
   };
 

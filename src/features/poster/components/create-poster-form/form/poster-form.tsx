@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { IconInfo, IconPlus } from "@/assets/icons";
+import { IconInfo, IconPlus, IcTrash } from "@/assets/icons";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { DotItem, DotList } from "@/components/ui/dot-list";
 import { FormField, FormFieldInput, FormItem } from "@/components/ui/form";
@@ -36,25 +36,25 @@ export const PosterForm = ({ form, frameOptions, carOptions }: PosterFormProps) 
       <Accordion type='multiple' className='w-full' defaultValue={["item-1", "item-2", "item-3", "item-4"]}>
         <AccordionItem value='item-1' className='border-0'>
           <AccordionTrigger>포토 프레임 선택</AccordionTrigger>
-          <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
+          <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <PhotoFrame form={form} frameOptions={frameOptions} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-2' className='border-0'>
           <AccordionTrigger>이미지 업로드 및 위치 조정</AccordionTrigger>
-          <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
+          <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <UploadImage form={form} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3' className='border-0'>
           <AccordionTrigger>Kia 헤리티지 차량 선택</AccordionTrigger>
-          <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
+          <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <SelectCar form={form} carOptions={carOptions} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-4' className='border-0'>
           <AccordionTrigger>타이틀 및 인스타그램 계정명 입력</AccordionTrigger>
-          <AccordionContent className='mb-[2.4rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
+          <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <InputInstagramName form={form} />
           </AccordionContent>
         </AccordionItem>
@@ -89,7 +89,7 @@ const PhotoFrame = memo(
                         <div key={option.value}>
                           <label
                             htmlFor={option.value}
-                            className='block relative w-[16.5rem] h-[20.6rem] p-[2.4rem] bg-white border border-border data-[checked=true]:border-primary cursor-pointer z-0'
+                            className='block relative w-[16.5rem] h-[20.6rem] p-[2.4rem] bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
                             data-checked={field.value === option.value}
                           >
                             {option.value === "horizontal" && (
@@ -118,19 +118,19 @@ const PhotoFrame = memo(
           </ItemContent>
         </div>
 
-        <div className='mt-[2.4rem] p-[2.4rem_3.2rem] bg-[#f8f8f8]'>
-          <div className='mb-[1.2rem] flex items-center gap-[1.2rem]'>
+        <div className='mt-[2.4rem] p-[1.6rem_2.4rem] bg-[#f8f8f8]'>
+          <div className='mb-[.8rem] flex items-center gap-[.8rem]'>
             <span>
-              <IconInfo />
+              <IconInfo className='size-[2rem]' />
             </span>
-            <h4 className='text-[1.6rem] font-bold leading-[2.6rem] text-sub-text'>프레임 선택 Tip</h4>
+            <h4 className='text-[1.4rem] font-bold leading-[2.2rem] text-sub-text'>프레임 선택 Tip</h4>
           </div>
           <div>
             <DotList className='gap-[.4rem]'>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+              <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
                 선택하신 이미지와 프레임이 다를 경우, 이미지 일부가 잘릴 수 있어요.
               </DotItem>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+              <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
                 이미지 구도를 확인하고 어울리는 프레임을 선택해 주세요.
               </DotItem>
             </DotList>
@@ -208,50 +208,58 @@ const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
         <ItemContent>
           <div className='flex gap-[1.6rem]'>
             {imageBase64 && (
-              <div className='relative w-[16.5rem] h-[20.6rem] border border-border'>
-                <Image src={imageBase64} alt='uploaded-image' className='w-full h-full object-cover' fill />
-                <span className='absolute top-0 right-0'>
-                  <Button onClick={handleDeleteImage} className='px-[1rem] h-[3rem] text-[1.2rem] leading-[2rem]'>
-                    삭제
-                  </Button>
-                </span>
+              <>
+                <div className='relative w-[16.5rem] h-[20.6rem] border border-border'>
+                  <Image src={imageBase64} alt='uploaded-image' className='w-full h-full object-cover' fill />
+                </div>
+                <Button
+                  size='xs'
+                  variant='outline'
+                  onClick={handleDeleteImage}
+                  className='mt-auto border-border font-bold text-sub-text'
+                >
+                  <span>삭제</span>
+                  <IcTrash className='size-[2rem]' />
+                </Button>
+              </>
+            )}
+            {!imageBase64 && (
+              <div className='w-[16.5rem] h-[20.6rem]'>
+                <label
+                  htmlFor='image-file'
+                  className='relative flex items-center justify-center w-full h-full bg-white border border-border cursor-pointer'
+                >
+                  <Input
+                    type='file'
+                    accept='image/jpeg, image/jpg, image/png'
+                    onChange={e => {
+                      setImageFile(e.target.files?.[0] || null);
+                    }}
+                    id='image-file'
+                    className='hidden'
+                  />
+                  <span>
+                    <IconPlus />
+                  </span>
+                </label>
               </div>
             )}
-            <div className='w-[16.5rem] h-[20.6rem]'>
-              <label
-                htmlFor='image-file'
-                className='relative flex items-center justify-center w-full h-full bg-white border border-border cursor-pointer'
-              >
-                <Input
-                  type='file'
-                  accept='image/jpeg, image/jpg, image/png'
-                  onChange={e => {
-                    setImageFile(e.target.files?.[0] || null);
-                  }}
-                  id='image-file'
-                  className='hidden'
-                />
-                <span>
-                  <IconPlus />
-                </span>
-              </label>
-            </div>
           </div>
         </ItemContent>
 
-        <div className='mt-[2.4rem] p-[2.4rem_3.2rem] bg-[#f8f8f8]'>
-          <div className='mb-[1.2rem] flex items-center gap-[1.2rem]'>
+        <div className='mt-[2.4rem] p-[1.6rem_2.4rem] bg-[#f8f8f8]'>
+          <div className='mb-[.8rem] flex items-center gap-[.8rem]'>
             <span>
-              <IconInfo />
+              <IconInfo className='size-[2rem]' />
             </span>
-            <h4 className='text-[1.6rem] font-bold leading-[2.6rem] text-sub-text'>이미지 업로드 Tip</h4>
+            <h4 className='text-[1.4rem] font-bold leading-[2.2rem] text-sub-text'>이미지 업로드 Tip</h4>
           </div>
           <div>
             <DotList className='gap-[.4rem]'>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+              <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
                 가로형 비율 4:3 (권장 해상도 1350*1080)
               </DotItem>
-              <DotItem className='text-[1.6rem] leading-[2.6rem] [--line-height:2.6rem] text-sub-text'>
+              <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
                 세로형 비율 3:4 (권장 해상도 1080*1350)
               </DotItem>
             </DotList>
@@ -279,17 +287,17 @@ const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
               <h4 className='text-[1.6rem] font-bold leading-[2.6rem]'>위치 조정</h4>
               <div className='flex flex-col gap-[4rem]'>
                 <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
-                  <ImagePositionHorizontalSlider
-                    form={form}
-                    handlePositionLeft={handlePositionLeft}
-                    handlePositionRight={handlePositionRight}
-                  />
-                </div>
-                <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
                   <ImagePositionVerticalSlider
                     form={form}
                     handlePositionTop={handlePositionTop}
                     handlePositionBottom={handlePositionBottom}
+                  />
+                </div>
+                <div className='flex items-center gap-[1.6rem] pb-[2.6rem]'>
+                  <ImagePositionHorizontalSlider
+                    form={form}
+                    handlePositionLeft={handlePositionLeft}
+                    handlePositionRight={handlePositionRight}
                   />
                 </div>
               </div>
@@ -453,7 +461,7 @@ const SelectCar = memo(
                         <div className='relative w-full h-0 pb-[100%]'>
                           <label
                             htmlFor={option.value}
-                            className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-500 cursor-pointer z-0'
+                            className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
                             data-checked={field.value === option.value}
                           >
                             <div className='absolute inset-[2rem]'>

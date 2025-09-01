@@ -25,13 +25,13 @@ function AccordionTrigger({ className, children, ...props }: React.ComponentProp
       <AccordionPrimitive.Trigger
         data-slot='accordion-trigger'
         className={cn(
-          "py-[1.9rem] text-[2rem] font-bold leading-[3.2rem] border-b border-black focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between text-left transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]_.ic-bar-vertical]:invisible cursor-pointer",
+          "py-[1.2rem] text-[2rem] font-bold leading-[3.2rem] border-b border-black focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between text-left transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]_.ic-bar-vertical]:invisible cursor-pointer",
           className
         )}
         {...props}
       >
         {children}
-        <span className='flex items-center justify-center w-[2.4rem] h-[2.4rem]'>
+        <span className='my-auto flex items-center justify-center w-[2.4rem] h-[2.4rem]'>
           <span className='absolute ic-bar-horizontal w-[2rem] h-[.2rem] bg-black'></span>
           <span className='absolute ic-bar-vertical w-[.2rem] h-[2rem] bg-black visible'></span>
         </span>

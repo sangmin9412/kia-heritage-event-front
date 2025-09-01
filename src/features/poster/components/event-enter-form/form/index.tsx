@@ -2,15 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { Form, FormFieldInput, FormFieldRadioGroup, FormRow } from "@/components/ui/form";
+import { Loading } from "@/components/ui/loading";
 import { BirthDateField, TermsAgreementField, useEventEnterForm } from "@/features/poster/components/event-enter-form";
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export const EventEnterForm = () => {
   const router = useRouter();
 
   const {
     form,
+    formState,
     isValid,
     onSubmit,
     GenderOptions,
@@ -23,7 +26,6 @@ export const EventEnterForm = () => {
   const handleSubmit = form.handleSubmit(
     data => {
       onSubmit(data);
-      router.push("/create");
     },
     error => {
       console.log("handleSubmit error", error);
@@ -31,6 +33,31 @@ export const EventEnterForm = () => {
     }
   );
 
+  useEffect(() => {
+    if (formState.isParticipated === false) {
+      router.push("/create");
+    }
+  }, [formState.isParticipated, router]);
+
+  // 로딩 중 - isParticipated가 false인 경우 화면 이동 하기 전 로딩 중 표시
+  if (formState.isSubmitting || formState.isParticipated === false) {
+    return <Loading />;
+  }
+
+  // 이미 참여가 완료되었습니다.
+  if (formState.isParticipated) {
+    return (
+      <p className='text-secondary text-center'>
+        이미 참여가 완료되었습니다.
+        <br />
+        본 이벤트는 1인 1회만 참여 가능합니다.
+        <br />
+        함께해 주셔서 감사합니다!
+      </p>
+    );
+  }
+
+  // 이벤트 참여 양식
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit}>
