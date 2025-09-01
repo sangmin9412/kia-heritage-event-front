@@ -99,19 +99,19 @@ export const SectionKeyVisual = () => {
                     <motion.div
                       className='absolute top-0 left-0 w-full h-full overflow-hidden'
                       initial={{ opacity: 0, y: -80 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -80 }}
                       transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "easeInOut" }}
                     >
                       <motion.div
                         className='absolute top-0 left-0 w-full h-full overflow-hidden'
                         initial={{ y: -imageHeight }}
-                        animate={{ y: 0 }}
+                        animate={hasAnimated ? { y: 0 } : { y: -imageHeight }}
                         transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
                       >
                         <motion.div
                           className='w-full h-full'
                           initial={{ y: imageHeight }}
-                          animate={{ y: 0 }}
+                          animate={hasAnimated ? { y: 0 } : { y: imageHeight }}
                           transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
                         >
                           <Image
