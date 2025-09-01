@@ -16,7 +16,7 @@ const NOTICE_ITEMS = [
 
 export const SectionEventNotice = () => {
   return (
-    <div className='py-[8rem] bg-white'>
+    <div className='py-[8rem] border-t border-border'>
       <div className='container'>
         <div className='flex flex-col gap-[2.4rem]'>
           <h3 className='text-[1.8rem] leading-[3rem] font-bold text-[#37434B]'>유의 사항</h3>

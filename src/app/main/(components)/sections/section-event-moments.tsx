@@ -7,6 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import ScrollReveal from "@/blocks/TextAnimations/ScrollReveal/ScrollReveal";
 import { getImagePath } from "@/lib/utils";
+import { motion } from "motion/react";
 
 export const SectionEventMoments = () => {
   const [scrollDirection, setScrollDirection] = useState<"forward" | "backward">("forward");
@@ -119,7 +120,13 @@ export const SectionEventMoments = () => {
           </div>
         </div>
 
-        <div className='relative flex items-center justify-center overflow-hidden'>
+        <motion.div
+          className='relative flex items-center justify-center overflow-hidden'
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
+          viewport={{ once: true }}
+        >
           <Carousel
             opts={{
               loop: true,
@@ -148,7 +155,7 @@ export const SectionEventMoments = () => {
           </Carousel>
           <div className='absolute top-0 right-0 w-[10rem] h-full bg-gradient-to-r from-transparent to-primary'></div>
           <div className='absolute top-0 left-0 w-[10rem] h-full bg-gradient-to-l from-transparent to-primary'></div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

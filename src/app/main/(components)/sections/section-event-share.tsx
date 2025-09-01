@@ -29,7 +29,7 @@ const SHARE_ITEMS = [
 
 export const SectionEventShare = () => {
   return (
-    <div className='py-[4rem] bg-[#f8f8f8]'>
+    <div className='py-[4rem] border-t border-border'>
       <div className='container'>
         <div className='flex justify-between items-center'>
           <div>

@@ -3,56 +3,104 @@ import Image from "next/image";
 
 export const SectionInstagramEvent = () => {
   return (
-    <section className='py-[8rem] bg-[#f8f8f8]'>
+    <section className='pt-[8rem] pb-[4rem]'>
       <h3 className='blind'>인스타그램 스토리 공유 이벤트 섹션</h3>
       <div className='container'>
         <div className='flex'>
-          <div className='flex-[0_0_68rem]'>
-            <div className='flex w-[68rem] h-[47.8rem]'>
+          <div className='py-[6.2rem] flex-[0_0_70rem] flex bg-sub-text'>
+            <div className='m-auto flex w-[50rem] h-[48rem]'>
               <Image
                 src={getImagePath("/images/main/share_item_01.webp")}
                 alt='이벤트 공유 이미지'
-                width={680}
-                height={478}
+                width={500}
+                height={480}
                 unoptimized
-                className='w-full h-full object-contain'
                 priority
+                className='w-full h-full object-contain'
               />
             </div>
           </div>
-          <div className='flex-1 px-[2.4rem] bg-white'>
-            <div className='p-[4.8rem_2.4rem_4rem] border-b border-border'>
-              <h4 className='mb-[1.6rem] text-[2rem] leading-[3.2rem] font-bold'>인스타그램 스토리 공유 이벤트</h4>
-              <p className='text-sub-text'>
-                완성된 포스터를 저장한 뒤,
+          <div className='flex-1 p-[4rem] bg-[#f8f8f8]'>
+            <div className='mb-[2.4rem] text-center'>
+              <h4 className='mb-[1.2rem] text-[2rem] leading-[3.2rem] font-bold'>
+                추가 이벤트 안내
                 <br />
-                인스타그램 스토리에 나만의 포스터를 인증해보세요.
+                인스타그램 스토리 공유 이벤트!
+              </h4>
+              <p className='text-secondary'>
+                완성된 포스터를 저장한 후,
+                <br />
+                인스타그램 스토리에 업로드해 인증해보세요!
               </p>
             </div>
-            <div className='p-[4.8rem_2.4rem_0]'>
+            <div className='p-[2.4rem] bg-white'>
               <div>
-                <ol className='flex flex-col gap-[1.2rem] [counter-reset:step] [counter-increment:step]'>
-                  <li className='relative pl-[2.7rem] before:content-[counter(step)"."] before:absolute before:left-0 before:top-0'>
+                <ol className='flex flex-col gap-[7.2rem] [counter-reset:step] [counter-increment:step]'>
+                  <li className='relative pl-[2.7rem] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
                     <p>완성된 포스터를 다운로드 해 주세요.</p>
+                    <span
+                      className='absolute left-0 right-0 top-full pt-[2.4rem] flex justify-center'
+                      aria-hidden='true'
+                    >
+                      <svg
+                        width='24'
+                        height='24'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='w-[2.4rem] h-[2.4rem]'
+                      >
+                        <rect x='24' width='24' height='24' rx='12' transform='rotate(90 24 0)' fill='#05141F' />
+                        <path
+                          fillRule='evenodd'
+                          clipRule='evenodd'
+                          d='M6.84801 9.79047L10.2455 14.2402C10.4541 14.5137 10.723 14.7353 11.0312 14.8879C11.3394 15.0405 11.6787 15.1198 12.0226 15.1198C12.3665 15.1198 12.7058 15.0405 13.0141 14.8879C13.3223 14.7353 13.5912 14.5137 13.7997 14.2402L17.1973 9.78969L16.0175 8.87695L12.6125 13.3267C12.5435 13.4177 12.4543 13.4916 12.3519 13.5424C12.2496 13.5933 12.1369 13.6197 12.0226 13.6197C11.9083 13.6197 11.7956 13.5933 11.6933 13.5424C11.591 13.4916 11.5018 13.4177 11.4327 13.3267L8.02776 8.87695L6.84801 9.79047Z'
+                          fill='white'
+                        />
+                      </svg>
+                    </span>
                   </li>
-                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-[counter(step)"."] before:absolute before:left-0 before:top-0'>
+                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
                     <p>
-                      인스타그램 스토리에 포스터를 업로드하고, <strong>‘Kia 80주년 지피 스티커’</strong>를 붙여
-                      꾸며보세요.
+                      인스타그램 스토리에 포스터를 업로드하고,
+                      <br />
+                      ‘Kia 80주년 지피 스티커’를 붙여 꾸며보세요.
                     </p>
+                    <span
+                      className='absolute left-0 right-0 top-full pt-[2.4rem] flex justify-center'
+                      aria-hidden='true'
+                    >
+                      <svg
+                        width='24'
+                        height='24'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='w-[2.4rem] h-[2.4rem]'
+                      >
+                        <rect x='24' width='24' height='24' rx='12' transform='rotate(90 24 0)' fill='#05141F' />
+                        <path
+                          fillRule='evenodd'
+                          clipRule='evenodd'
+                          d='M6.84801 9.79047L10.2455 14.2402C10.4541 14.5137 10.723 14.7353 11.0312 14.8879C11.3394 15.0405 11.6787 15.1198 12.0226 15.1198C12.3665 15.1198 12.7058 15.0405 13.0141 14.8879C13.3223 14.7353 13.5912 14.5137 13.7997 14.2402L17.1973 9.78969L16.0175 8.87695L12.6125 13.3267C12.5435 13.4177 12.4543 13.4916 12.3519 13.5424C12.2496 13.5933 12.1369 13.6197 12.0226 13.6197C11.9083 13.6197 11.7956 13.5933 11.6933 13.5424C11.591 13.4916 11.5018 13.4177 11.4327 13.3267L8.02776 8.87695L6.84801 9.79047Z'
+                          fill='white'
+                        />
+                      </svg>
+                    </span>
                   </li>
-                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-[counter(step)"."] before:absolute before:left-0 before:top-0'>
+                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
                     <p>
-                      업로드 시, <strong>기아 공식 인스타그램 계정(@kia.kor)</strong>을 꼭 태그해 주세요!
+                      업로드 시, 기아 공식 인스타그램 계정(@kia.kor)을
+                      <br />꼭 태그해 주세요!
                     </p>
                   </li>
                 </ol>
               </div>
-              <div className='mt-[3.2rem] py-[1.5rem] [counter-increment:step] flex justify-center items-center border border-border rounded-[5.8rem]'>
-                <p>
-                  참여하신 분들께 추첨을 통해 <strong>커피쿠폰 (1매)</strong>를 드립니다.
-                </p>
-              </div>
+            </div>
+            <div className='mt-[2.4rem] flex justify-center items-center '>
+              <p>
+                참여하신 분들께 추첨을 통해 <strong>커피쿠폰 (1매)</strong>를 드립니다.
+              </p>
             </div>
           </div>
         </div>
