@@ -4,6 +4,8 @@ import Image from "next/image";
 import { cn, getImagePath } from "@/lib/utils";
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import Magnet from "@/blocks/Animations/Magnet/Magnet";
+import MagnetWithValue from "@/blocks/Animations/Magnet/MagnetWithValue";
 
 const KEY_VISUAL_ITEMS = [
   {
@@ -73,6 +75,63 @@ export const SectionKeyVisual = () => {
   return (
     <section ref={scrollRef}>
       <div className='relative h-screen min-h-[92rem] bg-[#f8f8f8] overflow-hidden'>
+        <div className='absolute inset-0' aria-hidden='true'>
+          <MagnetWithValue disabled={false} magnetStrength={50} className='w-full h-full pt-[21.1rem]'>
+            <div className='container pointer-events-none'>
+              <div className='grid grid-cols-8 gap-[2.2rem]'>
+                {KEY_VISUAL_ITEMS.map((item, index) => (
+                  <div
+                    key={item.carName}
+                    className={cn("relative w-[14rem] h-[47rem] overflow-hidden", {
+                      "translate-y-[6rem]": (index + 1) % 2 === 0
+                    })}
+                    style={
+                      {
+                        "--scale": Math.random() + 1,
+                        transform:
+                          "translate3d(calc(var(--position-x) * var(--scale)), calc(var(--position-y) * var(--scale)), 0)",
+                        transition: "var(--transition)",
+                        willChange: "transform"
+                      } as React.CSSProperties
+                    }
+                  >
+                    <motion.div
+                      className='absolute top-0 left-0 w-full h-full overflow-hidden'
+                      initial={{ opacity: 0, y: -80 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "easeInOut" }}
+                    >
+                      <motion.div
+                        className='absolute top-0 left-0 w-full h-full overflow-hidden'
+                        initial={{ y: -imageHeight }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
+                      >
+                        <motion.div
+                          className='w-full h-full'
+                          initial={{ y: imageHeight }}
+                          animate={{ y: 0 }}
+                          transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
+                        >
+                          <Image
+                            src={getImagePath(item.imagePath)}
+                            alt={item.carName}
+                            width={imageWidth}
+                            height={imageHeight}
+                            className='w-full h-full object-contain'
+                            unoptimized
+                            priority
+                          />
+                        </motion.div>
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </MagnetWithValue>
+        </div>
+
         <div className='relative container h-full'>
           <div className='mb-[4.3rem] pt-[4.3rem]'>
             <motion.h3
@@ -91,48 +150,6 @@ export const SectionKeyVisual = () => {
             >
               당신의 이야기로 완성되는 80년의 기억
             </motion.p>
-          </div>
-
-          <div className='grid grid-cols-8 gap-[2.2rem]'>
-            {KEY_VISUAL_ITEMS.map((item, index) => (
-              <div
-                key={item.carName}
-                className={cn("relative w-[14rem] h-[47rem] overflow-hidden", {
-                  "translate-y-[6rem]": (index + 1) % 2 === 0
-                })}
-              >
-                <motion.div
-                  className='absolute top-0 left-0 w-full h-full overflow-hidden'
-                  initial={{ opacity: 0, y: -80 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "easeInOut" }}
-                >
-                  <motion.div
-                    className='absolute top-0 left-0 w-full h-full overflow-hidden'
-                    initial={{ opacity: 0, y: -imageHeight }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
-                  >
-                    <motion.div
-                      className='w-full h-full'
-                      initial={{ y: imageHeight }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
-                    >
-                      <Image
-                        src={getImagePath(item.imagePath)}
-                        alt={item.carName}
-                        width={imageWidth}
-                        height={imageHeight}
-                        className='w-full h-full object-contain'
-                        unoptimized
-                        priority
-                      />
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              </div>
-            ))}
           </div>
 
           <motion.div
