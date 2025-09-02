@@ -84,10 +84,6 @@ const useEventEnterForm = () => {
         isSubmitting: false,
         error: error instanceof Error ? error.message : "An error occurred"
       }));
-    } finally {
-      setTimeout(() => {
-        setFormState(prev => ({ ...prev, isSubmitting: false }));
-      }, 1000);
     }
   };
 

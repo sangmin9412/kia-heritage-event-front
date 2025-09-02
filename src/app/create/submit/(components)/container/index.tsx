@@ -20,14 +20,14 @@ export const CreateSubmitContainer = () => {
   const posterForm = useEventEnterFormStore(state => state.posterForm);
 
   const [submitState, setSubmitState] = useState({
-    isLoading: false,
+    isSubmitting: false,
     isSuccess: false,
     isError: false
   });
 
   const onSubmit = async () => {
     try {
-      setSubmitState(prev => ({ ...prev, isLoading: true }));
+      setSubmitState(prev => ({ ...prev, isSubmitting: true }));
 
       console.log("userForm", userForm);
       console.log("posterForm", posterForm);
@@ -44,15 +44,11 @@ export const CreateSubmitContainer = () => {
       console.log("response", response);
     } catch (error) {
       console.error(error);
-      setSubmitState(prev => ({ ...prev, isError: true }));
-    } finally {
-      setTimeout(() => {
-        setSubmitState(prev => ({ ...prev, isLoading: false }));
-      }, 1000);
+      setSubmitState(prev => ({ ...prev, isError: true, isSubmitting: false }));
     }
   };
 
-  if (submitState.isLoading) {
+  if (submitState.isSubmitting) {
     return (
       <div className='mt-[8rem] mb-[22rem] mx-auto p-[8rem_2rem_12rem] max-w-[86rem] flex flex-col items-center text-center bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
         <div className='mb-[4rem]'>
