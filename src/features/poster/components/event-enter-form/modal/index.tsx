@@ -21,7 +21,7 @@ export function EventEnterFormModal() {
   }, []);
 
   useEffect(() => {
-    setIsOpen(pathname === "/form");
+    setIsOpen(pathname === ROUTES.ENTER_EVENT_FORM.link);
   }, [pathname]);
 
   const handleClose = () => {

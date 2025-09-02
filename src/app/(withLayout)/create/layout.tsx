@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateAlert } from "@/app/create/(components)/alert";
+import { CreateAlert } from "@/app/(withLayout)/create/(components)/alert";
 import { ROUTES } from "@/config";
 import { getImagePath } from "@/lib/utils";
 import Image from "next/image";

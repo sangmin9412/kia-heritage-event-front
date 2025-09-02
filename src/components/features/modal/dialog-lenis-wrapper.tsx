@@ -12,7 +12,6 @@ export const DialogLenisWrapper = ({ children, open }: DialogLenisWrapperProps) 
   const lenis = useLenis();
 
   useEffect(() => {
-    console.log("open", open);
     if (open) {
       lenis?.stop();
     } else {

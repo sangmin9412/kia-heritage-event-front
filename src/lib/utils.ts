@@ -13,6 +13,16 @@ export function getImagePath(path: string, isQueryString: boolean = true) {
   return `${basePath}${path}${isQueryString ? `?v=${nowDate()}` : ""}`;
 }
 
+export const downloadImage = (image: string) => {
+  const a = document.createElement("a");
+  a.href = image;
+  a.download = "screenshot.png";
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(image);
+  return true;
+};
+
 // 숫자만 입력
 export const handleNumericInput = (value: string, maxLength: number = 4): string => {
   const numbersOnly = value.replace(/[^0-9]/g, "");

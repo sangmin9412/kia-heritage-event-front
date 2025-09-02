@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/app/main/(components)/shared/section-title";
+import { SectionTitle } from "@/app/(withLayout)/(main)/(components)/shared/section-title";
 import { EVENT_INFO } from "@/config";
 
 export const SectionEventInfo = () => {

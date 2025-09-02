@@ -15,3 +15,7 @@ export type RequestPosterCreate = eventEnterFormSchemaType &
 export interface ResponsePosterCreate {
   posterId: string;
 }
+
+export type RequestPosterScreenshot = createPosterFormSchemaType;
+
+// export interface ResponsePosterScreenshot {}

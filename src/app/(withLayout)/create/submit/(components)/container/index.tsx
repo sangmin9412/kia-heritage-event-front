@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ROUTES } from "@/config";
-import { createPoster } from "@/features/poster/api";
+import { createPoster, getPosterScreenshot } from "@/features/poster/api";
 import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form";
 import { PosterPreviewer } from "@/features/poster/components/create-poster-form/form/poster-preview";
 import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
@@ -17,7 +17,8 @@ export const CreateSubmitContainer = () => {
 
   const userStory = useEventEnterFormStore(state => state.userStory);
   const userForm = useEventEnterFormStore(state => state.userForm);
-  const posterForm = useEventEnterFormStore(state => state.posterForm);
+  const posterForm = useEventEnterFormStore(state => state.posterForm) as createPosterFormSchemaType;
+  const setPosterImage = useEventEnterFormStore(state => state.setPosterImage);
 
   const [submitState, setSubmitState] = useState({
     isSubmitting: false,
@@ -33,15 +34,26 @@ export const CreateSubmitContainer = () => {
       console.log("posterForm", posterForm);
       console.log("userStory", userStory);
 
-      const response = await createPoster({
-        ...(userForm as eventEnterFormSchemaType),
-        ...(posterForm as createPosterFormSchemaType),
-        userStory
+      // const response = await createPoster({
+      //   ...(userForm as eventEnterFormSchemaType),
+      //   ...(posterForm as createPosterFormSchemaType),
+      //   userStory
+      // });
+
+      const response = await getPosterScreenshot({
+        frameType: posterForm.frameType,
+        imageBase64: "",
+        imageScale: posterForm.imageScale,
+        imageVertical: posterForm.imageVertical,
+        imageHorizontal: posterForm.imageHorizontal,
+        carType: posterForm.carType,
+        posterTitle: posterForm.posterTitle,
+        instagramName: posterForm.instagramName
       });
 
-      router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", response.posterId));
+      setPosterImage(response as string);
 
-      console.log("response", response);
+      router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", "1234567890"));
     } catch (error) {
       console.error(error);
       setSubmitState(prev => ({ ...prev, isError: true, isSubmitting: false }));

@@ -10,7 +10,7 @@ import {
   SectionEventShare,
   SectionInstagramEvent,
   SectionKeyVisual
-} from "@/app/main/(components)";
+} from "@/app/(withLayout)/(main)/(components)";
 import { ReactLenis } from "@/lib/lenis";
 
 export const MainContainer = () => {

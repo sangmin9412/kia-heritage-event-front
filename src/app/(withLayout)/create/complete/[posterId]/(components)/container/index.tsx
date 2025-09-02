@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getImagePath } from "@/lib/utils";
+import { downloadImage, getImagePath } from "@/lib/utils";
 import Image from "next/image";
+import { useEventEnterFormStore } from "@/features/poster/store";
 
 export const CreateCompletePosterContainer = () => {
+  const posterImage = useEventEnterFormStore(state => state.posterImage);
+
   return (
     <div className='py-[8rem]'>
       <div className='mx-auto max-w-[86rem] shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-bottom-10 ease-in-out duration-1000'>
@@ -15,7 +20,18 @@ export const CreateCompletePosterContainer = () => {
             <br />
             인스타그램 피드에 게시물을 올려야 이벤트 참여가 완료됩니다.
           </p>
-          <div className='mx-auto max-w-[40rem] h-[50rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'></div>
+          <div className='mx-auto max-w-[40rem] h-[50rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
+            {posterImage && (
+              <Image
+                src={posterImage}
+                alt='포스터 이미지'
+                width={400}
+                height={500}
+                unoptimized
+                className='w-full h-full object-cover'
+              />
+            )}
+          </div>
         </div>
 
         <div className='p-[4rem_4.8rem]'>
@@ -69,7 +85,7 @@ export const CreateCompletePosterContainer = () => {
         </div>
 
         <div className='p-[2.4rem_4.8rem] flex gap-[1.6rem] border-t border-border'>
-          <Button variant='outline' className='flex-1'>
+          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImage)}>
             포스터 다운로드
           </Button>
           <Button className='flex-1' disabled>

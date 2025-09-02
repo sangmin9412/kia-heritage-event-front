@@ -1,5 +1,5 @@
-import { MainContainer } from "@/app/main/(components)/container";
+import MainPage from "@/app/(withLayout)/(main)/page";
 
-export default function FormModal() {
-  return <MainContainer />;
+export default function RootFormPage() {
+  return <MainPage />;
 }

@@ -1,33 +1,27 @@
 import React, { useMemo } from "react";
-import { useEventEnterFormStore } from "@/features/poster/store";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { IcTextPlaceholder } from "@/assets/icons";
 
-export const PosterPreview = React.memo(() => {
-  return (
-    <div>
-      <div className='flex flex-col'>
-        <div className='bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
-          <div className='h-[70rem]'>
-            <PosterPreviewer className='origin-top-left scale-[0.5185185185185185]' />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-});
-PosterPreview.displayName = "PosterPreview";
-
-export const PosterPreviewer = ({ className }: { className?: string }) => {
-  const frameType = useEventEnterFormStore(state => state.posterForm.frameType);
-  const imageBase64 = useEventEnterFormStore(state => state.posterForm.imageBase64);
-  const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale);
-  const imageVertical = useEventEnterFormStore(state => state.posterForm.imageVertical);
-  const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal);
-  const carType = useEventEnterFormStore(state => state.posterForm.carType);
-  const posterTitle = useEventEnterFormStore(state => state.posterForm.posterTitle);
-
+export const PosterPreviewerParams = ({
+  className,
+  frameType,
+  imageBase64,
+  imageScale,
+  imageVertical,
+  imageHorizontal,
+  carType,
+  posterTitle
+}: {
+  className?: string;
+  frameType?: string;
+  imageBase64?: string;
+  imageScale?: string;
+  imageVertical?: string;
+  imageHorizontal?: string;
+  carType?: string;
+  posterTitle?: string;
+}) => {
   const imageStyle = useMemo(
     () => ({
       "--image-horizontal": `${imageHorizontal}%`,

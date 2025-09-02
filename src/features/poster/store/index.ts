@@ -7,15 +7,21 @@ type UserForm = Partial<eventEnterFormSchemaType>;
 type PosterForm = Partial<createPosterFormSchemaType>;
 
 type EventEnterFormState = {
+  // 유저 폼
   userForm: UserForm;
   setUserForm: (form: UserForm) => void;
+  // 포스터 폼
   posterForm: PosterForm;
   setPosterForm: (form: PosterForm) => void;
+  // 사연 내용
   userStory: string;
   setUserStory: (story: string) => void;
   // 초기 데이터 로드 여부
   _hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
+  // 포스터 이미지
+  posterImage: string;
+  setPosterImage: (image: string) => void;
 };
 
 export const useEventEnterFormStore = create<EventEnterFormState>()(
@@ -52,6 +58,10 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
         // 쿠키에도 동일한 데이터 저장
         // const currentState = get();
         // setCookieData("user-story", { ...currentState, userStory: story });
+      },
+      posterImage: "",
+      setPosterImage: image => {
+        set({ posterImage: image });
       }
     }),
     {

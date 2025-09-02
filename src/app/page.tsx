@@ -1,5 +1,5 @@
-import { MainContainer } from "./main/(components)";
+import MainPage from "@/app/(withLayout)/(main)/page";
 
 export default function Home() {
-  return <MainContainer />;
+  return <MainPage />;
 }

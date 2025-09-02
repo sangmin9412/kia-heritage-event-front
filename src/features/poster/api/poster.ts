@@ -1,9 +1,11 @@
 import {
   RequestPosterCreate,
   RequestPosterParticipation,
+  RequestPosterScreenshot,
   ResponsePosterCreate,
   ResponsePosterParticipation
 } from "@/features/poster/model/poster";
+import httpClient from "@/lib/http";
 
 // 참여 여부 조회
 export const getParticipationStatus = async (payload: RequestPosterParticipation) => {
@@ -24,4 +26,12 @@ export const createPoster = async (payload: RequestPosterCreate) => {
       });
     }, 3000);
   });
+};
+
+export const getPosterScreenshot = async (payload: RequestPosterScreenshot) => {
+  const params = new URLSearchParams();
+  Object.entries(payload).forEach(([key, value]) => {
+    params.append(key, String(value));
+  });
+  return httpClient.get(`/api/screenshot?${params.toString()}`);
 };
