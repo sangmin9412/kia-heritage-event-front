@@ -9,6 +9,15 @@ import { hnadleErrorFocus } from "@/utils/form-error";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+import {
+  handleDeleteKoreanOnlyInput,
+  handleKoreanOnlyInput,
+  handleKoreanOnlyPaste,
+  handleNumericInput,
+  handleNumericPaste,
+  handleSpaceOnlyInput
+} from "@/lib/utils";
+
 export const EventEnterForm = () => {
   const router = useRouter();
 
@@ -69,15 +78,75 @@ export const EventEnterForm = () => {
           <h3 className='sr-only'>이벤트 참여 양식</h3>
           <div className='flex flex-col gap-[3.2rem]'>
             <FormRow label='이름' required names={["name"]}>
-              <FormFieldInput form={form} name='name' placeholder='김기아' type='text' required />
+              <FormFieldInput
+                form={form}
+                name='name'
+                placeholder='김기아'
+                type='text'
+                required
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = handleKoreanOnlyInput(input.value);
+                  input.value = value;
+                  form.setValue("name", value, {
+                    shouldValidate: true
+                  });
+                }}
+                onPaste={e => {
+                  const value = handleKoreanOnlyPaste(e);
+                  form.setValue("name", value, {
+                    shouldValidate: true
+                  });
+                }}
+              />
             </FormRow>
 
             <FormRow label='연락처' required names={["phone"]}>
-              <FormFieldInput form={form} name='phone' placeholder='010 0000 0000' type='text' required />
+              <FormFieldInput
+                form={form}
+                name='phone'
+                placeholder='01000000000'
+                type='text'
+                required
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = handleNumericInput(input.value, 11);
+                  input.value = value;
+                  form.setValue("phone", value, {
+                    shouldValidate: true
+                  });
+                }}
+                onPaste={e => {
+                  const value = handleNumericPaste(e, 11);
+                  form.setValue("phone", value, {
+                    shouldValidate: true
+                  });
+                }}
+              />
             </FormRow>
 
             <FormRow label='이메일' required names={["email"]}>
-              <FormFieldInput form={form} name='email' placeholder='email@kia.kor' type='text' required />
+              <FormFieldInput
+                form={form}
+                name='email'
+                placeholder='email@kia.kor'
+                type='text'
+                required
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = handleSpaceOnlyInput(handleDeleteKoreanOnlyInput(input.value));
+                  input.value = value;
+                  form.setValue("email", value, {
+                    shouldValidate: true
+                  });
+                }}
+                onPaste={e => {
+                  const value = handleSpaceOnlyInput(handleDeleteKoreanOnlyInput(e.clipboardData.getData("text")));
+                  form.setValue("email", value, {
+                    shouldValidate: true
+                  });
+                }}
+              />
             </FormRow>
 
             <FormRow label='성별' required className='overflow-visible' names={["gender"]}>
