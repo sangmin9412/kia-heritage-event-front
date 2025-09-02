@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/config";
 import Link from "next/link";
 
 export const SectionButtons = () => {
@@ -9,7 +10,7 @@ export const SectionButtons = () => {
           기아 헤리티지 더 알아보기
         </Button>
         <Button size='lg' className='w-[34rem]' asChild>
-          <Link href='/form' scroll={false}>
+          <Link href={ROUTES.ENTER_EVENT_FORM.link} scroll={false}>
             이벤트 참여하기
           </Link>
         </Button>

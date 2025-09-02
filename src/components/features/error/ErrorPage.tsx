@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { RefreshCw, Home, ArrowLeft } from "lucide-react";
+import { ROUTES } from "@/config";
 
 interface ErrorPageProps {
   title?: string;
@@ -34,7 +35,7 @@ export default function ErrorPage({
   };
 
   const handleGoHome = () => {
-    router.push("/");
+    router.push(ROUTES.HOME.link);
   };
 
   const handleGoBack = () => {

@@ -8,6 +8,7 @@ import { PosterForm } from "@/features/poster/components/create-poster-form/form
 import { PosterPreview } from "@/features/poster/components/create-poster-form/form/poster-preview";
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/config";
 
 export const CreatePosterForm = () => {
   return (
@@ -37,7 +38,7 @@ const PosterFormContainer = () => {
   const handleSubmit = form.handleSubmit(
     data => {
       onSubmit(data);
-      router.push("/create/submit");
+      router.push(ROUTES.CREATE_SUBMIT.link);
     },
     error => {
       console.log("handleSubmit error", error);

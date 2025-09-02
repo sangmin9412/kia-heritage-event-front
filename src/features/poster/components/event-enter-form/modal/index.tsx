@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 
 import { DialogLenisWrapper } from "@/components/features/modal/dialog-lenis-wrapper";
 import { EventEnterForm } from "@/features/poster/components/event-enter-form";
+import { ROUTES } from "@/config";
 
 export function EventEnterFormModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ export function EventEnterFormModal() {
   }, [pathname]);
 
   const handleClose = () => {
-    router.push("/", { scroll: false });
+    router.push(ROUTES.HOME.link, { scroll: false });
   };
 
   return (

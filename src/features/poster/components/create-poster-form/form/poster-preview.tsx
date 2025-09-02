@@ -5,7 +5,6 @@ import Image from "next/image";
 import { IcTextPlaceholder } from "@/assets/icons";
 
 export const PosterPreview = React.memo(() => {
-  console.log("PosterPreview");
   return (
     <div>
       <div className='flex flex-col'>

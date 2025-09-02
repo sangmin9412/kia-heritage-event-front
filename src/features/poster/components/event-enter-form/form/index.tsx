@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormFieldInput, FormFieldRadioGroup, FormRow } from "@/components/ui/form";
 import { Loading } from "@/components/ui/loading";
+import { ROUTES } from "@/config";
 import { BirthDateField, TermsAgreementField, useEventEnterForm } from "@/features/poster/components/event-enter-form";
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { useRouter } from "next/navigation";
@@ -35,12 +36,12 @@ export const EventEnterForm = () => {
 
   useEffect(() => {
     if (formState.isParticipated === false) {
-      router.push("/create");
+      router.push(ROUTES.CREATE_FORM.link);
     }
   }, [formState.isParticipated, router]);
 
-  // 로딩 중 - isParticipated가 false인 경우 화면 이동 하기 전 로딩 중 표시
-  if (formState.isSubmitting || formState.isParticipated === false) {
+  // 로딩 중
+  if (formState.isSubmitting) {
     return <Loading />;
   }
 
