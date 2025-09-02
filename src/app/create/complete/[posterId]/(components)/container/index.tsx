@@ -26,7 +26,7 @@ export const CreateCompletePosterContainer = () => {
           </div>
           <div className='p-[4.8rem] flex justify-between border border-t-0 border-border'>
             <div>
-              <ol className='max-w-[32.1rem] flex flex-col gap-[1.6rem] [counter-reset:list] [&>li]:pl-[3.8rem] [&>li]:relative [&>li]:[counter-increment:list] [&>li]:before:content-[counter(list)] [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:top-0 [&>li]:before:w-[2.6rem] [&>li]:before:h-[2.6rem] [&>li]:before:bg-primary [&>li]:before:rounded-full [&>li]:before:text-[1.6rem] [&>li]:before:leading-[3rem] [&>li]:before:font-bold [&>li]:before:text-center [&>li]:before:text-white'>
+              <ol className='max-w-[32.1rem] flex flex-col gap-[1.6rem] [counter-reset:list] [&>li]:pl-[3.8rem] [&>li]:relative [&>li]:[counter-increment:list] [&>li]:before:content-[counter(list)] [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:top-0 [&>li]:before:w-[2.6rem] [&>li]:before:h-[2.6rem] [&>li]:before:bg-primary [&>li]:before:rounded-full [&>li]:before:text-[1.6rem] [&>li]:before:leading-[2.8rem] [&>li]:before:font-bold [&>li]:before:text-center [&>li]:before:text-white'>
                 <li>
                   <p>완성된 포스터를 다운로드해 주세요.</p>
                 </li>
