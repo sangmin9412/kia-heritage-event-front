@@ -1,3 +1,5 @@
+import { CreateCompletePosterContainer } from "@/app/create/complete/[posterId]/(components)/container";
+
 export default function CreateCompletePosterPage() {
-  return <div>CreateCompletePosterPage</div>;
+  return <CreateCompletePosterContainer />;
 }
