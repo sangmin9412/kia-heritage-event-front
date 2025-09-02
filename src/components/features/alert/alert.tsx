@@ -57,7 +57,7 @@ export function Alert({
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent
         onAnimationEnd={handleAnimationEnd}
-        className='max-w-[32rem] lg:max-w-[46.4rem] w-full p-[2rem] pt-[4.8rem] lg:p-[4.8rem] gap-0'
+        className='max-w-[40rem] lg:max-w-[46.4rem] w-full p-[2rem] pt-[4.8rem] lg:p-[4.8rem] gap-0'
       >
         <AlertDialogHeader className='mb-[3.2rem] space-y-0'>
           <AlertDialogTitle>{title || ""}</AlertDialogTitle>

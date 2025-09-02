@@ -23,6 +23,7 @@ import {
   IcSliderScaleUp
 } from "@/assets/icons/ic-slider";
 import { useEventEnterFormStore } from "@/features/poster/store";
+import { useAlertDialog } from "@/components/contexts";
 
 interface PosterFormProps {
   form: UseFormReturn<createPosterFormSchemaType>;
@@ -143,6 +144,7 @@ const PhotoFrame = memo(
 PhotoFrame.displayName = "PhotoFrame";
 
 const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
+  const { open } = useAlertDialog();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const imageBase64 = useEventEnterFormStore(state => state.posterForm.imageBase64);
   const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale) || 0;
@@ -233,6 +235,18 @@ const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) => {
                     type='file'
                     accept='image/jpeg, image/jpg, image/png'
                     onChange={e => {
+                      // 이미지 용량 15MB 초과 검증
+                      if (e.target.files?.[0] && e.target.files[0].size > 15 * 1024 * 1024) {
+                        open({
+                          title: "이미지 용량 초과",
+                          description:
+                            "이미지는 최대 15MB 이하까지 업로드하실 수 있습니다.<br /> 용량을 확인한 후 다시 시도해 주세요.",
+                          onConfirm: () => {
+                            e.target.value = "";
+                          }
+                        });
+                        return;
+                      }
                       setImageFile(e.target.files?.[0] || null);
                     }}
                     id='image-file'
