@@ -46,7 +46,9 @@ export const CreateSubmitContainer = () => {
       console.error(error);
       setSubmitState(prev => ({ ...prev, isError: true }));
     } finally {
-      setSubmitState(prev => ({ ...prev, isLoading: false }));
+      setTimeout(() => {
+        setSubmitState(prev => ({ ...prev, isLoading: false }));
+      }, 1000);
     }
   };
 
