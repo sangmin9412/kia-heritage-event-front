@@ -4,7 +4,6 @@ import Image from "next/image";
 import { cn, getImagePath } from "@/lib/utils";
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import Magnet from "@/blocks/Animations/Magnet/Magnet";
 import MagnetWithValue from "@/blocks/Animations/Magnet/MagnetWithValue";
 
 const KEY_VISUAL_ITEMS = [
@@ -59,6 +58,7 @@ const KEY_VISUAL_ITEMS = [
 ];
 
 export const SectionKeyVisual = () => {
+  const [isAnimationCompleted, setIsAnimationCompleted] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(scrollRef);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -76,7 +76,7 @@ export const SectionKeyVisual = () => {
     <section ref={scrollRef}>
       <div className='relative h-screen min-h-[92rem] bg-[#f8f8f8] overflow-hidden'>
         <div className='absolute inset-0' aria-hidden='true'>
-          <MagnetWithValue disabled={false} magnetStrength={50} className='w-full h-full pt-[21.1rem]'>
+          <MagnetWithValue disabled={isAnimationCompleted} magnetStrength={50} className='w-full h-full pt-[21.1rem]'>
             <div className='container pointer-events-none'>
               <div className='grid grid-cols-8 gap-[2.2rem]'>
                 {KEY_VISUAL_ITEMS.map((item, index) => (
@@ -101,6 +101,11 @@ export const SectionKeyVisual = () => {
                       initial={{ opacity: 0, y: -80 }}
                       animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -80 }}
                       transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "easeInOut" }}
+                      onAnimationComplete={() => {
+                        if (index === KEY_VISUAL_ITEMS.length - 1) {
+                          setIsAnimationCompleted(false);
+                        }
+                      }}
                     >
                       <motion.div
                         className='absolute top-0 left-0 w-full h-full overflow-hidden'
