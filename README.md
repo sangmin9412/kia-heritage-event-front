@@ -23,21 +23,30 @@
 - **Sass** - CSS 전처리기
 - **GSAP** - 애니메이션 라이브러리
 - **Lenis** - 부드러운 스크롤 구현
+- **Motion** - 추가 애니메이션 라이브러리
 
 ### UI Components & Interactions
 
-- **Radix UI** - UI 컴포넌트
+- **Radix UI** - UI 컴포넌트 라이브러리
 - **Embla Carousel** - 캐러셀 컴포넌트
 - **Lucide React** - SVG 아이콘 라이브러리
+- **Lottie Files** - 애니메이션 파일 지원
 
 ### Forms & Validation
 
 - **React Hook Form** - 폼 라이브러리
 - **Zod** - 스키마 선언 및 검증
 
-### HTTP Client
+### State Management & Data Fetching
 
+- **Zustand** - 상태 관리 라이브러리
 - **Axios** - HTTP 클라이언트
+
+### Development & Build Tools
+
+- **Puppeteer** - 브라우저 자동화 (포스터 생성)
+- **ESLint** - 코드 린팅
+- **Prettier** - 코드 포매팅
 
 ## 📁 프로젝트 구조
 
@@ -46,22 +55,46 @@ kia-heritage-event-front/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── layout.tsx         # 루트 레이아웃
-│   │   ├── page.tsx           # 메인 페이지
 │   │   ├── globals.css        # 전역 스타일
-│   │   └── main/              # 메인 이벤트 페이지
-│   │       └── (components)/  # 이벤트 섹션 컴포넌트들
-│   │           ├── container/ # 메인 컨테이너
-│   │           ├── sections/  # 이벤트 섹션들
-│   │           └── shared/    # 공유 컴포넌트
+│   │   ├── error.tsx          # 에러 페이지
+│   │   ├── not-found.tsx      # 404 페이지
+│   │   ├── (withLayout)/      # 레이아웃이 적용된 페이지 그룹
+│   │   │   ├── page.tsx      # 메인 페이지
+│   │   │   ├── (main)/       # 메인 이벤트 페이지
+│   │   │   ├── form/         # 이벤트 참여 폼 페이지
+│   │   │   └── create/       # 포스터 생성 페이지
+│   │   ├── @modal/           # 모달 슬롯
+│   │   ├── api/              # API 라우트
+│   │   └── test/             # 테스트 페이지
 │   ├── components/            # 재사용 가능 컴포넌트
-│   │   ├── ui/               # 기본 UI 컴포넌트
-│   │   ├── layout/           # 레이아웃 컴포넌트
-│   │   └── error/            # 에러 처리 컴포넌트
-│   ├── lib/                  # 유틸리티 함수
+│   │   ├── ui/               # 기본 UI 컴포넌트 (Radix UI 기반)
+│   │   ├── features/         # 기능별 컴포넌트
+│   │   │   ├── modal/        # 모달 컴포넌트들
+│   │   │   ├── toast/        # 토스트 알림
+│   │   │   ├── alert/        # 알림 컴포넌트
+│   │   │   ├── layout/       # 레이아웃 컴포넌트
+│   │   │   └── error/        # 에러 처리 컴포넌트
+│   │   ├── contexts/         # React Context
+│   │   └── providers/        # Provider 컴포넌트들
+│   ├── features/             # 기능별 모듈
+│   │   └── poster/           # 포스터 생성 관련 기능
+│   ├── blocks/               # 재사용 가능한 블록 컴포넌트
+│   │   ├── Animations/       # 애니메이션 블록
+│   │   └── TextAnimations/   # 텍스트 애니메이션 블록
+│   ├── hooks/                # 커스텀 훅
+│   ├── utils/                # 유틸리티 함수
+│   ├── types/                # TypeScript 타입 정의
 │   ├── config/               # 설정 파일
-│   └── styles/               # 스타일 파일
+│   ├── assets/               # 정적 자산 파일
+│   ├── lib/                  # 라이브러리 설정
+│   ├── styles/               # 스타일 파일
+│   └── middleware.ts         # Next.js 미들웨어
 ├── public/                   # 정적 파일
-└── package.json              # 의존성 및 스크립트
+│   ├── images/              # 이미지 파일
+│   ├── fonts/               # 폰트 파일
+│   └── lotties/             # Lottie 애니메이션 파일
+├── lib/                     # 외부 라이브러리 설정
+└── package.json             # 의존성 및 스크립트
 ```
 
 ## 🚀 시작하기
@@ -115,17 +148,68 @@ npm run lint
 
 ## 🎨 주요 특징
 
-- **반응형 디자인**: 모바일과 데스크톱 모두 최적화
+- **반응형 디자인**: 모바일과 데스크톱 모두 최적화된 사용자 경험
 - **부드러운 스크롤**: Lenis를 활용한 고품질 스크롤 경험
 - **접근성**: Radix UI를 활용한 WCAG 준수 컴포넌트
 - **성능 최적화**: Next.js의 이미지 최적화 및 코드 분할
-- **모던 애니메이션**: GSAP을 활용한 인터랙티브 애니메이션
+- **모던 애니메이션**: GSAP과 Motion을 활용한 인터랙티브 애니메이션
+- **Lottie 애니메이션**: 고품질 벡터 애니메이션 지원
+- **포스터 생성**: Puppeteer를 활용한 서버사이드 이미지 생성
+- **상태 관리**: Zustand를 통한 효율적인 클라이언트 상태 관리
+- **타입 안전성**: TypeScript와 Zod를 통한 런타임 타입 검증
 - **SEO 최적화**: Next.js의 메타데이터 API 활용
+- **모달 시스템**: Next.js의 Parallel Routes를 활용한 모달 구현
 
 ## 📝 개발 노트
 
-- 이벤트 기간 및 경품 정보는 \`src/config/index.ts\`에서 관리
-- 이미지 파일은 \`public/images/\` 디렉토리에 위치
-- 컴포넌트는 섹션별로 분리하여 유지보수성 확보
+### 프로젝트 구조
+
+- **Route Groups**: `(withLayout)`, `@modal` 등을 활용한 레이아웃 및 모달 구조화
+- **Feature-based Architecture**: 기능별로 모듈화된 컴포넌트 구조
+- **UI Components**: Radix UI 기반의 재사용 가능한 컴포넌트 라이브러리
+
+### 설정 및 데이터 관리
+
+- 이벤트 기간 및 경품 정보는 `src/config/` 디렉토리에서 관리
+- 상태 관리는 Zustand를 통해 전역 상태 관리
+- 타입 정의는 `src/types/` 디렉토리에서 중앙 관리
+
+### 리소스 관리
+
+- 이미지 파일은 `public/images/` 디렉토리에 위치
+- Lottie 애니메이션은 `public/lotties/` 디렉토리에 위치
+- 폰트 파일은 `public/fonts/` 디렉토리에 위치
+
+### 개발 도구
+
 - TypeScript를 통한 타입 안전성 보장
 - ESLint와 Prettier를 통한 코드 품질 관리
+- 커스텀 훅은 `src/hooks/` 디렉토리에서 관리
+- 유틸리티 함수는 `src/utils/` 디렉토리에서 관리
+
+## 🔧 API 및 기능
+
+### API Routes
+
+- **포스터 생성**: `/api/screenshot` - Puppeteer를 활용한 포스터 이미지 생성
+
+### 주요 기능
+
+- **이벤트 참여 플로우**: 사용자 정보 입력 → 사진 업로드 → 포스터 생성 → 인스타그램 공유
+- **포스터 커스터마이징**: 다양한 템플릿과 텍스트 옵션 제공
+- **반응형 UI**: 모든 디바이스에서 최적화된 사용자 경험
+
+## 🚀 배포
+
+이 프로젝트는 Vercel에 최적화되어 있으며, 다음 명령어로 배포할 수 있습니다:
+
+```bash
+# Vercel CLI 설치
+npm i -g vercel
+
+# 배포
+vercel
+
+# 프로덕션 배포
+vercel --prod
+```
