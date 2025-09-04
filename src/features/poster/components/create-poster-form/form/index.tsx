@@ -9,6 +9,7 @@ import { PosterPreview } from "@/features/poster/components/create-poster-form/f
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config";
+import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 
 export const CreatePosterForm = () => {
   return (
@@ -38,6 +39,7 @@ const PosterFormContainer = () => {
   const handleSubmit = form.handleSubmit(
     data => {
       onSubmit(data);
+      ANALYTICS_HANDLER[Event.BTN_CLICK_CREATE].event();
       router.push(ROUTES.CREATE_SUBMIT.link);
     },
     error => {

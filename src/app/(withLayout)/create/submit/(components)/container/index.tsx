@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ROUTES } from "@/config";
-import { createPoster, getPosterScreenshot } from "@/features/poster/api";
+import { getPosterScreenshot } from "@/features/poster/api";
 import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form";
 import { PosterPreviewer } from "@/features/poster/components/create-poster-form/form/poster-preview";
-import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
+import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 import { useRouter } from "next/navigation";
 import { memo, useState } from "react";
 
@@ -53,6 +53,7 @@ export const CreateSubmitContainer = () => {
 
       setPosterImage(response as string);
 
+      ANALYTICS_HANDLER[Event.BTN_CLICK_CREATE].event();
       router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", "1234567890"));
     } catch (error) {
       console.error(error);

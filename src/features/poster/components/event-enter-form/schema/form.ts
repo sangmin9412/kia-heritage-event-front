@@ -11,6 +11,7 @@ import {
 } from "@/features/poster/components/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
 import { getParticipationStatus } from "@/features/poster/api";
+import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 
 interface FormState {
   isSubmitting: boolean;
@@ -62,6 +63,7 @@ const useEventEnterForm = () => {
   const onSubmit = async (data: eventEnterFormSchemaType) => {
     try {
       setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
+      ANALYTICS_HANDLER[Event.BTN_CLCK_SUBMIT].event();
       console.log("submit data", data);
 
       // 참여 여부 조회
