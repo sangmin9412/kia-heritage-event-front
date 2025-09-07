@@ -113,14 +113,14 @@ export const SectionKeyVisual = () => {
                     >
                       <motion.div
                         className='absolute top-0 left-0 w-full h-full overflow-hidden'
-                        initial={{ y: -imageHeight }}
-                        animate={hasAnimated ? { y: 0 } : { y: -imageHeight }}
+                        initial={{ y: "-100%" }}
+                        animate={hasAnimated ? { y: 0 } : { y: "-100%" }}
                         transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
                       >
                         <motion.div
                           className='w-full h-full'
-                          initial={{ y: imageHeight }}
-                          animate={hasAnimated ? { y: 0 } : { y: imageHeight }}
+                          initial={{ y: "100%" }}
+                          animate={hasAnimated ? { y: 0 } : { y: "100%" }}
                           transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: "linear" }}
                         >
                           <Image
