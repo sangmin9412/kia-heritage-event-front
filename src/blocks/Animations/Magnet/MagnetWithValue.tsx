@@ -38,6 +38,7 @@ const MagnetWithValue: React.FC<MagnetProps> = ({
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!magnetRef.current) return;
+      if (window.innerWidth <= 1024) return;
 
       const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
@@ -66,12 +67,7 @@ const MagnetWithValue: React.FC<MagnetProps> = ({
   const transitionStyle = isActive ? activeTransition : inactiveTransition;
 
   return (
-    <div
-      ref={magnetRef}
-      className={wrapperClassName}
-      style={{ position: "relative", display: "inline-block" }}
-      {...props}
-    >
+    <div ref={magnetRef} className={wrapperClassName} style={{ position: "relative" }} {...props}>
       <div
         className={innerClassName}
         style={

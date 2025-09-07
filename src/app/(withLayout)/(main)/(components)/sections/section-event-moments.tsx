@@ -95,12 +95,12 @@ export const SectionEventMoments = () => {
   }, []);
 
   return (
-    <section className='py-[12rem] bg-primary overflow-hidden'>
+    <section className='desktop:py-[12rem] py-[4rem] bg-primary overflow-hidden'>
       <h3 className='blind'>My Moments with Kia</h3>
       <div className='container'>
-        <div className='mb-[8rem]'>
+        <div className='desktop:mb-[8rem] mb-[4rem]'>
           <div
-            className='text-[3rem] text-white [&_br:first-of-type+span]:mt-[2rem]'
+            className='desktop:text-[3rem] text-[1.6rem] text-white desktop:[&_br:first-of-type+span]:mt-[2rem] [&_br:first-of-type+span]:mt-[1.6rem]'
             aria-label='수많은 도전과 기회로 달려온 Kia의 80년. Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동, 그리고 나만의 My moments with Kia를 들려주세요.'
           >
             <ScrollReveal
@@ -110,12 +110,30 @@ export const SectionEventMoments = () => {
               blurStrength={10}
               rotationEnd='center center'
               wordAnimationEnd='center center'
+              containerClassName='hidden desktop:block'
             >
               수많은 도전과 기회로 달려온 Kia의 80년.
               <br />
               Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
               <br />
               그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={5}
+              blurStrength={10}
+              rotationEnd='center center'
+              wordAnimationEnd='center center'
+              containerClassName='desktop:hidden'
+            >
+              수많은 도전과 기회로 달려온 Kia의 80년.
+              <br />
+              Kia의 헤리티지 속에서 여러분이 느낀
+              <br />
+              영감과 감동, 그리고 나만의
+              <br />
+              &apos;My moments with Kia&apos;를 들려주세요.
             </ScrollReveal>
           </div>
         </div>
@@ -138,8 +156,11 @@ export const SectionEventMoments = () => {
           >
             <CarouselContent>
               {[...carouselItems, ...carouselItems].map((img, index) => (
-                <CarouselItem key={index + index} className='pl-[1rem] basis-[29rem]'>
-                  <div className='w-[28rem] h-[35rem]'>
+                <CarouselItem
+                  key={index + index}
+                  className='desktop:pl-[1rem] pl-[0.8rem] desktop:basis-[29rem] basis-[13.8rem]'
+                >
+                  <div className='desktop:w-[28rem] w-[13rem] aspect-[280/350]'>
                     <Image
                       src={img}
                       alt={`moments-img-${index + 1}`}
@@ -153,8 +174,8 @@ export const SectionEventMoments = () => {
               ))}
             </CarouselContent>
           </Carousel>
-          <div className='absolute top-0 right-0 w-[10rem] h-full bg-gradient-to-r from-transparent to-primary'></div>
-          <div className='absolute top-0 left-0 w-[10rem] h-full bg-gradient-to-l from-transparent to-primary'></div>
+          <div className='absolute top-0 right-0 desktop:w-[10rem] w-[3.2rem] h-full bg-gradient-to-r from-transparent to-primary'></div>
+          <div className='absolute top-0 left-0 desktop:w-[10rem] w-[3.2rem] h-full bg-gradient-to-l from-transparent to-primary'></div>
         </motion.div>
       </div>
     </section>

@@ -22,7 +22,7 @@ const buttonVariants = cva(
         default: "h-[5.6rem] px-[1.6rem] py-[1.6rem] has-[>svg]:px-[1.6rem]",
         sm: "h-[4.8rem] gap-[1.2rem] px-[1.6rem] text-[1.4rem] leading-[2.2rem] has-[>svg]:px-[1.2rem]",
         xs: "h-[3.6rem] gap-[0.8rem] px-[1.2rem] text-[1.4rem] leading-[2.2rem] has-[>svg]:px-[1.2rem]",
-        lg: "h-[7.2rem] px-[1.6rem] py-[1.6rem] text-[2rem] leading-[3.2rem] has-[>svg]:px-[1.6rem]",
+        lg: "desktop:h-[7.2rem] h-[5rem] desktop:px-[1.6rem] px-[1.2rem] desktop:py-[1.6rem] py-[1.2rem] desktop:text-[2rem] text-[1.6rem] desktop:leading-[3.2rem] leading-[2.6rem] has-[>svg]:px-[1.6rem]",
         icon: "size-[2.4rem]"
       }
     },

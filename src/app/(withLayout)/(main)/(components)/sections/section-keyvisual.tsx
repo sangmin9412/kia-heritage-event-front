@@ -74,16 +74,20 @@ export const SectionKeyVisual = () => {
 
   return (
     <section ref={scrollRef}>
-      <div className='relative h-screen min-h-[92rem] bg-[#f8f8f8] overflow-hidden'>
-        <div className='absolute inset-0' aria-hidden='true'>
-          <MagnetWithValue disabled={isAnimationCompleted} magnetStrength={50} className='w-full h-full pt-[21.1rem]'>
+      <div className='relative desktop:h-screen desktop:min-h-[95.5rem] desktop:aspect-auto h-auto aspect-square bg-[#f8f8f8] overflow-hidden'>
+        <div className='absolute inset-0 pointer-events-none' aria-hidden='true'>
+          <MagnetWithValue
+            disabled={isAnimationCompleted}
+            magnetStrength={50}
+            className='w-full h-full flex items-center justify-center desktop:pt-[3.85rem] pt-[2.45rem]'
+          >
             <div className='container pointer-events-none'>
-              <div className='grid grid-cols-8 gap-[2.2rem]'>
+              <div className='grid grid-cols-8 desktop:gap-[2.2rem] gap-[0.3rem]'>
                 {KEY_VISUAL_ITEMS.map((item, index) => (
                   <div
                     key={item.carName}
-                    className={cn("relative w-[14rem] h-[47rem] overflow-hidden", {
-                      "translate-y-[6rem]": (index + 1) % 2 === 0
+                    className={cn("relative desktop:w-[14rem] w-[3.7rem] overflow-hidden aspect-[140/470]", {
+                      "desktop:translate-y-[6rem] translate-y-[1.6rem]": (index + 1) % 2 === 0
                     })}
                     style={
                       {
@@ -139,12 +143,12 @@ export const SectionKeyVisual = () => {
         </div>
 
         <div className='relative container h-full'>
-          <div className='mb-[4.3rem] pt-[4.3rem]'>
+          <div className='desktop:pt-[8.6rem] pt-[4.8rem] whitespace-nowrap'>
             <motion.h3
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
               transition={{ duration: 1, delay: 0, ease: "easeOut" }}
-              className='mb-[1.6rem] text-[6rem] font-bold leading-[1.14]'
+              className='desktop:mb-[1.6rem] mb-[0.8rem] desktop:text-[6rem] text-[3rem] font-bold leading-[1.15]'
             >
               My moments with Kia
             </motion.h3>
@@ -152,14 +156,14 @@ export const SectionKeyVisual = () => {
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
               transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-              className='text-[3.6rem] leading-[1.14]'
+              className='desktop:text-[3.6rem] text-[1.6rem] leading-[1.15]'
             >
               당신의 이야기로 완성되는 80년의 기억
             </motion.p>
           </div>
 
           <motion.div
-            className='absolute left-0 bottom-[4.3rem]'
+            className='absolute left-[2rem] container:left-0 bottom-[4.3rem]'
             initial={{ opacity: 0, y: 0 }}
             animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
             transition={{ duration: 1, delay: 1.5, ease: "easeInOut" }}
@@ -169,7 +173,7 @@ export const SectionKeyVisual = () => {
               alt='event-keyvisual'
               width={220}
               height={88}
-              className='w-[22rem] h-[8.8rem] object-contain'
+              className='desktop:w-[22rem] w-[7.5rem] h-auto object-contain'
               unoptimized
               priority
             />

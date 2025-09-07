@@ -8,7 +8,7 @@ export const SectionTitle = ({ asChild, className, ...props }: React.ComponentPr
     <Comp
       data-slot='section-title'
       className={cn(
-        "flex w-max px-[2.4rem] text-[1.8rem] font-bold text-white leading-[4.8rem] rounded-[4.8rem] bg-black",
+        "flex w-max desktop:px-[2.4rem] px-[1.6rem] desktop:text-[1.8rem] text-[1.6rem] font-bold text-white desktop:leading-[4.8rem] leading-[4.2rem] rounded-[4.8rem] bg-black",
         className
       )}
       {...props}

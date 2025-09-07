@@ -29,10 +29,10 @@ const SHARE_ITEMS = [
 
 export const SectionEventShare = () => {
   return (
-    <div className='py-[4rem] border-t border-border'>
+    <div className='desktop:py-[4rem] py-[2rem] border-t border-border'>
       <div className='container'>
-        <div className='flex justify-between items-center'>
-          <div>
+        <div className='flex desktop:justify-between justify-center items-center'>
+          <div className='hidden desktop:block'>
             <h3 className='text-[2rem] leading-[3.2rem] font-bold text-sub-text'>이벤트 공유하기</h3>
           </div>
           <div>
@@ -41,7 +41,7 @@ export const SectionEventShare = () => {
                 <li key={item.title}>
                   <Link
                     href={item.link}
-                    className='flex justify-center items-center size-[4.8rem] rounded-full border border-border bg-white'
+                    className='flex justify-center items-center desktop:size-[4.8rem] size-[4rem] rounded-full border border-border bg-white'
                   >
                     <Image
                       src={getImagePath(item.icon)}
@@ -49,7 +49,7 @@ export const SectionEventShare = () => {
                       width={24}
                       height={24}
                       unoptimized
-                      className='size-[2.4rem] object-contain'
+                      className='desktop:size-[2.4rem] size-[2rem] object-contain'
                     />
                   </Link>
                 </li>

@@ -16,14 +16,19 @@ const NOTICE_ITEMS = [
 
 export const SectionEventNotice = () => {
   return (
-    <div className='py-[8rem] border-t border-border'>
+    <div className='desktop:py-[8rem] py-[3rem] border-t border-border'>
       <div className='container'>
-        <div className='flex flex-col gap-[2.4rem]'>
-          <h3 className='text-[1.8rem] leading-[3rem] font-bold text-[#37434B]'>유의 사항</h3>
+        <div className='flex flex-col desktop:gap-[2.4rem] gap-[1.6rem]'>
+          <h3 className='desktop:text-[1.8rem] text-[1.6rem] desktop:leading-[3rem] leading-[2.6rem] font-bold text-secondary'>
+            유의 사항
+          </h3>
           <div>
-            <DotList className='gap-[1.6rem]'>
+            <DotList className='desktop:gap-[1.6rem] gap-[0.8rem]'>
               {NOTICE_ITEMS.map(item => (
-                <DotItem key={item} className='text-[1.4rem] leading-[2.2rem] [--line-height:2.2rem] text-[#37434B]'>
+                <DotItem
+                  key={item}
+                  className='desktop:pl-[1.6rem] pl-[1.2rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] desktop:[--line-height:2.2rem] [--line-height:2rem] text-secondary'
+                >
                   {item}
                 </DotItem>
               ))}

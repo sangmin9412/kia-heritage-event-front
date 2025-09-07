@@ -3,12 +3,12 @@ import Image from "next/image";
 
 export const SectionInstagramEvent = () => {
   return (
-    <section className='pt-[8rem] pb-[4rem]'>
+    <section className='desktop:pt-[8rem] pt-[2rem] desktop:pb-[4rem] pb-[2rem]'>
       <h3 className='blind'>인스타그램 스토리 공유 이벤트 섹션</h3>
       <div className='container'>
-        <div className='flex'>
-          <div className='py-[6.2rem] flex-[0_0_70rem] flex bg-sub-text'>
-            <div className='m-auto flex w-[50rem] h-[48rem]'>
+        <div className='flex desktop:flex-row flex-col'>
+          <div className='desktop:py-[6.2rem] py-[3.7rem] desktop:flex-[0_0_70rem] flex-auto flex bg-sub-text'>
+            <div className='m-auto flex desktop:w-[50rem] w-[25.6rem] aspect-[500/480]'>
               <Image
                 src={getImagePath("/images/main/share_item_01.webp")}
                 alt='이벤트 공유 이미지'
@@ -20,9 +20,9 @@ export const SectionInstagramEvent = () => {
               />
             </div>
           </div>
-          <div className='flex-1 p-[4rem] bg-[#f8f8f8]'>
+          <div className='flex-1 desktop:p-[4rem] p-[2.4rem] bg-[#f8f8f8]'>
             <div className='mb-[2.4rem] text-center'>
-              <h4 className='mb-[1.2rem] text-[2rem] leading-[3.2rem] font-bold'>
+              <h4 className='mb-[1.2rem] desktop:text-[2rem] text-[1.8rem] desktop:leading-[3.2rem] leading-[3rem] font-bold'>
                 추가 이벤트 안내
                 <br />
                 인스타그램 스토리 공유 이벤트!
@@ -35,11 +35,11 @@ export const SectionInstagramEvent = () => {
             </div>
             <div className='p-[2.4rem] bg-white'>
               <div>
-                <ol className='flex flex-col gap-[7.2rem] [counter-reset:step] [counter-increment:step]'>
-                  <li className='relative pl-[2.7rem] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
+                <ol className='flex flex-col desktop:gap-[7.2rem] gap-[5.6rem] [counter-reset:step] [counter-increment:step]'>
+                  <li className='relative desktop:pl-[2.7rem] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>완성된 포스터를 다운로드 해 주세요.</p>
                     <span
-                      className='absolute left-0 right-0 top-full pt-[2.4rem] flex justify-center'
+                      className='absolute left-0 right-0 top-full desktop:pt-[2.4rem] pt-[1.6rem] flex justify-center'
                       aria-hidden='true'
                     >
                       <svg
@@ -60,14 +60,14 @@ export const SectionInstagramEvent = () => {
                       </svg>
                     </span>
                   </li>
-                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
+                  <li className='relative desktop:pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>
                       인스타그램 스토리에 포스터를 업로드하고,
-                      <br />
+                      <br className='hidden desktop:block' />
                       ‘Kia 80주년 지피 스티커’를 붙여 꾸며보세요.
                     </p>
                     <span
-                      className='absolute left-0 right-0 top-full pt-[2.4rem] flex justify-center'
+                      className='absolute left-0 right-0 top-full desktop:pt-[2.4rem] pt-[1.6rem] flex justify-center'
                       aria-hidden='true'
                     >
                       <svg
@@ -88,18 +88,19 @@ export const SectionInstagramEvent = () => {
                       </svg>
                     </span>
                   </li>
-                  <li className='relative pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center text-center'>
+                  <li className='relative desktop:pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>
                       업로드 시, 기아 공식 인스타그램 계정(@kia.kor)을
-                      <br />꼭 태그해 주세요!
+                      <br className='hidden desktop:block' />꼭 태그해 주세요!
                     </p>
                   </li>
                 </ol>
               </div>
             </div>
-            <div className='mt-[2.4rem] flex justify-center items-center '>
+            <div className='mt-[2.4rem] text-center'>
               <p>
-                참여하신 분들께 추첨을 통해 <strong>커피쿠폰 (1매)</strong>를 드립니다.
+                참여하신 분들께 추첨을 통해
+                <br className='block desktop:hidden' /> <strong>커피쿠폰 (1매)</strong>를 드립니다.
               </p>
             </div>
           </div>
