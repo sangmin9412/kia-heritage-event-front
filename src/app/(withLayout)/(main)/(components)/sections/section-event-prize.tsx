@@ -137,7 +137,7 @@ export const SectionEventPrize = () => {
                         dangerouslySetInnerHTML={{ __html: criteria.title }}
                       />
                     </div>
-                    <div className='desktop:p-[2.4rem] p-[1.2rem] border-r border-b border-border'>
+                    <div className='flex-1 desktop:p-[2.4rem] p-[1.2rem] border-r border-b border-border'>
                       {criteria.description()}
                     </div>
                     <div className='desktop:flex-[0_0_12rem] flex-[0_0_5rem] flex items-center justify-center desktop:p-[2.4rem] p-[1.2rem] border-b border-border'>

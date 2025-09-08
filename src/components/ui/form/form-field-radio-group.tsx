@@ -39,7 +39,7 @@ export function FormFieldRadioGroup<T extends FieldValues>({
               onChange(value);
             }}
             value={field.value}
-            className='radio-group flex flex-row flex-wrap lg:pt-[0.8rem] gap-[1.2rem_2.4rem]'
+            className='radio-group flex flex-row flex-wrap gap-[1.2rem_2.4rem]'
           >
             {options.map(option => (
               <div key={option.value} className='radio-item flex items-center'>

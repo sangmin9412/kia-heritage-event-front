@@ -44,7 +44,7 @@ function RadioGroupItem({
         {mode === "checkbox" ? (
           <CheckIcon className='w-[1.2rem] h-[1.2rem]' strokeWidth={4} />
         ) : (
-          <span className='absolute inset-0 border-[5px] border-primary rounded-full'></span>
+          <span className='absolute inset-0 border-[0.5rem] border-primary rounded-full'></span>
         )}
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>

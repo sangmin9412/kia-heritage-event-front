@@ -61,7 +61,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot='dialog-content'
         className={cn(
-          "bg-white data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-[4rem] border p-[7.2rem_4.8rem_4.8rem] shadow-lg duration-200 sm:max-w-lg",
+          "bg-white data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] desktop:gap-[4rem] gap-[3.2rem] border desktop:p-[7.2rem_4.8rem_4.8rem] p-[3.2rem_1.6rem_1.6rem] shadow-lg duration-200 sm:max-w-lg",
           className
         )}
         {...props}
@@ -70,9 +70,16 @@ function DialogContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot='dialog-close'
-            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-[1.6rem] right-[2.4rem] transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[4rem] cursor-pointer"
+            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute desktop:top-[1.6rem] desktop:right-[2.4rem] top-[1rem] right-[1rem] transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[4rem] cursor-pointer"
           >
-            <svg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <svg
+              width='40'
+              height='40'
+              viewBox='0 0 40 40'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='desktop:size-[4rem] size-[2.4rem]'
+            >
               <g transform='translate(8, 8)'>
                 <path d='M22 2L2 22' stroke='#05141F' strokeWidth='2' strokeLinecap='square' strokeLinejoin='round' />
                 <path d='M2 2L22 22' stroke='#05141F' strokeWidth='2' strokeLinecap='square' strokeLinejoin='round' />
@@ -110,7 +117,10 @@ function DialogTitle({ className, ...props }: React.ComponentProps<typeof Dialog
   return (
     <DialogPrimitive.Title
       data-slot='dialog-title'
-      className={cn("text-[2.4rem] leading-[3.8rem] font-semibold text-primary", className)}
+      className={cn(
+        "desktop:text-[2.4rem] text-[1.6rem] desktop:leading-[3.8rem] leading-[2.6rem] font-semibold text-primary",
+        className
+      )}
       {...props}
     />
   );

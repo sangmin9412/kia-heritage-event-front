@@ -22,7 +22,7 @@ const DotItem = ({ asChild, className, children, ...props }: DotItemProps) => {
   return (
     <Comp
       className={cn(
-        "relative flex flex-col pl-[1.6rem] text-[1.8rem] leading-[3rem] [--line-height:3rem] [--dot-size:0.4rem]",
+        "relative flex flex-col desktop:pl-[1.6rem] pl-[1.2rem] text-[1.8rem] leading-[3rem] [--line-height:3rem] [--dot-size:0.4rem]",
         className
       )}
       {...props}

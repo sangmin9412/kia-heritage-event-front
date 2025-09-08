@@ -8,9 +8,9 @@ export const PosterPreview = React.memo(() => {
   return (
     <div>
       <div className='flex flex-col'>
-        <div className='bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
-          <div className='h-[70rem]'>
-            <PosterPreviewer className='origin-top-left scale-[0.5185185185185185]' />
+        <div className='desktop:w-auto w-[31.5rem] desktop:mx-0 mx-auto bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
+          <div className='desktop:h-[70rem] h-[39.4rem]'>
+            <PosterPreviewer className='origin-top-left desktop:scale-[0.5185185185185185] scale-[0.2916666666666667]' />
           </div>
         </div>
       </div>

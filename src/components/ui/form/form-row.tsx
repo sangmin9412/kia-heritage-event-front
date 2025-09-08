@@ -48,7 +48,7 @@ const FormRow = forwardRef<HTMLDivElement, FormRowProps>(
         ref={ref}
         data-field={`${names.join(",")}`}
         className={cn(
-          "flex flex-col gap-[1.2rem] lg:flex-row lg:gap-0 overflow-hidden outline-none focus:ring-4",
+          "flex flex-col desktop:gap-[1.2rem] gap-[0.8rem] overflow-hidden outline-none focus:ring-4",
           className
         )}
       >
@@ -57,7 +57,7 @@ const FormRow = forwardRef<HTMLDivElement, FormRowProps>(
           {required && (
             <span className='flex ml-[.4rem] overflow-hidden'>
               <svg
-                className='translate-y-[.4rem] w-[6px] h-[22px]'
+                className='translate-y-[.4rem] w-[.6rem] h-[2.2rem]'
                 width='6'
                 height='22'
                 viewBox='0 0 6 22'

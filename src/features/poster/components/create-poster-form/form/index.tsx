@@ -13,10 +13,10 @@ import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 
 export const CreatePosterForm = () => {
   return (
-    <div className='container'>
-      <div className='flex pb-[8rem]'>
-        <div className='p-[4.8rem_4rem_0] flex-[0_0_64rem] max-w-[64rem]'>
-          <div className='sticky top-[2rem]'>
+    <div className='container desktop:px-[3rem] px-0'>
+      <div className='flex desktop:flex-row flex-col pb-[8rem]'>
+        <div className='desktop:p-[4.8rem_4rem_0] p-[4.8rem_0] desktop:flex-[0_0_64rem] flex-[0_0_auto] max-w-[64rem] desktop:bg-transparent bg-[#f8f8f8]'>
+          <div className='desktop:sticky desktop:top-[2rem]'>
             <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
               <PosterPreview />
             </div>
@@ -51,10 +51,10 @@ const PosterFormContainer = () => {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit}>
-        <div className='p-[2.4rem_4.8rem]'>
+        <div className='desktop:p-[2.4rem_4.8rem]'>
           <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
         </div>
-        <div className='mt-auto sticky bottom-0 p-[2.4rem_4.8rem] bg-white border-t border-border'>
+        <div className='mt-auto sticky bottom-0 desktop:p-[2.4rem_4.8rem] p-[1.6rem] bg-white border-t border-border'>
           <PosterSubmit isValid={isValid} />
         </div>
       </form>

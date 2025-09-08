@@ -45,7 +45,7 @@ export const BirthDateField = ({
       className='overflow-visible'
       names={["birthYear", "birthMonth", "birthDay", "birthDate"]}
     >
-      <div className='flex gap-[1.6rem]'>
+      <div className='flex desktop:gap-[1.6rem] gap-[0.8rem]'>
         <div className='flex-1'>
           <FormFieldSelect
             form={form}

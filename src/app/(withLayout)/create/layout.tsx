@@ -19,8 +19,8 @@ export default function CreateLayout({ children }: { children: React.ReactNode }
 
 const CreateTopBanner = () => {
   return (
-    <div className='relative h-[21.4rem] bg-primary'>
-      <div className='container flex flex-col justify-center gap-[4.8rem] h-full'>
+    <div className='relative desktop:p-0 p-[2.4rem_0_1.6rem] desktop:h-[21.4rem] h-auto bg-primary'>
+      <div className='container flex flex-col justify-center desktop:gap-[4.8rem] gap-[2.4rem] h-full desktop:px-[3rem] px-[1.6rem]'>
         <div className='flex items-center'>
           <Link href={ROUTES.HOME.link}>
             <Image
@@ -28,14 +28,14 @@ const CreateTopBanner = () => {
               alt='top-banner'
               width={84}
               height={32}
-              className='w-[84px] h-[32px] object-cover'
+              className='desktop:w-[8.4rem] w-[6.3rem] h-auto object-cover'
               unoptimized
               priority
             />
           </Link>
         </div>
         <div>
-          <h2 className='text-[3.2rem] leading-[3.8rem] font-bold text-white animate-in fade-in slide-in-from-bottom-50 ease-in-out duration-1000'>
+          <h2 className='desktop:text-[3.2rem] text-[1.8rem] desktop:leading-[3.8rem] leading-[3rem] font-bold text-white animate-in fade-in slide-in-from-bottom-50 ease-in-out duration-1000 desktop:text-left text-center'>
             <CreateTopBannerTitle />
           </h2>
         </div>

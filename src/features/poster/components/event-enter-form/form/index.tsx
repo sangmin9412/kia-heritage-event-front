@@ -70,13 +70,16 @@ export const EventEnterForm = () => {
   // 이벤트 참여 양식
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className='flex-1 flex flex-col overflow-hidden desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[3.6rem] mr-[-1rem] pr-[1rem]'
+      >
         <div
-          className='max-h-[60dvh] overflow-y-auto custom-scrollbar desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[3.6rem]'
+          className='desktop:max-h-[60dvh] overflow-y-auto custom-scrollbar desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[2.8rem] mr-[-1rem] pr-[1rem]'
           data-lenis-prevent
         >
           <h3 className='sr-only'>이벤트 참여 양식</h3>
-          <div className='flex flex-col gap-[3.2rem]'>
+          <div className='flex flex-col desktop:gap-[3.2rem] gap-[2.4rem]'>
             <FormRow label='이름' required names={["name"]}>
               <FormFieldInput
                 form={form}
@@ -169,12 +172,14 @@ export const EventEnterForm = () => {
               <FormFieldRadioGroup form={form} name='hasDriverLicense' options={hasDriverLicenseOptions} />
             </FormRow>
           </div>
-          <div className='mt-[7rem]'>
-            <h3 className='mb-[2.4rem] text-[1.8rem] leading-[3rem] font-bold'>약관 동의</h3>
+          <div className='desktop:mt-[7rem] mt-[4rem]'>
+            <h3 className='desktop:mb-[2.4rem] mb-[1.2rem] desktop:text-[1.8rem] text-[1.6rem] desktop:leading-[3rem] leading-[2.6rem] font-bold'>
+              약관 동의
+            </h3>
             <TermsAgreementField form={form} />
           </div>
         </div>
-        <div className='pt-[2.4rem]'>
+        <div className='desktop:pt-[2.4rem] pt-[1.6rem]'>
           <Button className='w-full' disabled={!isValid} type='submit'>
             이벤트 참여하기
           </Button>

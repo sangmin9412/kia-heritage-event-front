@@ -136,9 +136,31 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 20px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(102, 102, 102, 0.3);
+    border-radius: 20px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: theme(--breakpoint-desktop)) {
     .custom-scrollbar::-webkit-scrollbar {
-      width: 8px;
+      width: 4px;
       border-radius: 20px;
     }
 
