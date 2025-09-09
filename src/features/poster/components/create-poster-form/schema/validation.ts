@@ -2,7 +2,16 @@ import { Option } from "@/features/poster/types";
 import { z } from "zod";
 
 const frameTypes = ["horizontal", "vertical"] as const;
-const carTypes = ["car_type_01", "car_type_02", "car_type_03", "car_type_04"] as const;
+const carTypes = [
+  "car_type_01",
+  "car_type_02",
+  "car_type_03",
+  "car_type_04",
+  "car_type_05",
+  "car_type_06",
+  "car_type_07",
+  "car_type_08"
+] as const;
 
 export const frameOptions: Option<(typeof frameTypes)[number]>[] = [
   { label: "가로형", value: "horizontal" },
@@ -13,7 +22,11 @@ export const carOptions: Option<(typeof carTypes)[number]>[] = [
   { label: "모델명1", value: "car_type_01", image: "/images/create/car/car_type_01.png" },
   { label: "모델명2", value: "car_type_02", image: "/images/create/car/car_type_02.png" },
   { label: "모델명3", value: "car_type_03", image: "/images/create/car/car_type_03.png" },
-  { label: "모델명4", value: "car_type_04", image: "/images/create/car/car_type_04.png" }
+  { label: "모델명4", value: "car_type_04", image: "/images/create/car/car_type_04.png" },
+  { label: "모델명5", value: "car_type_05", image: "/images/create/car/car_type_05.png" },
+  { label: "모델명6", value: "car_type_06", image: "/images/create/car/car_type_06.png" },
+  { label: "모델명7", value: "car_type_07", image: "/images/create/car/car_type_07.png" },
+  { label: "모델명8", value: "car_type_08", image: "/images/create/car/car_type_08.png" }
 ];
 
 const baseSchema = {
