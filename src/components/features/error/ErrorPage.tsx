@@ -72,6 +72,8 @@ export default function ErrorPage({
               이전 페이지
             </Button>
           )}
+          <hr className='my-[2.4rem]' />
+          <p className='text-gray-600 leading-relaxed'>{message}</p>
         </div>
       </div>
     </div>

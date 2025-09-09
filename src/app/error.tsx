@@ -17,7 +17,9 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <ErrorPage
       title='페이지 로드 중 오류가 발생했습니다'
-      message='일시적인 오류가 발생했습니다.<br /> 페이지를 새로고침하거나<br /> 잠시 후 다시 시도해주세요.'
+      message={
+        error?.message || "일시적인 오류가 발생했습니다.<br /> 페이지를 새로고침하거나<br /> 잠시 후 다시 시도해주세요."
+      }
       showRetry={true}
       showHome={true}
       showBack={true}
