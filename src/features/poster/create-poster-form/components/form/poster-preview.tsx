@@ -109,7 +109,11 @@ export const PosterImageFrameWrapper = React.memo(
     if (frameType === "horizontal") {
       return (
         <div className={cn("w-[90.5rem] h-[67.9rem] bg-white overflow-hidden", className)}>
-          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
+          <PosterImageFrame
+            className='relative w-full h-full flex items-center justify-center'
+            imageBase64={imageBase64}
+            imageStyle={imageStyle}
+          />
           {!imageBase64 && (
             <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
           )}
@@ -120,7 +124,11 @@ export const PosterImageFrameWrapper = React.memo(
     if (frameType === "vertical") {
       return (
         <div className={cn("w-[71.5rem] h-[95.3rem] bg-white overflow-hidden z-[-1]", className)}>
-          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
+          <PosterImageFrame
+            className='relative w-full h-full flex items-center justify-center'
+            imageBase64={imageBase64}
+            imageStyle={imageStyle}
+          />
           {!imageBase64 && (
             <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
           )}
@@ -141,9 +149,32 @@ export const PosterImageFrame = React.memo(
     imageBase64?: string;
     imageStyle: React.CSSProperties;
   }) => {
+    const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+      const image = e.currentTarget;
+      const width = image.naturalWidth;
+      const height = image.naturalHeight;
+      if (width > height) {
+        image.style.width = "auto";
+        image.style.height = "100%";
+      } else {
+        image.style.width = "100%";
+        image.style.height = "auto";
+      }
+      image.style.inset = "unset";
+    };
+
     return (
       <div className={className} style={imageStyle}>
-        {imageBase64 && <Image src={imageBase64} alt='poster' fill className='object-cover' unoptimized />}
+        {imageBase64 && (
+          <Image
+            src={imageBase64}
+            alt='poster'
+            className='max-w-none object-cover'
+            unoptimized
+            fill
+            onLoad={handleImageLoad}
+          />
+        )}
       </div>
     );
   }
