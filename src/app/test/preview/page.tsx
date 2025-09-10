@@ -1,16 +1,5 @@
 import { TEMP_IMAGE_BASE } from "@/config";
-import { PosterPreviewerParams } from "@/features/poster/components/create-poster-form/form/poster-preview-params";
-
-const dummyData = {
-  frameType: "vertical",
-  imageBase64: TEMP_IMAGE_BASE,
-  imageScale: "1",
-  imageVertical: "0",
-  imageHorizontal: "0",
-  carType: "car_type_01",
-  posterTitle: "기아와 함께한 순간",
-  instagramName: "test"
-};
+import { PosterPreviewerParams } from "@/features/poster/create-poster-form/components/form/poster-preview-params";
 
 export default async function PreviewPage({
   searchParams

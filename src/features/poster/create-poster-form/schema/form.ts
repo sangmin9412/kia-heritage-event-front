@@ -3,13 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEventEnterFormStore } from "@/features/poster/store";
+import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
 import {
   carOptions,
   createPosterFormSchema,
   createPosterFormSchemaType,
   frameOptions
-} from "@/features/poster/components/create-poster-form/schema";
+} from "@/features/poster/create-poster-form/schema";
 
 interface FormState {
   isSubmitting: boolean;
@@ -25,22 +25,28 @@ const useCreatePosterForm = () => {
     error: null
   });
 
+  const _hasHydrated = useEventEnterFormStore(state => state._hasHydrated);
+  const hydratedPosterForm = useEventEnterFormStore(state => state.hydratedPosterForm);
   const setPosterForm = useEventEnterFormStore(state => state.setPosterForm);
-  const posterForm = useEventEnterFormStore(state => state.posterForm);
 
   const form = useForm<createPosterFormSchemaType>({
     resolver: zodResolver(createPosterFormSchema),
-    defaultValues: posterForm, // 스토어에 저장된 데이터 사용
-    values: posterForm as createPosterFormSchemaType,
+    defaultValues: useEventEnterFormStoreInitialState.posterForm,
     mode: "onChange"
   });
+
+  useEffect(() => {
+    if (_hasHydrated) {
+      form.reset(hydratedPosterForm);
+    }
+  }, [_hasHydrated, hydratedPosterForm, form]);
 
   const { isValid } = form.formState;
 
   // 폼 데이터가 변경될 때마다 스토어에 자동 업데이트
   useEffect(() => {
     const subscription = form.watch(value => {
-      setPosterForm(value as createPosterFormSchemaType);
+      setPosterForm(value);
     });
 
     return () => subscription.unsubscribe();

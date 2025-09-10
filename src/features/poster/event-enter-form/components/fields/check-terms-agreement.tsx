@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { UseFormReturn } from "react-hook-form";
-import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
+import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export const TermsAgreementField = ({ form }: { form: UseFormReturn<eventEnterFormSchemaType> }) => {

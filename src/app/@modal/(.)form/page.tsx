@@ -1,4 +1,4 @@
-import { EventEnterFormModal } from "@/features/poster/components/event-enter-form";
+import { EventEnterFormModal } from "@/features/poster/event-enter-form";
 
 export default function FormModal() {
   return <EventEnterFormModal />;

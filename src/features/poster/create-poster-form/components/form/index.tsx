@@ -3,9 +3,9 @@
 import { memo } from "react";
 import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
-import { useCreatePosterForm } from "@/features/poster/components/create-poster-form";
-import { PosterForm } from "@/features/poster/components/create-poster-form/form/poster-form";
-import { PosterPreview } from "@/features/poster/components/create-poster-form/form/poster-preview";
+import { useCreatePosterForm } from "@/features/poster/create-poster-form";
+import { PosterForm } from "@/features/poster/create-poster-form/components/form/poster-form";
+import { PosterPreview } from "@/features/poster/create-poster-form/components/form/poster-preview";
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config";

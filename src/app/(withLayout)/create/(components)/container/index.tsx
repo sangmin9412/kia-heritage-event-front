@@ -1,4 +1,4 @@
-import { CreatePosterForm } from "@/features/poster/components/create-poster-form";
+import { CreatePosterForm } from "@/features/poster/create-poster-form";
 
 export const CreateContainer = () => {
   return <CreatePosterForm />;

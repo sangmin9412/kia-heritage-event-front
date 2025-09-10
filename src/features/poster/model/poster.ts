@@ -1,5 +1,5 @@
-import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form";
-import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
+import { createPosterFormSchemaType } from "@/features/poster/create-poster-form";
+import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 
 export type RequestPosterParticipation = eventEnterFormSchemaType;
 

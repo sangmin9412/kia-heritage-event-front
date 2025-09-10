@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 import { DialogLenisWrapper } from "@/components/features/modal/dialog-lenis-wrapper";
-import { EventEnterForm } from "@/features/poster/components/event-enter-form";
+import { EventEnterForm } from "@/features/poster/event-enter-form";
 import { ROUTES } from "@/config";
 
 export function EventEnterFormModal() {

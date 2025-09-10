@@ -14,14 +14,7 @@ import {
 } from "@/assets/icons";
 import { useAlertDialog } from "@/components/contexts";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DotItem, DotList } from "@/components/ui/dot-list";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
@@ -29,8 +22,8 @@ import {
   ItemContent,
   ItemTitle,
   PosterFormProps
-} from "@/features/poster/components/create-poster-form/form/poster-form";
-import { PosterImageFrameWrapper } from "@/features/poster/components/create-poster-form/form/poster-preview";
+} from "@/features/poster/create-poster-form/components/form/poster-form";
+import { PosterImageFrameWrapper } from "@/features/poster/create-poster-form/components/form/poster-preview";
 import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
 import Image from "next/image";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";

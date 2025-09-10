@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormFieldInput, FormFieldRadioGroup, FormRow } from "@/components/ui/form";
 import { Loading } from "@/components/ui/loading";
 import { ROUTES } from "@/config";
-import { BirthDateField, TermsAgreementField, useEventEnterForm } from "@/features/poster/components/event-enter-form";
+import { BirthDateField, TermsAgreementField, useEventEnterForm } from "@/features/poster/event-enter-form";
 import { hnadleErrorFocus } from "@/utils/form-error";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

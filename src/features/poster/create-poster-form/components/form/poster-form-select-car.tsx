@@ -4,7 +4,7 @@ import {
   ItemContent,
   ItemTitle,
   PosterFormProps
-} from "@/features/poster/components/create-poster-form/form/poster-form";
+} from "@/features/poster/create-poster-form/components/form/poster-form";
 import Image from "next/image";
 import { memo } from "react";
 

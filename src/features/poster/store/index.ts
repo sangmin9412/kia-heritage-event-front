@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { eventEnterFormSchemaType } from "@/features/poster/components/event-enter-form";
+import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form/schema/validation";
+import { createPosterFormSchemaType } from "@/features/poster/create-poster-form/schema/validation";
 
 type UserForm = Partial<eventEnterFormSchemaType>;
 type PosterForm = Partial<createPosterFormSchemaType>;
@@ -13,6 +13,8 @@ type EventEnterFormState = {
   // 포스터 폼
   posterForm: PosterForm;
   setPosterForm: (form: PosterForm) => void;
+  hydratedPosterForm: PosterForm;
+  setHydratedPosterForm: (form: PosterForm) => void;
   // 사연 내용
   userStory: string;
   setUserStory: (story: string) => void;
@@ -56,6 +58,10 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
       setPosterForm: form => {
         set({ posterForm: form });
       },
+      hydratedPosterForm: useEventEnterFormStoreInitialState.posterForm,
+      setHydratedPosterForm: form => {
+        set({ hydratedPosterForm: form });
+      },
       userStory: "",
       setUserStory: story => {
         set({ userStory: story });
@@ -72,6 +78,7 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
         if (error) {
           console.error("Error rehydrating storage:", error);
         }
+        state?.setHydratedPosterForm(state?.posterForm);
         state?.setHasHydrated(true);
       }
     }

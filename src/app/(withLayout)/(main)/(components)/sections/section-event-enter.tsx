@@ -1,7 +1,5 @@
 import { SectionTitle } from "@/app/(withLayout)/(main)/(components)/shared/section-title";
 import { DotItem, DotList } from "@/components/ui/dot-list";
-import { getImagePath } from "@/lib/utils";
-import Image from "next/image";
 
 export const SectionEventEnter = () => {
   return (

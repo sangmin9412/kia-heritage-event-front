@@ -8,7 +8,7 @@ import {
   eventEnterFormSchemaType,
   GenderOptions,
   hasDriverLicenseOptions
-} from "@/features/poster/components/event-enter-form";
+} from "@/features/poster/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
 import { getParticipationStatus } from "@/features/poster/api";
 import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";

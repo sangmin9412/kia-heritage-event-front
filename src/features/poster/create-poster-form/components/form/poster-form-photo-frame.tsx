@@ -7,7 +7,7 @@ import {
   ItemContent,
   ItemTitle,
   PosterFormProps
-} from "@/features/poster/components/create-poster-form/form/poster-form";
+} from "@/features/poster/create-poster-form/components/form/poster-form";
 
 export const PhotoFrame = memo(
   ({ form, frameOptions }: { form: PosterFormProps["form"]; frameOptions: PosterFormProps["frameOptions"] }) => {

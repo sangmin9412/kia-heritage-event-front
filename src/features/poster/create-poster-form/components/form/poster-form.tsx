@@ -1,17 +1,17 @@
-import { useCallback, useRef } from "react";
+import { memo, useCallback, useRef } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-import { createPosterFormSchemaType } from "@/features/poster/components/create-poster-form";
+import { createPosterFormSchemaType } from "@/features/poster/create-poster-form";
 import { Option } from "@/features/poster/types";
 
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { PhotoFrame } from "@/features/poster/components/create-poster-form/form/poster-form-photo-frame";
-import { UploadImage } from "@/features/poster/components/create-poster-form/form/poster-form-upload-image";
-import { SelectCar } from "@/features/poster/components/create-poster-form/form/poster-form-select-car";
-import { InputInstagramName } from "@/features/poster/components/create-poster-form/form/poster-form-instagram";
+import { PhotoFrame } from "@/features/poster/create-poster-form/components/form/poster-form-photo-frame";
+import { UploadImage } from "@/features/poster/create-poster-form/components/form/poster-form-upload-image";
+import { SelectCar } from "@/features/poster/create-poster-form/components/form/poster-form-select-car";
+import { InputInstagramName } from "@/features/poster/create-poster-form/components/form/poster-form-instagram";
 
 export interface PosterFormProps {
   form: UseFormReturn<createPosterFormSchemaType>;
@@ -19,14 +19,15 @@ export interface PosterFormProps {
   carOptions: Option[];
 }
 
-export const PosterForm = ({ form, frameOptions, carOptions }: PosterFormProps) => {
+export const PosterForm = memo(({ form, frameOptions, carOptions }: PosterFormProps) => {
   return (
     <>
       <PosterFormDesktopLayout form={form} frameOptions={frameOptions} carOptions={carOptions} />
       <PosterFormMobileLayout form={form} frameOptions={frameOptions} carOptions={carOptions} />
     </>
   );
-};
+});
+PosterForm.displayName = "PosterForm";
 
 const PosterFormDesktopLayout = ({ form, frameOptions, carOptions }: PosterFormProps) => {
   return (
