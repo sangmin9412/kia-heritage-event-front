@@ -28,6 +28,7 @@ const useCreatePosterForm = () => {
   const _hasHydrated = useEventEnterFormStore(state => state._hasHydrated);
   const hydratedPosterForm = useEventEnterFormStore(state => state.hydratedPosterForm);
   const setPosterForm = useEventEnterFormStore(state => state.setPosterForm);
+  const setHydratedPosterForm = useEventEnterFormStore(state => state.setHydratedPosterForm);
 
   const form = useForm<createPosterFormSchemaType>({
     resolver: zodResolver(createPosterFormSchema),
@@ -37,6 +38,7 @@ const useCreatePosterForm = () => {
 
   useEffect(() => {
     if (_hasHydrated) {
+      console.log("reset form");
       form.reset(hydratedPosterForm);
     }
   }, [_hasHydrated, hydratedPosterForm, form]);
@@ -59,6 +61,7 @@ const useCreatePosterForm = () => {
         console.log("submit data", data);
         // 스토어에 유저 데이터 저장 (이미 watch에서 자동으로 저장되고 있음)
         setPosterForm(data);
+        setHydratedPosterForm(data);
       } catch (error) {
         setFormState(prev => ({
           ...prev,
@@ -67,7 +70,7 @@ const useCreatePosterForm = () => {
         }));
       }
     },
-    [setPosterForm]
+    [setPosterForm, setHydratedPosterForm]
   );
 
   return {
