@@ -17,7 +17,9 @@ interface ScrollRevealProps {
   blurStrength?: number;
   containerClassName?: string;
   textClassName?: string;
+  rotationStart?: string;
   rotationEnd?: string;
+  wordAnimationStart?: string;
   wordAnimationEnd?: string;
 }
 
@@ -30,7 +32,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   blurStrength = 4,
   containerClassName = "",
   textClassName = "",
+  rotationStart = "top bottom",
   rotationEnd = "bottom bottom",
+  wordAnimationStart = "top bottom-=20%",
   wordAnimationEnd = "bottom bottom"
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
@@ -79,7 +83,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: "top bottom",
+          start: rotationStart,
           end: rotationEnd,
           scrub: true
         }
@@ -98,7 +102,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: "top bottom-=20%",
+          start: wordAnimationStart,
           end: wordAnimationEnd,
           scrub: true
         }
@@ -116,7 +120,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           scrollTrigger: {
             trigger: el,
             scroller,
-            start: "top bottom-=20%",
+            start: wordAnimationStart,
             end: wordAnimationEnd,
             scrub: true
           }

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     return new NextResponse("Please provide all required parameters.", { status: 400 });
   }
 
-  const host = process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "http://localhost:3000";
+  const host = process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "http://localhost:5500";
 
   // Prepend http:// if missing
   const inputUrl = `${host}/test/preview?frameType=${frameType}&imageBase64=${imageBase64}&imageScale=${imageScale}&imageVertical=${imageVertical}&imageHorizontal=${imageHorizontal}&carType=${carType}&posterTitle=${posterTitle}`;

@@ -109,6 +109,7 @@ export const EventEnterForm = () => {
                 form={form}
                 name='phone'
                 placeholder='01000000000'
+                inputMode='numeric'
                 type='text'
                 required
                 onInput={e => {
@@ -133,6 +134,7 @@ export const EventEnterForm = () => {
                 form={form}
                 name='email'
                 placeholder='email@kia.kor'
+                inputMode='email'
                 type='text'
                 required
                 onInput={e => {

@@ -123,8 +123,10 @@ export const SectionEventMoments = () => {
               enableBlur={true}
               baseRotation={5}
               blurStrength={10}
-              rotationEnd='center center'
-              wordAnimationEnd='center center'
+              rotationStart='top center'
+              rotationEnd='bottom top+=5%'
+              wordAnimationStart='top center'
+              wordAnimationEnd='bottom top+=25%'
               containerClassName='desktop:hidden'
             >
               수많은 도전과 기회로 달려온 Kia의 80년.
