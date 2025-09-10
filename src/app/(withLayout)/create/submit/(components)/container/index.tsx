@@ -63,17 +63,18 @@ export const CreateSubmitContainer = () => {
 
   if (submitState.isSubmitting) {
     return (
-      <div className='mt-[8rem] mb-[22rem] mx-auto p-[8rem_2rem_12rem] max-w-[86rem] flex flex-col items-center text-center bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
-        <div className='mb-[4rem]'>
+      <div className='desktop:mt-[8rem] desktop:mb-[22rem] mt-0 mb-[12rem] desktop:mx-auto mx-auto desktop:p-[8rem_2rem_12rem] p-[4rem_1rem_6rem] desktop:max-w-[86rem] flex flex-col items-center text-center bg-white desktop:shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
+        <div className='desktop:mb-[4rem] mb-0 w-[65%]'>
           <Loading />
         </div>
-        <div className='flex flex-col gap-[1.6rem]'>
-          <p className='text-[2.4rem] leading-[3.8rem] font-bold'>
-            기아와 함께한 추억이 담긴 포스터를 생성하고 있어요!
+        <div className='flex flex-col desktop:gap-[1.6rem] gap-[1.2rem]'>
+          <p className='desktop:text-[2.4rem] text-[1.8rem] desktop:leading-[3.8rem] leading-[3rem] font-bold'>
+            기아와 함께한 추억이 담긴 포스터를
+            <br className='desktop:hidden block' /> 생성하고 있어요!
             <br />
             나만의 포스터가 곧 완성됩니다.
           </p>
-          <p className='text-[1.8rem] leading-[3rem] text-secondary'>
+          <p className='desktop:text-[1.8rem] text-[1.4rem] desktop:leading-[3rem] leading-[2.2rem] text-secondary'>
             포스터 생성 중에는 페이지를 닫거나 이동하지 마세요.
             <br />
             페이지 이탈시 이벤트 참여가 완료되지 않습니다.
@@ -84,16 +85,16 @@ export const CreateSubmitContainer = () => {
   }
 
   return (
-    <div className='container'>
-      <div className='flex pb-[8rem]'>
-        <div className='p-[4.8rem_4rem_0] flex-[0_0_64rem] max-w-[64rem]'>
-          <div className='sticky top-[2rem]'>
-            <div className='animate-in fade-in slide-in-from-left-10 ease-in-out duration-1000'>
+    <div className='container desktop:px-[3rem] px-0'>
+      <div className='flex desktop:flex-row flex-col desktop:pb-[8rem]'>
+        <div className='desktop:p-[4.8rem_4rem_0] p-[4.8rem_0] desktop:flex-[0_0_64rem] flex-[0_0_auto] max-w-[64rem] desktop:bg-transparent bg-[#f8f8f8]'>
+          <div className='desktop:sticky desktop:top-[2rem]'>
+            <div className='animate-in fade-in desktop:slide-in-from-left-10 desktop:slide-in-from-bottom-0 slide-in-from-bottom-10 ease-in-out duration-1000'>
               <div>
                 <div className='flex flex-col'>
-                  <div className='bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
-                    <div className='h-[70rem]'>
-                      <PosterPreviewer className='origin-top-left scale-[0.5185185185185185]' />
+                  <div className='desktop:w-auto w-[31.5rem] desktop:mx-0 mx-auto bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)]'>
+                    <div className='desktop:h-[70rem] h-[39.4rem]'>
+                      <PosterPreviewer className='origin-top-left desktop:scale-[0.5185185185185185] scale-[0.2916666666666667]' />
                     </div>
                   </div>
                 </div>
@@ -102,7 +103,7 @@ export const CreateSubmitContainer = () => {
           </div>
         </div>
         <div className='flex-1 min-w-0 w-full'>
-          <div className='min-h-screen flex flex-col bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-right-10 ease-in-out duration-1000'>
+          <div className='bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in desktop:slide-in-from-right-10 desktop:slide-in-from-bottom-0 slide-in-from-bottom-10 ease-in-out duration-1000'>
             <CreateSubmitForm onSubmit={onSubmit} />
           </div>
         </div>
@@ -127,37 +128,38 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
   const placeholderText = `사연을 작성해 주세요.${"\n" /* 또는 &#13;&#10; */}(최대 300자 이내)`;
 
   return (
-    <>
-      <div className='p-[2.4rem_4.8rem]'>
-        <div className='pt-[5.6rem]'>
-          <div className='mb-[4.8rem]'>
-            <h3 className='text-[2.4rem] leading-[3.8rem] font-bold text-center'>
-              포스터에 담긴 Kia와 함께한 시간 속에서 느꼈던
-              <br />
+    <div className='desktop:min-h-screen flex flex-col'>
+      <div className='desktop:p-[2.4rem_4.8rem] p-[3rem]'>
+        <div className='desktop:p-[5.6rem_0_0] p-[0_0_4.8rem]'>
+          <div className='desktop:mb-[4.8rem] mb-[2.4rem] desktop:pb-0 pb-[2.4rem] desktop:border-b-0 border-b border-border'>
+            <h3 className='desktop:text-[2.4rem] text-[1.8rem] desktop:leading-[3.8rem] leading-[3rem] font-bold text-center'>
+              포스터에 담긴 Kia와 함께한 시간 속에서
+              <br className='desktop:hidden block' /> 느꼈던
+              <br className='desktop:block hidden' />
               여러분의 추억을 들려주세요.
             </h3>
           </div>
           <div>
-            <h4 className='pb-[1.2rem] text-[2rem] leading-[3.2rem] font-bold border-b border-primary'>
+            <h4 className='desktop:pb-[1.2rem] desktop:text-[2rem] desktop:leading-[3.2rem] font-bold desktop:border-b border-primary text-[1.6rem] leading-[2.6rem]'>
               사연 작성하기
             </h4>
-            <div className='relative pt-[3.2rem]'>
-              <div className='p-[1.6rem_2.4rem_4.8rem_2.4rem] h-[24rem] border border-border focus-within:border-primary'>
+            <div className='relative desktop:pt-[3.2rem] pt-[1.6rem]'>
+              <div className='desktop:p-[1.6rem_2.4rem_4.8rem_2.4rem] p-[1.6rem_1.6rem_4.8rem] desktop:h-[24rem] h-[20rem] border border-border focus-within:border-primary'>
                 <Textarea
                   placeholder={placeholderText}
-                  className='p-0 h-full border-0 bg-none shadow-none text-[1.6rem] leading-[2.6rem] resize-none'
+                  className='p-0 h-full border-0 bg-none shadow-none desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] resize-none'
                   value={userStory}
                   onChange={setUserStoryHandler}
                 />
               </div>
-              <span className='absolute right-[2.4rem] bottom-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+              <span className='absolute desktop:right-[2.4rem] desktop:bottom-[1.6rem] right-[1.6rem] bottom-[1.6rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                 {userStoryLengthString}/{limitLength} byte
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className='mt-auto sticky bottom-0 p-[2.4rem_4.8rem] flex gap-[1.6rem] bg-white border-t border-border'>
+      <div className='mt-auto sticky bottom-0 flex desktop:gap-[1.6rem] gap-[1.2rem] desktop:p-[2.4rem_4.8rem] p-[1.6rem] bg-white border-t border-border'>
         <Button variant='outline' className='flex-1' onClick={() => router.push(ROUTES.CREATE_FORM.link)}>
           이전으로
         </Button>
@@ -165,7 +167,7 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
           제출하기
         </Button>
       </div>
-    </>
+    </div>
   );
 });
 CreateSubmitForm.displayName = "CreateSubmitForm";

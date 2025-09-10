@@ -46,12 +46,12 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
         <div className='absolute inset-0 pointer-events-none'>
           <Image src='/images/create/poster_frame_bg_hrz.png' alt='frame' fill className='object-cover' unoptimized />
         </div>
-        <div className='absolute left-0 top-[24.3rem] w-[90.5rem] h-[67.9rem] bg-white overflow-hidden'>
-          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
-          {!imageBase64 && (
-            <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
-          )}
-        </div>
+        <PosterImageFrameWrapper
+          frameType='horizontal'
+          imageBase64={imageBase64}
+          imageStyle={imageStyle}
+          className='absolute left-0 top-[24.3rem]'
+        />
         <div className='absolute right-[8.1rem] top-[75.6rem] w-[34.5rem] h-[34.5rem]'>
           <PosterCar carType={carType} />
         </div>
@@ -74,12 +74,12 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
         <div className='absolute inset-0 pointer-events-none'>
           <Image src='/images/create/poster_frame_bg_vtc.png' alt='frame' fill className='object-cover' unoptimized />
         </div>
-        <div className='absolute right-0 top-0 w-[71.5rem] h-[95.3rem] bg-white overflow-hidden z-[-1]'>
-          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
-          {!imageBase64 && (
-            <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
-          )}
-        </div>
+        <PosterImageFrameWrapper
+          frameType='vertical'
+          imageBase64={imageBase64}
+          imageStyle={imageStyle}
+          className='absolute right-0 top-0'
+        />
         <div className='absolute left-[16.3rem] top-[75.6rem] w-[34.5rem] h-[34.5rem]'>
           <PosterCar carType={carType} />
         </div>
@@ -94,7 +94,44 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
   return <></>;
 };
 
-const PosterImageFrame = React.memo(
+export const PosterImageFrameWrapper = React.memo(
+  ({
+    frameType,
+    imageBase64,
+    imageStyle,
+    className
+  }: {
+    frameType: "horizontal" | "vertical";
+    imageBase64?: string;
+    imageStyle: React.CSSProperties;
+    className?: React.HTMLAttributes<HTMLDivElement>["className"];
+  }) => {
+    if (frameType === "horizontal") {
+      return (
+        <div className={cn("w-[90.5rem] h-[67.9rem] bg-white overflow-hidden", className)}>
+          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
+          {!imageBase64 && (
+            <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
+          )}
+        </div>
+      );
+    }
+
+    if (frameType === "vertical") {
+      return (
+        <div className={cn("w-[71.5rem] h-[95.3rem] bg-white overflow-hidden z-[-1]", className)}>
+          <PosterImageFrame className='relative w-full h-full' imageBase64={imageBase64} imageStyle={imageStyle} />
+          {!imageBase64 && (
+            <IcTextPlaceholder className='absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[48rem] h-auto' />
+          )}
+        </div>
+      );
+    }
+  }
+);
+PosterImageFrameWrapper.displayName = "PosterImageFrameWrapper";
+
+export const PosterImageFrame = React.memo(
   ({
     className,
     imageBase64,
@@ -113,7 +150,7 @@ const PosterImageFrame = React.memo(
 );
 PosterImageFrame.displayName = "PosterImageFrame";
 
-const PosterTitle = React.memo(({ posterTitle }: { posterTitle?: string }) => {
+export const PosterTitle = React.memo(({ posterTitle }: { posterTitle?: string }) => {
   if (!posterTitle) return null;
   return <p className='text-[5rem] leading-[6.4rem] font-bold text-primary'>{posterTitle}</p>;
 });

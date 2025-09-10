@@ -24,6 +24,23 @@ type EventEnterFormState = {
   setPosterImage: (image: string) => void;
 };
 
+export const useEventEnterFormStoreInitialState: {
+  userForm: UserForm;
+  posterForm: createPosterFormSchemaType;
+} = {
+  userForm: {},
+  posterForm: {
+    frameType: "horizontal",
+    imageScale: 1,
+    imageVertical: 0,
+    imageHorizontal: 0,
+    posterTitle: "",
+    instagramName: "",
+    imageBase64: "",
+    carType: "car_type_01"
+  }
+};
+
 export const useEventEnterFormStore = create<EventEnterFormState>()(
   persist(
     set => ({
@@ -31,33 +48,17 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
       setHasHydrated: (state: boolean) => {
         set({ _hasHydrated: state });
       },
-      userForm: {},
+      userForm: useEventEnterFormStoreInitialState.userForm,
       setUserForm: form => {
         set({ userForm: form });
-        // 쿠키에도 동일한 데이터 저장
-        // const currentState = get();
-        // setCookieData("event-enter-form", { ...currentState, userForm: form });
       },
-      posterForm: {
-        frameType: "horizontal",
-        imageScale: 1,
-        imageVertical: 0,
-        imageHorizontal: 0,
-        posterTitle: "",
-        instagramName: ""
-      },
+      posterForm: useEventEnterFormStoreInitialState.posterForm,
       setPosterForm: form => {
         set({ posterForm: form });
-        // 쿠키에도 동일한 데이터 저장
-        // const currentState = get();
-        // setCookieData("create-poster-form", { ...currentState, posterForm: form });
       },
       userStory: "",
       setUserStory: story => {
         set({ userStory: story });
-        // 쿠키에도 동일한 데이터 저장
-        // const currentState = get();
-        // setCookieData("user-story", { ...currentState, userStory: story });
       },
       posterImage: "",
       setPosterImage: image => {

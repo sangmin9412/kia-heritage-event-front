@@ -35,7 +35,7 @@ export const ROUTES = {
   },
   CREATE_COMPLETE_POSTER: {
     title: "포스터 생성 완료",
-    layoutTitle: "사연 작성하기",
+    layoutTitle: "포스터 생성완료",
     link: "/create/complete/:posterId"
   }
 } as const;

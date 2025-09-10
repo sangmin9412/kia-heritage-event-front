@@ -17,13 +17,13 @@ export const CreatePosterForm = () => {
       <div className='flex desktop:flex-row flex-col desktop:pb-[8rem]'>
         <div className='desktop:p-[4.8rem_4rem_0] p-[4.8rem_0] desktop:flex-[0_0_64rem] flex-[0_0_auto] max-w-[64rem] desktop:bg-transparent bg-[#f8f8f8]'>
           <div className='desktop:sticky desktop:top-[2rem]'>
-            <div className='animate-in fade-in desktop:slide-in-from-left-10 slide-in-from-bottom-10 ease-in-out duration-1000'>
+            <div className='animate-in fade-in desktop:slide-in-from-left-10 desktop:slide-in-from-bottom-0 slide-in-from-bottom-10 ease-in-out duration-1000'>
               <PosterPreview />
             </div>
           </div>
         </div>
         <div className='flex-1 min-w-0 w-full'>
-          <div className='min-h-screen flex flex-col bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in desktop:slide-in-from-right-10 slide-in-from-bottom-10 ease-in-out duration-1000'>
+          <div className='bg-white shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in desktop:slide-in-from-right-10 desktop:slide-in-from-bottom-0 slide-in-from-bottom-10 ease-in-out duration-1000'>
             <PosterFormContainer />
           </div>
         </div>
@@ -50,7 +50,7 @@ const PosterFormContainer = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='desktop:min-h-screen flex flex-col'>
         <div className='desktop:p-[2.4rem_4.8rem] p-[0_0_4.8rem]'>
           <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
         </div>
