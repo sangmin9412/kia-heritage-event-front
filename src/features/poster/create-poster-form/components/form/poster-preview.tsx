@@ -33,7 +33,8 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
       "--image-horizontal": `${imageHorizontal}%`,
       "--image-vertical": `${imageVertical}%`,
       "--image-scale": `${imageScale}`,
-      transform: `translateX(var(--image-horizontal)) translateY(var(--image-vertical)) scale(var(--image-scale))`
+      transform: `translateX(var(--image-horizontal)) translateY(var(--image-vertical)) scale(var(--image-scale))`,
+      willChange: "transform"
     }),
     [imageHorizontal, imageVertical, imageScale]
   );

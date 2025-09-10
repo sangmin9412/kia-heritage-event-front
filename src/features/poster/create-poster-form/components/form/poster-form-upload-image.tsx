@@ -25,6 +25,7 @@ import {
 } from "@/features/poster/create-poster-form/components/form/poster-form";
 import { PosterImageFrameWrapper } from "@/features/poster/create-poster-form/components/form/poster-preview";
 import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
+import { minmaxValue } from "@/lib/utils";
 import Image from "next/image";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
@@ -32,15 +33,9 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
   const { open } = useAlertDialog();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const imageBase64 = useEventEnterFormStore(state => state.posterForm.imageBase64) || "";
-  const imageScale =
-    useEventEnterFormStore(state => state.posterForm.imageScale) ||
-    useEventEnterFormStoreInitialState.posterForm.imageScale;
-  const imageVertical =
-    useEventEnterFormStore(state => state.posterForm.imageVertical) ||
-    useEventEnterFormStoreInitialState.posterForm.imageVertical;
-  const imageHorizontal =
-    useEventEnterFormStore(state => state.posterForm.imageHorizontal) ||
-    useEventEnterFormStoreInitialState.posterForm.imageHorizontal;
+  const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale) || 0;
+  const imageVertical = useEventEnterFormStore(state => state.posterForm.imageVertical) || 0;
+  const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal) || 0;
   const frameType =
     useEventEnterFormStore(state => state.posterForm.frameType) ||
     useEventEnterFormStoreInitialState.posterForm.frameType;
@@ -141,39 +136,35 @@ const UploadImageFormDesktop = ({
     [form]
   );
 
-  const minmaxValue = useCallback((value: number, min: number, max: number) => {
-    return Math.min(Math.max(value, min), max);
-  }, []);
-
   const handleScaleUp = useCallback(() => {
     const value = Number((imageScale + 0.1).toFixed(1));
     form.setValue("imageScale", minmaxValue(value, 0, 2));
-  }, [imageScale, form, minmaxValue]);
+  }, [imageScale, form]);
 
   const handleScaleDown = useCallback(() => {
     const value = Number((imageScale - 0.1).toFixed(1));
     form.setValue("imageScale", minmaxValue(value, 0, 2));
-  }, [imageScale, form, minmaxValue]);
+  }, [imageScale, form]);
 
   const handlePositionTop = useCallback(() => {
     const value = imageVertical - 1;
     form.setValue("imageVertical", minmaxValue(value, -100, 100));
-  }, [imageVertical, form, minmaxValue]);
+  }, [imageVertical, form]);
 
   const handlePositionBottom = useCallback(() => {
     const value = imageVertical + 1;
     form.setValue("imageVertical", minmaxValue(value, -100, 100));
-  }, [imageVertical, form, minmaxValue]);
+  }, [imageVertical, form]);
 
   const handlePositionLeft = useCallback(() => {
     const value = imageHorizontal - 1;
     form.setValue("imageHorizontal", minmaxValue(value, -100, 100));
-  }, [imageHorizontal, form, minmaxValue]);
+  }, [imageHorizontal, form]);
 
   const handlePositionRight = useCallback(() => {
     const value = imageHorizontal + 1;
     form.setValue("imageHorizontal", minmaxValue(value, -100, 100));
-  }, [imageHorizontal, form, minmaxValue]);
+  }, [imageHorizontal, form]);
 
   return (
     <div className='desktop:block hidden'>
@@ -412,6 +403,13 @@ const ImageScaleSlider = memo(
     handleScaleDown: () => void;
     handleScaleUp: () => void;
   }) => {
+    const handleSliderChange = useCallback(
+      (value: number[]) => {
+        setValue(value[0]);
+      },
+      [setValue]
+    );
+
     return (
       <>
         <div className='relative flex-[0_0_4rem] items-center'>
@@ -422,16 +420,7 @@ const ImageScaleSlider = memo(
             </span>
           </button>
         </div>
-        <Slider
-          className='flex-1'
-          min={0}
-          max={2}
-          step={0.1}
-          value={[imageScale]}
-          onValueChange={value => {
-            setValue(value[0]);
-          }}
-        />
+        <Slider className='flex-1' min={0} max={2} step={0.1} value={[imageScale]} onValueChange={handleSliderChange} />
         <div className='relative flex-[0_0_4rem] items-center'>
           <button className='relative flex w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp} type='button'>
             <IcSliderScaleUp className='size-[4rem]' />
@@ -457,6 +446,13 @@ const ImagePositionVerticalSlider = memo(
     handlePositionTop: () => void;
     handlePositionBottom: () => void;
   }) => {
+    const handleSliderChange = useCallback(
+      (value: number[]) => {
+        setValue(value[0]);
+      },
+      [setValue]
+    );
+
     return (
       <>
         <div className='relative flex-[0_0_4rem] items-center'>
@@ -467,15 +463,7 @@ const ImagePositionVerticalSlider = memo(
             </span>
           </button>
         </div>
-        <Slider
-          min={-100}
-          max={100}
-          step={1}
-          value={[imageVertical]}
-          onValueChange={value => {
-            setValue(value[0]);
-          }}
-        />
+        <Slider min={-100} max={100} step={1} value={[imageVertical]} onValueChange={handleSliderChange} />
         <div className='relative flex-[0_0_4rem] items-center'>
           <button
             className='relative flex w-[4rem] h-[4rem] cursor-pointer'
@@ -505,6 +493,13 @@ const ImagePositionHorizontalSlider = memo(
     handlePositionLeft: () => void;
     handlePositionRight: () => void;
   }) => {
+    const handleSliderChange = useCallback(
+      (value: number[]) => {
+        setValue(value[0]);
+      },
+      [setValue]
+    );
+
     return (
       <>
         <div className='relative flex-[0_0_4rem] items-center'>
@@ -515,15 +510,7 @@ const ImagePositionHorizontalSlider = memo(
             </span>
           </button>
         </div>
-        <Slider
-          min={-100}
-          max={100}
-          step={1}
-          value={[imageHorizontal]}
-          onValueChange={value => {
-            setValue(value[0]);
-          }}
-        />
+        <Slider min={-100} max={100} step={1} value={[imageHorizontal]} onValueChange={handleSliderChange} />
         <div className='relative flex-[0_0_4rem] items-center'>
           <button
             className='relative flex w-[4rem] h-[4rem] cursor-pointer'
@@ -578,7 +565,8 @@ const UploadImageDialog = memo(
         "--image-horizontal": `${imageState.imageHorizontal}%`,
         "--image-vertical": `${imageState.imageVertical}%`,
         "--image-scale": `${imageState.imageScale}`,
-        transform: `translateX(var(--image-horizontal)) translateY(var(--image-vertical)) scale(var(--image-scale))`
+        transform: `translateX(var(--image-horizontal)) translateY(var(--image-vertical)) scale(var(--image-scale))`,
+        willChange: "transform"
       }),
       [imageState]
     );

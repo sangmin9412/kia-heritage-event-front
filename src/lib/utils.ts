@@ -75,3 +75,8 @@ export const handleSpaceOnlyInput = (value: string, maxLength: number = 50): str
   const spaceOnly = value.replace(/\s+/g, "");
   return spaceOnly.slice(0, maxLength);
 };
+
+// 최소값과 최대값 사이의 값 반환
+export const minmaxValue = (value: number, min: number, max: number) => {
+  return Math.min(Math.max(value, min), max);
+};
