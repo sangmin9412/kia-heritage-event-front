@@ -38,7 +38,6 @@ const useCreatePosterForm = () => {
 
   useEffect(() => {
     if (_hasHydrated) {
-      console.log("reset form");
       form.reset(hydratedPosterForm);
     }
   }, [_hasHydrated, hydratedPosterForm, form]);
