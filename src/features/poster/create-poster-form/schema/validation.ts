@@ -44,7 +44,7 @@ const baseSchema = {
     .number()
     .min(-100, { message: "이미지 위치를 선택해주세요." })
     .max(100, { message: "이미지 위치를 선택해주세요." }),
-  carType: z.enum(carTypes, { message: "차량 타입을 선택해주세요." }),
+  carType: z.enum([...carTypes, ""], { message: "차량 타입을 선택해주세요." }),
   posterTitle: z.string().min(1, { message: "포스터 제목을 입력해주세요." }),
   instagramName: z.string().min(1, { message: "인스타그램 계정명을 입력해주세요." })
 };

@@ -36,7 +36,7 @@
   --breakpoint-*: initial;
   --breakpoint-mobile: 640px;
   --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
+  --breakpoint-desktop: 1025px;
   --breakpoint-container: 1340px;
   --breakpoint-wide: 1920px;
 }
@@ -186,10 +186,16 @@
 
   @media (max-width: theme(--breakpoint-desktop)) {
     html {
-      font-size: 2.6667vw;
+      font-size: 1.953125vw;
     }
     body {
       font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: theme(--breakpoint-tablet)) {
+    html {
+      font-size: 2.6667vw;
     }
   }
 }

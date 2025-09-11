@@ -176,7 +176,13 @@ const UploadImageFormDesktop = ({
             {imageBase64 && (
               <>
                 <div className='relative w-[16.5rem] h-[20.6rem] border border-border'>
-                  <Image src={imageBase64} alt='uploaded-image' className='w-full h-full object-cover' fill />
+                  <Image
+                    src={imageBase64}
+                    alt='uploaded-image'
+                    className='w-full h-full object-contain'
+                    fill
+                    unoptimized
+                  />
                 </div>
                 <div className='mt-auto flex flex-col gap-[0.8rem]'>
                   <Button
@@ -316,7 +322,13 @@ const UploadImageFormMobile = ({
             {imageBase64 && (
               <>
                 <div className='relative w-[13rem] h-[16.2rem] border border-border'>
-                  <Image src={imageBase64} alt='uploaded-image' className='w-full h-full object-cover' fill />
+                  <Image
+                    src={imageBase64}
+                    alt='uploaded-image'
+                    className='w-full h-full object-contain'
+                    fill
+                    unoptimized
+                  />
                 </div>
                 <div className='mt-auto flex flex-col gap-[0.8rem]'>
                   <Button

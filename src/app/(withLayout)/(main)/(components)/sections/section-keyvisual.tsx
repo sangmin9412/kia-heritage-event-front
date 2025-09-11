@@ -80,13 +80,14 @@ export const SectionKeyVisual = () => {
             disabled={isAnimationCompleted}
             magnetStrength={50}
             className='w-full h-full flex items-center justify-center desktop:pt-[3.85rem] pt-[2.45rem]'
+            innerClassName='w-full'
           >
             <div className='container pointer-events-none'>
               <div className='grid grid-cols-8 desktop:gap-[2.2rem] gap-[0.3rem]'>
                 {KEY_VISUAL_ITEMS.map((item, index) => (
                   <div
                     key={item.carName}
-                    className={cn("relative desktop:w-[14rem] w-[3.7rem] overflow-hidden aspect-[140/470]", {
+                    className={cn("relative desktop:w-[14rem] w-full overflow-hidden aspect-[140/470]", {
                       "desktop:translate-y-[6rem] translate-y-[1.6rem]": (index + 1) % 2 === 0
                     })}
                     style={

@@ -161,18 +161,16 @@ export const PosterImageFrame = React.memo(
         image.style.width = "100%";
         image.style.height = "auto";
       }
-      image.style.inset = "unset";
+      image.style.opacity = "1";
     };
 
     return (
       <div className={className} style={imageStyle}>
         {imageBase64 && (
-          <Image
+          <img
             src={imageBase64}
             alt='poster'
-            className='max-w-none object-cover'
-            unoptimized
-            fill
+            className='max-w-none absolute object-cover opacity-0'
             onLoad={handleImageLoad}
           />
         )}

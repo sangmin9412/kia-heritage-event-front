@@ -39,7 +39,7 @@ export const useEventEnterFormStoreInitialState: {
     posterTitle: "",
     instagramName: "",
     imageBase64: "",
-    carType: "car_type_01"
+    carType: ""
   }
 };
 

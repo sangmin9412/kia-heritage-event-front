@@ -21,7 +21,7 @@ export const CreateCompletePosterContainer = () => {
             <br className='desktop:block hidden' />
             인스타그램 피드에 게시물을 올려야 이벤트 참여가 완료됩니다.
           </p>
-          <div className='desktop:mx-auto mx-[1.8rem] desktop:max-w-[40rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
+          <div className='mx-auto desktop:max-w-[40rem] max-w-[31.5rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
             {posterImage && (
               <Image
                 src={posterImage}
