@@ -107,7 +107,6 @@ export const sliceStringByByte = (str: string, byteLength: number) => {
   let currentByteLength = 0;
   let i = 0;
   while (i < str.length && currentByteLength < byteLength) {
-    console.log("여기가 도는건 아닌데");
     const byteCount = encoder.encode(str[i]).length;
     currentByteLength += byteCount;
     i++;
