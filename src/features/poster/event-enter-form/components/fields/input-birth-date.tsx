@@ -32,7 +32,7 @@ export const BirthDateField = ({
 
   useEffect(() => {
     if (birthYear && birthMonth && birthDay) {
-      form.setValue("birthDate", `${birthYear}${birthMonth}${birthDay}`, {
+      form.setValue("birthDate", `${birthYear}-${birthMonth}-${birthDay}`, {
         shouldValidate: true
       });
     }

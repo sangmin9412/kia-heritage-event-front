@@ -57,7 +57,6 @@ const useCreatePosterForm = () => {
     async (data: createPosterFormSchemaType) => {
       try {
         setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
-        console.log("submit data", data);
         // 스토어에 유저 데이터 저장 (이미 watch에서 자동으로 저장되고 있음)
         setPosterForm(data);
         setHydratedPosterForm(data);

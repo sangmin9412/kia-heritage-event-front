@@ -4,21 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ROUTES } from "@/config";
-import { getPosterScreenshot } from "@/features/poster/api";
+import { createPoster } from "@/features/poster/api";
 import { createPosterFormSchemaType } from "@/features/poster/create-poster-form";
 import { PosterPreviewer } from "@/features/poster/create-poster-form/components/form/poster-preview";
+import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
+import { usePosterStatus } from "@/features/poster/hooks/use-poster-status";
 import { useEventEnterFormStore } from "@/features/poster/store";
 import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
+import { convertBase64ImgToImgFile, sleep } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { memo, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 export const CreateSubmitFormWrapper = () => {
   const router = useRouter();
+  const [posterId, setPosterId] = useState<number | null>(null);
+  const refetchFlagRef = useRef(false);
 
-  const userStory = useEventEnterFormStore(state => state.userStory);
-  const userForm = useEventEnterFormStore(state => state.userForm);
+  const userStory = useEventEnterFormStore(state => state.story);
+  const userForm = useEventEnterFormStore(state => state.userForm) as eventEnterFormSchemaType;
   const posterForm = useEventEnterFormStore(state => state.posterForm) as createPosterFormSchemaType;
-  const setPosterImage = useEventEnterFormStore(state => state.setPosterImage);
+  const resetStore = useEventEnterFormStore(state => state.resetStore);
 
   const [submitState, setSubmitState] = useState({
     isSubmitting: false,
@@ -30,36 +35,79 @@ export const CreateSubmitFormWrapper = () => {
     try {
       setSubmitState(prev => ({ ...prev, isSubmitting: true }));
 
-      console.log("userForm", userForm);
-      console.log("posterForm", posterForm);
-      console.log("userStory", userStory);
+      const fileExtension = posterForm.imageBase64.split(";")[0].split("/")[1];
+      const fileName = `poster_${userForm.phone}.${fileExtension}`;
+      const imageFile = convertBase64ImgToImgFile(posterForm.imageBase64, fileName);
 
-      // const response = await createPoster({
-      //   ...(userForm as eventEnterFormSchemaType),
-      //   ...(posterForm as createPosterFormSchemaType),
-      //   userStory
-      // });
+      // FormData 생성
+      const formData = new FormData();
 
-      const response = await getPosterScreenshot({
-        frameType: posterForm.frameType,
-        imageBase64: "",
-        imageScale: posterForm.imageScale,
-        imageVertical: posterForm.imageVertical,
-        imageHorizontal: posterForm.imageHorizontal,
-        carType: posterForm.carType,
-        posterTitle: posterForm.posterTitle,
-        instagramName: posterForm.instagramName
-      });
+      // 기본 데이터 추가
+      formData.append(
+        "data",
+        JSON.stringify({
+          name: userForm.name,
+          gender: userForm.gender,
+          phone: userForm.phone,
+          email: userForm.email,
+          birthDate: userForm.birthDate,
+          isThirdPartyCollect: userForm.agreeTerms,
+          isPrivacyCollect: userForm.agreePrivacy,
+          isDriverLicense: Boolean(userForm.isDriverLicense),
+          title: posterForm.title,
+          frameCode: posterForm.frameCode,
+          carCode: posterForm.carCode,
+          position: {
+            offsetX: posterForm.imageHorizontal,
+            offsetY: posterForm.imageVertical,
+            scale: posterForm.imageScale
+          },
+          instagramId: posterForm.instagramId,
+          story: userStory
+        })
+      );
 
-      setPosterImage(response as string);
+      // 파일 추가
+      formData.append("uploadFile", imageFile);
 
-      ANALYTICS_HANDLER[Event.BTN_CLICK_CREATE].event();
-      router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", "1234567890"));
+      const response = await createPoster(formData);
+
+      setPosterId(response.data.posterId);
     } catch (error) {
       console.error(error);
       setSubmitState(prev => ({ ...prev, isError: true, isSubmitting: false }));
     }
   };
+
+  const { data, isError, error, refetch } = usePosterStatus(
+    { posterId: posterId },
+    {
+      enabled: !!posterId,
+      refetchInterval: 1000
+    }
+  );
+
+  // 포스터 생성 상태 체크
+  useEffect(() => {
+    if (!posterId || !data) return;
+
+    if (isError) {
+      // 포스터 생성 실패 시 페이지 리로드
+      console.error("getPosterStatus error", error.message);
+      setSubmitState(prev => ({ ...prev, isError: true, isSubmitting: false }));
+      return;
+    }
+
+    if (data?.data.status === "PENDING") {
+      refetch();
+      return;
+    }
+
+    if (data?.data.status === "DONE") {
+      ANALYTICS_HANDLER[Event.BTN_CLICK_CREATE].event();
+      router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", posterId?.toString() ?? ""));
+    }
+  }, [data, posterId, router, isError, error, refetch]);
 
   if (submitState.isSubmitting) {
     return (
@@ -115,8 +163,8 @@ export const CreateSubmitFormWrapper = () => {
 const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
   const router = useRouter();
 
-  const userStory = useEventEnterFormStore(state => state.userStory);
-  const setUserStory = useEventEnterFormStore(state => state.setUserStory);
+  const userStory = useEventEnterFormStore(state => state.story);
+  const setUserStory = useEventEnterFormStore(state => state.setStory);
 
   const setUserStoryHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserStory(e.target.value.slice(0, 300));

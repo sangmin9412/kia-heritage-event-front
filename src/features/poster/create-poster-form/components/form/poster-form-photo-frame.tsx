@@ -18,7 +18,7 @@ export const PhotoFrame = memo(
           <ItemContent>
             <FormField
               control={form.control}
-              name='frameType'
+              name='frameCode'
               render={({ field }) => (
                 <FormItem>
                   <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -30,10 +30,10 @@ export const PhotoFrame = memo(
                             className='block relative desktop:w-[16.5rem] desktop:h-[20.6rem] w-[13rem] h-[16.2rem] desktop:p-[2.4rem] p-[1.6rem] bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
                             data-checked={field.value === option.value}
                           >
-                            {option.value === "horizontal" && (
+                            {option.value === "HORIZONTAL" && (
                               <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 가로형 프레임 이미지 */}</div>
                             )}
-                            {option.value === "vertical" && (
+                            {option.value === "VERTICAL" && (
                               <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 세로형 프레임 이미지 */}</div>
                             )}
                             <p className='text-[1.6rem] font-bold leading-[2.6rem]'>{option.label}</p>

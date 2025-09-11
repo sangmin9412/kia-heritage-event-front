@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig, AxiosRequestConfig } from "axios";
 
 interface ErrorResponse {
   message: string;
@@ -67,9 +67,9 @@ class HttpClient {
     }
   }
 
-  async post<T>(url: string, data?: RequestData): Promise<T> {
+  async post<T>(url: string, data?: RequestData, config?: AxiosRequestConfig): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.instance.post(url, data);
+      const response: AxiosResponse<T> = await this.instance.post(url, data, config);
       return response.data;
     } catch (error) {
       throw this.handleError(error);

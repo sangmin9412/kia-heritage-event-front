@@ -24,6 +24,7 @@ import {
   PosterFormProps
 } from "@/features/poster/create-poster-form/components/form/poster-form";
 import { PosterImageFrameWrapper } from "@/features/poster/create-poster-form/components/form/poster-preview";
+import { frameCodesEnum } from "@/features/poster/create-poster-form/schema";
 import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
 import { minmaxValue } from "@/lib/utils";
 import Image from "next/image";
@@ -36,9 +37,9 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
   const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale) || 0;
   const imageVertical = useEventEnterFormStore(state => state.posterForm.imageVertical) || 0;
   const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal) || 0;
-  const frameType =
-    useEventEnterFormStore(state => state.posterForm.frameType) ||
-    useEventEnterFormStoreInitialState.posterForm.frameType;
+  const frameCode =
+    useEventEnterFormStore(state => state.posterForm.frameCode) ||
+    useEventEnterFormStoreInitialState.posterForm.frameCode;
 
   const isImageFile = useMemo(() => imageFile && imageFile instanceof File, [imageFile]);
 
@@ -92,7 +93,7 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
         imageScale={imageScale}
         imageVertical={imageVertical}
         imageHorizontal={imageHorizontal}
-        frameType={frameType}
+        frameCode={frameCode}
         handleDeleteImage={handleDeleteImage}
         handleFileChange={handleFileChange}
       />
@@ -289,7 +290,7 @@ const UploadImageFormMobile = ({
   imageScale,
   imageVertical,
   imageHorizontal,
-  frameType,
+  frameCode,
   handleDeleteImage,
   handleFileChange
 }: {
@@ -298,7 +299,7 @@ const UploadImageFormMobile = ({
   imageScale: number;
   imageVertical: number;
   imageHorizontal: number;
-  frameType: "horizontal" | "vertical";
+  frameCode: keyof typeof frameCodesEnum;
   handleDeleteImage: () => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
@@ -373,7 +374,7 @@ const UploadImageFormMobile = ({
               imageScale={imageScale}
               imageVertical={imageVertical}
               imageHorizontal={imageHorizontal}
-              frameType={frameType}
+              frameCode={frameCode}
               imageBase64={imageBase64}
               handleFileChange={handleFileChange}
             />
@@ -552,7 +553,7 @@ const UploadImageDialog = memo(
     imageScale,
     imageVertical,
     imageHorizontal,
-    frameType,
+    frameCode,
     imageBase64,
     handleFileChange
   }: {
@@ -562,7 +563,7 @@ const UploadImageDialog = memo(
     imageScale: number;
     imageVertical: number;
     imageHorizontal: number;
-    frameType: "horizontal" | "vertical";
+    frameCode: keyof typeof frameCodesEnum;
     imageBase64: string;
     handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }) => {
@@ -655,7 +656,7 @@ const UploadImageDialog = memo(
               <div className='aspect-square px-[3rem] flex items-center justify-center bg-[#f1f1f1] overflow-hidden'>
                 {imageBase64 && (
                   <PosterImageFrameWrapper
-                    frameType={frameType}
+                    frameCode={frameCode}
                     imageBase64={imageBase64}
                     imageStyle={imageStyle}
                     className='scale-[0.34806629834254144] shrink-0 z-[1]'

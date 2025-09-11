@@ -1,36 +1,43 @@
 import { Option } from "@/features/poster/types";
 import { z } from "zod";
 
-const frameTypes = ["horizontal", "vertical"] as const;
-const carTypes = [
-  "car_type_01",
-  "car_type_02",
-  "car_type_03",
-  "car_type_04",
-  "car_type_05",
-  "car_type_06",
-  "car_type_07",
-  "car_type_08"
-] as const;
+const frameCodes = ["HORIZONTAL", "VERTICAL"] as const;
+const carCodes = ["CAR01", "CAR02", "CAR03", "CAR04", "CAR05", "CAR06", "CAR07", "CAR08"] as const;
 
-export const frameOptions: Option<(typeof frameTypes)[number]>[] = [
-  { label: "가로형", value: "horizontal" },
-  { label: "세로형", value: "vertical" }
+export enum frameCodesEnum {
+  HORIZONTAL = "HORIZONTAL",
+  VERTICAL = "VERTICAL"
+}
+
+export enum carCodesEnum {
+  CAR01 = "CAR01",
+  CAR02 = "CAR02",
+  CAR03 = "CAR03",
+  CAR04 = "CAR04",
+  CAR05 = "CAR05",
+  CAR06 = "CAR06",
+  CAR07 = "CAR07",
+  CAR08 = "CAR08"
+}
+
+export const frameOptions: Option<(typeof frameCodes)[number]>[] = [
+  { label: "가로형", value: frameCodesEnum.HORIZONTAL },
+  { label: "세로형", value: frameCodesEnum.VERTICAL }
 ];
 
-export const carOptions: Option<(typeof carTypes)[number]>[] = [
-  { label: "모델명1", value: "car_type_01", image: "/images/create/car/car_type_01.png" },
-  { label: "모델명2", value: "car_type_02", image: "/images/create/car/car_type_02.png" },
-  { label: "모델명3", value: "car_type_03", image: "/images/create/car/car_type_03.png" },
-  { label: "모델명4", value: "car_type_04", image: "/images/create/car/car_type_04.png" },
-  { label: "모델명5", value: "car_type_05", image: "/images/create/car/car_type_05.png" },
-  { label: "모델명6", value: "car_type_06", image: "/images/create/car/car_type_06.png" },
-  { label: "모델명7", value: "car_type_07", image: "/images/create/car/car_type_07.png" },
-  { label: "모델명8", value: "car_type_08", image: "/images/create/car/car_type_08.png" }
+export const carOptions: Option<(typeof carCodes)[number]>[] = [
+  { label: "모델명1", value: carCodesEnum.CAR01, image: "/images/create/car/CAR01.png" },
+  { label: "모델명2", value: carCodesEnum.CAR02, image: "/images/create/car/CAR02.png" },
+  { label: "모델명3", value: carCodesEnum.CAR03, image: "/images/create/car/CAR03.png" },
+  { label: "모델명4", value: carCodesEnum.CAR04, image: "/images/create/car/CAR04.png" },
+  { label: "모델명5", value: carCodesEnum.CAR05, image: "/images/create/car/CAR05.png" },
+  { label: "모델명6", value: carCodesEnum.CAR06, image: "/images/create/car/CAR06.png" },
+  { label: "모델명7", value: carCodesEnum.CAR07, image: "/images/create/car/CAR07.png" },
+  { label: "모델명8", value: carCodesEnum.CAR08, image: "/images/create/car/CAR08.png" }
 ];
 
 const baseSchema = {
-  frameType: z.enum(frameTypes, { message: "프레임 타입을 선택해주세요." }),
+  frameCode: z.enum(frameCodes, { message: "프레임 타입을 선택해주세요." }),
   imageBase64: z.string().min(1, { message: "이미지 파일을 선택해주세요." }),
   imageScale: z
     .number()
@@ -44,9 +51,9 @@ const baseSchema = {
     .number()
     .min(-100, { message: "이미지 위치를 선택해주세요." })
     .max(100, { message: "이미지 위치를 선택해주세요." }),
-  carType: z.enum([...carTypes, ""], { message: "차량 타입을 선택해주세요." }),
-  posterTitle: z.string().min(1, { message: "포스터 제목을 입력해주세요." }),
-  instagramName: z.string().min(1, { message: "인스타그램 계정명을 입력해주세요." })
+  carCode: z.enum([...carCodes, ""], { message: "차량 타입을 선택해주세요." }),
+  title: z.string().min(1, { message: "포스터 제목을 입력해주세요." }),
+  instagramId: z.string().min(1, { message: "인스타그램 계정명을 입력해주세요." })
 };
 
 export const createPosterFormSchema = z.object(baseSchema);

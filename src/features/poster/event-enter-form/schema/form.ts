@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   eventEnterFormSchema,
   eventEnterFormSchemaType,
-  GenderOptions,
+  genderOptions,
   hasDriverLicenseOptions
 } from "@/features/poster/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
@@ -17,6 +17,7 @@ interface FormState {
   isSubmitting: boolean;
   isSuccess: boolean;
   isParticipated?: boolean;
+  posterId?: number | null;
   error: string | null;
   couponCode?: string;
 }
@@ -64,22 +65,27 @@ const useEventEnterForm = () => {
     try {
       setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
       ANALYTICS_HANDLER[Event.BTN_CLCK_SUBMIT].event();
-      console.log("submit data", data);
 
       // 참여 여부 조회
-      const response = await getParticipationStatus(data);
+      const response = await getParticipationStatus({ phone: data.phone });
 
-      setFormState(prev => ({ ...prev, isParticipated: response.isParticipated }));
+      setFormState(prev => ({
+        ...prev,
+        isParticipated: response.data.posterId !== null,
+        posterId: response.data.posterId
+      }));
 
       // 이미 참여가 완료되었습니다.
-      if (response.isParticipated) {
+      if (response.data.posterId !== null) {
         // 스토어에 유저 데이터 초기화
         setUserForm({});
+        setFormState(prev => ({ ...prev, isSubmitting: false }));
         return;
       }
 
       // 스토어에 유저 데이터 저장
       setUserForm(data);
+      setFormState(prev => ({ ...prev, isSubmitting: false }));
     } catch (error) {
       setFormState(prev => ({
         ...prev,
@@ -94,7 +100,7 @@ const useEventEnterForm = () => {
     isValid,
     onSubmit,
     formState,
-    GenderOptions,
+    genderOptions,
     birthYearOptions,
     birthMonthOptions,
     birthDayOptions,

@@ -1,37 +1,34 @@
 import {
   RequestPosterCreate,
   RequestPosterParticipation,
-  RequestPosterScreenshot,
+  RequestPosterStatus,
   ResponsePosterCreate,
-  ResponsePosterParticipation
+  ResponsePosterParticipation,
+  ResponsePosterStatus
 } from "@/features/poster/model/poster";
 import httpClient from "@/lib/http";
+import axios from "axios";
 
 // 참여 여부 조회
 export const getParticipationStatus = async (payload: RequestPosterParticipation) => {
-  return new Promise<ResponsePosterParticipation>((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        isParticipated: false
-      });
-    }, 1000);
+  return httpClient.post<ResponsePosterParticipation>("/api/posters/participants/duplicate", payload);
+};
+
+// 포스터 생성
+export const createPoster = async (formData: RequestPosterCreate) => {
+  return httpClient.post<ResponsePosterCreate>("/api/posters", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
   });
 };
 
-export const createPoster = async (payload: RequestPosterCreate) => {
-  return new Promise<ResponsePosterCreate>((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        posterId: "1234567890"
-      });
-    }, 3000);
-  });
+// 포스터 생성 상태 조회
+export const getPosterStatus = async (payload: RequestPosterStatus) => {
+  return httpClient.get<ResponsePosterStatus>(`/api/posters/${payload.posterId}`);
 };
 
-export const getPosterScreenshot = async (payload: RequestPosterScreenshot) => {
-  const params = new URLSearchParams();
-  Object.entries(payload).forEach(([key, value]) => {
-    params.append(key, String(value));
-  });
-  return httpClient.get(`/api/screenshot?${params.toString()}`);
+// 포스터 이미지 다운로드
+export const getPosterImage = async (imageUrl: string) => {
+  return axios.post("/api/poster", { imageUrl }).then(res => res.data);
 };

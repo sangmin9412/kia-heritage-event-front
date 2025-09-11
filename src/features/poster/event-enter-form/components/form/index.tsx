@@ -26,7 +26,7 @@ export const EventEnterForm = () => {
     formState,
     isValid,
     onSubmit,
-    GenderOptions,
+    genderOptions,
     birthYearOptions,
     birthMonthOptions,
     birthDayOptions,
@@ -50,20 +50,38 @@ export const EventEnterForm = () => {
   }, [formState.isParticipated, router]);
 
   // 로딩 중
-  if (formState.isSubmitting) {
+  if (formState.isSubmitting || formState.isParticipated === false) {
     return <Loading />;
   }
 
   // 이미 참여가 완료되었습니다.
   if (formState.isParticipated) {
     return (
-      <p className='text-secondary text-center'>
-        이미 참여가 완료되었습니다.
-        <br />
-        본 이벤트는 1인 1회만 참여 가능합니다.
-        <br />
-        함께해 주셔서 감사합니다!
-      </p>
+      <div className='flex flex-col desktop:gap-[2.4rem] gap-[1.6rem]'>
+        <p className='text-secondary text-center'>
+          이미 참여가 완료되었습니다.
+          <br />
+          본 이벤트는 1인 1회만 참여 가능합니다.
+          <br />
+          함께해 주셔서 감사합니다!
+        </p>
+        <div className='desktop:pt-[2.4rem] pt-[1.6rem] flex desktop:gap-[1.6rem] gap-[1.2rem]'>
+          <Button
+            className='flex-1'
+            variant='outline'
+            onClick={() => {
+              if (formState.posterId) {
+                router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", formState.posterId.toString()));
+              }
+            }}
+          >
+            포스터 보러가기
+          </Button>
+          <Button className='flex-1' onClick={() => router.push(ROUTES.HOME.link, { scroll: false })}>
+            닫기
+          </Button>
+        </div>
+      </div>
     );
   }
 
@@ -155,7 +173,7 @@ export const EventEnterForm = () => {
             </FormRow>
 
             <FormRow label='성별' required className='overflow-visible' names={["gender"]}>
-              <FormFieldRadioGroup form={form} name='gender' options={GenderOptions} />
+              <FormFieldRadioGroup form={form} name='gender' options={genderOptions} />
             </FormRow>
 
             <BirthDateField
@@ -169,9 +187,9 @@ export const EventEnterForm = () => {
               label='자동차운전면허증 소지 여부'
               required
               className='overflow-visible'
-              names={["hasDriverLicense"]}
+              names={["isDriverLicense"]}
             >
-              <FormFieldRadioGroup form={form} name='hasDriverLicense' options={hasDriverLicenseOptions} />
+              <FormFieldRadioGroup form={form} name='isDriverLicense' options={hasDriverLicenseOptions} />
             </FormRow>
           </div>
           <div className='desktop:mt-[7rem] mt-[4rem]'>

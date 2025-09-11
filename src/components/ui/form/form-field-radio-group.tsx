@@ -15,7 +15,7 @@ interface FormFieldRadioGroupProps<T extends FieldValues> {
   label?: string;
   options: Option[];
   className?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number | boolean) => void;
 }
 
 export function FormFieldRadioGroup<T extends FieldValues>({

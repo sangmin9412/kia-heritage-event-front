@@ -16,7 +16,7 @@ export const SelectCar = memo(
         <ItemContent>
           <FormField
             control={form.control}
-            name='carType'
+            name='carCode'
             render={({ field }) => (
               <FormItem>
                 <RadioGroup onValueChange={field.onChange} value={field.value}>

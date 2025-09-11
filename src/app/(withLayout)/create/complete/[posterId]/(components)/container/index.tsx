@@ -1,12 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Loading } from "@/components/ui/loading";
+import { getPosterImage } from "@/features/poster/api";
+import { usePosterStatus } from "@/features/poster/hooks/use-poster-status";
 import { downloadImage, getImagePath } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useEventEnterFormStore } from "@/features/poster/store";
 
-export const CreateCompletePosterContainer = () => {
-  const posterImage = useEventEnterFormStore(state => state.posterImage);
+export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }) => {
+  const [posterImageBase64, setPosterImageBase64] = useState<string | null>(null);
+
+  const { data, isLoading } = usePosterStatus({ posterId: Number(posterId) }, { enabled: !!posterId });
+  const posterImage = data?.data.posterFile?.fileUrl ?? "";
+
+  useEffect(() => {
+    async function getPosterImageBase64() {
+      try {
+        const imageBase64 = await getPosterImage(posterImage);
+        setPosterImageBase64(imageBase64.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    if (posterImage) {
+      getPosterImageBase64();
+    }
+  }, [posterImage, setPosterImageBase64]);
 
   return (
     <div className='desktop:py-[8rem]'>
@@ -22,13 +43,19 @@ export const CreateCompletePosterContainer = () => {
             인스타그램 피드에 게시물을 올려야 이벤트 참여가 완료됩니다.
           </p>
           <div className='mx-auto desktop:max-w-[40rem] max-w-[31.5rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
-            {posterImage && (
+            {isLoading && (
+              <div className='desktop:h-[50rem] h-[30rem] flex items-center justify-center'>
+                <Loading />
+              </div>
+            )}
+            {posterImage && !isLoading && (
               <Image
                 src={posterImage}
                 alt='포스터 이미지'
                 width={400}
                 height={500}
                 unoptimized
+                priority
                 className='w-full h-auto object-cover'
               />
             )}
@@ -88,7 +115,7 @@ export const CreateCompletePosterContainer = () => {
         </div>
 
         <div className='desktop:p-[2.4rem_4.8rem] p-[1.6rem] sticky bottom-0 flex desktop:gap-[1.6rem] gap-[1.2rem] bg-white border-t border-border'>
-          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImage)}>
+          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImageBase64)}>
             포스터 다운로드
           </Button>
           <Button className='flex-1' disabled>

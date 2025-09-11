@@ -3,6 +3,7 @@ import { useEventEnterFormStore } from "@/features/poster/store";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { IcTextPlaceholder } from "@/assets/icons";
+import { frameCodesEnum } from "@/features/poster/create-poster-form/schema";
 
 export const PosterPreview = React.memo(() => {
   return (
@@ -20,13 +21,13 @@ export const PosterPreview = React.memo(() => {
 PosterPreview.displayName = "PosterPreview";
 
 export const PosterPreviewer = ({ className }: { className?: string }) => {
-  const frameType = useEventEnterFormStore(state => state.posterForm.frameType);
+  const frameCode = useEventEnterFormStore(state => state.posterForm.frameCode);
   const imageBase64 = useEventEnterFormStore(state => state.posterForm.imageBase64);
   const imageScale = useEventEnterFormStore(state => state.posterForm.imageScale);
   const imageVertical = useEventEnterFormStore(state => state.posterForm.imageVertical);
   const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal);
-  const carType = useEventEnterFormStore(state => state.posterForm.carType);
-  const posterTitle = useEventEnterFormStore(state => state.posterForm.posterTitle);
+  const carCode = useEventEnterFormStore(state => state.posterForm.carCode);
+  const title = useEventEnterFormStore(state => state.posterForm.title);
 
   const imageStyle = useMemo(
     () => ({
@@ -39,54 +40,65 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
     [imageHorizontal, imageVertical, imageScale]
   );
 
-  if (frameType === "horizontal") {
+  if (frameCode === frameCodesEnum.HORIZONTAL) {
     return (
-      <section
-        className={cn("relative w-[108rem] h-[135rem] bg-[linear-gradient(180deg,#DEDEDE_0%,#F7F7F7_100%)]", className)}
-      >
-        <div className='absolute inset-0 pointer-events-none'>
-          <Image src='/images/create/poster_frame_bg_hrz.png' alt='frame' fill className='object-cover' unoptimized />
+      <section className={cn("relative w-[108rem] h-[135rem] bg-primary", className)}>
+        <div className='absolute inset-0 pointer-events-none z-[1]'>
+          <Image
+            src='/images/create/poster_frame_bg_hrz.png'
+            alt='frame'
+            fill
+            className='object-cover'
+            unoptimized
+            priority
+          />
         </div>
         <PosterImageFrameWrapper
-          frameType='horizontal'
+          frameCode={frameCodesEnum.HORIZONTAL}
           imageBase64={imageBase64}
           imageStyle={imageStyle}
-          className='absolute left-0 top-[24.3rem]'
+          className='absolute left-0 top-0'
         />
-        <div className='absolute right-[8.1rem] top-[75.6rem] w-[34.5rem] h-[34.5rem]'>
-          <PosterCar carType={carType} />
+
+        <div className='absolute left-0 top-[65rem] w-full h-[13rem] bg-[linear-gradient(180deg,rgba(5,20,31,0)0%,rgba(5,20,31,0.77)41.52%,#05141F_95%)]'></div>
+
+        <div className='absolute left-[50%] translate-x-[-50%] bottom-[16rem] w-[30rem] h-[18rem]'>
+          <PosterCar carCode={carCode} />
         </div>
-        <div className='absolute left-[10.2rem] top-[101rem] min-h-[16rem] flex flex-col gap-[3.2rem] justify-end whitespace-normal'>
-          <PosterTitle posterTitle={posterTitle} />
-          <p className='text-[5rem] leading-[6.4rem] text-primary'>기아와 함께한 순간</p>
+        <div className='absolute left-0 bottom-[42.6rem] w-full flex flex-col gap-[2.9rem] items-center justify-center whitespace-normal'>
+          <PosterTitle title={title} />
         </div>
       </section>
     );
   }
 
-  if (frameType === "vertical") {
+  if (frameCode === frameCodesEnum.VERTICAL) {
     return (
-      <section
-        className={cn(
-          "relative w-[108rem] h-[135rem] bg-[linear-gradient(180deg,#DEDEDE_0%,#F7F7F7_100%)] z-[0]",
-          className
-        )}
-      >
-        <div className='absolute inset-0 pointer-events-none'>
-          <Image src='/images/create/poster_frame_bg_vtc.png' alt='frame' fill className='object-cover' unoptimized />
+      <section className={cn("relative w-[108rem] h-[135rem] bg-primary z-[0]", className)}>
+        <div className='absolute inset-0 pointer-events-none z-[1]'>
+          <Image
+            src='/images/create/poster_frame_bg_vtc.png'
+            alt='frame'
+            fill
+            className='object-cover'
+            unoptimized
+            priority
+          />
         </div>
         <PosterImageFrameWrapper
-          frameType='vertical'
+          frameCode={frameCodesEnum.VERTICAL}
           imageBase64={imageBase64}
           imageStyle={imageStyle}
-          className='absolute right-0 top-0'
+          className='absolute left-0 top-0'
         />
-        <div className='absolute left-[16.3rem] top-[75.6rem] w-[34.5rem] h-[34.5rem]'>
-          <PosterCar carType={carType} />
+
+        <div className='absolute left-0 bottom-0 w-full h-[55.6rem] bg-[linear-gradient(180deg,rgba(5,20,31,0)0%,rgba(5,20,31,0.6)25%,#05141F_100%)]'></div>
+
+        <div className='absolute left-[50%] translate-x-[-50%] bottom-[16rem] w-[30rem] h-[18rem]'>
+          <PosterCar carCode={carCode} />
         </div>
-        <div className='absolute right-[10.6rem] top-[102.1rem] min-h-[16rem] flex flex-col gap-[2.9rem] items-end justify-end whitespace-normal'>
-          <PosterTitle posterTitle={posterTitle} />
-          <p className='text-[5rem] leading-[6.4rem] text-primary'>기아와 함께한 순간</p>
+        <div className='absolute left-0 bottom-[42.6rem] w-full flex flex-col gap-[2.9rem] items-center justify-center whitespace-normal'>
+          <PosterTitle title={title} />
         </div>
       </section>
     );
@@ -97,19 +109,19 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
 
 export const PosterImageFrameWrapper = React.memo(
   ({
-    frameType,
+    frameCode,
     imageBase64,
     imageStyle,
     className
   }: {
-    frameType: "horizontal" | "vertical";
+    frameCode: keyof typeof frameCodesEnum;
     imageBase64?: string;
     imageStyle: React.CSSProperties;
     className?: React.HTMLAttributes<HTMLDivElement>["className"];
   }) => {
-    if (frameType === "horizontal") {
+    if (frameCode === frameCodesEnum.HORIZONTAL) {
       return (
-        <div className={cn("w-[90.5rem] h-[67.9rem] bg-white overflow-hidden", className)}>
+        <div className={cn("w-full h-[76rem] bg-white overflow-hidden", className)}>
           <PosterImageFrame
             className='relative w-full h-full flex items-center justify-center'
             imageBase64={imageBase64}
@@ -122,9 +134,9 @@ export const PosterImageFrameWrapper = React.memo(
       );
     }
 
-    if (frameType === "vertical") {
+    if (frameCode === frameCodesEnum.VERTICAL) {
       return (
-        <div className={cn("w-[71.5rem] h-[95.3rem] bg-white overflow-hidden z-[-1]", className)}>
+        <div className={cn("w-full h-full bg-white overflow-hidden", className)}>
           <PosterImageFrame
             className='relative w-full h-full flex items-center justify-center'
             imageBase64={imageBase64}
@@ -156,10 +168,12 @@ export const PosterImageFrame = React.memo(
       const height = image.naturalHeight;
       if (width > height) {
         image.style.width = "auto";
+        image.style.minWidth = "100%";
         image.style.height = "100%";
       } else {
-        image.style.width = "100%";
         image.style.height = "auto";
+        image.style.minHeight = "100%";
+        image.style.width = "100%";
       }
       image.style.opacity = "1";
     };
@@ -180,14 +194,14 @@ export const PosterImageFrame = React.memo(
 );
 PosterImageFrame.displayName = "PosterImageFrame";
 
-export const PosterTitle = React.memo(({ posterTitle }: { posterTitle?: string }) => {
-  if (!posterTitle) return null;
-  return <p className='text-[5rem] leading-[6.4rem] font-bold text-primary'>{posterTitle}</p>;
+export const PosterTitle = React.memo(({ title }: { title?: string }) => {
+  if (!title) return null;
+  return <p className='text-[7.2rem] leading-[7rem] font-bold text-white text-center'>{title}</p>;
 });
 PosterTitle.displayName = "PosterTitle";
 
-const PosterCar = React.memo(({ carType }: { carType?: string }) => {
-  if (!carType) return null;
-  return <Image src={`/images/create/car/${carType}.png`} alt='car' fill className='object-cover' unoptimized />;
+const PosterCar = React.memo(({ carCode }: { carCode?: string }) => {
+  if (!carCode) return null;
+  return <Image src={`/images/create/car/${"temp_car"}.png`} alt='car' fill className='object-cover' unoptimized />;
 });
 PosterCar.displayName = "PosterCar";

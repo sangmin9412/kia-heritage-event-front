@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { createPosterFormSchemaType } from "@/features/poster/create-poster-form/schema/validation";
+import { createPosterFormSchemaType, frameCodesEnum } from "@/features/poster/create-poster-form/schema/validation";
 
 type UserForm = Partial<eventEnterFormSchemaType>;
 type PosterForm = Partial<createPosterFormSchemaType>;
@@ -16,14 +16,13 @@ type EventEnterFormState = {
   hydratedPosterForm: PosterForm;
   setHydratedPosterForm: (form: PosterForm) => void;
   // 사연 내용
-  userStory: string;
-  setUserStory: (story: string) => void;
+  story: string;
+  setStory: (story: string) => void;
   // 초기 데이터 로드 여부
   _hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
-  // 포스터 이미지
-  posterImage: string;
-  setPosterImage: (image: string) => void;
+  // 스토어 초기화
+  resetStore: () => void;
 };
 
 export const useEventEnterFormStoreInitialState: {
@@ -32,14 +31,14 @@ export const useEventEnterFormStoreInitialState: {
 } = {
   userForm: {},
   posterForm: {
-    frameType: "horizontal",
+    frameCode: frameCodesEnum.HORIZONTAL,
     imageScale: 1,
     imageVertical: 0,
     imageHorizontal: 0,
-    posterTitle: "",
-    instagramName: "",
+    title: "",
+    instagramId: "",
     imageBase64: "",
-    carType: ""
+    carCode: ""
   }
 };
 
@@ -62,13 +61,17 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
       setHydratedPosterForm: form => {
         set({ hydratedPosterForm: form });
       },
-      userStory: "",
-      setUserStory: story => {
-        set({ userStory: story });
+      story: "",
+      setStory: story => {
+        set({ story: story });
       },
-      posterImage: "",
-      setPosterImage: image => {
-        set({ posterImage: image });
+      resetStore: () => {
+        set({
+          userForm: useEventEnterFormStoreInitialState.userForm,
+          posterForm: useEventEnterFormStoreInitialState.posterForm,
+          hydratedPosterForm: useEventEnterFormStoreInitialState.posterForm,
+          story: ""
+        });
       }
     }),
     {
