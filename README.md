@@ -144,20 +144,6 @@ npm run start
 npm run lint
 ```
 
-## 🎨 주요 특징
-
-- **반응형 디자인**: 모바일과 데스크톱 모두 최적화된 사용자 경험
-- **부드러운 스크롤**: Lenis를 활용한 고품질 스크롤 경험
-- **접근성**: Radix UI를 활용한 WCAG 준수 컴포넌트
-- **성능 최적화**: Next.js의 이미지 최적화 및 코드 분할
-- **모던 애니메이션**: GSAP과 Motion을 활용한 인터랙티브 애니메이션
-- **Lottie 애니메이션**: 고품질 벡터 애니메이션 지원
-- **포스터 생성**: Puppeteer를 활용한 서버사이드 이미지 생성
-- **상태 관리**: Zustand를 통한 효율적인 클라이언트 상태 관리
-- **타입 안전성**: TypeScript와 Zod를 통한 런타임 타입 검증
-- **SEO 최적화**: Next.js의 메타데이터 API 활용
-- **모달 시스템**: Next.js의 Parallel Routes를 활용한 모달 구현
-
 ## 📝 개발 노트
 
 ### 프로젝트 구조
@@ -185,19 +171,26 @@ npm run lint
 - 커스텀 훅은 `src/hooks/` 디렉토리에서 관리
 - 유틸리티 함수는 `src/utils/` 디렉토리에서 관리
 
-## 🔧 API 및 기능
-
-### API Routes
-
-- **포스터 생성**: `/api/screenshot` - Puppeteer를 활용한 포스터 이미지 생성
-
 ### 주요 기능
 
 - **이벤트 참여 플로우**: 사용자 정보 입력 → 사진 업로드 → 포스터 생성 → 인스타그램 공유
 - **포스터 커스터마이징**: 다양한 템플릿과 텍스트 옵션 제공
 - **반응형 UI**: 모든 디바이스에서 최적화된 사용자 경험
 
-## 🚀 배포
+## 환경변수
+
+```bash
+# .env
+PUBLIC_URL=https://kia-heritage-event-front.vercel.app
+
+# .env.production
+NEXT_PUBLIC_API_URL=https://dev-api.kia80years-event.com
+
+# .env.development
+NEXT_PUBLIC_API_URL=https://dev-api.kia80years-event.com
+```
+
+## 배포
 
 이 프로젝트는 Vercel에 최적화되어 있으며, 다음 명령어로 배포할 수 있습니다:
 
