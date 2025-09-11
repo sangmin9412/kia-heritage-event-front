@@ -43,14 +43,14 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
             인스타그램 피드에 게시물을 올려야 이벤트 참여가 완료됩니다.
           </p>
           <div className='mx-auto desktop:max-w-[40rem] max-w-[31.5rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
-            {isLoading && (
+            {(!posterImageBase64 || isLoading) && (
               <div className='desktop:h-[50rem] h-[30rem] flex items-center justify-center'>
                 <Loading />
               </div>
             )}
-            {posterImage && !isLoading && (
+            {posterImageBase64 && !isLoading && (
               <Image
-                src={posterImage}
+                src={posterImageBase64}
                 alt='포스터 이미지'
                 width={400}
                 height={500}
