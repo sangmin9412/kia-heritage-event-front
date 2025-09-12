@@ -89,6 +89,7 @@ const useEventEnterForm = () => {
       setFormState(prev => ({ ...prev, isSubmitting: false }));
     } catch (error) {
       resetStore();
+      console.error(error);
       setFormState(prev => ({
         ...prev,
         isSubmitting: false,

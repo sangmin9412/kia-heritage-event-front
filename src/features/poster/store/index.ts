@@ -72,6 +72,8 @@ export const useEventEnterFormStore = create<EventEnterFormState>()(
           hydratedPosterForm: useEventEnterFormStoreInitialState.posterForm,
           story: ""
         });
+        // 로컬 스토리지 삭제
+        localStorage.removeItem("event-enter-form");
       }
     }),
     {

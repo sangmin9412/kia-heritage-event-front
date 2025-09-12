@@ -49,6 +49,19 @@ export const EventEnterForm = () => {
     }
   }, [formState.isParticipated, router]);
 
+  if (formState.error) {
+    return (
+      <div className='flex flex-col desktop:gap-[2.4rem] gap-[1.6rem]'>
+        <p className='text-secondary text-center'>잠시 후 다시 시도해주세요.</p>
+        <div className='desktop:pt-[2.4rem] pt-[1.6rem] flex desktop:gap-[1.6rem] gap-[1.2rem]'>
+          <Button className='flex-1' onClick={() => router.push(ROUTES.HOME.link, { scroll: false })}>
+            닫기
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   // 로딩 중
   if (formState.isSubmitting || formState.isParticipated === false) {
     return <Loading />;
