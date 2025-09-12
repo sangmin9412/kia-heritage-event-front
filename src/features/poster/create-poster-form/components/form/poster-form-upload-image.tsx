@@ -26,7 +26,7 @@ import {
 import { PosterImageFrameWrapper } from "@/features/poster/create-poster-form/components/form/poster-preview";
 import { frameCodesEnum } from "@/features/poster/create-poster-form/schema";
 import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
-import { minmaxValue } from "@/lib/utils";
+import { cn, minmaxValue } from "@/lib/utils";
 import Image from "next/image";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
@@ -139,12 +139,12 @@ const UploadImageFormDesktop = ({
 
   const handleScaleUp = useCallback(() => {
     const value = Number((imageScale + 0.1).toFixed(1));
-    form.setValue("imageScale", minmaxValue(value, 0, 2));
+    form.setValue("imageScale", minmaxValue(value, 0.5, 2));
   }, [imageScale, form]);
 
   const handleScaleDown = useCallback(() => {
     const value = Number((imageScale - 0.1).toFixed(1));
-    form.setValue("imageScale", minmaxValue(value, 0, 2));
+    form.setValue("imageScale", minmaxValue(value, 0.5, 2));
   }, [imageScale, form]);
 
   const handlePositionTop = useCallback(() => {
@@ -433,7 +433,14 @@ const ImageScaleSlider = memo(
             </span>
           </button>
         </div>
-        <Slider className='flex-1' min={0} max={2} step={0.1} value={[imageScale]} onValueChange={handleSliderChange} />
+        <Slider
+          className='flex-1'
+          min={0.5}
+          max={2}
+          step={0.1}
+          value={[imageScale]}
+          onValueChange={handleSliderChange}
+        />
         <div className='relative flex-[0_0_4rem] items-center'>
           <button className='relative flex w-[4rem] h-[4rem] cursor-pointer' onClick={handleScaleUp} type='button'>
             <IcSliderScaleUp className='size-[4rem]' />
@@ -609,12 +616,12 @@ const UploadImageDialog = memo(
 
     const handleScaleUp = useCallback(() => {
       const value = Number((imageState.imageScale + 0.1).toFixed(1));
-      setImageState({ ...imageState, imageScale: minmaxValue(value, 0, 2) });
+      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2) });
     }, [imageState, minmaxValue]);
 
     const handleScaleDown = useCallback(() => {
       const value = Number((imageState.imageScale - 0.1).toFixed(1));
-      setImageState({ ...imageState, imageScale: minmaxValue(value, 0, 2) });
+      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2) });
     }, [imageState, minmaxValue]);
 
     const handlePositionTop = useCallback(() => {
@@ -653,14 +660,22 @@ const UploadImageDialog = memo(
           <DialogDescription className='sr-only'>이미지 조정</DialogDescription>
           <div className='flex-1 flex flex-col overflow-hidden'>
             <div className='overflow-y-auto custom-scrollbar'>
-              <div className='aspect-square px-[3rem] flex items-center justify-center bg-[#f1f1f1] overflow-hidden'>
+              <div className='tablet:aspect-auto aspect-square tablet:py-[4.8rem] py-0 px-[3rem] flex items-center justify-center bg-[#f1f1f1] overflow-hidden'>
                 {imageBase64 && (
-                  <PosterImageFrameWrapper
-                    frameCode={frameCode}
-                    imageBase64={imageBase64}
-                    imageStyle={imageStyle}
-                    className='scale-[0.34806629834254144] shrink-0 z-[1]'
-                  />
+                  <div
+                    className={cn(
+                      "w-[31.5rem]",
+                      frameCode === frameCodesEnum.HORIZONTAL && "aspect-[1080/760]",
+                      frameCode === frameCodesEnum.VERTICAL && "aspect-square"
+                    )}
+                  >
+                    <PosterImageFrameWrapper
+                      frameCode={frameCode}
+                      imageBase64={imageBase64}
+                      imageStyle={imageStyle}
+                      className='shrink-0 z-[1]'
+                    />
+                  </div>
                 )}
                 {!imageBase64 && (
                   <div className='w-[13rem] h-[16.2rem]'>

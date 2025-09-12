@@ -121,7 +121,7 @@ export const PosterImageFrameWrapper = React.memo(
   }) => {
     if (frameCode === frameCodesEnum.HORIZONTAL) {
       return (
-        <div className={cn("w-full h-[76rem] bg-white overflow-hidden", className)}>
+        <div className={cn("w-full h-full max-h-[76rem] bg-white overflow-hidden", className)}>
           <PosterImageFrame
             className='relative w-full h-full flex items-center justify-center'
             imageBase64={imageBase64}
