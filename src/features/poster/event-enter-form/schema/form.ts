@@ -52,6 +52,7 @@ const useEventEnterForm = () => {
 
   const setUserForm = useEventEnterFormStore(state => state.setUserForm);
   const userForm = useEventEnterFormStore(state => state.userForm);
+  const resetStore = useEventEnterFormStore(state => state.resetStore);
 
   const form = useForm<eventEnterFormSchemaType>({
     resolver: zodResolver(eventEnterFormSchema),
@@ -87,6 +88,7 @@ const useEventEnterForm = () => {
       setUserForm(data);
       setFormState(prev => ({ ...prev, isSubmitting: false }));
     } catch (error) {
+      resetStore();
       setFormState(prev => ({
         ...prev,
         isSubmitting: false,

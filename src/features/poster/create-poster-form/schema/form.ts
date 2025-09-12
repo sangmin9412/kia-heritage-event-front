@@ -29,6 +29,7 @@ const useCreatePosterForm = () => {
   const hydratedPosterForm = useEventEnterFormStore(state => state.hydratedPosterForm);
   const setPosterForm = useEventEnterFormStore(state => state.setPosterForm);
   const setHydratedPosterForm = useEventEnterFormStore(state => state.setHydratedPosterForm);
+  const resetStore = useEventEnterFormStore(state => state.resetStore);
 
   const form = useForm<createPosterFormSchemaType>({
     resolver: zodResolver(createPosterFormSchema),
@@ -61,6 +62,7 @@ const useCreatePosterForm = () => {
         setPosterForm(data);
         setHydratedPosterForm(data);
       } catch (error) {
+        resetStore();
         setFormState(prev => ({
           ...prev,
           isSubmitting: false,
@@ -68,7 +70,7 @@ const useCreatePosterForm = () => {
         }));
       }
     },
-    [setPosterForm, setHydratedPosterForm]
+    [setPosterForm, setHydratedPosterForm, resetStore]
   );
 
   return {

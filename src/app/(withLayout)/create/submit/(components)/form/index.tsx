@@ -18,7 +18,6 @@ import { memo, useEffect, useRef, useState } from "react";
 export const CreateSubmitFormWrapper = () => {
   const router = useRouter();
   const [posterId, setPosterId] = useState<number | null>(null);
-  const refetchFlagRef = useRef(false);
 
   const userStory = useEventEnterFormStore(state => state.story);
   const userForm = useEventEnterFormStore(state => state.userForm) as eventEnterFormSchemaType;
@@ -75,6 +74,7 @@ export const CreateSubmitFormWrapper = () => {
       setPosterId(response.data.posterId);
     } catch (error) {
       console.error(error);
+      resetStore();
       setSubmitState(prev => ({ ...prev, isError: true, isSubmitting: false }));
     }
   };
