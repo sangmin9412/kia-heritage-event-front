@@ -1,0 +1,15 @@
+﻿version: '3.8'
+services:
+  kia-heritage-front-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '5500:5500'
+    container_name: kia-heritage-front-dev
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
