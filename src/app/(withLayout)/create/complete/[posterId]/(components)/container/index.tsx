@@ -29,6 +29,53 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
     }
   }, [posterImage, setPosterImageBase64]);
 
+  const handleFeedCertification = () => {
+    // 모바일 환경 체크
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+
+    if (isMobile) {
+      if (isIOS) {
+        // iOS: Universal Links 먼저 시도, 실패하면 URL scheme 시도
+        const universalLink = "https://www.instagram.com/";
+        const urlScheme = "instagram://";
+
+        // Universal Link로 먼저 시도 (iOS 9+에서 권장)
+        window.location.href = urlScheme;
+
+        // 앱이 열리지 않는 경우를 대비한 fallback
+        // setTimeout(() => {
+        //   // URL scheme으로 재시도
+        //   window.location.href = urlScheme;
+
+        //   // 그래도 안되면 웹으로 이동
+        //   setTimeout(() => {
+        //     window.open(universalLink, "_blank");
+        //   }, 1000);
+        // }, 500);
+      } else if (isAndroid) {
+        // Android: Intent URL 사용
+        const intentUrl = "intent://www.instagram.com/#Intent;package=com.instagram.android;scheme=https;end";
+        const webUrl = "https://www.instagram.com/";
+
+        try {
+          window.location.href = intentUrl;
+        } catch (error) {
+          console.error(error);
+          // Intent가 실패하면 웹으로 이동
+          window.open(webUrl, "_blank");
+        }
+      } else {
+        // 기타 모바일 디바이스
+        window.open("https://www.instagram.com/", "_blank");
+      }
+    } else {
+      // 데스크톱인 경우 웹으로 이동
+      window.open("https://www.instagram.com/", "_blank");
+    }
+  };
+
   return (
     <div className='desktop:py-[8rem]'>
       <div className='mx-auto max-w-[86rem] desktop:shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-bottom-10 ease-in-out duration-1000'>
@@ -118,7 +165,7 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
           <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImageBase64)}>
             포스터 다운로드
           </Button>
-          <Button className='flex-1' disabled>
+          <Button className='flex-1' onClick={handleFeedCertification}>
             피드 인증하러 가기
           </Button>
         </div>
