@@ -15,6 +15,12 @@ export const SITE_METADATA = {
       }
     ],
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KIA Heritage Event",
+    description: "KIA Heritage Event",
+    images: [`${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`]
   }
 };
 

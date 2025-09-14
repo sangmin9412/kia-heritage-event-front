@@ -2,6 +2,7 @@ import { SITE_METADATA } from "@/config";
 import { useToaster } from "@/hooks/use-toaster";
 import { copyClipboard, getImagePath } from "@/lib/utils";
 import Image from "next/image";
+import { kakaoSdk } from "@/lib/kakao.sdk";
 
 const SHARE_ITEMS = [
   {
@@ -56,26 +57,21 @@ export const SectionEventShare = () => {
   };
 
   const handleShareKakaoTalk = () => {
-    // 카카오톡 공유를 위해서는 카카오 SDK가 필요합니다
-    // 현재는 카카오톡 공유하기 페이지로 이동하는 방식으로 구현
-    if (process.env.NEXT_PUBLIC_URL && typeof window !== "undefined") {
-      const shareUrl = encodeURIComponent(process.env.NEXT_PUBLIC_URL);
-      const shareText = encodeURIComponent(SITE_METADATA.title || "기아 헤리티지 이벤트");
-
-      // 모바일에서는 카카오톡 앱으로 직접 공유 시도
-      if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        const kakaoUrl = `kakaotalk://send?text=${shareText} ${shareUrl}`;
-        const fallbackUrl = `https://story.kakao.com/share?url=${shareUrl}`;
-
-        // 카카오톡 앱이 설치되어 있으면 앱으로, 없으면 웹으로
-        window.location.href = kakaoUrl;
-        setTimeout(() => {
-          window.open(fallbackUrl, "_blank");
-        }, 1000);
-      } else {
-        // 데스크톱에서는 카카오스토리로 공유
-        window.open(`https://story.kakao.com/share?url=${shareUrl}`, "_blank", "width=600,height=400");
-      }
+    // 카카오 SDK 공유 기능 사용
+    const Kakao = kakaoSdk();
+    if (Kakao) {
+      Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: SITE_METADATA.title,
+          description: SITE_METADATA.description,
+          imageUrl: SITE_METADATA.openGraph?.images[0].url,
+          link: {
+            webUrl: process.env.NEXT_PUBLIC_URL,
+            mobileWebUrl: process.env.NEXT_PUBLIC_URL
+          }
+        }
+      });
     }
   };
 
