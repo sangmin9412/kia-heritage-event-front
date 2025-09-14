@@ -100,7 +100,8 @@ export const SectionInstagramEvent = () => {
             <div className='mt-[2.4rem] text-center'>
               <p>
                 참여하신 분들께 추첨을 통해
-                <br className='block desktop:hidden' /> <strong>커피쿠폰 (1매)</strong>를 드립니다.
+                <br />
+                <strong>스타벅스 아이스 아메리카노(Tall) 1잔</strong>을 드립니다.
               </p>
             </div>
           </div>

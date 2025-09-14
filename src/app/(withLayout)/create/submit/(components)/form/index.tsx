@@ -201,7 +201,7 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
                 />
               </div>
               <span className='absolute desktop:right-[2.4rem] desktop:bottom-[1.6rem] right-[1.6rem] bottom-[1.6rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
-                {userStoryLengthString}/{limitLength} byte
+                {userStoryLengthString}/{limitLength}자
               </span>
             </div>
           </div>

@@ -4,6 +4,7 @@ import {
   IconInfo,
   IconPlus,
   IcPencil,
+  IcRefresh,
   IcSliderPositionBottom,
   IcSliderPositionLeft,
   IcSliderPositionRight,
@@ -167,6 +168,12 @@ const UploadImageFormDesktop = ({
     form.setValue("imageHorizontal", minmaxValue(value, -100, 100));
   }, [imageHorizontal, form]);
 
+  const handleImagePositionReset = useCallback(() => {
+    form.setValue("imageScale", useEventEnterFormStoreInitialState.posterForm.imageScale);
+    form.setValue("imageVertical", useEventEnterFormStoreInitialState.posterForm.imageVertical);
+    form.setValue("imageHorizontal", useEventEnterFormStoreInitialState.posterForm.imageHorizontal);
+  }, [form]);
+
   return (
     <div className='desktop:block hidden'>
       <div>
@@ -235,13 +242,30 @@ const UploadImageFormDesktop = ({
               <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
                 세로형 비율 3:4 (권장 해상도 1080*1350)
               </DotItem>
+              <DotItem className='text-[1.3rem] leading-[2rem] [--line-height:2rem] text-sub-text'>
+                이미지 용량 제한 : 최대 15MB
+              </DotItem>
             </DotList>
           </div>
         </div>
       </div>
 
-      <div className='desktop:mt-[4.8rem] mt-[3.2rem] desktop:pt-[4.8rem] pt-[3.2rem] border-t border-border'>
+      <div className='relative desktop:mt-[4.8rem] mt-[3.2rem] desktop:pt-[4.8rem] pt-[3.2rem] border-t border-border'>
         <ItemTitle>이미지 조정</ItemTitle>
+        <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+          이미지가 보이지 않을 경우 &apos;초기화&apos; 버튼을 눌러주세요.
+        </p>
+        <div className='absolute desktop:top-[7.2rem] top-[6rem] right-0'>
+          <Button
+            size='xs'
+            variant='outline'
+            className='border-border font-bold text-sub-text'
+            onClick={handleImagePositionReset}
+          >
+            <span>초기화</span>
+            <IcRefresh className='size-[1.6rem]' />
+          </Button>
+        </div>
         <ItemContent>
           <div className='p-[2.4rem_3.2rem] flex flex-col gap-[4rem] border border-border'>
             <div className='flex flex-col gap-[2.4rem]'>
@@ -644,12 +668,20 @@ const UploadImageDialog = memo(
       setImageState({ ...imageState, imageHorizontal: minmaxValue(value, -100, 100) });
     }, [imageState, minmaxValue]);
 
-    const handleComplete = () => {
+    const handleImagePositionReset = useCallback(() => {
+      setImageState({
+        imageScale: useEventEnterFormStoreInitialState.posterForm.imageScale,
+        imageVertical: useEventEnterFormStoreInitialState.posterForm.imageVertical,
+        imageHorizontal: useEventEnterFormStoreInitialState.posterForm.imageHorizontal
+      });
+    }, [setImageState]);
+
+    const handleComplete = useCallback(() => {
       onClose();
       form.setValue("imageScale", imageState.imageScale);
       form.setValue("imageVertical", imageState.imageVertical);
       form.setValue("imageHorizontal", imageState.imageHorizontal);
-    };
+    }, [imageState, form, onClose]);
 
     return (
       <Dialog open={open} onOpenChange={onClose}>
@@ -660,11 +692,26 @@ const UploadImageDialog = memo(
           <DialogDescription className='sr-only'>이미지 조정</DialogDescription>
           <div className='flex-1 flex flex-col overflow-hidden'>
             <div className='overflow-y-auto custom-scrollbar'>
+              <div className='flex justify-between items-center px-[3rem] pb-[1.6rem]'>
+                <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+                  이미지가 보이지 않을 경우, <br />
+                  &apos;초기화&apos; 버튼을 눌러주세요.
+                </p>
+                <Button
+                  size='xs'
+                  variant='outline'
+                  className='border-border font-bold text-sub-text'
+                  onClick={handleImagePositionReset}
+                >
+                  <span>초기화</span>
+                  <IcRefresh className='size-[1.6rem]' />
+                </Button>
+              </div>
               <div className='tablet:aspect-auto aspect-square tablet:py-[4.8rem] py-0 px-[3rem] flex items-center justify-center bg-[#f1f1f1] overflow-hidden'>
                 {imageBase64 && (
                   <div
                     className={cn(
-                      "w-[31.5rem]",
+                      "relative w-[31.5rem] before:absolute before:inset-0 before:border-[2px] before:border-border before:z-[1] before:pointer-events-none",
                       frameCode === frameCodesEnum.HORIZONTAL && "aspect-[1080/760]",
                       frameCode === frameCodesEnum.VERTICAL && "aspect-square"
                     )}

@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { AlertProvider } from "@/components/contexts";
-import { Toaster } from "@/components/features/toast";
+import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface AppProviderProps {
@@ -24,10 +24,8 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <AlertProvider>
-          {children}
-          <Toaster />
-        </AlertProvider>
+        <AlertProvider>{children}</AlertProvider>
+        <Toaster />
       </QueryClientProvider>
     </>
   );

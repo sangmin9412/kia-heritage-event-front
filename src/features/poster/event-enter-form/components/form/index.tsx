@@ -88,10 +88,10 @@ export const EventEnterForm = () => {
               }
             }}
           >
-            포스터 보러가기
+            포스터 확인
           </Button>
           <Button className='flex-1' onClick={() => router.push(ROUTES.HOME.link, { scroll: false })}>
-            닫기
+            확인
           </Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
-import { getImagePath } from "@/lib/utils";
+import { SITE_METADATA } from "@/config";
+import { useToaster } from "@/hooks/use-toaster";
+import { copyClipboard, getImagePath } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
 
 const SHARE_ITEMS = [
   {
@@ -28,6 +29,84 @@ const SHARE_ITEMS = [
 ];
 
 export const SectionEventShare = () => {
+  const { toast } = useToaster();
+
+  const handleShareFacebook = () => {
+    if (process.env.NEXT_PUBLIC_URL) {
+      const shareUrl = encodeURIComponent(process.env.NEXT_PUBLIC_URL);
+      const shareText = encodeURIComponent(SITE_METADATA.title || "기아 헤리티지 이벤트");
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    }
+  };
+
+  const handleShareTwitter = () => {
+    if (process.env.NEXT_PUBLIC_URL) {
+      const shareUrl = encodeURIComponent(process.env.NEXT_PUBLIC_URL);
+      const shareText = encodeURIComponent(SITE_METADATA.title || "기아 헤리티지 이벤트");
+      window.open(
+        `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    }
+  };
+
+  const handleShareKakaoTalk = () => {
+    // 카카오톡 공유를 위해서는 카카오 SDK가 필요합니다
+    // 현재는 카카오톡 공유하기 페이지로 이동하는 방식으로 구현
+    if (process.env.NEXT_PUBLIC_URL && typeof window !== "undefined") {
+      const shareUrl = encodeURIComponent(process.env.NEXT_PUBLIC_URL);
+      const shareText = encodeURIComponent(SITE_METADATA.title || "기아 헤리티지 이벤트");
+
+      // 모바일에서는 카카오톡 앱으로 직접 공유 시도
+      if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        const kakaoUrl = `kakaotalk://send?text=${shareText} ${shareUrl}`;
+        const fallbackUrl = `https://story.kakao.com/share?url=${shareUrl}`;
+
+        // 카카오톡 앱이 설치되어 있으면 앱으로, 없으면 웹으로
+        window.location.href = kakaoUrl;
+        setTimeout(() => {
+          window.open(fallbackUrl, "_blank");
+        }, 1000);
+      } else {
+        // 데스크톱에서는 카카오스토리로 공유
+        window.open(`https://story.kakao.com/share?url=${shareUrl}`, "_blank", "width=600,height=400");
+      }
+    }
+  };
+
+  const handleCopyClipboard = async () => {
+    if (process.env.NEXT_PUBLIC_URL) {
+      const result = await copyClipboard(process.env.NEXT_PUBLIC_URL);
+      if (result) {
+        toast("공유 링크를 클립보드에 복사했습니다.");
+      } else {
+        toast("공유 링크를 클립보드에 복사하는데 실패했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    }
+  };
+
+  const handleShare = async (item: (typeof SHARE_ITEMS)[number]) => {
+    switch (item.title) {
+      case "페이스북":
+        handleShareFacebook();
+        break;
+      case "트위터":
+        handleShareTwitter();
+        break;
+      case "카카오톡":
+        handleShareKakaoTalk();
+        break;
+      case "공유하기":
+        handleCopyClipboard();
+        break;
+    }
+  };
+
   return (
     <div className='desktop:py-[4rem] py-[2rem] border-t border-border'>
       <div className='container'>
@@ -39,9 +118,9 @@ export const SectionEventShare = () => {
             <ul className='flex gap-[1.6rem]'>
               {SHARE_ITEMS.map(item => (
                 <li key={item.title}>
-                  <Link
-                    href={item.link}
-                    className='flex justify-center items-center desktop:size-[4.8rem] size-[4rem] rounded-full border border-border bg-white'
+                  <button
+                    className='flex justify-center items-center size-[4rem] rounded-full border border-border bg-white cursor-pointer'
+                    onClick={() => handleShare(item)}
                   >
                     <Image
                       src={getImagePath(item.icon)}
@@ -51,7 +130,7 @@ export const SectionEventShare = () => {
                       unoptimized
                       className='desktop:size-[2.4rem] size-[2rem] object-contain'
                     />
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

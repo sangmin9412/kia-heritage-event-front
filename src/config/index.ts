@@ -1,14 +1,33 @@
 export const basePath = "";
+
+export const SITE_METADATA = {
+  title: "KIA Heritage Event",
+  description: "KIA Heritage Event",
+  openGraph: {
+    url: process.env.NEXT_PUBLIC_URL,
+    title: "KIA Heritage Event",
+    description: "KIA Heritage Event",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`,
+        width: 1200,
+        height: 628
+      }
+    ],
+    type: "website"
+  }
+};
+
 export const EVENT_INFO = {
   info: {
-    start: "2025. 09. 29 (Mon)",
-    end: "2025. 11. 10 (Mon)",
-    announcement: "2025. 11. 00 (Mon)"
+    start: "2025. 9. 29 (월)",
+    end: "11. 4 (화)",
+    announcement: "2025. 11. 20 (목)"
   },
   date: {
     start: "2025-09-29",
-    end: "2025-11-10",
-    announcement: "2025-11-00"
+    end: "2025-11-04",
+    announcement: "2025-11-20"
   }
 };
 

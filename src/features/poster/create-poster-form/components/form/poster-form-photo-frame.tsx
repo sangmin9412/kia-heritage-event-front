@@ -27,24 +27,30 @@ export const PhotoFrame = memo(
                         <div key={option.value}>
                           <label
                             htmlFor={option.value}
-                            className='block relative desktop:w-[16.5rem] desktop:h-[20.6rem] w-[13rem] h-[16.2rem] desktop:p-[2.4rem] p-[1.6rem] bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
+                            className='flex flex-col justify-end relative desktop:w-[16.5rem] desktop:h-[20.6rem] w-[13rem] h-[16.2rem] p-[1.6rem] bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
                             data-checked={field.value === option.value}
                           >
                             {option.value === "HORIZONTAL" && (
-                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 가로형 프레임 이미지 */}</div>
+                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>
+                                <div className='absolute left-0 top-0 w-full h-[48.55%] bg-[#f1f1f1]'></div>
+                              </div>
                             )}
                             {option.value === "VERTICAL" && (
-                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>{/** 세로형 프레임 이미지 */}</div>
+                              <div className='absolute inset-0 bg-[#fff] z-[-1]'>
+                                <div className='absolute inset-0 bg-[#f1f1f1]'></div>
+                              </div>
                             )}
-                            <p className='text-[1.6rem] font-bold leading-[2.6rem]'>{option.label}</p>
-                            <span className='flex absolute desktop:right-[2.4rem] desktop:bottom-[2.4rem] right-[1.6rem] bottom-[1.6rem] pointer-events-none'>
-                              <RadioGroupItem
-                                value={option.value}
-                                id={`${option.value}`}
-                                mode='checkbox'
-                                className='desktop:w-[3.2rem] desktop:h-[3.2rem] w-[2.4rem] h-[2.4rem] desktop:[&_svg]:size-[1.8rem] [&_svg]:size-[1.4rem]'
-                              />
-                            </span>
+                            <div className='flex items-center justify-between'>
+                              <p className='text-[1.6rem] font-bold leading-[2.6rem]'>{option.label}</p>
+                              <span className='flex pointer-events-none'>
+                                <RadioGroupItem
+                                  value={option.value}
+                                  id={`${option.value}`}
+                                  mode='checkbox'
+                                  className='w-[2.4rem] h-[2.4rem] [&_svg]:size-[1.4rem] bg-white'
+                                />
+                              </span>
+                            </div>
                           </label>
                         </div>
                       ))}

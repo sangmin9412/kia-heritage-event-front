@@ -74,12 +74,12 @@ export const SectionKeyVisual = () => {
 
   return (
     <section ref={scrollRef}>
-      <div className='relative desktop:h-screen desktop:min-h-[95.5rem] desktop:aspect-auto h-auto aspect-square bg-[#f8f8f8] overflow-hidden'>
+      <div className='relative desktop:h-screen desktop:min-h-[97.9rem] desktop:aspect-auto h-auto aspect-[375/433] bg-[#f8f8f8] overflow-hidden'>
         <div className='absolute inset-0 pointer-events-none' aria-hidden='true'>
           <MagnetWithValue
             disabled={isAnimationCompleted}
             magnetStrength={50}
-            className='w-full h-full flex items-center justify-center desktop:pt-[3.85rem] pt-[2.45rem]'
+            className='w-full h-full flex items-center justify-center desktop:pt-[1.9rem] pt-[4.2rem]'
             innerClassName='w-full'
           >
             <div className='container pointer-events-none'>
@@ -143,8 +143,8 @@ export const SectionKeyVisual = () => {
           </MagnetWithValue>
         </div>
 
-        <div className='relative container h-full'>
-          <div className='desktop:pt-[8.6rem] pt-[4.8rem] whitespace-nowrap'>
+        <div className='relative desktop:px-[6rem] px-[3rem] h-full'>
+          <div className='desktop:pt-[6rem] pt-[2.6rem] whitespace-nowrap'>
             <motion.h3
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
@@ -157,14 +157,15 @@ export const SectionKeyVisual = () => {
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
               transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-              className='desktop:text-[3.6rem] text-[1.6rem] leading-[1.15]'
+              className='desktop:text-[3.6rem] text-[2.4rem] leading-[3.6rem]'
             >
-              당신의 이야기로 완성되는 80년의 기억
+              당신의 이야기로 완성되는
+              <br className='desktop:hidden block' /> 80년의 기억
             </motion.p>
           </div>
 
           <motion.div
-            className='absolute left-[2rem] container:left-0 bottom-[4.3rem]'
+            className='absolute desktop:left-[6rem] left-[3rem] desktop:bottom-[6rem] bottom-[3rem]'
             initial={{ opacity: 0, y: 0 }}
             animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
             transition={{ duration: 1, delay: 1.5, ease: "easeInOut" }}

@@ -29,11 +29,11 @@ export const SelectCar = memo(
                             className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
                             data-checked={field.value === option.value}
                           >
-                            <div className='absolute desktop:inset-[2rem] inset-[0.8rem]'>
+                            <div className='absolute inset-[0.8rem]'>
                               <Image
                                 src={option.image as string}
                                 alt='car-image'
-                                className='inset-[.8rem] object-cover'
+                                className='inset-[.8rem] object-contain'
                                 unoptimized
                                 fill
                               />

@@ -3,7 +3,7 @@ import { DotItem, DotList } from "@/components/ui/dot-list";
 
 export const SectionEventEnter = () => {
   return (
-    <section className='relative desktop:py-[8rem] py-[4rem]'>
+    <section className='relative desktop:py-[6rem] py-[4rem]'>
       <h3 className='blind'>응모 방법 섹션</h3>
       <div className='container'>
         <div className='flex flex-col desktop:gap-[4rem] gap-[3rem]'>

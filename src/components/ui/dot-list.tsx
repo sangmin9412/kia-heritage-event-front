@@ -9,7 +9,7 @@ type DotListProps = {
 type DotItemProps = React.ComponentProps<"li"> & {
   asChild?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const DotList = ({ className, children }: DotListProps) => {
@@ -19,18 +19,38 @@ const DotList = ({ className, children }: DotListProps) => {
 const DotItem = ({ asChild, className, children, ...props }: DotItemProps) => {
   const Comp = asChild ? Slot : "li";
 
-  return (
-    <Comp
-      className={cn(
-        "relative flex flex-col desktop:pl-[1.6rem] pl-[1.2rem] text-[1.8rem] leading-[3rem] [--line-height:3rem] [--dot-size:0.4rem]",
-        className
-      )}
-      {...props}
-    >
-      <span className='absolute left-0 top-0 flex items-center h-[var(--line-height)] before:size-[var(--dot-size)] before:rounded-full before:bg-[currentColor]'></span>
-      {children}
-    </Comp>
-  );
+  if (props.dangerouslySetInnerHTML) {
+    return (
+      <Comp
+        className={cn(
+          "relative flex flex-col desktop:pl-[1.6rem] pl-[1.2rem] text-[1.8rem] leading-[3rem] [--line-height:3rem] [--dot-size:0.4rem]",
+          className
+        )}
+        {...props}
+        dangerouslySetInnerHTML={{
+          __html: `
+          <span class='absolute left-0 top-0 flex items-center h-[var(--line-height)] before:size-[var(--dot-size)] before:rounded-full before:bg-[currentColor]'></span>
+          ${props.dangerouslySetInnerHTML.__html}
+        `
+        }}
+      ></Comp>
+    );
+  }
+
+  if (children) {
+    return (
+      <Comp
+        className={cn(
+          "relative flex flex-col desktop:pl-[1.6rem] pl-[1.2rem] text-[1.8rem] leading-[3rem] [--line-height:3rem] [--dot-size:0.4rem]",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </Comp>
+    );
+  }
+  return null;
 };
 
 export { DotList, DotItem };

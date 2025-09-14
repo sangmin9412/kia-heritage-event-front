@@ -3,10 +3,10 @@ import { EVENT_INFO } from "@/config";
 
 export const SectionEventInfo = () => {
   return (
-    <section className='bg-white desktop:py-[8rem] py-[4rem]'>
+    <section className='bg-white desktop:p-[8rem_0_6rem] p-[4rem_0]'>
       <h3 className='blind'>이벤트 정보 섹션</h3>
       <div className='container'>
-        <div className='flex flex-col desktop:gap-[16rem] gap-[8rem] desktop:text-[2rem] text-[1.6rem] leading-[1.5]'>
+        <div className='flex flex-col desktop:gap-[12rem] gap-[6rem] desktop:text-[2rem] text-[1.6rem] leading-[1.5]'>
           <div className='flex flex-col desktop:gap-[4rem] gap-[3rem]'>
             <SectionTitle asChild>
               <h4>이벤트 기간</h4>

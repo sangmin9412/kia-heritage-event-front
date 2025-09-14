@@ -1,24 +1,9 @@
 import "@/app/globals.css";
 import { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SITE_METADATA } from "@/config";
 
-export const metadata: Metadata = {
-  title: "KIA Heritage Event",
-  description: "KIA Heritage Event",
-  openGraph: {
-    url: process.env.PUBLIC_URL,
-    title: "KIA Heritage Event",
-    description: "KIA Heritage Event",
-    images: [
-      {
-        url: `${process.env.PUBLIC_URL}/images/share_thumbnail.png`,
-        width: 1200,
-        height: 628
-      }
-    ],
-    type: "website"
-  }
-};
+export const metadata: Metadata = SITE_METADATA;
 
 export const viewport: Viewport = {
   width: "device-width",

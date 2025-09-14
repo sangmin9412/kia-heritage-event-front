@@ -8,48 +8,38 @@ import {
 } from "@/features/poster/create-poster-form/components/form/poster-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
 import { sliceStringByByte } from "@/lib/utils";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"] }) => {
   const posterTitle = useEventEnterFormStore(state => state.posterForm.title);
-  const posterTitleLength = posterTitle ? new TextEncoder().encode(posterTitle).length : 0;
-  const limitByte = 20;
-  const limitByteString = limitByte.toString().padStart(2, "0");
+  const posterInstagramId = useEventEnterFormStore(state => state.posterForm.instagramId);
+  const posterTitleLength = posterTitle?.length ?? 0;
+  const posterInstagramIdLength = posterInstagramId?.length ?? 0;
+  const titleLimitLength = 16;
+  const instagramIdLimitLength = 30;
+  const limitLengthString = titleLimitLength.toString().padStart(2, "0");
+  const instagramIdLimitLengthString = instagramIdLimitLength.toString().padStart(2, "0");
 
-  const handleInput = (e: React.InputEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
-    const value = input.value;
-    const length = new TextEncoder().encode(value).length;
-    if (length > limitByte) {
-      const slicedValue = sliceStringByByte(value, limitByte);
-      input.value = slicedValue;
-      form.setValue("title", slicedValue, {
-        shouldValidate: true
-      });
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
-    const value = input.value + e.clipboardData.getData("text");
-    const length = new TextEncoder().encode(value).length;
-
-    if (length > limitByte) {
-      e.preventDefault();
-      const slicedValue = sliceStringByByte(value, limitByte);
-      input.value = slicedValue;
-      form.setValue("title", slicedValue, {
-        shouldValidate: true
-      });
-    }
-  };
+  const handleLimitLengthInput = useCallback(
+    (limit: number, name: "title" | "instagramId") => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const input = e.target;
+      const value = input.value;
+      if (value.length > limit) {
+        input.value = value.slice(0, limit);
+        form.setValue(name, input.value, {
+          shouldValidate: true
+        });
+      }
+    },
+    [form]
+  );
 
   return (
     <>
       <div>
         <ItemTitle>포스터에 어울리는 타이틀을 입력해주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
-          최대 글자수 {limitByteString}자 이내로 작성해주세요.
+          최대 글자수 {limitLengthString}자 이내로 작성해주세요.
         </p>
         <ItemContent className='pt-[2.4rem]'>
           <div className='relative'>
@@ -59,11 +49,11 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
               placeholder='예) 나 어릴적'
               type='text'
               className='desktop:pr-[12rem] pr-[9rem] w-full h-[5.6rem] desktop:text-[1.6rem] text-[1.4rem]'
-              onInput={handleInput}
-              onPaste={handlePaste}
+              maxLength={titleLimitLength}
+              onInput={handleLimitLengthInput(titleLimitLength, "title")}
             />
-            <span className='absolute inset-y-0 right-[2.4rem] flex items-center desktop:text-[1.4rem] text-[1.2rem] pointer-events-none'>
-              {posterTitleLength.toString().padStart(2, "0")}/{limitByteString} byte
+            <span className='absolute inset-y-0 right-[2.4rem] flex items-center desktop:text-[1.4rem] text-[1.2rem] text-sub-text pointer-events-none'>
+              {posterTitleLength.toString().padStart(2, "0")}/{limitLengthString}자
             </span>
           </div>
         </ItemContent>
@@ -88,9 +78,14 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
                 name='instagramId'
                 placeholder='인스타그램 계정명 입력'
                 type='text'
-                className='w-full h-[5.6rem] desktop:text-[1.6rem] text-[1.4rem]'
+                className='desktop:pr-[12rem] pr-[9rem] w-full h-[5.6rem] desktop:text-[1.6rem] text-[1.4rem]'
                 id='instagram-name'
+                maxLength={instagramIdLimitLength}
+                onInput={handleLimitLengthInput(instagramIdLimitLength, "instagramId")}
               />
+              <span className='absolute inset-y-0 right-[2.4rem] flex items-center desktop:text-[1.4rem] text-[1.2rem] text-sub-text pointer-events-none'>
+                {posterInstagramIdLength.toString().padStart(2, "0")}/{instagramIdLimitLengthString}자
+              </span>
             </div>
           </div>
         </ItemContent>

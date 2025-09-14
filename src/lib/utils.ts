@@ -114,3 +114,63 @@ export const sliceStringByByte = (str: string, byteLength: number) => {
 
   return str.slice(0, currentByteLength > byteLength ? i - 1 : i);
 };
+
+/**
+ * 클립보드에 텍스트 복사
+ * @param {string} text - 복사할 텍스트
+ * @returns {Promise<boolean>} 복사 성공 여부
+ */
+export async function copyClipboard(text: string) {
+  if (!text) return false;
+
+  // Modern API 방식 시도
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      console.error("Failed to copy with modern API:", err);
+    }
+  }
+
+  // Fallback: execCommand 방식
+  try {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // iOS에서 복사를 위해 필요한 스타일 설정
+    textArea.style.position = "fixed";
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.width = "2em";
+    textArea.style.height = "2em";
+    textArea.style.padding = "0";
+    textArea.style.border = "none";
+    textArea.style.outline = "none";
+    textArea.style.boxShadow = "none";
+    textArea.style.background = "transparent";
+
+    document.body.appendChild(textArea);
+
+    if (navigator.userAgent.match(/ipad|iphone/i)) {
+      // iOS 워크어라운드
+      const range = document.createRange();
+      range.selectNodeContents(textArea);
+      const selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      textArea.setSelectionRange(0, 999999);
+    } else {
+      textArea.select();
+    }
+
+    const successful = document.execCommand("copy");
+    document.body.removeChild(textArea);
+    return successful;
+  } catch (err) {
+    console.error("Failed to copy with execCommand:", err);
+    return false;
+  }
+}

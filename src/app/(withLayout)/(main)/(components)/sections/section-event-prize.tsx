@@ -7,7 +7,7 @@ const PRIZE_LIST = [
   {
     title: "1등",
     description: "1등 경품",
-    prizeName: "EV 4 에 스탠다드 A/T",
+    prizeName: "The Kia EV4 스탠다드 A/T",
     prizeImage: "/images/main/prize_item_01.webp",
     winCount: 1,
     winDescription: "1명"
@@ -17,16 +17,16 @@ const PRIZE_LIST = [
     description: "2등 경품",
     prizeName: "해비치 숙박권",
     prizeImage: "/images/main/prize_item_02.webp",
-    winCount: 2,
+    winCount: 5,
     winDescription: "5명"
   },
   {
     title: "3등",
     description: "3등 경품",
-    prizeName: "미정",
+    prizeName: "Kia 굿즈 (랜덤 증정)",
     prizeImage: "/images/main/prize_item_03.webp",
-    winCount: null,
-    winDescription: "N명"
+    winCount: 100,
+    winDescription: "100명"
   }
 ];
 
@@ -88,7 +88,7 @@ const JUDGE_CRITERIA = [
 
 export const SectionEventPrize = () => {
   return (
-    <section className='desktop:py-[8rem] py-[4rem] bg-white'>
+    <section className='desktop:py-[6rem] py-[4rem] bg-white'>
       <h3 className='blind'>경품 및 시상 안내 섹션</h3>
       <div className='container'>
         <div className='flex flex-col desktop:gap-[4rem] gap-[3rem]'>
@@ -97,16 +97,22 @@ export const SectionEventPrize = () => {
           </SectionTitle>
           <div className='flex flex-col desktop:gap-[6.4rem] gap-[3rem]'>
             <h5 className='blind'>경품 안내</h5>
-            <div className='flex desktop:flex-row flex-col desktop:gap-[3.2rem] gap-[2.4rem] overflow-hidden'>
+            <div className='flex desktop:flex-row flex-col gap-[2.4rem] overflow-hidden'>
               {PRIZE_LIST.map(prize => (
-                <div className='flex flex-1 flex-col items-center overflow-hidden' key={prize.title}>
-                  <div className='flex justify-center items-center'>
-                    <div className='flex desktop:w-[40.5rem] w-full aspect-[405/307]'>
+                <div
+                  className='relative flex flex-1 flex-col desktop:p-[6.4rem_2.4rem_2.4rem] p-[4.8rem_1.6rem_1.6rem] border-t-[1px] border-border overflow-hidden'
+                  key={prize.title}
+                >
+                  <div className='absolute top-0 desktop:left-[2.4rem] left-[1.6rem] desktop:px-[1.8rem] px-[1.4rem] desktop:text-[1.8rem] text-[1.4rem] desktop:leading-[4.2rem] leading-[3.4rem] font-bold text-white rounded-[0_0_1rem_1rem] bg-black'>
+                    <span>{prize.title}</span>
+                  </div>
+                  <div className='flex justify-center items-center w-full'>
+                    <div className='flex desktop:w-[36.3rem] w-full aspect-[363/180]'>
                       <Image
                         src={getImagePath(prize.prizeImage)}
                         alt={prize.title}
-                        width={405}
-                        height={307}
+                        width={363}
+                        height={180}
                         unoptimized
                         className='w-full h-full object-contain'
                       />

@@ -94,7 +94,7 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
 
         <div className='absolute left-0 bottom-0 w-full h-[55.6rem] bg-[linear-gradient(180deg,rgba(5,20,31,0)0%,rgba(5,20,31,0.6)25%,#05141F_100%)]'></div>
 
-        <div className='absolute left-[50%] translate-x-[-50%] bottom-[16rem] w-[30rem] h-[18rem]'>
+        <div className='absolute left-[50%] translate-x-[-50%] bottom-[16rem] w-[30rem] aspect-[300/180]'>
           <PosterCar carCode={carCode} />
         </div>
         <div className='absolute left-0 bottom-[42.6rem] w-full flex flex-col gap-[2.9rem] items-center justify-center whitespace-normal'>
@@ -195,13 +195,21 @@ export const PosterImageFrame = React.memo(
 PosterImageFrame.displayName = "PosterImageFrame";
 
 export const PosterTitle = React.memo(({ title }: { title?: string }) => {
-  if (!title) return null;
-  return <p className='text-[7.2rem] leading-[7rem] font-bold text-white text-center'>{title}</p>;
+  const titleText = !title ? "문구를 작성해 주세요" : title;
+  return <p className='text-[7.2rem] leading-[7rem] font-bold text-white text-center whitespace-nowrap'>{titleText}</p>;
 });
 PosterTitle.displayName = "PosterTitle";
 
 const PosterCar = React.memo(({ carCode }: { carCode?: string }) => {
   if (!carCode) return null;
-  return <Image src={`/images/create/car/${"temp_car"}.png`} alt='car' fill className='object-cover' unoptimized />;
+  return (
+    <Image
+      src={`/images/create/car/${carCode ? carCode : "temp_car"}.png`}
+      alt='car'
+      fill
+      className='object-cover'
+      unoptimized
+    />
+  );
 });
 PosterCar.displayName = "PosterCar";

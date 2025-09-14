@@ -52,8 +52,14 @@ const baseSchema = {
     .min(-100, { message: "이미지 위치를 선택해주세요." })
     .max(100, { message: "이미지 위치를 선택해주세요." }),
   carCode: z.enum([...carCodes, ""], { message: "차량 타입을 선택해주세요." }),
-  title: z.string().min(1, { message: "포스터 제목을 입력해주세요." }),
-  instagramId: z.string().min(1, { message: "인스타그램 계정명을 입력해주세요." })
+  title: z
+    .string()
+    .min(1, { message: "포스터 제목을 입력해주세요." })
+    .max(16, { message: "포스터 제목을 16자 이내로 입력해주세요." }),
+  instagramId: z
+    .string()
+    .min(1, { message: "인스타그램 계정명을 입력해주세요." })
+    .max(30, { message: "인스타그램 계정명을 30자 이내로 입력해주세요." })
 };
 
 export const createPosterFormSchema = z.object(baseSchema);
