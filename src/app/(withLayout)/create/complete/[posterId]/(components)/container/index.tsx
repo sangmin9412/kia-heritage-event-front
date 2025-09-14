@@ -37,23 +37,10 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
 
     if (isMobile) {
       if (isIOS) {
-        // iOS: Universal Links 먼저 시도, 실패하면 URL scheme 시도
-        const universalLink = "https://www.instagram.com/";
         const urlScheme = "instagram://";
 
-        // Universal Link로 먼저 시도 (iOS 9+에서 권장)
+        // URL scheme으로 시도
         window.location.href = urlScheme;
-
-        // 앱이 열리지 않는 경우를 대비한 fallback
-        // setTimeout(() => {
-        //   // URL scheme으로 재시도
-        //   window.location.href = urlScheme;
-
-        //   // 그래도 안되면 웹으로 이동
-        //   setTimeout(() => {
-        //     window.open(universalLink, "_blank");
-        //   }, 1000);
-        // }, 500);
       } else if (isAndroid) {
         // Android: Intent URL 사용
         const intentUrl = "intent://www.instagram.com/#Intent;package=com.instagram.android;scheme=https;end";
