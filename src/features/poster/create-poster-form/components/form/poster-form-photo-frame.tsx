@@ -8,6 +8,8 @@ import {
   ItemTitle,
   PosterFormProps
 } from "@/features/poster/create-poster-form/components/form/poster-form";
+import Image from "next/image";
+import { getImagePath } from "@/lib/utils";
 
 export const PhotoFrame = memo(
   ({ form, frameOptions }: { form: PosterFormProps["form"]; frameOptions: PosterFormProps["frameOptions"] }) => {
@@ -32,12 +34,28 @@ export const PhotoFrame = memo(
                           >
                             {option.value === "HORIZONTAL" && (
                               <div className='absolute inset-0 bg-[#fff] z-[-1]'>
-                                <div className='absolute left-0 top-0 w-full h-[48.55%] bg-[#f1f1f1]'></div>
+                                <div className='absolute inset-0'>
+                                  <Image
+                                    src={getImagePath("/images/create/photo_frame_thum_hrz.png")}
+                                    alt='photo-frame'
+                                    className='w-full h-full object-cover'
+                                    fill
+                                    unoptimized
+                                  />
+                                </div>
                               </div>
                             )}
                             {option.value === "VERTICAL" && (
                               <div className='absolute inset-0 bg-[#fff] z-[-1]'>
-                                <div className='absolute inset-0 bg-[#f1f1f1]'></div>
+                                <div className='absolute inset-0'>
+                                  <Image
+                                    src={getImagePath("/images/create/photo_frame_thum_vtc.png")}
+                                    alt='photo-frame'
+                                    className='w-full h-full object-cover'
+                                    fill
+                                    unoptimized
+                                  />
+                                </div>
                               </div>
                             )}
                             <div className='flex items-center justify-between'>

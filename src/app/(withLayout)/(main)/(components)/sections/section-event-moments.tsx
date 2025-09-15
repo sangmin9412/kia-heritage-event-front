@@ -90,7 +90,9 @@ export const SectionEventMoments = () => {
       getImagePath("/images/main/moments_img_01.webp"),
       getImagePath("/images/main/moments_img_02.webp"),
       getImagePath("/images/main/moments_img_03.webp"),
-      getImagePath("/images/main/moments_img_04.webp")
+      getImagePath("/images/main/moments_img_04.webp"),
+      getImagePath("/images/main/moments_img_05.webp"),
+      getImagePath("/images/main/moments_img_06.webp")
     ];
   }, []);
 
@@ -160,7 +162,7 @@ export const SectionEventMoments = () => {
               {[...carouselItems, ...carouselItems].map((img, index) => (
                 <CarouselItem
                   key={index + index}
-                  className='desktop:pl-[1rem] pl-[0.8rem] desktop:basis-[29rem] basis-[13.8rem]'
+                  className='desktop:pl-[1rem] pl-[0.2rem] desktop:basis-[29rem] basis-[13.2rem]'
                 >
                   <div className='desktop:w-[28rem] w-[13rem] aspect-[280/350]'>
                     <Image

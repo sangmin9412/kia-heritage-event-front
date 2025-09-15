@@ -38,7 +38,7 @@ export const useEventEnterFormStoreInitialState: {
     title: "",
     instagramId: "",
     imageBase64: "",
-    carCode: ""
+    carCode: "CAR01"
   }
 };
 

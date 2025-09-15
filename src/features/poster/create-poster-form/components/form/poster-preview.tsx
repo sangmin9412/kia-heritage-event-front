@@ -28,6 +28,7 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
   const imageHorizontal = useEventEnterFormStore(state => state.posterForm.imageHorizontal);
   const carCode = useEventEnterFormStore(state => state.posterForm.carCode);
   const title = useEventEnterFormStore(state => state.posterForm.title);
+  const instagramId = useEventEnterFormStore(state => state.posterForm.instagramId);
 
   const imageStyle = useMemo(
     () => ({
@@ -68,6 +69,9 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
         <div className='absolute left-0 bottom-[42.6rem] w-full flex flex-col gap-[2.9rem] items-center justify-center whitespace-normal'>
           <PosterTitle title={title} />
         </div>
+        <div className='absolute left-0 bottom-[4.8rem] w-full flex justify-center items-center text-center'>
+          <PosterInstagramId instagramId={instagramId} />
+        </div>
       </section>
     );
   }
@@ -99,6 +103,9 @@ export const PosterPreviewer = ({ className }: { className?: string }) => {
         </div>
         <div className='absolute left-0 bottom-[42.6rem] w-full flex flex-col gap-[2.9rem] items-center justify-center whitespace-normal'>
           <PosterTitle title={title} />
+        </div>
+        <div className='absolute left-0 bottom-[4.8rem] w-full flex justify-center items-center text-center'>
+          <PosterInstagramId instagramId={instagramId} />
         </div>
       </section>
     );
@@ -213,3 +220,12 @@ const PosterCar = React.memo(({ carCode }: { carCode?: string }) => {
   );
 });
 PosterCar.displayName = "PosterCar";
+
+const PosterInstagramId = React.memo(({ instagramId }: { instagramId?: string }) => {
+  return (
+    <p className='text-[3.2rem] leading-[3.8rem] font-[300] text-white text-center whitespace-nowrap'>
+      {instagramId ? `@ ${instagramId}` : "@ kia.kor"}
+    </p>
+  );
+});
+PosterInstagramId.displayName = "PosterInstagramId";
