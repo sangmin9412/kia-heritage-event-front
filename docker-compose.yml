@@ -1,7 +1,10 @@
 version: '3.8'
 services:
   kia-heritage-front:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      no_cache: true
     ports:
       - '5500:5500'
     container_name: kia-heritage-front
