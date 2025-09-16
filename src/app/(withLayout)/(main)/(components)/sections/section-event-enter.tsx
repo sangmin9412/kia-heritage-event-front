@@ -6,7 +6,7 @@ export const SectionEventEnter = () => {
     <section className='relative desktop:py-[6rem] py-[4rem]'>
       <h3 className='blind'>응모 방법 섹션</h3>
       <div className='container'>
-        <div className='flex flex-col desktop:gap-[4rem] gap-[3rem]'>
+        <div className='flex flex-col desktop:gap-[4rem] gap-[1.6rem]'>
           <SectionTitle asChild>
             <h4>응모 방법</h4>
           </SectionTitle>

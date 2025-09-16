@@ -37,7 +37,7 @@ export const useEventEnterFormStoreInitialState: {
   userForm: {},
   posterForm: {
     frameCode: frameCodesEnum.HORIZONTAL,
-    imageScale: 1,
+    imageScale: 1.5,
     imageVertical: 0,
     imageHorizontal: 0,
     title: "",

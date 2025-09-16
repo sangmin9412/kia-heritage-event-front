@@ -29,7 +29,7 @@ export const CreateAlert = () => {
       if (response.data.posterId) {
         open({
           title: "이벤트 안내",
-          description: "이미 참여하셨습니다. 참여 완료 페이지로 이동합니다.",
+          description: "이미 참여하셨습니다.<br /> 참여 완료 페이지로 이동합니다.",
           onConfirm() {
             if (response.data.posterId) {
               router.push(ROUTES.CREATE_COMPLETE_POSTER.link.replace(":posterId", response.data.posterId.toString()));

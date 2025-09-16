@@ -80,7 +80,7 @@ export const SectionEventMoments = () => {
   const autoScrollPlugin = AutoScroll({
     playOnInit: true, // 초기 재생 여부
     stopOnInteraction: false, // 상호작용 시 정지 여부
-    speed: 1, // 스크롤 속도
+    speed: typeof window !== "undefined" ? (window.innerWidth > 1024 ? 1 : 0.5) : 1, // 스크롤 속도
     startDelay: 300, // 시작 지연 시간
     direction: scrollDirection // 스크롤 방향
   });
@@ -125,10 +125,10 @@ export const SectionEventMoments = () => {
               enableBlur={true}
               baseRotation={5}
               blurStrength={10}
-              rotationStart='top center'
-              rotationEnd='bottom top+=30%'
-              wordAnimationStart='top center'
-              wordAnimationEnd='bottom top+=30%'
+              rotationStart='top center+=20%'
+              rotationEnd='bottom+=10% center'
+              wordAnimationStart='top center+=20%'
+              wordAnimationEnd='bottom+=30% center'
               containerClassName='desktop:hidden'
             >
               수많은 도전과 기회로 달려온 Kia의 80년.

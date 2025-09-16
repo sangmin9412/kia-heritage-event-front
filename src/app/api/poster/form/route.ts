@@ -41,7 +41,7 @@ const posterFormDefault: PosterForm = {
   position: {
     offsetX: 0,
     offsetY: 0,
-    scale: 1
+    scale: 1.5
   },
   instagramId: "",
   story: ""

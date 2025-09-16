@@ -137,12 +137,12 @@ const UploadImageFormDesktop = ({
 
   const handleScaleUp = useCallback(() => {
     const value = Number((imageScale + 0.1).toFixed(1));
-    form.setValue("imageScale", minmaxValue(value, 0.5, 2));
+    form.setValue("imageScale", minmaxValue(value, 0.5, 2.5));
   }, [imageScale, form]);
 
   const handleScaleDown = useCallback(() => {
     const value = Number((imageScale - 0.1).toFixed(1));
-    form.setValue("imageScale", minmaxValue(value, 0.5, 2));
+    form.setValue("imageScale", minmaxValue(value, 0.5, 2.5));
   }, [imageScale, form]);
 
   const handlePositionTop = useCallback(() => {
@@ -457,8 +457,9 @@ const ImageScaleSlider = memo(
         <Slider
           className='flex-1'
           min={0.5}
-          max={2}
+          max={2.5}
           step={0.1}
+          labelValue={[-10, 0, 10]}
           value={[imageScale]}
           onValueChange={handleSliderChange}
         />
@@ -637,12 +638,12 @@ const UploadImageDialog = memo(
 
     const handleScaleUp = useCallback(() => {
       const value = Number((imageState.imageScale + 0.1).toFixed(1));
-      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2) });
+      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2.5) });
     }, [imageState, minmaxValue]);
 
     const handleScaleDown = useCallback(() => {
       const value = Number((imageState.imageScale - 0.1).toFixed(1));
-      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2) });
+      setImageState({ ...imageState, imageScale: minmaxValue(value, 0.5, 2.5) });
     }, [imageState, minmaxValue]);
 
     const handlePositionTop = useCallback(() => {
