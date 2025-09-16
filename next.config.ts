@@ -3,9 +3,19 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // The `serverExternalPackages` option allows you to opt-out of bundling dependencies in your Server Components.
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
-  // 빌드마다 고유한 빌드 ID를 생성하여 캐시 문제 방지
+  webpack: (config, { buildId, dev }) => {
+    const newConfig = config;
+
+    if (!dev && newConfig.output.filename.startsWith("static")) {
+      newConfig.output.filename = newConfig.output.filename.replace("[name]", `[name]-${buildId}`);
+      newConfig.output.chunkFilename = newConfig.output.chunkFilename.replace("[name]", `[name]-${buildId}`);
+    }
+
+    return newConfig;
+  },
   generateBuildId: async () => {
-    return `build-${new Date().getTime()}`;
+    const timestamp = Math.floor(Date.now() / 1000);
+    return `build-${timestamp}`;
   },
   env: {
     NEXT_PUBLIC_BUILD_TIME: new Date().getTime().toString(),
