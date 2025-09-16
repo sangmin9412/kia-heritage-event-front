@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // The `serverExternalPackages` option allows you to opt-out of bundling dependencies in your Server Components.
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
+  // 빌드마다 고유한 빌드 ID를 생성하여 캐시 문제 방지
+  generateBuildId: async () => {
+    return `build-${new Date().getTime()}`;
+  },
   env: {
     NEXT_PUBLIC_BUILD_TIME: new Date().getTime().toString(),
     KAKAO_SDK_KEY: process.env.KAKAO_SDK_KEY
