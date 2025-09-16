@@ -1,12 +1,22 @@
 export const basePath = "";
 
+/** 
+
+카톡 메타태그 설정 부탁드립니다.
+타이틀 : My moments with Kia
+서브 : Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
+그리고 나만의 ‘My moments with Kia’를 들려주세요.
+
+*/
+
 export const SITE_METADATA = {
   title: "KIA Heritage Event",
   description: "KIA Heritage Event",
   openGraph: {
     url: process.env.NEXT_PUBLIC_URL,
-    title: "KIA Heritage Event",
-    description: "KIA Heritage Event",
+    title: "My moments with Kia",
+    description: `Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
+그리고 나만의 ‘My moments with Kia’를 들려주세요.`,
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`,
@@ -18,8 +28,9 @@ export const SITE_METADATA = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KIA Heritage Event",
-    description: "KIA Heritage Event",
+    title: "My moments with Kia",
+    description: `Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
+그리고 나만의 ‘My moments with Kia’를 들려주세요.`,
     images: [`${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`]
   }
 };
