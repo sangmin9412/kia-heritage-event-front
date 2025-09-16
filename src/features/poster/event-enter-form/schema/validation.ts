@@ -27,7 +27,7 @@ const baseSchema = {
   birthYear: z.string().min(1, "출생년도를 선택해주세요"),
   birthMonth: z.string().min(1, "출생월을 선택해주세요"),
   birthDay: z.string().min(1, "출생일을 선택해주세요"),
-  isDriverLicense: z.enum(["true", "false"], { message: "자동차운전면허증 소유 여부를 선택해주세요." }),
+  isDriverLicense: z.enum(["true", "false", ""], { message: "자동차운전면허증 소유 여부를 선택해주세요." }),
   agreeTerms: z.boolean().refine(val => val, { message: "이벤트 참여 약관에 동의해주세요." }),
   agreePrivacy: z.boolean().refine(val => val, { message: "개인정보 수집 / 이용 동의에 체크해주세요." })
 };

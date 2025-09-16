@@ -13,6 +13,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ data: dataUrl });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to get poster image" }, { status: 500 });
+    return NextResponse.json({ error: "포스터 이미지 조회 중 오류가 발생했습니다." }, { status: 500 });
   }
 }

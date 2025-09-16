@@ -20,12 +20,12 @@ export enum carCodesEnum {
   CAR08 = "CAR08"
 }
 
-export const frameOptions: Option<(typeof frameCodes)[number]>[] = [
+export const frameOptions: Option<frameCodesEnum>[] = [
   { label: "가로형", value: frameCodesEnum.HORIZONTAL },
   { label: "세로형", value: frameCodesEnum.VERTICAL }
 ];
 
-export const carOptions: Option<(typeof carCodes)[number]>[] = [
+export const carOptions: Option<carCodesEnum>[] = [
   { label: "모델명1", value: carCodesEnum.CAR01, image: "/images/create/car/CAR01.png" },
   { label: "모델명2", value: carCodesEnum.CAR02, image: "/images/create/car/CAR02.png" },
   { label: "모델명3", value: carCodesEnum.CAR03, image: "/images/create/car/CAR03.png" },
@@ -51,7 +51,7 @@ const baseSchema = {
     .number()
     .min(-100, { message: "이미지 위치를 선택해주세요." })
     .max(100, { message: "이미지 위치를 선택해주세요." }),
-  carCode: z.enum([...carCodes, ""], { message: "차량 타입을 선택해주세요." }),
+  carCode: z.enum(carCodes, { message: "차량 타입을 선택해주세요." }),
   title: z
     .string()
     .min(1, { message: "포스터 제목을 입력해주세요." })

@@ -1,10 +1,14 @@
 import {
   RequestPosterCreate,
   RequestPosterParticipation,
+  RequestPosterFormSave,
   RequestPosterStatus,
   ResponsePosterCreate,
   ResponsePosterParticipation,
-  ResponsePosterStatus
+  ResponsePosterFormSave,
+  ResponsePosterStatus,
+  ResponsePosterFormGet,
+  ResponsePosterFormDelete
 } from "@/features/poster/model/poster";
 import httpClient from "@/lib/http";
 import axios from "axios";
@@ -30,5 +34,22 @@ export const getPosterStatus = async (payload: RequestPosterStatus) => {
 
 // 포스터 이미지 다운로드
 export const getPosterImage = async (imageUrl: string) => {
-  return axios.post("/api/poster", { imageUrl }).then(res => res.data);
+  return axios.post(`${process.env.NEXT_PUBLIC_URL}/api/poster`, { imageUrl }).then(res => res.data);
+};
+
+// 포스터 정보 저장
+export const savePosterForm = async (payload: Partial<RequestPosterFormSave>) => {
+  return axios
+    .post<ResponsePosterFormSave>(`${process.env.NEXT_PUBLIC_URL}/api/poster/form`, payload)
+    .then(res => res.data);
+};
+
+// 포스터 정보 조회
+export const getPosterForm = async () => {
+  return axios.get<ResponsePosterFormGet>(`${process.env.NEXT_PUBLIC_URL}/api/poster/form`).then(res => res.data);
+};
+
+// 포스터 정보 삭제
+export const deletePosterForm = async () => {
+  return axios.delete<ResponsePosterFormDelete>(`${process.env.NEXT_PUBLIC_URL}/api/poster/form`).then(res => res.data);
 };

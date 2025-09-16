@@ -46,11 +46,8 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
 
   useEffect(() => {
     if (isImageFile && imageFile) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(imageFile);
-      fileReader.onload = () => {
-        form.setValue("imageBase64", fileReader.result as string);
-      };
+      const blobUrl = URL.createObjectURL(imageFile);
+      form.setValue("imageBase64", blobUrl);
     }
   }, [imageFile, form, isImageFile]);
 

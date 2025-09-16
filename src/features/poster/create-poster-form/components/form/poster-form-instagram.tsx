@@ -7,7 +7,6 @@ import {
   PosterFormProps
 } from "@/features/poster/create-poster-form/components/form/poster-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
-import { sliceStringByByte } from "@/lib/utils";
 import { memo, useCallback } from "react";
 
 export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"] }) => {

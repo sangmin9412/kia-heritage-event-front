@@ -34,7 +34,9 @@ export const CreatePosterForm = () => {
 
 const PosterFormContainer = () => {
   const router = useRouter();
-  const { form, isValid, onSubmit, frameOptions, carOptions } = useCreatePosterForm();
+  const { form, isValid, onSubmit, frameOptions, carOptions, formState } = useCreatePosterForm();
+
+  const isSubmitting = formState.isSubmitting;
 
   const handleSubmit = form.handleSubmit(
     data => {
@@ -55,7 +57,7 @@ const PosterFormContainer = () => {
           <PosterForm form={form} frameOptions={frameOptions} carOptions={carOptions} />
         </div>
         <div className='mt-auto sticky bottom-0 desktop:p-[2.4rem_4.8rem] p-[1.6rem] bg-white border-t border-border'>
-          <PosterSubmit isValid={isValid} />
+          <PosterSubmit isValid={!isSubmitting && isValid} />
         </div>
       </form>
     </Form>

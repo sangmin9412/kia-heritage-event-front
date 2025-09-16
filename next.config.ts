@@ -52,8 +52,8 @@ const nextConfig: NextConfig = {
         ]
       },
       {
-        // 일반적인 정적 파일들 (jpg, jpeg, png, gif, webp, avif, ico, svg, woff, woff2, ttf, otf)
-        source: "/:path*\\.(jpg|jpeg|png|gif|webp|avif|ico|svg|woff|woff2|ttf|otf)$",
+        // 일반적인 정적 파일들 (jpg, jpeg, png, gif, webp, avif, ico, svg, woff, woff2, ttf, otf, json)
+        source: "/:path*\\.(jpg|jpeg|png|gif|webp|avif|ico|svg|woff|woff2|ttf|otf|json)$",
         headers: [
           {
             key: "Cache-Control",

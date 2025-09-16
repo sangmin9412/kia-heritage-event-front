@@ -1,31 +1,8 @@
-import { frameCodesEnum } from "@/features/poster/create-poster-form";
+import { carCodesEnum, frameCodesEnum } from "@/features/poster/create-poster-form";
 import { genderTypesEnum } from "@/features/poster/event-enter-form/schema/validation";
 
 // 포스터 생성
 export type RequestPosterCreate = FormData;
-// export interface RequestPosterCreate {
-//   data: {
-//     isThirdPartyCollect: boolean;
-//     gender: keyof typeof genderTypesEnum;
-//     carCode: string;
-//     position: {
-//       offsetX: number;
-//       offsetY: number;
-//       scale: number;
-//     };
-//     name: string;
-//     isPrivacyCollect: boolean;
-//     instagramId: string;
-//     birthDate: string;
-//     phone: string;
-//     isDriverLicense: boolean;
-//     story: string;
-//     title: string;
-//     frameCode: keyof typeof frameCodesEnum;
-//     email: string;
-//   };
-//   uploadFile: File;
-// }
 
 // 포스터 생성 응답
 export interface ResponsePosterCreate {
@@ -43,7 +20,7 @@ export interface ResponsePosterCreate {
       name: string;
       phone: string;
       email: string;
-      gender: "M" | "F";
+      gender: keyof typeof genderTypesEnum;
       birthDate: string;
       isDriverLicense: boolean;
       isPrivacyCollect: boolean;
@@ -96,7 +73,7 @@ export interface ResponsePosterStatus {
       name: string;
       phone: string;
       email: string;
-      gender: "M" | "F";
+      gender: keyof typeof genderTypesEnum;
       birthDate: string;
       isDriverLicense: boolean;
       isPrivacyCollect: boolean;
@@ -112,3 +89,49 @@ export interface ResponsePosterStatus {
     };
   };
 }
+
+// 포스터 정보 저장
+export type RequestPosterFormSave = {
+  name: string;
+  gender: keyof typeof genderTypesEnum;
+  phone: string;
+  email: string;
+  birthDate: string;
+  isThirdPartyCollect: boolean;
+  isPrivacyCollect: boolean;
+  isDriverLicense: boolean;
+  title: string;
+  frameCode: keyof typeof frameCodesEnum;
+  carCode: keyof typeof carCodesEnum;
+  imageBase64: string;
+  position: {
+    offsetX: number;
+    offsetY: number;
+    scale: number;
+  };
+  instagramId: string;
+  story: string;
+};
+
+export type ResponsePosterFormSave = {
+  message: string;
+  status: string;
+  success: boolean;
+  data: RequestPosterFormSave;
+};
+
+// 포스터 정보 조회
+export type ResponsePosterFormGet = {
+  message: string;
+  status: string;
+  success: boolean;
+  data: RequestPosterFormSave;
+};
+
+// 포스터 정보 삭제
+export type ResponsePosterFormDelete = {
+  message: string;
+  status: string;
+  success: boolean;
+  data: null;
+};

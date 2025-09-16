@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,7 +10,7 @@ import {
   hasDriverLicenseOptions
 } from "@/features/poster/event-enter-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
-import { getParticipationStatus } from "@/features/poster/api";
+import { getParticipationStatus, getPosterForm, savePosterForm } from "@/features/poster/api";
 import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 
 interface FormState {
@@ -50,6 +50,8 @@ const useEventEnterForm = () => {
     error: null
   });
 
+  const _hasUserHydrated = useEventEnterFormStore(state => state._hasUserHydrated);
+  const setHasUserHydrated = useEventEnterFormStore(state => state.setHasUserHydrated);
   const setUserForm = useEventEnterFormStore(state => state.setUserForm);
   const userForm = useEventEnterFormStore(state => state.userForm);
   const resetStore = useEventEnterFormStore(state => state.resetStore);
@@ -59,6 +61,34 @@ const useEventEnterForm = () => {
     defaultValues: userForm, // 스토어에 저장된 데이터 사용
     mode: "onChange"
   });
+
+  useEffect(() => {
+    async function checkUserHydrated() {
+      if (_hasUserHydrated) return;
+
+      const response = await getPosterForm();
+      const userData: eventEnterFormSchemaType = {
+        name: response.data.name,
+        phone: response.data.phone,
+        email: response.data.email,
+        birthDate: response.data.birthDate,
+        gender: response.data.gender,
+        agreeTerms: response.data.isThirdPartyCollect,
+        agreePrivacy: response.data.isPrivacyCollect,
+        isDriverLicense: response.data?.isDriverLicense
+          ? (String(response.data?.isDriverLicense) as "true" | "false")
+          : "",
+        birthYear: response.data.birthDate?.split("-")[0] || "",
+        birthMonth: response.data.birthDate?.split("-")[1] || "",
+        birthDay: response.data.birthDate?.split("-")[2] || ""
+      };
+      form.reset(userData);
+      setUserForm(userData);
+      setHasUserHydrated(true);
+    }
+
+    checkUserHydrated();
+  }, [form, setUserForm, setHasUserHydrated, _hasUserHydrated]);
 
   const { isValid } = form.formState;
 
@@ -83,6 +113,17 @@ const useEventEnterForm = () => {
         setFormState(prev => ({ ...prev, isSubmitting: false }));
         return;
       }
+
+      await savePosterForm({
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        birthDate: data.birthDate,
+        gender: data.gender,
+        isThirdPartyCollect: data.agreeTerms,
+        isPrivacyCollect: data.agreePrivacy,
+        isDriverLicense: data.isDriverLicense === "true"
+      });
 
       // 스토어에 유저 데이터 저장
       setUserForm(data);

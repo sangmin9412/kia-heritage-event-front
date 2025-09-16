@@ -3,13 +3,15 @@
 import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEventEnterFormStore, useEventEnterFormStoreInitialState } from "@/features/poster/store";
+import { useEventEnterFormStore } from "@/features/poster/store";
 import {
   carOptions,
   createPosterFormSchema,
   createPosterFormSchemaType,
   frameOptions
 } from "@/features/poster/create-poster-form/schema";
+import { getPosterForm, savePosterForm } from "@/features/poster/api";
+import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 
 interface FormState {
   isSubmitting: boolean;
@@ -25,23 +27,76 @@ const useCreatePosterForm = () => {
     error: null
   });
 
-  const _hasHydrated = useEventEnterFormStore(state => state._hasHydrated);
-  const hydratedPosterForm = useEventEnterFormStore(state => state.hydratedPosterForm);
+  const _hasUserHydrated = useEventEnterFormStore(state => state._hasUserHydrated);
+  const _hasPosterHydrated = useEventEnterFormStore(state => state._hasPosterHydrated);
+  const posterForm = useEventEnterFormStore(state => state.posterForm);
+  const setHasUserHydrated = useEventEnterFormStore(state => state.setHasUserHydrated);
+  const setHasPosterHydrated = useEventEnterFormStore(state => state.setHasPosterHydrated);
+  const setUserForm = useEventEnterFormStore(state => state.setUserForm);
   const setPosterForm = useEventEnterFormStore(state => state.setPosterForm);
-  const setHydratedPosterForm = useEventEnterFormStore(state => state.setHydratedPosterForm);
+  const setStory = useEventEnterFormStore(state => state.setStory);
   const resetStore = useEventEnterFormStore(state => state.resetStore);
 
   const form = useForm<createPosterFormSchemaType>({
     resolver: zodResolver(createPosterFormSchema),
-    defaultValues: useEventEnterFormStoreInitialState.posterForm,
+    defaultValues: posterForm,
     mode: "onChange"
   });
 
   useEffect(() => {
-    if (_hasHydrated) {
-      form.reset(hydratedPosterForm);
+    async function checkPosterHydrated() {
+      if (_hasPosterHydrated && _hasUserHydrated) return;
+
+      const response = await getPosterForm();
+
+      if (!_hasUserHydrated) {
+        const userData: eventEnterFormSchemaType = {
+          name: response.data.name,
+          phone: response.data.phone,
+          email: response.data.email,
+          birthDate: response.data.birthDate,
+          gender: response.data.gender,
+          agreeTerms: response.data.isThirdPartyCollect,
+          agreePrivacy: response.data.isPrivacyCollect,
+          isDriverLicense: response.data?.isDriverLicense
+            ? (String(response.data?.isDriverLicense) as "true" | "false")
+            : "",
+          birthYear: response.data.birthDate?.split("-")[0] || "",
+          birthMonth: response.data.birthDate?.split("-")[1] || "",
+          birthDay: response.data.birthDate?.split("-")[2] || ""
+        };
+        setUserForm(userData);
+        setHasUserHydrated(true);
+      }
+
+      if (!_hasPosterHydrated) {
+        const posterData: createPosterFormSchemaType = {
+          frameCode: response.data.frameCode,
+          imageBase64: response.data.imageBase64,
+          imageScale: response.data.position.scale,
+          imageVertical: response.data.position.offsetY,
+          imageHorizontal: response.data.position.offsetX,
+          carCode: response.data.carCode,
+          title: response.data.title,
+          instagramId: response.data.instagramId
+        };
+        setStory(response.data.story || "");
+        form.reset(posterData);
+        setHasPosterHydrated(true);
+      }
     }
-  }, [_hasHydrated, hydratedPosterForm, form]);
+
+    checkPosterHydrated();
+  }, [
+    _hasPosterHydrated,
+    _hasUserHydrated,
+    setHasUserHydrated,
+    setHasPosterHydrated,
+    setPosterForm,
+    form,
+    setStory,
+    setUserForm
+  ]);
 
   const { isValid } = form.formState;
 
@@ -58,9 +113,19 @@ const useCreatePosterForm = () => {
     async (data: createPosterFormSchemaType) => {
       try {
         setFormState(prev => ({ ...prev, isSubmitting: true, error: null }));
-        // 스토어에 유저 데이터 저장 (이미 watch에서 자동으로 저장되고 있음)
-        setPosterForm(data);
-        setHydratedPosterForm(data);
+
+        await savePosterForm({
+          frameCode: data.frameCode,
+          imageBase64: data.imageBase64,
+          position: {
+            scale: data.imageScale,
+            offsetY: data.imageVertical,
+            offsetX: data.imageHorizontal
+          },
+          carCode: data.carCode,
+          title: data.title,
+          instagramId: data.instagramId
+        });
       } catch (error) {
         resetStore();
         setFormState(prev => ({
@@ -70,7 +135,7 @@ const useCreatePosterForm = () => {
         }));
       }
     },
-    [setPosterForm, setHydratedPosterForm, resetStore]
+    [resetStore]
   );
 
   return {

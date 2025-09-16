@@ -174,3 +174,12 @@ export async function copyClipboard(text: string) {
     return false;
   }
 }
+
+// DEBOUNCE
+export const debounce = <Args extends unknown[], R>(func: (...args: Args) => R, delay: number) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: Args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+};

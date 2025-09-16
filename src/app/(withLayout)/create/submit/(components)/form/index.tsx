@@ -4,21 +4,27 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ROUTES } from "@/config";
-import { createPoster } from "@/features/poster/api";
+import { createPoster, getPosterForm } from "@/features/poster/api";
 import { createPosterFormSchemaType } from "@/features/poster/create-poster-form";
 import { PosterPreviewer } from "@/features/poster/create-poster-form/components/form/poster-preview";
 import { eventEnterFormSchemaType } from "@/features/poster/event-enter-form";
 import { usePosterStatus } from "@/features/poster/hooks/use-poster-status";
 import { useEventEnterFormStore } from "@/features/poster/store";
 import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
-import { convertBase64ImgToImgFile, sleep } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 
 export const CreateSubmitFormWrapper = () => {
   const router = useRouter();
   const [posterId, setPosterId] = useState<number | null>(null);
 
+  const _hasPosterHydrated = useEventEnterFormStore(state => state._hasPosterHydrated);
+  const _hasUserHydrated = useEventEnterFormStore(state => state._hasUserHydrated);
+  const setUserForm = useEventEnterFormStore(state => state.setUserForm);
+  const setHasUserHydrated = useEventEnterFormStore(state => state.setHasUserHydrated);
+  const setPosterForm = useEventEnterFormStore(state => state.setPosterForm);
+  const setHasPosterHydrated = useEventEnterFormStore(state => state.setHasPosterHydrated);
+  const setStory = useEventEnterFormStore(state => state.setStory);
   const userStory = useEventEnterFormStore(state => state.story);
   const userForm = useEventEnterFormStore(state => state.userForm) as eventEnterFormSchemaType;
   const posterForm = useEventEnterFormStore(state => state.posterForm) as createPosterFormSchemaType;
@@ -30,13 +36,70 @@ export const CreateSubmitFormWrapper = () => {
     isError: false
   });
 
+  useEffect(() => {
+    async function checkPosterHydrated() {
+      if (_hasPosterHydrated && _hasUserHydrated) return;
+
+      const response = await getPosterForm();
+
+      if (!_hasUserHydrated) {
+        const userData: eventEnterFormSchemaType = {
+          name: response.data.name,
+          phone: response.data.phone,
+          email: response.data.email,
+          birthDate: response.data.birthDate,
+          gender: response.data.gender,
+          agreeTerms: response.data.isThirdPartyCollect,
+          agreePrivacy: response.data.isPrivacyCollect,
+          isDriverLicense: response.data?.isDriverLicense
+            ? (String(response.data?.isDriverLicense) as "true" | "false")
+            : "",
+          birthYear: response.data.birthDate?.split("-")[0] || "",
+          birthMonth: response.data.birthDate?.split("-")[1] || "",
+          birthDay: response.data.birthDate?.split("-")[2] || ""
+        };
+        setUserForm(userData);
+        setHasUserHydrated(true);
+      }
+
+      if (!_hasPosterHydrated) {
+        const posterData: createPosterFormSchemaType = {
+          frameCode: response.data.frameCode,
+          imageBase64: response.data.imageBase64,
+          imageScale: response.data.position.scale,
+          imageVertical: response.data.position.offsetY,
+          imageHorizontal: response.data.position.offsetX,
+          carCode: response.data.carCode,
+          title: response.data.title,
+          instagramId: response.data.instagramId
+        };
+        setStory(response.data.story || "");
+        setPosterForm(posterData);
+        setHasPosterHydrated(true);
+      }
+    }
+
+    checkPosterHydrated();
+  }, [
+    _hasPosterHydrated,
+    _hasUserHydrated,
+    setHasUserHydrated,
+    setHasPosterHydrated,
+    setPosterForm,
+    setStory,
+    setUserForm
+  ]);
+
   const onSubmit = async () => {
     try {
       setSubmitState(prev => ({ ...prev, isSubmitting: true }));
 
-      const fileExtension = posterForm.imageBase64.split(";")[0].split("/")[1];
-      const fileName = `poster_${userForm.phone}.${fileExtension}`;
-      const imageFile = convertBase64ImgToImgFile(posterForm.imageBase64, fileName);
+      // const fileExtension = posterForm.imageBase64.split(";")[0].split("/")[1];
+      // const fileName = `poster_${userForm.phone}.${fileExtension}`;
+      // const imageFile = convertBase64ImgToImgFile(posterForm.imageBase64, fileName);
+
+      const response_image = await fetch(posterForm.imageBase64);
+      const imageFile = await response_image.blob();
 
       // FormData 생성
       const formData = new FormData();
@@ -67,7 +130,7 @@ export const CreateSubmitFormWrapper = () => {
       );
 
       // 파일 추가
-      formData.append("uploadFile", imageFile);
+      formData.append("uploadFile", imageFile, `poster_${userForm.phone}.png`);
 
       const response = await createPoster(formData);
 
@@ -165,6 +228,7 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
 
   const userStory = useEventEnterFormStore(state => state.story);
   const setUserStory = useEventEnterFormStore(state => state.setStory);
+  const posterForm = useEventEnterFormStore(state => state.posterForm) as createPosterFormSchemaType;
 
   const setUserStoryHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserStory(e.target.value.slice(0, 300));
@@ -174,6 +238,10 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
   const limitLength = 300;
   const userStoryLengthString = userStoryLength.toString().padStart(2, "0");
   const placeholderText = `사연을 작성해 주세요.${"\n" /* 또는 &#13;&#10; */}(최대 300자 이내)`;
+
+  const isValid = useMemo(() => {
+    return userStory.length > 0 && posterForm.imageBase64 !== "";
+  }, [userStory, posterForm.imageBase64]);
 
   return (
     <div className='desktop:min-h-screen flex flex-col'>
@@ -211,7 +279,7 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
         <Button variant='outline' className='flex-1' onClick={() => router.push(ROUTES.CREATE_FORM.link)}>
           이전으로
         </Button>
-        <Button className='flex-1' disabled={userStoryLength === 0} onClick={onSubmit}>
+        <Button className='flex-1' disabled={!isValid} onClick={onSubmit}>
           제출하기
         </Button>
       </div>
