@@ -11,7 +11,7 @@ type PosterForm = {
   birthDate: string;
   isThirdPartyCollect: boolean;
   isPrivacyCollect: boolean;
-  isDriverLicense: boolean;
+  isDriverLicense?: boolean;
   title: string;
   frameCode: string;
   carCode: string;
@@ -33,7 +33,7 @@ const posterFormDefault: PosterForm = {
   birthDate: "",
   isThirdPartyCollect: false,
   isPrivacyCollect: false,
-  isDriverLicense: false,
+  isDriverLicense: undefined,
   title: "",
   frameCode: "HORIZONTAL",
   carCode: "CAR01",
