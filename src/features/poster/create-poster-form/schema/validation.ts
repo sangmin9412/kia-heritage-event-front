@@ -41,8 +41,8 @@ const baseSchema = {
   imageBase64: z.string().min(1, { message: "이미지 파일을 선택해주세요." }),
   imageScale: z
     .number()
-    .min(0, { message: "이미지 크기를 선택해주세요." })
-    .max(2, { message: "이미지 크기를 선택해주세요." }),
+    .min(0.5, { message: "이미지 크기를 선택해주세요." })
+    .max(2.5, { message: "이미지 크기를 선택해주세요." }),
   imageVertical: z
     .number()
     .min(-100, { message: "이미지 위치를 선택해주세요." })
