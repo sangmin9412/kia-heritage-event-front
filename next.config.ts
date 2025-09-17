@@ -24,23 +24,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/api/:path*",
-        destination: "https://dev.kia80years-event.com/api/:path*",
-        headers: [{
-          key: "Access-Control-Allow-Origin",
-          value: "https://dev.kia80years-event.com"
-        }, {
-          key: "Access-Control-Allow-Methods",
-          value: "GET, POST, PUT, DELETE, OPTIONS"
-        }, {
-          key: "Access-Control-Allow-Headers",
-          value: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        }, {
-          key: "Access-Control-Allow-Credentials",
-          value: "true"
-        }]
-      },
-      {
         // 이미지 파일에 대한 캐시 헤더 설정
         source: "/images/:path*",
         headers: [
