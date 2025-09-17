@@ -116,7 +116,7 @@ const useCreatePosterForm = () => {
 
         await savePosterForm({
           frameCode: data.frameCode,
-          imageBase64: data.imageBase64,
+          imageBase64: "",
           position: {
             scale: data.imageScale,
             offsetY: data.imageVertical,

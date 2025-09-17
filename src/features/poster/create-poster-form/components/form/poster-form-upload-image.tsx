@@ -47,7 +47,9 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
   useEffect(() => {
     if (isImageFile && imageFile) {
       const blobUrl = URL.createObjectURL(imageFile);
-      form.setValue("imageBase64", blobUrl);
+      form.setValue("imageBase64", blobUrl, {
+        shouldValidate: true
+      });
     }
   }, [imageFile, form, isImageFile]);
 
@@ -71,7 +73,9 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
 
   const handleDeleteImage = useCallback(() => {
     setImageFile(null);
-    form.setValue("imageBase64", "");
+    form.setValue("imageBase64", "", {
+      shouldValidate: true
+    });
   }, [form]);
 
   return (
