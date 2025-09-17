@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     const session = await getSession<PosterForm>(COOKIE_NAME);
 
     Object.entries(body).forEach(([key, value]) => {
-      if (value) {
+      if (value !== undefined) {
         session[key as keyof PosterForm] = (value as never) || posterFormDefault[key as keyof PosterForm];
       }
     });

@@ -51,9 +51,7 @@ export const CreateSubmitFormWrapper = () => {
           gender: response.data.gender,
           agreeTerms: response.data.isThirdPartyCollect,
           agreePrivacy: response.data.isPrivacyCollect,
-          isDriverLicense: response.data?.isDriverLicense
-            ? (String(response.data?.isDriverLicense) as "true" | "false")
-            : "",
+          isDriverLicense: (String(response.data?.isDriverLicense) as "true" | "false"),
           birthYear: response.data.birthDate?.split("-")[0] || "",
           birthMonth: response.data.birthDate?.split("-")[1] || "",
           birthDay: response.data.birthDate?.split("-")[2] || ""
@@ -115,7 +113,7 @@ export const CreateSubmitFormWrapper = () => {
           birthDate: userForm.birthDate,
           isThirdPartyCollect: userForm.agreeTerms,
           isPrivacyCollect: userForm.agreePrivacy,
-          isDriverLicense: Boolean(userForm.isDriverLicense),
+          isDriverLicense: userForm.isDriverLicense === "true",
           title: posterForm.title,
           frameCode: posterForm.frameCode,
           carCode: posterForm.carCode,

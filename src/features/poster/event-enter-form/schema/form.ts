@@ -67,17 +67,17 @@ const useEventEnterForm = () => {
       if (_hasUserHydrated) return;
 
       const response = await getPosterForm();
-      const userData: eventEnterFormSchemaType = {
+      const userData: Omit<eventEnterFormSchemaType, "isDriverLicense"> & { isDriverLicense?: "true" | "false" } = {
         name: response.data.name,
         phone: response.data.phone,
         email: response.data.email,
         birthDate: response.data.birthDate,
         gender: response.data.gender,
-        agreeTerms: response.data.isThirdPartyCollect,
-        agreePrivacy: response.data.isPrivacyCollect,
+        agreeTerms: response.data?.isThirdPartyCollect,
+        agreePrivacy: response.data?.isPrivacyCollect,
         isDriverLicense: response.data?.isDriverLicense
           ? (String(response.data?.isDriverLicense) as "true" | "false")
-          : "",
+          : undefined,
         birthYear: response.data.birthDate?.split("-")[0] || "",
         birthMonth: response.data.birthDate?.split("-")[1] || "",
         birthDay: response.data.birthDate?.split("-")[2] || ""

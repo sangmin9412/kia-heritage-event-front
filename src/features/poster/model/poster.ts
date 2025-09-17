@@ -99,7 +99,7 @@ export type RequestPosterFormSave = {
   birthDate: string;
   isThirdPartyCollect: boolean;
   isPrivacyCollect: boolean;
-  isDriverLicense: boolean;
+  isDriverLicense?: boolean;
   title: string;
   frameCode: keyof typeof frameCodesEnum;
   carCode: keyof typeof carCodesEnum;
