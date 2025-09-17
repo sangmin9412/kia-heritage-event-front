@@ -203,7 +203,7 @@ PosterImageFrame.displayName = "PosterImageFrame";
 
 export const PosterTitle = React.memo(({ title }: { title?: string }) => {
   const titleText = !title ? "문구를 작성해 주세요" : title;
-  return <p className='text-[7.2rem] leading-[7rem] font-bold text-white text-center whitespace-nowrap'>{titleText}</p>;
+  return <p className='text-[7.2rem] leading-[7rem] font-bold text-white text-center whitespace-nowrap text-shadow-[4px_4px_10px_rgba(5,20,31,0.6)]'>{titleText}</p>;
 });
 PosterTitle.displayName = "PosterTitle";
 
