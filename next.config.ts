@@ -27,7 +27,10 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         headers: [{
           key: "Access-Control-Allow-Origin",
-          value: "https://dev.kia80years-event.com,https://kia80years-event.com"
+          value: "https://kia80years-event.com"
+        },{
+          key: "Access-Control-Allow-Origin",
+          value: "https://dev.kia80years-event.com"
         }, {
           key: "Access-Control-Allow-Methods",
           value: "GET, POST, PUT, DELETE, OPTIONS"
