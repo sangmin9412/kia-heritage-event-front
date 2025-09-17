@@ -63,8 +63,8 @@ export const SectionKeyVisual = () => {
   const isInView = useInView(scrollRef);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  const imageHeight = 470;
-  const imageWidth = 140;
+  const imageWidth = 124;
+  const imageHeight = 418;
 
   useEffect(() => {
     if (isInView && !hasAnimated) {
@@ -74,20 +74,20 @@ export const SectionKeyVisual = () => {
 
   return (
     <section ref={scrollRef}>
-      <div className='relative desktop:h-screen desktop:min-h-[97.9rem] desktop:aspect-auto h-auto aspect-[375/433] bg-[#f8f8f8] overflow-hidden'>
+      <div className='relative desktop:h-screen desktop:min-h-[97.9rem] desktop:aspect-auto h-auto aspect-[375/400] bg-[#f8f8f8] overflow-hidden'>
         <div className='absolute inset-0 pointer-events-none' aria-hidden='true'>
           <MagnetWithValue
             disabled={isAnimationCompleted}
             magnetStrength={50}
-            className='w-full h-full flex items-center justify-center desktop:pt-[1.9rem] pt-[4.2rem]'
+            className='w-full h-full flex items-center justify-center desktop:pt-[1.9rem] pt-[4.5rem]'
             innerClassName='w-full'
           >
-            <div className='container pointer-events-none'>
-              <div className='grid grid-cols-8 desktop:gap-[2.2rem] gap-[0.3rem]'>
+            <div className='container max-w-[1120px] pointer-events-none'>
+              <div className='grid grid-cols-8 desktop:gap-[1.8rem] gap-[0.2rem]'>
                 {KEY_VISUAL_ITEMS.map((item, index) => (
                   <div
                     key={item.carName}
-                    className={cn("relative desktop:w-[14rem] w-full overflow-hidden aspect-[140/470]", {
+                    className={cn("relative desktop:w-[12.4rem] w-full overflow-hidden aspect-[124/418]", {
                       "desktop:translate-y-[6rem] translate-y-[1.6rem]": (index + 1) % 2 === 0
                     })}
                     style={
@@ -149,7 +149,7 @@ export const SectionKeyVisual = () => {
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
               transition={{ duration: 1, delay: 0, ease: "easeOut" }}
-              className='desktop:mb-[1.6rem] mb-[0.8rem] desktop:text-[6rem] text-[3rem] font-bold leading-[1.15]'
+              className='desktop:text-[5.6rem] text-[3rem] font-bold desktop:leading-[9rem] leading-[5rem]'
             >
               My moments with Kia
             </motion.h3>
@@ -157,7 +157,7 @@ export const SectionKeyVisual = () => {
               initial={{ opacity: 0, y: -50 }}
               animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
               transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-              className='desktop:text-[3.6rem] text-[2.4rem] leading-[3.6rem]'
+              className='desktop:text-[3.2rem] text-[2rem] desktop:leading-[5.2rem] leading-[3.2rem]'
             >
               당신의 이야기로 완성되는
               <br className='desktop:hidden block' /> 80년의 기억
@@ -173,9 +173,9 @@ export const SectionKeyVisual = () => {
             <Image
               src={getImagePath("/images/main/main_kv_logo.svg")}
               alt='event-keyvisual'
-              width={220}
-              height={88}
-              className='desktop:w-[22rem] w-[7.5rem] h-auto object-contain'
+              width={1820}
+              height={72}
+              className='desktop:w-[18.2rem] w-[6.3rem] h-auto object-contain'
               unoptimized
               priority
             />

@@ -46,6 +46,7 @@ const DotItem = ({ asChild, className, children, ...props }: DotItemProps) => {
         )}
         {...props}
       >
+        <span className='absolute left-0 top-0 flex items-center h-[var(--line-height)] before:size-[var(--dot-size)] before:rounded-full before:bg-[currentColor]'></span>
         {children}
       </Comp>
     );

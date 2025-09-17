@@ -30,7 +30,7 @@ export const SectionInstagramEvent = () => {
               <p className='text-secondary'>
                 완성된 포스터를 저장한 후,
                 <br />
-                인스타그램 스토리에 업로드해 인증해보세요!
+                인스타그램 스토리에 업로드해 인증해 보세요!
               </p>
             </div>
             <div className='p-[2.4rem] bg-white'>
@@ -62,9 +62,8 @@ export const SectionInstagramEvent = () => {
                   </li>
                   <li className='relative desktop:pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>
-                      인스타그램 스토리에 포스터를 업로드하고,
-                      <br className='hidden desktop:block' />
-                      ‘Kia 80주년 지피 스티커’를 붙여 꾸며보세요.
+                      인스타그램 스토리에 포스터를 업로드하고, <br className='hidden desktop:block' />
+                      ‘Kia 80주년 GIPHY 스티커’를 붙여 꾸며보세요.
                     </p>
                     <span
                       className='absolute left-0 right-0 top-full desktop:pt-[2.4rem] pt-[1.6rem] flex justify-center'
@@ -90,8 +89,8 @@ export const SectionInstagramEvent = () => {
                   </li>
                   <li className='relative desktop:pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>
-                      업로드 시, 기아 공식 인스타그램 계정(@kia.kor)을
-                      <br className='hidden desktop:block' />꼭 태그해 주세요!
+                      업로드 시, 기아 공식 인스타그램 계정(@kia.kor)을 <br className='hidden desktop:block' />꼭 태그해
+                      주세요!
                     </p>
                   </li>
                 </ol>
@@ -99,9 +98,13 @@ export const SectionInstagramEvent = () => {
             </div>
             <div className='mt-[2.4rem] text-center'>
               <p>
-                참여하신 분들께 추첨을 통해
+                추첨을 통해 총 20분께
                 <br />
-                <strong>스타벅스 아이스 아메리카노(Tall) 1잔</strong>을 드립니다.
+                <strong>스타벅스 아이스 아메리카노(Tall) 1잔</strong>을<br className='block desktop:hidden' /> 드립니다.
+              </p>
+              <p className='mt-[.8rem] text-[1.2rem] leading-[2rem] text-[#999]'>
+                * 해당 이벤트에 대한 자세한 내용은
+                <br /> 기아 공식 인스타그램을 통해 확인해 주세요.
               </p>
             </div>
           </div>

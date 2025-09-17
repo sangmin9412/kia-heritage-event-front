@@ -87,6 +87,10 @@ export const SectionEventMoments = () => {
 
   const carouselItems = useMemo(() => {
     return [
+      getImagePath("/images/main/moments_img_07.webp"),
+      getImagePath("/images/main/moments_img_08.webp"),
+      getImagePath("/images/main/moments_img_09.webp"),
+      getImagePath("/images/main/moments_img_10.webp"),
       getImagePath("/images/main/moments_img_01.webp"),
       getImagePath("/images/main/moments_img_02.webp"),
       getImagePath("/images/main/moments_img_03.webp"),

@@ -50,11 +50,16 @@ export const SectionEventEnter = () => {
                 <div className='desktop:p-[2.4rem_0.8rem] p-[1.6rem_0.4rem] border-t border-border'>
                   <DotList className='gap-[1.2rem]'>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      ‘나와 Kia’의 특별한 순간이 담긴 사진을 업로드해 주세요.
+                      ‘나와 Kia’의 특별한 순간이 담긴 사진을
+                      <br className='block desktop:hidden' />
+                      업로드해 주세요.
                     </DotItem>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      포스터에 들어갈 문구를 입력하고, 마음에 드는 포토 프레임을 골라 단 하나뿐인 ‘My moments with Kia’
-                      포스터를 만들어 보세요!
+                      기아와 함께한 특별한 순간을 표현하는
+                      <br className='block desktop:hidden' /> 문구를 입력하고,
+                      <br className='hidden desktop:block' />
+                      사진에 알맞은 포토 프레임을 골라
+                      <br className='hidden desktop:block' />단 하나뿐인 ‘My moments with Kia’ 포스터를 만들어 보세요!
                     </DotItem>
                   </DotList>
                 </div>
@@ -116,17 +121,17 @@ export const SectionEventEnter = () => {
                 <div className='desktop:p-[2.4rem_0.8rem] p-[1.6rem_0.4rem] border-t border-border'>
                   <DotList className='gap-[1.2rem]'>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      완성된 포스터를 저장한 후, 인스타그램 피드에 인증해주세요.
+                      완성된 포스터를 저장한 후,
+                      <br className='block desktop:hidden' /> 인스타그램 피드에 인증해 주세요.
                     </DotItem>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      기아 공식 계정(@Kia.kor) 태그 및 필수 해시태그 입력 필수! #기아와함께한순간 #기아헤리티지이벤트
-                      #기아80주년
+                      기아 공식 계정(@kia.kor) 태그 및<br className='block desktop:hidden' /> 필수 해시태그 입력 필수!
                       <div className='pt-[1.2rem] flex items-center flex-wrap desktop:gap-[.8rem] gap-[.4rem]'>
                         <button className='px-[0.8rem] desktop:text-[1.4rem] text-[1.3rem] desktop:leading-[3.8rem] leading-[3.6rem] bg-[#f8f8f8]'>
                           #기아와함께한순간
                         </button>
                         <button className='px-[0.8rem] desktop:text-[1.4rem] text-[1.3rem] desktop:leading-[3.8rem] leading-[3.6rem] bg-[#f8f8f8]'>
-                          #기아헤리티지이벤트
+                          #Mymomentswithkia
                         </button>
                         <button className='px-[0.8rem] desktop:text-[1.4rem] text-[1.3rem] desktop:leading-[3.8rem] leading-[3.6rem] bg-[#f8f8f8]'>
                           #기아80주년
@@ -134,7 +139,8 @@ export const SectionEventEnter = () => {
                       </div>
                     </DotItem>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      정확한 심사를 위해 이벤트 종료 기간까지 게시글을 유지해주세요.
+                      정확한 심사를 위해 이벤트 종료 기간까지
+                      <br className='block desktop:hidden' /> 게시글을 유지해 주세요.
                     </DotItem>
                   </DotList>
                 </div>

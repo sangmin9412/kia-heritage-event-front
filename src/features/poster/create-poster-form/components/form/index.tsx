@@ -16,7 +16,7 @@ export const CreatePosterForm = () => {
     <div className='container desktop:px-[3rem] px-0'>
       <div className='flex desktop:flex-row flex-col desktop:pb-[8rem]'>
         <div className='desktop:p-[4.8rem_4rem_0] p-[4.8rem_0] desktop:flex-[0_0_64rem] flex-[0_0_auto] max-w-[64rem] desktop:bg-transparent bg-[#f8f8f8]'>
-          <div className='desktop:sticky desktop:top-[2rem]'>
+          <div className='desktop:sticky desktop:top-[4.8rem]'>
             <div className='animate-in fade-in desktop:slide-in-from-left-10 desktop:slide-in-from-bottom-0 slide-in-from-bottom-10 ease-in-out duration-1000'>
               <PosterPreview />
             </div>

@@ -63,9 +63,9 @@ export const SectionEventShare = () => {
       Kakao.Share.sendDefault({
         objectType: "feed",
         content: {
-          title: SITE_METADATA.title,
-          description: SITE_METADATA.description,
-          imageUrl: SITE_METADATA.openGraph?.images[0].url,
+          title: SITE_METADATA.openGraph.title,
+          description: SITE_METADATA.openGraph.description,
+          imageUrl: `${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`,
           link: {
             webUrl: process.env.NEXT_PUBLIC_URL,
             mobileWebUrl: process.env.NEXT_PUBLIC_URL

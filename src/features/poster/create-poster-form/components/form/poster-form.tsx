@@ -40,19 +40,19 @@ const PosterFormDesktopLayout = ({ form, frameOptions, carOptions }: PosterFormP
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-2' className='border-0'>
-          <AccordionTrigger>이미지 업로드</AccordionTrigger>
+          <AccordionTrigger className='pt-[3.6rem]'>이미지 업로드 및 조정</AccordionTrigger>
           <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <UploadImage form={form} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3' className='border-0'>
-          <AccordionTrigger>Kia 헤리티지 차량 선택</AccordionTrigger>
+          <AccordionTrigger className='pt-[3.6rem]'>Kia 헤리티지 차량 선택</AccordionTrigger>
           <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <SelectCar form={form} carOptions={carOptions} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-4' className='border-0'>
-          <AccordionTrigger>타이틀 및 인스타그램 계정명 입력</AccordionTrigger>
+          <AccordionTrigger className='pt-[3.6rem]'>타이틀 및 인스타그램 계정명 입력</AccordionTrigger>
           <AccordionContent className='pt-[3.2rem]'>
             <InputInstagramName form={form} />
           </AccordionContent>

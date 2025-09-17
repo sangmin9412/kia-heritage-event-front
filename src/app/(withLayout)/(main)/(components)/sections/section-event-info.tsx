@@ -35,7 +35,7 @@ export const SectionEventInfo = () => {
             <div>
               <dl className='flex flex-col desktop:flex-row desktop:gap-[1.6rem] gap-[0.8rem]'>
                 <dt className='desktop:flex-[0_0_18rem] font-bold'>이벤트 대상</dt>
-                <dd>Kia와 함께한 순간이 있다면, 대한민국 국민 누구나 참여 가능</dd>
+                <dd>Kia와 함께한 순간이 있다면, 누구나 참여 가능</dd>
               </dl>
             </div>
           </div>

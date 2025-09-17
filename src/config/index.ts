@@ -10,8 +10,8 @@ export const basePath = "";
 */
 
 export const SITE_METADATA = {
-  title: "KIA Heritage Event",
-  description: "KIA Heritage Event",
+  title: "Kia Heritage Event",
+  description: "Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동",
   openGraph: {
     url: process.env.NEXT_PUBLIC_URL,
     title: "My moments with Kia",
@@ -32,6 +32,9 @@ export const SITE_METADATA = {
     description: `Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
 그리고 나만의 ‘My moments with Kia’를 들려주세요.`,
     images: [`${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`]
+  },
+  icons: {
+    icon: "/images/favicon.png"
   }
 };
 
@@ -39,7 +42,7 @@ export const EVENT_INFO = {
   info: {
     start: "2025. 9. 29 (월)",
     end: "11. 4 (화)",
-    announcement: "2025. 11. 20 (목)"
+    announcement: "2025. 11. 20 (목) 이후"
   },
   date: {
     start: "2025-09-29",
@@ -71,7 +74,7 @@ export const ROUTES = {
   },
   CREATE_COMPLETE_POSTER: {
     title: "포스터 생성 완료",
-    layoutTitle: "포스터 생성완료",
+    layoutTitle: "포스터 생성 완료",
     link: "/create/complete/:posterId"
   }
 } as const;
