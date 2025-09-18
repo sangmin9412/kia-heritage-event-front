@@ -65,7 +65,7 @@ export const SectionEventShare = () => {
         content: {
           title: SITE_METADATA.openGraph.title,
           description: SITE_METADATA.openGraph.description,
-          imageUrl: `${process.env.NEXT_PUBLIC_URL}/images/share_thumbnail.png`,
+          imageUrl: `${process.env.NEXT_PUBLIC_URL}/images/share_kakao_thumb.png`,
           link: {
             webUrl: process.env.NEXT_PUBLIC_URL,
             mobileWebUrl: process.env.NEXT_PUBLIC_URL
