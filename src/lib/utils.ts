@@ -13,11 +13,11 @@ export function getImagePath(path: string, isQueryString: boolean = true) {
   return `${basePath}${path}${isQueryString ? `?v=${nowDate()}` : ""}`;
 }
 
-export const downloadImage = (image?: string | null) => {
+export const downloadImage = (image?: string | null, fileName: string = "kia-heritage-event-poster.png") => {
   if (!image) return;
   const a = document.createElement("a");
   a.href = image;
-  a.download = "kia-heritage-event-poster.png";
+  a.download = fileName;
   a.click();
   a.remove();
   URL.revokeObjectURL(image);

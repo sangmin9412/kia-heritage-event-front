@@ -13,6 +13,7 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
 
   const { data, isLoading } = usePosterStatus({ posterId: Number(posterId) }, { enabled: !!posterId });
   const posterImage = data?.data.posterFile?.fileUrl ?? "";
+  const posterFileName = data?.data.posterFile?.fileFullName.replaceAll(" ", "_") ?? "";
 
   useEffect(() => {
     async function getPosterImageBase64() {
@@ -151,7 +152,7 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
         </div>
 
         <div className='desktop:p-[2.4rem_4.8rem] p-[1.6rem] sticky bottom-0 flex desktop:gap-[1.6rem] gap-[1.2rem] bg-white border-t border-border'>
-          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImageBase64)}>
+          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImageBase64, posterFileName)}>
             포스터 다운로드
           </Button>
           <Button className='flex-1' onClick={handleFeedCertification}>
