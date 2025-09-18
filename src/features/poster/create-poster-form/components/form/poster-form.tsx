@@ -46,7 +46,7 @@ const PosterFormDesktopLayout = ({ form, frameOptions, carOptions }: PosterFormP
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3' className='border-0'>
-          <AccordionTrigger className='pt-[3.6rem]'>Kia 헤리티지 차량 선택</AccordionTrigger>
+          <AccordionTrigger className='pt-[3.6rem]'>기아 헤리티지 차량 선택</AccordionTrigger>
           <AccordionContent className='mb-[4.8rem] pt-[3.2rem] pb-[5.6rem] border-b border-border'>
             <SelectCar form={form} carOptions={carOptions} />
           </AccordionContent>
@@ -86,7 +86,7 @@ const PosterFormMobileLayout = ({ form, frameOptions, carOptions }: PosterFormPr
             이미지 업로드
           </TabsTrigger>
           <TabsTrigger value='item-3' className='pt-[2.4rem] pb-[1.6rem]' data-value='item-3'>
-            Kia 헤리티지 차량 선택
+            기아 헤리티지 차량 선택
           </TabsTrigger>
           <TabsTrigger value='item-4' className='pt-[2.4rem] pb-[1.6rem]' data-value='item-4'>
             타이틀 및 인스타그램 계정명 입력

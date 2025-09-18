@@ -51,7 +51,7 @@ export const CreateSubmitFormWrapper = () => {
           gender: response.data.gender,
           agreeTerms: response.data.isThirdPartyCollect,
           agreePrivacy: response.data.isPrivacyCollect,
-          isDriverLicense: (String(response.data?.isDriverLicense) as "true" | "false"),
+          isDriverLicense: String(response.data?.isDriverLicense) as "true" | "false",
           birthYear: response.data.birthDate?.split("-")[0] || "",
           birthMonth: response.data.birthDate?.split("-")[1] || "",
           birthDay: response.data.birthDate?.split("-")[2] || ""
@@ -247,7 +247,7 @@ const CreateSubmitForm = memo(({ onSubmit }: { onSubmit: () => void }) => {
         <div className='desktop:p-[5.6rem_0_0] p-[0_0_4.8rem]'>
           <div className='desktop:mb-[4.8rem] mb-[2.4rem] desktop:pb-0 pb-[2.4rem] desktop:border-b-0 border-b border-border'>
             <h3 className='desktop:text-[2.4rem] text-[1.8rem] desktop:leading-[3.8rem] leading-[3rem] font-bold text-center'>
-              포스터에 담긴 Kia와 함께한 시간 속에서
+              포스터에 담긴 기아와 함께한 시간 속에서
               <br className='desktop:hidden block' /> 느꼈던
               <br className='desktop:block hidden' />
               여러분의 추억을 들려주세요.

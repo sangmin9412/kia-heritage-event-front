@@ -63,7 +63,7 @@ export const SectionInstagramEvent = () => {
                   <li className='relative desktop:pl-[2.7rem] [counter-increment:step] before:content-["0"counter(step)] before:font-bold flex gap-[.8rem] justify-center desktop:text-center'>
                     <p>
                       인스타그램 스토리에 포스터를 업로드하고, <br className='hidden desktop:block' />
-                      ‘Kia 80주년 GIPHY 스티커’를 붙여 꾸며보세요.
+                      ‘기아 80주년 GIPHY 스티커’를 붙여 꾸며보세요.
                     </p>
                     <span
                       className='absolute left-0 right-0 top-full desktop:pt-[2.4rem] pt-[1.6rem] flex justify-center'

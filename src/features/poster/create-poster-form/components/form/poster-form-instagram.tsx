@@ -36,9 +36,9 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
   return (
     <>
       <div>
-        <ItemTitle>포스터에 어울리는 타이틀을 입력해주세요.</ItemTitle>
+        <ItemTitle>포스터에 어울리는 타이틀을 입력해 주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
-          최대 글자수 {limitLengthString}자 이내로 작성해주세요.
+          최대 글자수 {limitLengthString}자 이내로 작성해 주세요.
         </p>
         <ItemContent className='pt-[2.4rem]'>
           <div className='relative'>
@@ -61,7 +61,7 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
       <div className='desktop:mt-[4.8rem] mt-[3.2rem] desktop:pt-[4.8rem] pt-[3.2rem] border-t border-border'>
         <ItemTitle>인스타그램 계정명을 입력해 주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
-          게시물 심사를 위해 정확한 인스타그램 사용자 이름을 작성해주세요.
+          게시물 심사를 위해 정확한 인스타그램 사용자 이름을 작성해 주세요.
         </p>
         <ItemContent className='pt-[2.4rem]'>
           <div className='relative flex'>

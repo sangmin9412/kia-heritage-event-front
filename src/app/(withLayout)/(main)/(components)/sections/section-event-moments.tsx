@@ -118,9 +118,9 @@ export const SectionEventMoments = () => {
               wordAnimationEnd='center center'
               containerClassName='hidden desktop:block'
             >
-              수많은 도전과 기회로 달려온 Kia의 80년.
+              수많은 도전과 기회로 달려온 기아의 80년.
               <br />
-              Kia의 헤리티지 속에서 여러분이 느낀 영감과 감동,
+              기아의 헤리티지 속에서 여러분이 느낀 영감과 감동,
               <br />
               그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
             </ScrollReveal>
@@ -135,9 +135,9 @@ export const SectionEventMoments = () => {
               wordAnimationEnd='bottom+=30% center'
               containerClassName='desktop:hidden'
             >
-              수많은 도전과 기회로 달려온 Kia의 80년.
+              수많은 도전과 기회로 달려온 기아의 80년.
               <br />
-              Kia의 헤리티지 속에서 여러분이 느낀
+              기아의 헤리티지 속에서 여러분이 느낀
               <br />
               영감과 감동, 그리고 나만의
               <br />
