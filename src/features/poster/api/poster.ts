@@ -32,6 +32,11 @@ export const getPosterStatus = async (payload: RequestPosterStatus) => {
   return httpClient.get<ResponsePosterStatus>(`/api/posters/${payload.posterId}`);
 };
 
+// 포스터 다운로드
+export const getPosterDownload = async (posterId: number) => {
+  return httpClient.get(`/api/posters/${posterId}/download`);
+};
+
 // 포스터 이미지 다운로드
 export const getPosterImage = async (imageUrl: string) => {
   return axios.post(`${process.env.NEXT_PUBLIC_URL}/api/poster`, { imageUrl }).then(res => res.data);
