@@ -178,7 +178,7 @@ const UploadImageFormDesktop = ({
   return (
     <div className='desktop:block hidden'>
       <div>
-        <ItemTitle>이미지를 등록해주세요.</ItemTitle>
+        <ItemTitle>이미지를 등록해 주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>JPEG, JPG, PNG 확장자만 지원합니다.</p>
         <ItemContent>
           <div className='flex gap-[1.6rem]'>
@@ -341,7 +341,7 @@ const UploadImageFormMobile = ({
   return (
     <div className='desktop:hidden block'>
       <div>
-        <ItemTitle>이미지를 등록해주세요.</ItemTitle>
+        <ItemTitle>이미지를 등록해 주세요.</ItemTitle>
         <p className='mt-[.4rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>JPEG, JPG, PNG 확장자만 지원합니다.</p>
         <ItemContent>
           <div className='flex gap-[1.6rem]'>

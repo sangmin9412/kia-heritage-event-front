@@ -68,12 +68,12 @@ export const TermsAgreementField = ({ form }: { form: UseFormReturn<eventEnterFo
                   <br />
                   - 이벤트 당첨자 선정, 고지 및 경품 발송
                   <br />
-                  - 응모 사진 및 사연의 Kia 공식 채널(공식 홈페이지, 공식 온드미디어 채널, 온·오프라인 홍보물 등) 게시
+                  - 응모 사진 및 사연의 기아 공식 채널(공식 홈페이지, 공식 온드미디어 채널, 온·오프라인 홍보물 등) 게시
                   및 홍보 활용
                   <br />
                   <strong>3. 보유 및 이용 기간</strong>
                   <br />
-                  - 이벤트 응모 후 Kia 80주년 기념 전시 종료 전까지(2028년 12월 31일까지)
+                  - 이벤트 응모 후 기아 80주년 기념 전시 종료 전까지(2028년 12월 31일까지)
                   <br />
                   <strong>4. 개인정보 제공 받는 자 : 주식회사 이노션에스</strong>
                   <br />
@@ -127,7 +127,7 @@ export const TermsAgreementField = ({ form }: { form: UseFormReturn<eventEnterFo
                   <strong>4. 제3자 제공 항목 : </strong>이름, 휴대전화번호, 이메일 주소, 성별, 생년월일,
                   자동차운전면허증 소지 여부, 응모 사진, 응모 사연
                   <br />
-                  <strong>5. 제3자 제공 목적 : </strong>Kia 창립 80주년 기념 헤리티지 고객 참여 이벤트 홍보(공식
+                  <strong>5. 제3자 제공 목적 : </strong>기아 창립 80주년 기념 헤리티지 고객 참여 이벤트 홍보(공식
                   홈페이지, 공식 온드미디어 채널, 온·오프라인 홍보물 등) 게시 및 홍보 활용
                   <br />
                   <strong>6. 제3자 보유 및 이용 기간 : </strong>2025년 12월 31일까지

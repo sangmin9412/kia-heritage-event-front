@@ -50,16 +50,14 @@ export const SectionEventEnter = () => {
                 <div className='desktop:p-[2.4rem_0.8rem] p-[1.6rem_0.4rem] border-t border-border'>
                   <DotList className='gap-[1.2rem]'>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      ‘나와 Kia’의 특별한 순간이 담긴 사진을
-                      <br className='block desktop:hidden' />
-                      업로드해 주세요.
+                      ‘나와 기아’의 특별한 순간이 담긴 사진을 <br className='block desktop:hidden' /> 업로드해 주세요.
                     </DotItem>
                     <DotItem className='desktop:text-[1.6rem] text-[1.4rem] desktop:leading-[2.6rem] leading-[2.2rem] desktop:[--line-height:2.6rem] [--line-height:2.2rem]'>
-                      기아와 함께한 특별한 순간을 표현하는
-                      <br className='block desktop:hidden' /> 문구를 입력하고,
-                      <br className='hidden desktop:block' />
+                      기아와 함께한 특별한 순간을 표현하는 문구를
+                      <br className='block desktop:hidden' /> 입력하고, <br className='hidden desktop:block' />
                       사진에 알맞은 포토 프레임을 골라
-                      <br className='hidden desktop:block' />단 하나뿐인 ‘My moments with Kia’ 포스터를 만들어 보세요!
+                      <br />단 하나뿐인 ‘My moments with Kia’ 포스터를
+                      <br className='block desktop:hidden' /> 만들어 보세요!
                     </DotItem>
                   </DotList>
                 </div>
@@ -67,18 +65,19 @@ export const SectionEventEnter = () => {
 
               <div className='desktop:flex-[0_0_6rem] flex-[0_0_3.2rem] flex justify-center items-center'>
                 <svg
-                  width='32'
-                  height='32'
-                  viewBox='0 0 32 32'
+                  width='24'
+                  height='25'
+                  viewBox='0 0 24 25'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
-                  className='w-[3.2rem] h-[3.2rem] desktop:rotate-0 rotate-90'
+                  className='desktop:size-[2.4rem] size-[3.2rem] desktop:rotate-0 rotate-90 '
                 >
+                  <rect y='0.111328' width='24' height='24' rx='12' fill='#05141F' />
                   <path
                     fillRule='evenodd'
                     clipRule='evenodd'
-                    d='M12.0732 25.1599L19.9839 19.12C20.4701 18.7492 20.8641 18.2711 21.1353 17.7231C21.4066 17.1752 21.5477 16.572 21.5477 15.9606C21.5477 15.3492 21.4066 14.746 21.1353 14.198C20.8641 13.65 20.4701 13.1721 19.9839 12.8013L12.0719 6.76123L10.4492 8.85856L18.3599 14.9119C18.5217 15.0347 18.653 15.1932 18.7434 15.3752C18.8338 15.5571 18.8808 15.7575 18.8808 15.9606C18.8808 16.1638 18.8338 16.3641 18.7434 16.5461C18.653 16.728 18.5217 16.8865 18.3599 17.0093L10.4492 23.0626L12.0732 25.1599Z'
-                    fill='#05141F'
+                    d='M9.79047 17.2633L14.2402 13.8658C14.5137 13.6573 14.7353 13.3884 14.8879 13.0801C15.0405 12.7719 15.1198 12.4326 15.1198 12.0887C15.1198 11.7448 15.0405 11.4055 14.8879 11.0972C14.7353 10.789 14.5137 10.5202 14.2402 10.3116L9.78969 6.91406L8.87695 8.09381L13.3267 11.4988C13.4177 11.5679 13.4916 11.6571 13.5424 11.7594C13.5933 11.8617 13.6197 11.9744 13.6197 12.0887C13.6197 12.203 13.5933 12.3157 13.5424 12.418C13.4916 12.5204 13.4177 12.6096 13.3267 12.6786L8.87695 16.0836L9.79047 17.2633Z'
+                    fill='white'
                   />
                 </svg>
               </div>
@@ -131,7 +130,7 @@ export const SectionEventEnter = () => {
                           #기아와함께한순간
                         </button>
                         <button className='px-[0.8rem] desktop:text-[1.4rem] text-[1.3rem] desktop:leading-[3.8rem] leading-[3.6rem] bg-[#f8f8f8]'>
-                          #Mymomentswithkia
+                          #MymomentswithKia
                         </button>
                         <button className='px-[0.8rem] desktop:text-[1.4rem] text-[1.3rem] desktop:leading-[3.8rem] leading-[3.6rem] bg-[#f8f8f8]'>
                           #기아80주년

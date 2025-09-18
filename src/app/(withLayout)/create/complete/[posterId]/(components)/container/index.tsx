@@ -2,33 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
-import { getPosterDownload, getPosterImage } from "@/features/poster/api";
 import { usePosterStatus } from "@/features/poster/hooks/use-poster-status";
 import { getImagePath } from "@/lib/utils";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }) => {
-  const [posterImageBase64, setPosterImageBase64] = useState<string | null>(null);
-
   const { data, isLoading } = usePosterStatus({ posterId: Number(posterId) }, { enabled: !!posterId });
   const posterImage = data?.data.posterFile?.fileUrl ?? "";
-  const posterFileName = data?.data.posterFile?.fileFullName.replaceAll(" ", "_") ?? "";
-
-  useEffect(() => {
-    async function getPosterImageBase64() {
-      try {
-        const imageBase64 = await getPosterImage(posterImage);
-        setPosterImageBase64(imageBase64.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    if (posterImage) {
-      getPosterImageBase64();
-    }
-  }, [posterImage, setPosterImageBase64]);
 
   const handleFeedCertification = () => {
     // 모바일 환경 체크
@@ -64,14 +44,6 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
     }
   };
 
-  const handlePosterDownload = async () => {
-    try {
-      const response = await getPosterDownload(Number(posterId));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div className='desktop:py-[8rem]'>
       <div className='mx-auto max-w-[86rem] desktop:shadow-[0_4px_15px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-bottom-10 ease-in-out duration-1000'>
@@ -88,14 +60,14 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
             <br className='block desktop:hidden' /> 이벤트 참여가 완료됩니다.
           </p>
           <div className='mx-auto desktop:max-w-[40rem] max-w-[31.5rem] shadow-[0_4px_18px_rgba(0,0,0,0.15)]'>
-            {(!posterImageBase64 || isLoading) && (
+            {(!posterImage || isLoading) && (
               <div className='desktop:h-[50rem] h-[30rem] flex items-center justify-center'>
                 <Loading />
               </div>
             )}
-            {posterImageBase64 && !isLoading && (
+            {posterImage && !isLoading && (
               <Image
-                src={posterImageBase64}
+                src={posterImage}
                 alt='포스터 이미지'
                 width={400}
                 height={500}
@@ -120,13 +92,17 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                   <p>완성된 포스터를 다운로드해 주세요.</p>
                 </li>
                 <li>
-                  <p>참여시 입력한 인스타그램 계정을 통해 아래 해시태그 3개와 함께 포스터를 피드에 업로드해 주세요.</p>
+                  <p>
+                    참여시 입력한 인스타그램 계정을 통해
+                    <br /> 아래 해시태그 3개와 함께
+                    <br /> 포스터를 피드에 업로드해 주세요.
+                  </p>
                   <div className='pt-[0.8rem] flex flex-wrap items-center desktop:gap-[.4rem] gap-[.6rem]'>
                     <button className='desktop:px-[0.8rem] px-[0.4rem] desktop:text-[1.3rem] text-[1.2rem] desktop:leading-[2.8rem] leading-[2.4rem] bg-[#f8f8f8]'>
                       #기아와함께한순간
                     </button>
                     <button className='desktop:px-[0.8rem] px-[0.4rem] desktop:text-[1.3rem] text-[1.2rem] desktop:leading-[2.8rem] leading-[2.4rem] bg-[#f8f8f8]'>
-                      #Mymomentswithkia
+                      #MymomentswithKia
                     </button>
                     <button className='desktop:px-[0.8rem] px-[0.4rem] desktop:text-[1.3rem] text-[1.2rem] desktop:leading-[2.8rem] leading-[2.4rem] bg-[#f8f8f8]'>
                       #기아80주년
@@ -135,11 +111,15 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                 </li>
                 <li>
                   <p>
-                    업로드 시, <strong>기아 공식 인스타 계정(@kia.kor)</strong>을 꼭 태그 해주세요.
+                    업로드 시, <strong>기아 공식 인스타그램 계정(@kia.kor)</strong>을 꼭 태그 해주세요.
                   </p>
                 </li>
                 <li>
-                  <p>참여시 입력한 인스타그램 계정을 통해 아래 해시태그 3개와 함께 포스터를 피드에 업로드해 주세요.</p>
+                  <p>
+                    참여시 입력한 인스타그램 계정을 통해
+                    <br /> 아래 해시태그 3개와 함께
+                    <br /> 포스터를 피드에 업로드해 주세요.
+                  </p>
                   <p className='desktop:mt-[.4rem] mt-[.2rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                     (개인 인스타그램 계정 내 게시물 유지 필수)
                   </p>

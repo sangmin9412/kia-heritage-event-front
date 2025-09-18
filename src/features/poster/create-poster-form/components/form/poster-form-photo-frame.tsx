@@ -16,7 +16,7 @@ export const PhotoFrame = memo(
     return (
       <>
         <div>
-          <ItemTitle>포토 프레임을 선택해주세요.</ItemTitle>
+          <ItemTitle>포토 프레임을 선택해 주세요.</ItemTitle>
           <ItemContent>
             <FormField
               control={form.control}

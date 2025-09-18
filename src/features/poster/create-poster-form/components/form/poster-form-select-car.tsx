@@ -12,7 +12,7 @@ export const SelectCar = memo(
   ({ form, carOptions }: { form: PosterFormProps["form"]; carOptions: PosterFormProps["carOptions"] }) => {
     return (
       <div>
-        <ItemTitle>Kia 80주년 기념 대표 헤리티지 차량을 선택해주세요.</ItemTitle>
+        <ItemTitle>기아 80주년 기념 대표 헤리티지 차량을 선택해 주세요.</ItemTitle>
         <ItemContent>
           <FormField
             control={form.control}

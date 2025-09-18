@@ -42,7 +42,7 @@ const JUDGE_CRITERIA = [
           이벤트 주제에 잘 부합하는 포스터인가
         </DotItem>
         <DotItem className='desktop:text-[1.6rem] text-[1.3rem] desktop:leading-[2.6rem] leading-[2rem] desktop:[--line-height:2.6rem] [--line-height:2rem]'>
-          Kia 창립 80주년 주제에 명확하게 전달하는 메시지가 있는가
+          기아 80주년 주제에 명확하게 전달하는 메시지가 있는가
         </DotItem>
       </DotList>
     ),
@@ -56,7 +56,7 @@ const JUDGE_CRITERIA = [
           시각적으로 본인의 스토리가 포스터에 잘 표현 되었는가
         </DotItem>
         <DotItem className='desktop:text-[1.6rem] text-[1.3rem] desktop:leading-[2.6rem] leading-[2rem] desktop:[--line-height:2.6rem] [--line-height:2rem]'>
-          독창적으로 제작이 되었는가
+          사진과 스토리가 독창적으로 드러나도록 제작이 되었는가
         </DotItem>
       </DotList>
     ),
@@ -117,7 +117,7 @@ export const SectionEventPrize = () => {
                       <div
                         className={cn(
                           "relative flex desktop:w-[36.3rem] w-full aspect-[363/180]",
-                          index !== 0 && "aspect-[154/120]"
+                          index !== 0 && "desktop:aspect-[363/180] aspect-[154/120]"
                         )}
                       >
                         <Image
