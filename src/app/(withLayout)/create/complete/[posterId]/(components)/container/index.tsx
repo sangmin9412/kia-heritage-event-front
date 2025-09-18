@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
-import { getPosterImage } from "@/features/poster/api";
+import { getPosterDownload, getPosterImage } from "@/features/poster/api";
 import { usePosterStatus } from "@/features/poster/hooks/use-poster-status";
-import { downloadImage, getImagePath } from "@/lib/utils";
+import { getImagePath } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -61,6 +61,14 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
     } else {
       // 데스크톱인 경우 웹으로 이동
       window.open("https://www.instagram.com/", "_blank");
+    }
+  };
+
+  const handlePosterDownload = async () => {
+    try {
+      const response = await getPosterDownload(Number(posterId));
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -152,8 +160,10 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
         </div>
 
         <div className='desktop:p-[2.4rem_4.8rem] p-[1.6rem] sticky bottom-0 flex desktop:gap-[1.6rem] gap-[1.2rem] bg-white border-t border-border'>
-          <Button variant='outline' className='flex-1' onClick={() => downloadImage(posterImageBase64, posterFileName)}>
-            포스터 다운로드
+          <Button variant='outline' className='flex-1' asChild>
+            <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/posters/${posterId}/download`} download target='_blank'>
+              포스터 다운로드
+            </a>
           </Button>
           <Button className='flex-1' onClick={handleFeedCertification}>
             피드 인증하러 가기

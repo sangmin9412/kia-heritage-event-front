@@ -56,10 +56,11 @@ class HttpClient {
     );
   }
 
-  async get<T>(url: string, params?: RequestParams): Promise<T> {
+  async get<T>(url: string, params?: RequestParams, config?: AxiosRequestConfig): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.instance.get(url, {
-        params
+        params,
+        ...config
       });
       return response.data;
     } catch (error) {
