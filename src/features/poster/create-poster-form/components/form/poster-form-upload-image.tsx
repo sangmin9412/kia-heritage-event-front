@@ -58,8 +58,8 @@ export const UploadImage = memo(({ form }: { form: PosterFormProps["form"] }) =>
       // 이미지 용량 15MB 초과 검증
       if (e.target.files?.[0] && e.target.files[0].size > 15 * 1024 * 1024) {
         open({
-          title: "이미지 용량 초과",
-          description: "이미지는 최대 15MB 이하까지 업로드하실 수 있습니다.<br /> 용량을 확인한 후 다시 시도해 주세요.",
+          title: "이미지 확인",
+          description: `이미지는 최대 15MB 이하까지<br class="block desktop:hidden" /> 업로드하실 수 있습니다.<br /> 용량을 확인한 후 다시 시도해 주세요.`,
           onConfirm: () => {
             e.target.value = "";
           }
