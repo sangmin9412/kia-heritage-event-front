@@ -41,13 +41,13 @@ export const SITE_METADATA = {
 export const EVENT_INFO = {
   info: {
     start: "2025. 9. 29 (월)",
-    end: "11. 4 (화)",
-    announcement: "2025. 11. 20 (목) 이후"
+    end: "10. 27 (월)",
+    announcement: "2025. 11. 10 (월) 이후"
   },
   date: {
     start: "2025-09-29",
-    end: "2025-11-04",
-    announcement: "2025-11-20"
+    end: "2025-10-27",
+    announcement: "2025-11-10"
   }
 };
 

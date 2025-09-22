@@ -25,7 +25,7 @@ const PRIZE_LIST = [
   {
     title: "3등",
     description: "3등 경품",
-    prizeName: "기아 헤리티지 굿즈",
+    prizeName: "기아 헤리티지 굿즈 세트",
     prizeImage: "/images/main/prize_item_03.webp",
     prizeImageMobile: "/images/main/prize_item_03_mobile.webp",
     winCount: 20,
@@ -141,7 +141,7 @@ export const SectionEventPrize = () => {
                       <p
                         className={cn(
                           "desktop:text-[2rem] text-[1.8rem] desktop:leading-[3.2rem] leading-[3rem] font-bold",
-                          index !== 0 && "text-[1.6rem]"
+                          index !== 0 && "text-[1.4rem]"
                         )}
                       >
                         {prize.prizeName}
