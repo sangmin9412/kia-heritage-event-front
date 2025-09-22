@@ -17,6 +17,7 @@ import { useEffect } from "react";
 
 export const MainContainer = () => {
   useEffect(() => {
+    ANALYTICS_HANDLER[Event.PAGEVIEW_CREATE].event();
     ANALYTICS_HANDLER[Event.PAGEVIEW_VISIT].event();
     ANALYTICS_HANDLER[Event.PAGEVIEW_20S_VISIT].event();
   }, []);
