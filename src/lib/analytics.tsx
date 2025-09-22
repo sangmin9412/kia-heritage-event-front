@@ -1,6 +1,5 @@
-import { sendGAEvent } from "@next/third-parties/google";
+// import { sendGAEvent } from "@next/third-parties/google";
 
-/* eslint-disable @next/next/no-img-element */
 export enum Event {
   BTN_CLCK_LEARN_MORE = "KIA_KOR_BRAND_BTN-CLCK_LEARN-MORE-HERITAGE2025",
   BTN_CLCK_REGISTER = "KIA_KOR_BRAND_BTN-CLCK_REGISTER-HERITAGE2025",
@@ -14,10 +13,15 @@ export enum Event {
 export const ANALYTICS_HANDLER = {
   [Event.BTN_CLCK_LEARN_MORE]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("BTN_CLCK_LEARN_MORE");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k006+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/conveo0/kia_k006+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -34,10 +38,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLCK_REGISTER]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("BTN_CLCK_REGISTER");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k007+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/conveo0/kia_k007+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -54,10 +63,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLCK_SUBMIT]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("BTN_CLCK_SUBMIT");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k008+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/conveo0/kia_k008+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -74,10 +88,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLICK_CREATE]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("BTN_CLICK_CREATE");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k009+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/conveo0/kia_k009+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -94,10 +113,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_20S_VISIT]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("PAGEVIEW_20S_VISIT");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k001+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/pagev0/kia_k001+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -114,10 +138,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_CREATE]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("PAGEVIEW_CREATE");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k002+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/pagev0/kia_k002+standard"
+      // });
     },
     noscript: () => (
       <>
@@ -134,10 +163,15 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_VISIT]: {
     event: () => {
-      sendGAEvent("conversion", {
+      console.log("PAGEVIEW_VISIT");
+      window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k000+standard"
       });
+      // sendGAEvent("conversion", {
+      //   allow_custom_scripts: true,
+      //   send_to: "DC-10576537/pagev0/kia_k000+standard"
+      // });
     },
     noscript: () => (
       <>
