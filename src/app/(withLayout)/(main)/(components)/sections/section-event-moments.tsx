@@ -122,7 +122,7 @@ export const SectionEventMoments = () => {
               <br />
               기아의 헤리티지 속에서 여러분이 느낀 영감과 감동,
               <br />
-              그리고 나만의 &apos;My moments with Kia&apos;를 들려주세요.
+              그리고 &apos;My moments with Kia&apos;를 들려주세요.
             </ScrollReveal>
             <ScrollReveal
               baseOpacity={0}
@@ -139,7 +139,7 @@ export const SectionEventMoments = () => {
               <br />
               기아의 헤리티지 속에서 여러분이 느낀
               <br />
-              영감과 감동, 그리고 나만의
+              영감과 감동, 그리고
               <br />
               &apos;My moments with Kia&apos;를 들려주세요.
             </ScrollReveal>
