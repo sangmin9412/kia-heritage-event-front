@@ -26,10 +26,10 @@ export const SelectCar = memo(
                         <div className='relative w-full h-0 pb-[100%]'>
                           <label
                             htmlFor={option.value}
-                            className='flex absolute inset-0 bg-white border border-border data-[checked=true]:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0'
+                            className='flex absolute inset-0 bg-white data-[checked=true]:after:border-primary data-[checked=true]:shadow-[0_3px_6px_rgba(0,0,0,0.16)] transition-all duration-200 cursor-pointer z-0 after:content-[""] after:absolute after:inset-0 after:border after:border-border after:transition-all after:duration-200 after:pointer-events-none after:z-10'
                             data-checked={field.value === option.value}
                           >
-                            <div className='absolute inset-[0.8rem]'>
+                            <div className='absolute inset-0'>
                               <Image
                                 src={option.image as string}
                                 alt='car-image'

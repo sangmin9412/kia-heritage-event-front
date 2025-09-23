@@ -12,6 +12,11 @@ type PosterForm = {
   isThirdPartyCollect: boolean;
   isPrivacyCollect: boolean;
   isDriverLicense?: boolean;
+  isOldKiaCar?: boolean;
+  oldKiaCar?: string;
+  isCurrentKiaCar?: boolean;
+  currentKiaCar?: string;
+  currentNonKiaCar?: string;
   title: string;
   frameCode: string;
   carCode: string;
@@ -34,6 +39,11 @@ const posterFormDefault: PosterForm = {
   isThirdPartyCollect: false,
   isPrivacyCollect: false,
   isDriverLicense: undefined,
+  isOldKiaCar: undefined,
+  oldKiaCar: "",
+  isCurrentKiaCar: undefined,
+  currentKiaCar: "",
+  currentNonKiaCar: "",
   title: "",
   frameCode: "HORIZONTAL",
   carCode: "CAR01",

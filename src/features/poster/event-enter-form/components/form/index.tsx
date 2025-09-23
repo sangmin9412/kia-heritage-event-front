@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import {
+  cn,
   handleDeleteKoreanOnlyInput,
   handleKoreanOnlyInput,
   handleKoreanOnlyPaste,
@@ -204,6 +205,108 @@ export const EventEnterForm = () => {
             >
               <FormFieldRadioGroup form={form} name='isDriverLicense' options={hasDriverLicenseOptions} />
             </FormRow>
+
+            <FormRow
+              label='과거에 기아 차량을 보유한 적이 있습니까?'
+              className='overflow-visible'
+              names={["isOldKiaCar"]}
+              required
+            >
+              <FormFieldRadioGroup form={form} name='isOldKiaCar' options={hasDriverLicenseOptions} />
+            </FormRow>
+
+            <FormRow
+              label='과거에 기아 차량을 보유한 적이 있다면, 어떤 차종입니까?'
+              names={["oldKiaCar"]}
+              className={cn("relative", form.watch("isOldKiaCar") === "false" && "hidden")}
+            >
+              <FormFieldInput
+                form={form}
+                name='oldKiaCar'
+                placeholder='차종 입력'
+                type='text'
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = input.value;
+                  if (value.length > 15) {
+                    input.value = value.slice(0, 15);
+                  }
+                  form.setValue("oldKiaCar", value, {
+                    shouldValidate: true
+                  });
+                }}
+                className='pr-[7.4rem]'
+              />
+              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+                {form.watch("oldKiaCar")?.length || 0}/15자
+              </span>
+            </FormRow>
+
+            <FormRow
+              label='현재 기아 차량을 보유하고 있습니까?'
+              className='overflow-visible'
+              names={["isCurrentKiaCar"]}
+              required
+            >
+              <FormFieldRadioGroup form={form} name='isCurrentKiaCar' options={hasDriverLicenseOptions} />
+            </FormRow>
+
+            <FormRow
+              label='현재 기아 차량을 보유하고 있다면, 어떤 차종입니까?'
+              names={["currentKiaCar"]}
+              className={cn("relative", form.watch("isCurrentKiaCar") === "false" && "hidden")}
+            >
+              <FormFieldInput
+                form={form}
+                name='currentKiaCar'
+                placeholder='차종 입력'
+                type='text'
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = input.value;
+                  if (value.length > 15) {
+                    input.value = value.slice(0, 15);
+                  }
+                  form.setValue("currentKiaCar", value, {
+                    shouldValidate: true
+                  });
+                }}
+              />
+              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+                {form.watch("currentKiaCar")?.length || 0}/15자
+              </span>
+            </FormRow>
+
+            <FormRow
+              label='현재 보유하고 있는 차종은 어떤 차종입니까?'
+              names={["currentNonKiaCar"]}
+              className={cn("relative", form.watch("isCurrentKiaCar") === "true" && "hidden")}
+            >
+              <FormFieldInput
+                form={form}
+                name='currentNonKiaCar'
+                placeholder='차종 입력'
+                type='text'
+                onInput={e => {
+                  const input = e.target as HTMLInputElement;
+                  const value = input.value;
+                  if (value.length > 15) {
+                    input.value = value.slice(0, 15);
+                  }
+                  form.setValue("currentNonKiaCar", value, {
+                    shouldValidate: true
+                  });
+                }}
+              />
+              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+                {form.watch("currentNonKiaCar")?.length || 0}/15자
+              </span>
+            </FormRow>
+          </div>
+          <div className='mt-[3.2rem] p-[1.6rem] bg-[#f8f8f8]'>
+            <p className='text-[1.4rem] leading-[2.2rem] text-center text-sub-text'>
+              ※ 위 항목은 설문조사 목적으로만 활용됩니다.
+            </p>
           </div>
           <div className='desktop:mt-[7rem] mt-[4rem]'>
             <h3 className='desktop:mb-[2.4rem] mb-[1.2rem] desktop:text-[1.8rem] text-[1.6rem] desktop:leading-[3rem] leading-[2.6rem] font-bold'>

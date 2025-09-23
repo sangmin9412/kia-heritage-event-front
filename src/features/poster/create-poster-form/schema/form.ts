@@ -58,7 +58,12 @@ const useCreatePosterForm = () => {
           gender: response.data.gender,
           agreeTerms: response.data.isThirdPartyCollect,
           agreePrivacy: response.data.isPrivacyCollect,
-          isDriverLicense: (String(response.data?.isDriverLicense) as "true" | "false"),
+          isDriverLicense: String(response.data?.isDriverLicense) as "true" | "false",
+          isOldKiaCar: String(response.data?.isOldKiaCar) as "true" | "false",
+          oldKiaCar: response.data?.oldKiaCar || "",
+          isCurrentKiaCar: String(response.data?.isCurrentKiaCar) as "true" | "false",
+          currentKiaCar: response.data?.currentKiaCar || "",
+          currentNonKiaCar: response.data?.currentNonKiaCar || "",
           birthYear: response.data.birthDate?.split("-")[0] || "",
           birthMonth: response.data.birthDate?.split("-")[1] || "",
           birthDay: response.data.birthDate?.split("-")[2] || ""
