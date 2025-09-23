@@ -218,7 +218,7 @@ export const EventEnterForm = () => {
             <FormRow
               label='과거에 기아 차량을 보유한 적이 있다면, 어떤 차종입니까?'
               names={["oldKiaCar"]}
-              className={cn("relative", form.watch("isOldKiaCar") === "false" && "hidden")}
+              className={cn("relative", form.watch("isOldKiaCar") !== "true" && "hidden")}
             >
               <FormFieldInput
                 form={form}
@@ -254,7 +254,7 @@ export const EventEnterForm = () => {
             <FormRow
               label='현재 기아 차량을 보유하고 있다면, 어떤 차종입니까?'
               names={["currentKiaCar"]}
-              className={cn("relative", form.watch("isCurrentKiaCar") === "false" && "hidden")}
+              className={cn("relative", form.watch("isCurrentKiaCar") !== "false" && "hidden")}
             >
               <FormFieldInput
                 form={form}
@@ -280,7 +280,7 @@ export const EventEnterForm = () => {
             <FormRow
               label='현재 보유하고 있는 차종은 어떤 차종입니까?'
               names={["currentNonKiaCar"]}
-              className={cn("relative", form.watch("isCurrentKiaCar") === "true" && "hidden")}
+              className={cn("relative", form.watch("isCurrentKiaCar") !== "true" && "hidden")}
             >
               <FormFieldInput
                 form={form}
