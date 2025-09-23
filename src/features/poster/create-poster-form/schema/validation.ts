@@ -26,14 +26,14 @@ export const frameOptions: Option<frameCodesEnum>[] = [
 ];
 
 export const carOptions: Option<carCodesEnum>[] = [
-  { label: "모델명1", value: carCodesEnum.CAR01, image: "/images/create/car/CAR01.png" },
-  { label: "모델명2", value: carCodesEnum.CAR02, image: "/images/create/car/CAR02.png" },
-  { label: "모델명3", value: carCodesEnum.CAR03, image: "/images/create/car/CAR03.png" },
-  { label: "모델명4", value: carCodesEnum.CAR04, image: "/images/create/car/CAR04.png" },
-  { label: "모델명5", value: carCodesEnum.CAR05, image: "/images/create/car/CAR05.png" },
-  { label: "모델명6", value: carCodesEnum.CAR06, image: "/images/create/car/CAR06.png" },
-  { label: "모델명7", value: carCodesEnum.CAR07, image: "/images/create/car/CAR07.png" },
-  { label: "모델명8", value: carCodesEnum.CAR08, image: "/images/create/car/CAR08.png" }
+  { label: "모델명1", value: carCodesEnum.CAR01, image: "/images/create/car/CAR01_SELECT.png" },
+  { label: "모델명2", value: carCodesEnum.CAR02, image: "/images/create/car/CAR02_SELECT.png" },
+  { label: "모델명3", value: carCodesEnum.CAR03, image: "/images/create/car/CAR03_SELECT.png" },
+  { label: "모델명4", value: carCodesEnum.CAR04, image: "/images/create/car/CAR04_SELECT.png" },
+  { label: "모델명5", value: carCodesEnum.CAR05, image: "/images/create/car/CAR05_SELECT.png" },
+  { label: "모델명6", value: carCodesEnum.CAR06, image: "/images/create/car/CAR06_SELECT.png" },
+  { label: "모델명7", value: carCodesEnum.CAR07, image: "/images/create/car/CAR07_SELECT.png" },
+  { label: "모델명8", value: carCodesEnum.CAR08, image: "/images/create/car/CAR08_SELECT.png" }
 ];
 
 const baseSchema = {

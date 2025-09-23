@@ -67,7 +67,11 @@ const useEventEnterForm = () => {
       if (_hasUserHydrated) return;
 
       const response = await getPosterForm();
-      const userData: Omit<eventEnterFormSchemaType, "isDriverLicense"> & { isDriverLicense?: "true" | "false" } = {
+      const userData: Omit<eventEnterFormSchemaType, "isDriverLicense" | "isOldKiaCar" | "isCurrentKiaCar"> & {
+        isDriverLicense?: "true" | "false";
+        isOldKiaCar?: "true" | "false";
+        isCurrentKiaCar?: "true" | "false";
+      } = {
         name: response.data.name,
         phone: response.data.phone,
         email: response.data.email,
@@ -78,6 +82,13 @@ const useEventEnterForm = () => {
         isDriverLicense: response.data?.isDriverLicense
           ? (String(response.data?.isDriverLicense) as "true" | "false")
           : undefined,
+        isOldKiaCar: response.data?.isOldKiaCar ? (String(response.data?.isOldKiaCar) as "true" | "false") : undefined,
+        oldKiaCar: response.data?.oldKiaCar || "",
+        isCurrentKiaCar: response.data?.isCurrentKiaCar
+          ? (String(response.data?.isCurrentKiaCar) as "true" | "false")
+          : undefined,
+        currentKiaCar: response.data?.currentKiaCar || "",
+        currentNonKiaCar: response.data?.currentNonKiaCar || "",
         birthYear: response.data.birthDate?.split("-")[0] || "",
         birthMonth: response.data.birthDate?.split("-")[1] || "",
         birthDay: response.data.birthDate?.split("-")[2] || ""

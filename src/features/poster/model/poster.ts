@@ -100,6 +100,11 @@ export type RequestPosterFormSave = {
   isThirdPartyCollect: boolean;
   isPrivacyCollect: boolean;
   isDriverLicense?: boolean;
+  isOldKiaCar?: boolean;
+  oldKiaCar?: string;
+  isCurrentKiaCar?: boolean;
+  currentKiaCar?: string;
+  currentNonKiaCar?: string;
   title: string;
   frameCode: keyof typeof frameCodesEnum;
   carCode: keyof typeof carCodesEnum;
