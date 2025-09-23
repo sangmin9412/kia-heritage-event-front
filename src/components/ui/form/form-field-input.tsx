@@ -27,10 +27,6 @@ export function FormFieldInput<T extends FieldValues>({
         render={({ field, fieldState }) => {
           const { error } = fieldState;
 
-          if (name === "oldKiaCar") {
-            console.log("fieldState", error);
-          }
-
           return (
             <FormItem>
               {label && <FormLabel>{label}</FormLabel>}
