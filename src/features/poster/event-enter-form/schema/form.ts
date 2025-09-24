@@ -133,7 +133,12 @@ const useEventEnterForm = () => {
         gender: data.gender,
         isThirdPartyCollect: data.agreeTerms,
         isPrivacyCollect: data.agreePrivacy,
-        isDriverLicense: data.isDriverLicense === "true"
+        isDriverLicense: data.isDriverLicense === "true",
+        isOldKiaCar: data.isOldKiaCar === "true",
+        oldKiaCar: data.oldKiaCar,
+        isCurrentKiaCar: data.isCurrentKiaCar === "true",
+        currentKiaCar: data.currentKiaCar,
+        currentNonKiaCar: data.currentNonKiaCar,
       });
 
       // 스토어에 유저 데이터 저장
