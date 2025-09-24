@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface FormRowProps extends ComponentBaseProps {
-  label: React.ReactNode;
+  label: string;
   required?: boolean;
   labelClassName?: string;
   names?: string[];
@@ -53,7 +53,7 @@ const FormRow = forwardRef<HTMLDivElement, FormRowProps>(
         )}
       >
         <div className={cn("flex", labelClassName)}>
-          <label className={cn("font-bold", errorLabelClass)}>{label}</label>
+          <label className={cn("font-bold", errorLabelClass)} dangerouslySetInnerHTML={{ __html: label }} />
           {required && (
             <span className='flex ml-[.4rem] overflow-hidden'>
               <svg
