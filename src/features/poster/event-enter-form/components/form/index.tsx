@@ -278,7 +278,7 @@ export const EventEnterForm = () => {
             </FormRow>
 
             <FormRow
-              label='현재 보유하고 있는 차종은 어떤 차종입니까?'
+              label={`현재 보유하고 있는 차가 있으시다면,<br class='block desktop:hidden' /> 차종을 입력해 주시고,<br class='block desktop:hidden' /> 없으시다면 '없음'을 입력해 주세요.`}
               names={["currentNonKiaCar"]}
               className={cn("relative", form.watch("isCurrentKiaCar") !== "false" && "hidden")}
             >
