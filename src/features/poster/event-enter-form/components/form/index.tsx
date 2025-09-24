@@ -235,9 +235,9 @@ export const EventEnterForm = () => {
                     shouldValidate: true
                   });
                 }}
-                className='pr-[7.4rem]'
+                className='desktop:pr-[7.4rem] pr-[6rem]'
               />
-              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+              <span className='absolute desktop:bottom-[1.7rem] bottom-[1.4rem] right-[1.6rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                 {form.watch("oldKiaCar")?.length || 0}/15자
               </span>
             </FormRow>
@@ -271,8 +271,9 @@ export const EventEnterForm = () => {
                     shouldValidate: true
                   });
                 }}
+                className='desktop:pr-[7.4rem] pr-[6rem]'
               />
-              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+              <span className='absolute desktop:bottom-[1.7rem] bottom-[1.4rem] right-[1.6rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                 {form.watch("currentKiaCar")?.length || 0}/15자
               </span>
             </FormRow>
@@ -297,8 +298,9 @@ export const EventEnterForm = () => {
                     shouldValidate: true
                   });
                 }}
+                className='desktop:pr-[7.4rem] pr-[6rem]'
               />
-              <span className='absolute bottom-[1.7rem] right-[1.6rem] text-[1.4rem] leading-[2.2rem] text-sub-text'>
+              <span className='absolute desktop:bottom-[1.7rem] bottom-[1.4rem] right-[1.6rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                 {form.watch("currentNonKiaCar")?.length || 0}/15자
               </span>
             </FormRow>
