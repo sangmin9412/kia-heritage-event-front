@@ -38,6 +38,8 @@ export const SITE_METADATA = {
   }
 };
 
+export const EVENT_START_DATE_TIME = "2025-09-29 08:00:00";
+
 export const EVENT_INFO = {
   info: {
     start: "2025. 9. 29 (월)",
