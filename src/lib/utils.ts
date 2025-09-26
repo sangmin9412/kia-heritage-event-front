@@ -183,3 +183,111 @@ export const debounce = <Args extends unknown[], R>(func: (...args: Args) => R, 
     timeout = setTimeout(() => func(...args), delay);
   };
 };
+
+import dayjs from 'dayjs';
+
+/**
+ * 날짜/시간 형식을 자동 감지하여 비교하는 함수 (이후 여부)
+ * 지원 형식: YYYY-MM-DD 또는 YYYY-MM-DD HH:mm:ss
+ * @param {string} baseDateTime - 기준 날짜/시간
+ * @param {string} compareDateTime - 비교할 날짜/시간
+ * @returns {boolean} compareDateTime이 baseDateTime 이후이면 true, 이전이면 false
+ */
+export const isAfterDate = (baseDateTime: string, compareDateTime: string): boolean => {
+  if (!baseDateTime || !compareDateTime) return false;
+  
+  // 형식 자동 감지
+  const dateTimeFormat = baseDateTime.includes(' ') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  const compareDateTimeFormat = compareDateTime.includes(' ') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  
+  const base = dayjs(baseDateTime, dateTimeFormat, true);
+  const compare = dayjs(compareDateTime, compareDateTimeFormat, true);
+  
+  // 유효한 날짜인지 확인
+  if (!base.isValid() || !compare.isValid()) {
+    console.error("Invalid date/time provided. Please use YYYY-MM-DD or YYYY-MM-DD HH:mm:ss format.");
+    return false;
+  }
+  
+  return compare.isAfter(base);
+};
+
+/**
+ * 날짜/시간 형식을 자동 감지하여 비교하는 함수 (이전 여부)
+ * 지원 형식: YYYY-MM-DD 또는 YYYY-MM-DD HH:mm:ss
+ * @param {string} baseDateTime - 기준 날짜/시간
+ * @param {string} compareDateTime - 비교할 날짜/시간
+ * @returns {boolean} compareDateTime이 baseDateTime 이전이면 true, 이후이면 false
+ */
+export const isBeforeDate = (baseDateTime: string, compareDateTime: string): boolean => {
+  if (!baseDateTime || !compareDateTime) return false;
+  
+  // 형식 자동 감지
+  const dateTimeFormat = baseDateTime.includes(' ') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  const compareDateTimeFormat = compareDateTime.includes(' ') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  
+  const base = dayjs(baseDateTime, dateTimeFormat, true);
+  const compare = dayjs(compareDateTime, compareDateTimeFormat, true);
+  
+  // 유효한 날짜인지 확인
+  if (!base.isValid() || !compare.isValid()) {
+    console.error("Invalid date/time provided. Please use YYYY-MM-DD or YYYY-MM-DD HH:mm:ss format.");
+    return false;
+  }
+  
+  return compare.isBefore(base);
+};
+
+/**
+ * 특정 날짜 형식으로 비교하는 함수 (이후 여부)
+ * @param {string} baseDateTime - 기준 날짜/시간
+ * @param {string} compareDateTime - 비교할 날짜/시간
+ * @param {string} format - 날짜 형식 (기본값: 'YYYY-MM-DD')
+ * @returns {boolean} compareDateTime이 baseDateTime 이후이면 true, 이전이면 false
+ */
+export const isAfterDateWithFormat = (
+  baseDateTime: string, 
+  compareDateTime: string, 
+  format: string = 'YYYY-MM-DD'
+): boolean => {
+  if (!baseDateTime || !compareDateTime) return false;
+  
+  const base = dayjs(baseDateTime, format, true);
+  const compare = dayjs(compareDateTime, format, true);
+  
+  // 유효한 날짜인지 확인
+  if (!base.isValid() || !compare.isValid()) {
+    console.error(`Invalid date/time provided. Please use ${format} format.`);
+    return false;
+  }
+  
+  return compare.isAfter(base);
+};
+
+/**
+ * 특정 날짜 형식으로 비교하는 함수 (이전 여부)
+ * @param {string} baseDateTime - 기준 날짜/시간
+ * @param {string} compareDateTime - 비교할 날짜/시간
+ * @param {string} format - 날짜 형식 (기본값: 'YYYY-MM-DD')
+ * @returns {boolean} compareDateTime이 baseDateTime 이전이면 true, 이후이면 false
+ */
+export const isBeforeDateWithFormat = (
+  baseDateTime: string, 
+  compareDateTime: string, 
+  format: string = 'YYYY-MM-DD'
+): boolean => {
+  if (!baseDateTime || !compareDateTime) return false;
+  
+  const base = dayjs(baseDateTime, format, true);
+  const compare = dayjs(compareDateTime, format, true);
+  
+  // 유효한 날짜인지 확인
+  if (!base.isValid() || !compare.isValid()) {
+    console.error(`Invalid date/time provided. Please use ${format} format.`);
+    return false;
+  }
+  
+  return compare.isBefore(base);
+};
+
+
