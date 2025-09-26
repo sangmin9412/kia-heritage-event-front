@@ -21,7 +21,7 @@ export const SectionButtons = () => {
         {/* <Button size='lg' variant='outline' className='desktop:w-[34rem] w-full' onClick={handleLearnMore}>
           기아 헤리티지 더 알아보기
         </Button> */}
-        <Button size='lg' className='desktop:w-[34rem] w-full' onClick={handleRegister}>
+        <Button size='lg' className='desktop:w-[34rem] w-full' disabled={true} onClick={handleRegister}>
           이벤트 참여하기
         </Button>
       </div>
