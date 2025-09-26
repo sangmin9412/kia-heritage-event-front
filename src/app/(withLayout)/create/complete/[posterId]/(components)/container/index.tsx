@@ -94,7 +94,7 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                 </li>
                 <li>
                   <p>
-                    참여시 입력한 인스타그램 계정을 통해
+                    참여 시 입력한 인스타그램 계정을 통해
                     <br /> 아래 해시태그 3개와 함께
                     <br /> 포스터를 피드에 업로드해 주세요.
                   </p>
@@ -139,7 +139,7 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                 <li>
                   <p>
                     정확한 심사를 위해 이벤트 종료일까지 <br />
-                    게시물을 유지해주세요.
+                    게시물을 유지해 주세요.
                   </p>
                   <p className='desktop:mt-[.4rem] mt-[.2rem] desktop:text-[1.4rem] text-[1.2rem] desktop:leading-[2.2rem] leading-[2rem] text-sub-text'>
                     (개인 인스타그램 계정 내 게시물 유지 필수)
