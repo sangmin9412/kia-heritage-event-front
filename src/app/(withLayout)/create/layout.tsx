@@ -6,12 +6,15 @@ import { getImagePath } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
+import { ErrorBoundaryWrapper } from "@/components/providers/ErrorBoundary";
 
 export default function CreateLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <CreateTopBanner />
-      <div>{children}</div>
+      <ErrorBoundaryWrapper>
+        <div>{children}</div>
+      </ErrorBoundaryWrapper>
       <CreateAlert />
     </>
   );
