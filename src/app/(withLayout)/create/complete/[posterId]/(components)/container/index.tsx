@@ -8,7 +8,14 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }) => {
-  const { data, isLoading } = usePosterStatus({ posterId: Number(posterId) }, { enabled: !!posterId });
+  const { data, isLoading, isError, error } = usePosterStatus(
+    { posterId: Number(posterId) },
+    {
+      enabled: !!posterId,
+      retry: 0,
+      retryDelay: 3000
+    }
+  );
   const posterImage = data?.data.posterFile?.fileUrl ?? "";
 
   const handleFeedCertification = () => {
@@ -44,6 +51,10 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
       window.open("https://www.instagram.com/", "_blank");
     }
   };
+
+  if (isError) {
+    throw new Error(error?.message);
+  }
 
   return (
     <div className='desktop:py-[8rem]'>
@@ -109,10 +120,10 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                       #기아80주년
                     </button>
                   </div>
-                  <div className="mt-[.8rem]">
-                    <button 
-                      type="button" 
-                      className="p-[0_1.2rem] flex items-center gap-[.4rem] h-[3.6rem] border border-border text-[1.3rem] leading-[2rem] bg-[#fff] cursor-pointer"
+                  <div className='mt-[.8rem]'>
+                    <button
+                      type='button'
+                      className='p-[0_1.2rem] flex items-center gap-[.4rem] h-[3.6rem] border border-border text-[1.3rem] leading-[2rem] bg-[#fff] cursor-pointer'
                       onClick={async () => {
                         const hashtags = ["#기아와함께한순간", "#MymomentswithKia", "#기아80주년"];
                         const hashtagsString = hashtags.join(" ");
@@ -125,8 +136,21 @@ export const CreateCompletePosterContainer = ({ posterId }: { posterId: string }
                       }}
                     >
                       <span>해시태그 전체 복사하기</span>
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[2rem] h-[2rem]">
-                        <path d="M7.5 7.5V5.16683C7.5 4.23341 7.5 3.76635 7.68166 3.40983C7.84145 3.09623 8.09623 2.84144 8.40983 2.68166C8.76635 2.5 9.23341 2.5 10.1668 2.5H14.8335C15.7669 2.5 16.2334 2.5 16.5899 2.68166C16.9035 2.84144 17.1587 3.09623 17.3185 3.40983C17.5002 3.76635 17.5002 4.23306 17.5002 5.16648V9.83317C17.5002 10.7666 17.5002 11.2333 17.3185 11.5898C17.1587 11.9034 16.9033 12.1587 16.5897 12.3185C16.2335 12.5 15.7675 12.5 14.8359 12.5H12.5M7.5 7.5H5.16683C4.23341 7.5 3.76635 7.5 3.40983 7.68166C3.09623 7.84144 2.84144 8.09623 2.68166 8.40983C2.5 8.76635 2.5 9.23341 2.5 10.1668V14.8335C2.5 15.7669 2.5 16.2334 2.68166 16.5899C2.84144 16.9035 3.09623 17.1587 3.40983 17.3185C3.766 17.5 4.23249 17.5 5.16409 17.5H9.83629C10.7679 17.5 11.2337 17.5 11.5899 17.3185C11.9035 17.1587 12.1587 16.9033 12.3185 16.5897C12.5 16.2335 12.5 15.7675 12.5 14.8359V12.5M7.5 7.5H9.8335C10.7669 7.5 11.2334 7.5 11.5899 7.68166C11.9035 7.84144 12.1587 8.09623 12.3185 8.40983C12.5 8.766 12.5 9.2325 12.5 10.1641L12.5 12.5" stroke="#697278" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <svg
+                        width='20'
+                        height='20'
+                        viewBox='0 0 20 20'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='w-[2rem] h-[2rem]'
+                      >
+                        <path
+                          d='M7.5 7.5V5.16683C7.5 4.23341 7.5 3.76635 7.68166 3.40983C7.84145 3.09623 8.09623 2.84144 8.40983 2.68166C8.76635 2.5 9.23341 2.5 10.1668 2.5H14.8335C15.7669 2.5 16.2334 2.5 16.5899 2.68166C16.9035 2.84144 17.1587 3.09623 17.3185 3.40983C17.5002 3.76635 17.5002 4.23306 17.5002 5.16648V9.83317C17.5002 10.7666 17.5002 11.2333 17.3185 11.5898C17.1587 11.9034 16.9033 12.1587 16.5897 12.3185C16.2335 12.5 15.7675 12.5 14.8359 12.5H12.5M7.5 7.5H5.16683C4.23341 7.5 3.76635 7.5 3.40983 7.68166C3.09623 7.84144 2.84144 8.09623 2.68166 8.40983C2.5 8.76635 2.5 9.23341 2.5 10.1668V14.8335C2.5 15.7669 2.5 16.2334 2.68166 16.5899C2.84144 16.9035 3.09623 17.1587 3.40983 17.3185C3.766 17.5 4.23249 17.5 5.16409 17.5H9.83629C10.7679 17.5 11.2337 17.5 11.5899 17.3185C11.9035 17.1587 12.1587 16.9033 12.3185 16.5897C12.5 16.2335 12.5 15.7675 12.5 14.8359V12.5M7.5 7.5H9.8335C10.7669 7.5 11.2334 7.5 11.5899 7.68166C11.9035 7.84144 12.1587 8.09623 12.3185 8.40983C12.5 8.766 12.5 9.2325 12.5 10.1641L12.5 12.5'
+                          stroke='#697278'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
                       </svg>
                     </button>
                   </div>

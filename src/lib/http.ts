@@ -47,8 +47,13 @@ class HttpClient {
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: AxiosError) => {
+        // 서버에서 보낸 실제 에러 메시지 추출
+        const responseData = error.response?.data as Record<string, unknown>;
+        const serverMessage = responseData?.message || responseData?.error || responseData;
+
         const errorResponse: ErrorResponse = {
-          message: error.message || "알 수 없는 에러가 발생했습니다.",
+          message:
+            typeof serverMessage === "string" ? serverMessage : error.message || "알 수 없는 에러가 발생했습니다.",
           status: error.response?.status || 500
         };
         return Promise.reject(errorResponse);
