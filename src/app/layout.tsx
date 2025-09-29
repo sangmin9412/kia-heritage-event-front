@@ -17,6 +17,7 @@ export default function RootLayout({ children, modal }: { children: React.ReactN
   return (
     <html lang='ko'>
       <head>
+        <meta name="color-scheme" content="only light" />
         <GoogleAnalytics gaId='DC-10576537' />
         <Script strategy='beforeInteractive' src='/js/kakao.min.js' />
       </head>

@@ -171,6 +171,7 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
+    margin: 0.8rem 0;
     background: transparent;
   }
 
