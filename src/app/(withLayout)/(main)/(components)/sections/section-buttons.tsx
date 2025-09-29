@@ -7,9 +7,11 @@ import { isAfterDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
+import { useIOS } from "@/hooks/use-ios";
 
 export const SectionButtons = () => {
   const router = useRouter();
+  const isIOS = useIOS();
   const [isEventActive, setIsEventActive] = useState(false);
 
   // 한국시간 2025년 9월 29일 08:00:00
@@ -32,7 +34,12 @@ export const SectionButtons = () => {
 
   const handleRegister = () => {
     ANALYTICS_HANDLER[Event.BTN_CLCK_REGISTER].event();
-    router.push(ROUTES.ENTER_EVENT_FORM.link, { scroll: false });
+
+    if (isIOS) {
+      router.push(ROUTES.ENTER_EVENT_FORM_IOS.link, { scroll: true });
+    } else {
+      router.push(ROUTES.ENTER_EVENT_FORM.link, { scroll: false });
+    }
   };
 
   return (
