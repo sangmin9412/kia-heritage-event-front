@@ -64,6 +64,11 @@ export const ROUTES = {
     layoutTitle: "이벤트 참여",
     link: "/form"
   },
+  ENTER_EVENT_FORM_IOS: {
+    title: "이벤트 참여",
+    layoutTitle: "이벤트 참여",
+    link: "/form-ios"
+  },
   CREATE_FORM: {
     title: "포스터 제작하기",
     layoutTitle: "포스터 제작하기",
