@@ -16,8 +16,8 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Expose ports 5500 and 5501
-EXPOSE 5500 5501
+# Expose ports 5500
+EXPOSE 5500
 
 # Start the application with dynamic port
 CMD ["sh", "-c", "npm start -- --port ${PORT:-5500}"]

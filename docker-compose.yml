@@ -1,25 +1,13 @@
-version: '3.8'
+version: "3.8"
 services:
   kia-heritage-front-5500:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       no_cache: true
     ports:
-      - '5500:5500'
+      - "5500:5500"
     container_name: kia-heritage-front-5500
     restart: unless-stopped
     environment:
       - PORT=5500
-
-  kia-heritage-front-5501:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-      no_cache: true
-    ports:
-      - '5501:5501'
-    container_name: kia-heritage-front-5501
-    restart: unless-stopped
-    environment:
-      - PORT=5501
