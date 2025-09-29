@@ -7,6 +7,7 @@ import {
   PosterFormProps
 } from "@/features/poster/create-poster-form/components/form/poster-form";
 import { useEventEnterFormStore } from "@/features/poster/store";
+import { handleEmojiRemoveInput, handleEmojiRemovePaste } from "@/lib/utils";
 import { memo, useCallback } from "react";
 
 export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"] }) => {
@@ -49,7 +50,20 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
               type='text'
               className='desktop:pr-[12rem] pr-[9rem] w-full h-[5.6rem] desktop:text-[1.6rem] text-[1.4rem]'
               maxLength={titleLimitLength}
-              onInput={handleLimitLengthInput(titleLimitLength, "title")}
+              onInput={(e) => {
+                const input = e.target as HTMLInputElement;
+                const value = handleEmojiRemoveInput(input.value, titleLimitLength);
+                input.value = value;
+                form.setValue("title", value, {
+                  shouldValidate: true
+                });
+              }}
+              onPaste={(e) => {
+                const value = handleEmojiRemovePaste(e, titleLimitLength);
+                form.setValue("title", value, {
+                  shouldValidate: true
+                });
+              }}
             />
             <span className='absolute inset-y-0 right-[2.4rem] flex items-center desktop:text-[1.4rem] text-[1.2rem] text-sub-text pointer-events-none'>
               {posterTitleLength.toString().padStart(2, "0")}/{limitLengthString}자
