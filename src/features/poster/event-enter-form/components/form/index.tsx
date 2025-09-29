@@ -104,10 +104,10 @@ export const EventEnterForm = () => {
     <Form {...form}>
       <form
         onSubmit={handleSubmit}
-        className='flex-1 flex flex-col overflow-hidden desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[3.6rem] mr-[-1rem] pr-[1rem]'
+        className='flex flex-col overflow-hidden desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[3.6rem] mr-[-1rem] pr-[1rem]'
       >
         <div
-          className='desktop:max-h-[60dvh] overflow-y-auto custom-scrollbar desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[2.8rem] mr-[-1rem] pr-[1rem]'
+          className='max-h-[60dvh] overflow-y-auto custom-scrollbar desktop:ml-[-1.2rem] desktop:pl-[1.2rem] desktop:mr-[-3.6rem] desktop:pr-[2.8rem] mr-[-1rem] pr-[1rem]'
           data-lenis-prevent
         >
           <h3 className='sr-only'>이벤트 참여 양식</h3>
