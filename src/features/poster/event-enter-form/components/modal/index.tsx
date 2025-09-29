@@ -31,7 +31,7 @@ export function EventEnterFormModal() {
   return (
     <DialogLenisWrapper open={isOpen}>
       <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className='desktop:max-w-[76rem] max-w-[calc(100%-6rem)] max-h-[calc(100%-4rem)] flex flex-col'>
+        <DialogContent className='desktop:max-w-[76rem] max-w-[calc(100%-6rem)] max-h-[calc(100svh-4rem)] flex flex-col overflow-hidden'>
           <DialogHeader className='flex-[0_0_auto]'>
             <DialogTitle>이벤트 참여하기</DialogTitle>
           </DialogHeader>
