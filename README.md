@@ -11,9 +11,9 @@
 
 ### Core Framework
 
-- **Next.js 15.4.7**
-- **React 19.1.0**
-- **TypeScript 5**
+- **Next.js 15.4.7** - React 기반 풀스택 프레임워크
+- **React 19.1.0** - 사용자 인터페이스 라이브러리
+- **TypeScript 5** - 정적 타입 지원
 
 ### Styling & Animation
 
@@ -21,30 +21,41 @@
 - **Sass** - CSS 전처리기
 - **GSAP** - 애니메이션 라이브러리
 - **Lenis** - 부드러운 스크롤 구현
-- **Motion** - 추가 애니메이션 라이브러리
+- **Motion** - React 애니메이션 라이브러리
 
 ### UI Components & Interactions
 
-- **Radix UI** - UI 컴포넌트 라이브러리
-- **Embla Carousel** - 캐러셀 컴포넌트
-- **Lucide React** - SVG 아이콘 라이브러리
-- **Lottie Files** - 애니메이션 파일 지원
+- **Radix UI** - 접근성 중심 UI 컴포넌트 라이브러리
+- **Embla Carousel** - 경량 캐러셀 컴포넌트
+- **Lucide React** - 벡터 아이콘 라이브러리
+- **@lottiefiles/dotlottie-react** - Lottie 애니메이션 지원
+- **Sonner** - 토스트 알림 라이브러리
 
 ### Forms & Validation
 
-- **React Hook Form** - 폼 라이브러리
-- **Zod** - 스키마 선언 및 검증
+- **React Hook Form** - 고성능 폼 라이브러리
+- **Zod** - 스키마 선언 및 런타임 검증
+- **@hookform/resolvers** - React Hook Form용 검증 리졸버
 
 ### State Management & Data Fetching
 
 - **Zustand** - 상태 관리 라이브러리
+- **@tanstack/react-query** - 서버 상태 관리 라이브러리
 - **Axios** - HTTP 클라이언트
 
 ### Development & Build Tools
 
-- **Puppeteer** - 브라우저 자동화 (포스터 생성)
-- **ESLint** - 코드 린팅
-- **Prettier** - 코드 포매팅
+- **ESLint** - 코드 품질 및 스타일 검사
+- **Prettier** - 코드 포매터
+- **Docker**
+
+### Additional Libraries
+
+- **Iron Session** - 세션 관리
+- **js-cookie** - 쿠키 관리 유틸리티
+- **dayjs** - 날짜/시간 처리 라이브러리
+- **ua-parser-js** - 사용자 에이전트 파싱
+- **@next/third-parties** - 서드파티 스크립트 최적화
 
 ## 📁 프로젝트 구조
 
@@ -56,19 +67,23 @@ kia-heritage-event-front/
 │   │   ├── globals.css        # 전역 스타일
 │   │   ├── error.tsx          # 에러 페이지
 │   │   ├── not-found.tsx      # 404 페이지
+│   │   ├── default.tsx        # 기본 페이지
+│   │   ├── favicon.ico        # 파비콘
 │   │   ├── (withLayout)/      # 레이아웃이 적용된 페이지 그룹
 │   │   │   ├── page.tsx      # 메인 페이지
+│   │   │   ├── layout.tsx    # 레이아웃 컴포넌트
+│   │   │   ├── default.tsx   # 기본 페이지
 │   │   │   ├── (main)/       # 메인 이벤트 페이지
 │   │   │   ├── form/         # 이벤트 참여 폼 페이지
 │   │   │   └── create/       # 포스터 생성 페이지
 │   │   ├── @modal/           # 모달 슬롯
 │   │   ├── api/              # API 라우트
-│   │   └── test/             # 테스트 페이지
+│   │   │   └── poster/       # 포스터 관련 API
+│   │   └── form-ios/         # iOS 전용 폼 페이지
 │   ├── components/            # 재사용 가능 컴포넌트
 │   │   ├── ui/               # 기본 UI 컴포넌트 (Radix UI 기반)
 │   │   ├── features/         # 기능별 컴포넌트
 │   │   │   ├── modal/        # 모달 컴포넌트들
-│   │   │   ├── toast/        # 토스트 알림
 │   │   │   ├── alert/        # 알림 컴포넌트
 │   │   │   ├── layout/       # 레이아웃 컴포넌트
 │   │   │   └── error/        # 에러 처리 컴포넌트
@@ -76,7 +91,7 @@ kia-heritage-event-front/
 │   │   └── providers/        # Provider 컴포넌트들
 │   ├── features/             # 기능별 모듈
 │   │   └── poster/           # 포스터 생성 관련 기능
-│   ├── blocks/               # 재사용 가능한 블록 컴포넌트
+│   ├── blocks/               # React bits 컴포넌트
 │   │   ├── Animations/       # 애니메이션 블록
 │   │   └── TextAnimations/   # 텍스트 애니메이션 블록
 │   ├── hooks/                # 커스텀 훅
@@ -84,15 +99,30 @@ kia-heritage-event-front/
 │   ├── types/                # TypeScript 타입 정의
 │   ├── config/               # 설정 파일
 │   ├── assets/               # 정적 자산 파일
-│   ├── lib/                  # 라이브러리 설정
+│   ├── lib/                  # 클라이언트 라이브러리 설정
+│   ├── lib-server/           # 서버 사이드 라이브러리 설정
 │   ├── styles/               # 스타일 파일
 │   └── middleware.ts         # Next.js 미들웨어
 ├── public/                   # 정적 파일
 │   ├── images/              # 이미지 파일
 │   ├── fonts/               # 폰트 파일
-│   └── lotties/             # Lottie 애니메이션 파일
-├── lib/                     # 외부 라이브러리 설정
-└── package.json             # 의존성 및 스크립트
+│   ├── lotties/             # Lottie 애니메이션 파일
+│   ├── js/                  # JavaScript 파일
+│   └── file.svg             # SVG 파일
+├── scripts/                 # 빌드 및 배포 스크립트
+│   └── deploy.sh           # 배포 스크립트
+├── Dockerfile              # Docker 컨테이너 설정
+├── docker-compose.yml      # Docker Compose 설정
+├── .dockerignore           # Docker 무시 파일
+├── next.config.ts          # Next.js 설정
+├── tsconfig.json           # TypeScript 설정
+├── eslint.config.mjs       # ESLint 설정
+├── .prettierrc             # Prettier 설정
+├── postcss.config.mjs      # PostCSS 설정
+├── components.json         # UI 컴포넌트 설정
+├── jsrepo.json             # JavaScript 저장소 설정
+├── .gitignore              # Git 무시 파일
+└── package.json            # 의존성 및 스크립트
 ```
 
 ## 🚀 시작하기
@@ -129,7 +159,7 @@ kia-heritage-event-front/
    ```
 
 3. **브라우저에서 확인**
-   [http://localhost:3000](http://localhost:3000)에서 애플리케이션을 확인할 수 있습니다.
+   [http://localhost:5500](http://localhost:5500)에서 애플리케이션을 확인할 수 있습니다.
 
 ### 빌드 및 배포
 
@@ -137,11 +167,14 @@ kia-heritage-event-front/
 # 프로덕션 빌드
 npm run build
 
-# 프로덕션 서버 시작
+# 프로덕션 서버 시작 (포트 5500)
 npm run start
 
 # 린팅
 npm run lint
+
+# Docker 배포
+npm run deploy
 ```
 
 ## 📝 개발 노트
@@ -156,7 +189,6 @@ npm run lint
 
 - 이벤트 기간 및 경품 정보는 `src/config/` 디렉토리에서 관리
 - 상태 관리는 Zustand를 통해 전역 상태 관리
-- 타입 정의는 `src/types/` 디렉토리에서 중앙 관리
 
 ### 리소스 관리
 
@@ -166,41 +198,52 @@ npm run lint
 
 ### 개발 도구
 
-- TypeScript를 통한 타입 안전성 보장
-- ESLint와 Prettier를 통한 코드 품질 관리
+- **TypeScript**를 통한 타입 안전성 보장
+- **ESLint**와 **Prettier**를 통한 코드 품질 관리
+- **Docker**를 통한 컨테이너화 배포 지원
 - 커스텀 훅은 `src/hooks/` 디렉토리에서 관리
 - 유틸리티 함수는 `src/utils/` 디렉토리에서 관리
-
-### 주요 기능
-
-- **이벤트 참여 플로우**: 사용자 정보 입력 → 사진 업로드 → 포스터 생성 → 인스타그램 공유
-- **포스터 커스터마이징**: 다양한 템플릿과 텍스트 옵션 제공
-- **반응형 UI**: 모든 디바이스에서 최적화된 사용자 경험
+- 클라이언트 라이브러리 설정은 `src/lib/`에서 관리
+- 서버 사이드 라이브러리 설정은 `src/lib-server/`에서 관리
 
 ## 환경변수
 
+운영 및 개발서버 환경변수는 해당 서버 경로에 설정되어있음
+
 ```bash
+#local =================================================
 # .env
-PUBLIC_URL=https://kia-heritage-event-front.vercel.app
+NEXT_PUBLIC_URL=http://localhost:5500
+KAKAO_SDK_KEY=ddfdsvdvsdv
+SESSION_SECRET=e0b2ce9e05e9bc945dc2b534587ce94f
 
 # .env.production
 NEXT_PUBLIC_API_URL=https://dev-api.kia80years-event.com
 
 # .env.development
 NEXT_PUBLIC_API_URL=https://dev-api.kia80years-event.com
+# ======================================================
 ```
 
 ## 배포
 
-이 프로젝트는 Vercel에 최적화되어 있으며, 다음 명령어로 배포할 수 있습니다:
+### Docker를 이용한 배포
+
+이 프로젝트는 Docker를 사용한 컨테이너화 배포를 지원합니다:
 
 ```bash
-# Vercel CLI 설치
-npm i -g vercel
+# Docker Compose를 이용한 배포
+npm run deploy
 
-# 배포
-vercel
+# 또는 직접 Docker 명령어 사용
+docker compose down && docker compose up --build -d
+```
 
-# 프로덕션 배포
-vercel --prod
+### 배포 스크립트
+
+프로젝트에는 배포를 위한 스크립트가 포함되어 있습니다:
+
+```bash
+# 배포 스크립트 실행
+./scripts/deploy.sh
 ```
