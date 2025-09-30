@@ -12,7 +12,7 @@ export const SectionEventEnter = () => {
           </SectionTitle>
           <div>
             <div className='relative flex desktop:flex-row flex-col desktop:gap-[2.4rem] gap-[1.6rem]'>
-              <div className='flex flex-col flex-1 bg-white'>
+              <div className='flex flex-col flex-1'>
                 <div className='desktop:p-[2.4rem_0] p-[1.6rem_0] flex desktop:flex-row flex-row-reverse items-center desktop:justify-start justify-between desktop:gap-[2.4rem]'>
                   <div className='desktop:w-[10rem] w-[6rem] desktop:h-[10rem] h-[6rem] flex items-center justify-center bg-[#f8f8f8] rounded-full'>
                     <svg
@@ -82,7 +82,7 @@ export const SectionEventEnter = () => {
                 </svg>
               </div>
 
-              <div className='flex flex-col flex-1 bg-white'>
+              <div className='flex flex-col flex-1'>
                 <div className='desktop:p-[2.4rem_0] p-[1.6rem_0] flex desktop:flex-row flex-row-reverse items-center desktop:justify-start justify-between desktop:gap-[2.4rem]'>
                   <div className='desktop:w-[10rem] w-[6rem] desktop:h-[10rem] h-[6rem] flex items-center justify-center bg-[#f8f8f8] rounded-full'>
                     <svg
