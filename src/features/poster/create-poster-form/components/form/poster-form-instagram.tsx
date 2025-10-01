@@ -20,20 +20,6 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
   const limitLengthString = titleLimitLength.toString().padStart(2, "0");
   const instagramIdLimitLengthString = instagramIdLimitLength.toString().padStart(2, "0");
 
-  const handleLimitLengthInput = useCallback(
-    (limit: number, name: "title" | "instagramId") => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const input = e.target;
-      const value = input.value;
-      if (value.length > limit) {
-        input.value = value.slice(0, limit);
-        form.setValue(name, input.value, {
-          shouldValidate: true
-        });
-      }
-    },
-    [form]
-  );
-
   return (
     <>
       <div>
@@ -94,7 +80,25 @@ export const InputInstagramName = memo(({ form }: { form: PosterFormProps["form"
                 className='desktop:pr-[12rem] pr-[9rem] w-full h-[5.6rem] desktop:text-[1.6rem] text-[1.4rem]'
                 id='instagram-name'
                 maxLength={instagramIdLimitLength}
-                onInput={handleLimitLengthInput(instagramIdLimitLength, "instagramId")}
+                onInput={(e) => {
+                  // 영문,숫자,언더바,마침표 만 가능
+                  const input = e.target as HTMLInputElement;
+                  const value = input.value.replace(/[^a-zA-Z0-9_.]/g, '');
+                  input.value = value;
+                  form.setValue("instagramId", value, {
+                    shouldValidate: true
+                  });
+                }}
+                onPaste={(e) => {
+                  setTimeout(() => {
+                    const input = e.target as HTMLInputElement;
+                    const value = input.value.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, instagramIdLimitLength);
+                    input.value = value;
+                    form.setValue("instagramId", value, {
+                      shouldValidate: true
+                    });
+                  }, 0);
+                }}
               />
               <span className='absolute inset-y-0 right-[2.4rem] flex items-center desktop:text-[1.4rem] text-[1.2rem] text-sub-text pointer-events-none'>
                 {posterInstagramIdLength.toString().padStart(2, "0")}/{instagramIdLimitLengthString}자
