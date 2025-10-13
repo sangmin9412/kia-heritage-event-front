@@ -13,15 +13,12 @@ export enum Event {
 export const ANALYTICS_HANDLER = {
   [Event.BTN_CLCK_LEARN_MORE]: {
     event: () => {
+      // 기아 헤리티지 더 알아보기 버튼 클릭 이벤트
       console.log("BTN_CLCK_LEARN_MORE");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k006+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/conveo0/kia_k006+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -38,15 +35,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLCK_REGISTER]: {
     event: () => {
+      // 이벤트 참여 이벤트
       console.log("BTN_CLCK_REGISTER");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k007+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/conveo0/kia_k007+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -63,15 +57,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLCK_SUBMIT]: {
     event: () => {
+      // 포스터 제출 이벤트
       console.log("BTN_CLCK_SUBMIT");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k008+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/conveo0/kia_k008+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -88,15 +79,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.BTN_CLICK_CREATE]: {
     event: () => {
+      // 포스터 생성 이벤트
       console.log("BTN_CLICK_CREATE");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/conveo0/kia_k009+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/conveo0/kia_k009+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -113,15 +101,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_20S_VISIT]: {
     event: () => {
+      // 20초 유지 페이지 뷰 이벤트
       console.log("PAGEVIEW_20S_VISIT");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k001+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/pagev0/kia_k001+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -138,15 +123,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_CREATE]: {
     event: () => {
+      // 페이지 뷰 이벤트
       console.log("PAGEVIEW_CREATE");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k002+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/pagev0/kia_k002+standard"
-      // });
     },
     noscript: () => (
       <>
@@ -163,15 +145,12 @@ export const ANALYTICS_HANDLER = {
   },
   [Event.PAGEVIEW_VISIT]: {
     event: () => {
+      // 페이지 방문자 이벤트
       console.log("PAGEVIEW_VISIT");
       window.gtag("event", "conversion", {
         allow_custom_scripts: true,
         send_to: "DC-10576537/pagev0/kia_k000+standard"
       });
-      // sendGAEvent("conversion", {
-      //   allow_custom_scripts: true,
-      //   send_to: "DC-10576537/pagev0/kia_k000+standard"
-      // });
     },
     noscript: () => (
       <>
