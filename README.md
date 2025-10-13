@@ -11,9 +11,9 @@
 
 ### Core Framework
 
-- **Next.js 15.4.7** - React 기반 풀스택 프레임워크
-- **React 19.1.0** - 사용자 인터페이스 라이브러리
-- **TypeScript 5** - 정적 타입 지원
+- **Next.js 15.4.7**
+- **React 19.1.0**
+- **TypeScript 5**
 
 ### Styling & Animation
 
@@ -25,17 +25,17 @@
 
 ### UI Components & Interactions
 
-- **Radix UI** - 접근성 중심 UI 컴포넌트 라이브러리
-- **Embla Carousel** - 경량 캐러셀 컴포넌트
+- **Radix UI** - UI 컴포넌트 라이브러리
+- **Embla Carousel** - 캐러셀 컴포넌트
 - **Lucide React** - 벡터 아이콘 라이브러리
 - **@lottiefiles/dotlottie-react** - Lottie 애니메이션 지원
 - **Sonner** - 토스트 알림 라이브러리
 
 ### Forms & Validation
 
-- **React Hook Form** - 고성능 폼 라이브러리
+- **React Hook Form** - 폼 라이브러리
 - **Zod** - 스키마 선언 및 런타임 검증
-- **@hookform/resolvers** - React Hook Form용 검증 리졸버
+- **@hookform/resolvers** - React Hook Form용 검증
 
 ### State Management & Data Fetching
 
@@ -62,7 +62,7 @@
 ```
 kia-heritage-event-front/
 ├── src/
-│   ├── app/                    # Next.js App Router
+│   ├── app/                   # Next.js App Router
 │   │   ├── layout.tsx         # 루트 레이아웃
 │   │   ├── globals.css        # 전역 스타일
 │   │   ├── error.tsx          # 에러 페이지
@@ -119,8 +119,8 @@ kia-heritage-event-front/
 ├── eslint.config.mjs       # ESLint 설정
 ├── .prettierrc             # Prettier 설정
 ├── postcss.config.mjs      # PostCSS 설정
-├── components.json         # UI 컴포넌트 설정
-├── jsrepo.json             # JavaScript 저장소 설정
+├── components.json         # Shadcn UI 컴포넌트 설정
+├── jsrepo.json             # React Bits 관련 설정
 ├── .gitignore              # Git 무시 파일
 └── package.json            # 의존성 및 스크립트
 ```
@@ -208,7 +208,7 @@ npm run deploy
 
 ## 환경변수
 
-운영 및 개발서버 환경변수는 해당 서버 경로에 설정되어있음
+운영 및 개발서버 환경변수는 해당 서버에 설정되어있습니다.
 
 ```bash
 #local =================================================
@@ -229,13 +229,13 @@ NEXT_PUBLIC_API_URL=https://dev-api.kia80years-event.com
 
 ### Docker를 이용한 배포
 
-이 프로젝트는 Docker를 사용한 컨테이너화 배포를 지원합니다:
-
 ```bash
 # Docker Compose를 이용한 배포
-npm run deploy
+git pull
+npm run deploy # 개발,운영서버 내 노드가 설치되어있지 않아 npm 사용할 수 없음.
 
 # 또는 직접 Docker 명령어 사용
+git pull
 docker compose down && docker compose up --build -d
 ```
 
@@ -245,5 +245,16 @@ docker compose down && docker compose up --build -d
 
 ```bash
 # 배포 스크립트 실행
-./scripts/deploy.sh
+git pull
+sh ./scripts/deploy.sh
 ```
+
+## 참고사항
+1. 애널리틱스 관련 설정은 lib/analytics.tsx 파일에 정리되어있습니다.
+   - 파일 내 메서드를 확인하여 데이터 수집이 필요한 시점에 호출하면 됩니다.
+   - 아래 티켓 내용 기반으로 현재 작업은 되어있고 추가로 PAGEVIEW_VISIT, PAGEVIEW_CREATE, PAGEVIEW_20S_VISIT 이벤트는 동일한 시점에 호출하도록 되어있는데 고객사에 각 이벤트별 정확한 호출 시점 문의한 상태입니다.
+   - 관련 티켓 링크 https://flow.team/l/19QIv
+2. 현재 운영서버와 개발서버 내 소스 코드는 동일하나 도커 파일 설정만 다른 상태입니다.
+   - 운영서버만 5500, 5501 2개 포트에 실행해야 하는 상황으로 차이가 있습니다.
+3. 메인페이지에서 이벤트 참여하기 진행 시 IOS 에서는 페이지로 이동하도록 조건 처리 되어있습니다.
+   - IOS26버전 사파리 버그로 고정된 요소(모달) 내 입력필드가 있을 경우 포커스 위치를 제대로 잡아주지 못하는 이슈가 있어 IOS인 경우에는 form-ios 페이지에서 이벤트 참여하기 항목 입력할 수 있도록 해두었습니다.
