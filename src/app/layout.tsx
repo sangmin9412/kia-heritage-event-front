@@ -1,6 +1,6 @@
 import "@/app/globals.css";
 import { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { SITE_METADATA } from "@/config";
 import Script from "next/script";
 
@@ -17,8 +17,9 @@ export default function RootLayout({ children, modal }: { children: React.ReactN
   return (
     <html lang='ko'>
       <head>
-        <meta name="color-scheme" content="only light" />
+        <meta name='color-scheme' content='only light' />
         <GoogleAnalytics gaId='DC-10576537' />
+        <GoogleTagManager gtmId='GTM-WZ6SD6RN' />
         <Script strategy='beforeInteractive' src='/js/kakao.min.js' />
       </head>
       <body className='antialiased'>
