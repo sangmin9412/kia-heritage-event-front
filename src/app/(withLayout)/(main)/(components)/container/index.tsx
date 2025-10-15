@@ -17,9 +17,14 @@ import { useEffect } from "react";
 
 export const MainContainer = () => {
   useEffect(() => {
-    ANALYTICS_HANDLER[Event.PAGEVIEW_CREATE].event();
     ANALYTICS_HANDLER[Event.PAGEVIEW_VISIT].event();
-    ANALYTICS_HANDLER[Event.PAGEVIEW_20S_VISIT].event();
+
+    const second20Timer = setTimeout(() => {
+      ANALYTICS_HANDLER[Event.PAGEVIEW_20S_VISIT].event();
+    }, 20000);
+    return () => {
+      clearTimeout(second20Timer);
+    };
   }, []);
 
   return (

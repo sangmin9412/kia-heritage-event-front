@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import { useCreatePosterForm } from "@/features/poster/create-poster-form";
@@ -12,6 +12,11 @@ import { ROUTES } from "@/config";
 import { ANALYTICS_HANDLER, Event } from "@/lib/analytics";
 
 export const CreatePosterForm = () => {
+
+  useEffect(() => {
+    ANALYTICS_HANDLER[Event.PAGEVIEW_CREATE].event();
+  }, []);
+
   return (
     <div className='container desktop:px-[3rem] px-0'>
       <div className='flex desktop:flex-row flex-col desktop:pb-[8rem]'>
